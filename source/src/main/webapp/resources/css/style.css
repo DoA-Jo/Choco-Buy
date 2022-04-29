@@ -1,0 +1,74 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+
+
+/* header */
+.header {padding: 20px 0 10px;}
+.header .container {display: flex; position: relative;}
+.header .container > div {display: inline-block;}
+.header .logoBox {}
+.header .logoBox .logo {width: 240px; height: 120px; background: url("/resources/img/common/logo.svg") no-repeat; background-size: contain; display: inline-block; text-indent: -9999px;}
+
+.header .searchBox {margin-left: 110px; padding-top: 40px;}
+.header .searchBox form {width: 300px; height: 40px; border: 2px solid #421e22; border-radius: 20px; padding: 0 15px; position: relative;}
+.header .searchBox form .searchInput {width: 234px; height:34px; border: 0;}
+.searchInput:focus, .searchInput:active, .searchInput:hover {border: 0; outline: 0;}
+.header .searchBox form .searchBtn {width: 20px; height: 20px; background: url("/resources/img/common/searchBtn.png") no-repeat; background-size: contain; text-indent: -9999px; position: absolute; right: 15px; top: 50%; transform: translateY(-50%);}
+
+.header .hdMenuBox  {position: absolute; right: 0; top: 50%; transform: translateY(-50%);}
+.header .hdMenuBox ul {overflow: hidden;}
+.header .hdMenuBox ul li {float: left; margin-right: 30px; padding: 10px 0;}
+.header .hdMenuBox ul li:last-child {margin-right: 0;}
+.header .hdMenuBox ul li a {display: block; font-size: 16px; font-weight: 500;}
+.header .hdMenuBox ul li a:hover {text-decoration: none!important; display: block; font-size: 16px; font-weight: 500;}
+
+/* menuBox */
+/* .menuBox {width: 100%; height: 50px; background: #58a6a6;} */
+.menuBox {width: 100%; height: 52px; border-top :2px solid #58a6a6; border-bottom :2px solid #58a6a6; }
+.menuBox .container {position: relative;}
+.menuBox .menuBar {line-height: 48px;}
+.menuBox .menuBar ul {display: flex;}
+.menuBox .menuBar ul li {display: inline-block; margin-right: 50px;}
+.menuBox .menuBar ul li:hover {display: inline-block; margin-right: 50px;border-bottom:3px solid #58a6a6;}
+.menuBox .menuBar ul li:last-child {margin-right: 0;border:none;}
+.menuBox .menuBar ul li a {font-size: 16px; font-weight: 500;}
+.menuBox .menuBar ul li a:hover {text-decoration: none; font-size: 16px; font-weight: 500; }
+/* .menuBox .btnBox {position: absolute; right: 0; top: 50%; transform: translateY(-50%);} */
+/* .menuBox .btnBox .writeBtn {width: 120px; height: 40px; background: #2a0e11; font-size: 16px; font-weight: 500; color:#f9c48f; border-radius: 18.5px;} */
+.menuBox .btnBox .writeBtn {margin-bottom:3px;line-height : 40px; width: 120px; height: 40px; border : 1px solid #2a0e11; font-size: 16px; font-weight: 500; color:#2a0e11; border-radius: 18.5px;}
+.menuBox .btnBox .writeBtn:hover {margin-bottom:3px;line-height : 40px; width: 120px; height: 40px; background : #2a0e11; font-size: 16px; font-weight: 500; color:#fff; border-radius: 18.5px;}
+
+
+/* container */
+.container {width: 1000px; margin: 0 auto;}
+/* .warp {min-height: 450px;} */
+
+
+
+/* footer */
+.footer {background-color : #fff;  left :0; width: 100%; margin-top :50px ; padding: 30px 0; display: flex; border-top : 1px solid #8e8e8e;}
+.footer .container > div {display: inline-block; vertical-align: top;}
+.footer .ft_logo {margin-right: 40px;}
+.ft_logo .logo {font-family: 'Luckiest Guy', cursive; font-size: 30px;}
+.footer .ft_txt {}
+.footer .ft_txt > p {margin-bottom: 5px; font-size: 14px; line-height: 18px;}
+.footer .ft_txt > p:last-of-type {margin-bottom: 0;}
+.footer .ft_txt .nameTxt {margin-top: 22px; display: flex;}
+.footer .ft_txt .nameTxt > div {display: inline-block; margin-right: 10px; padding-right: 10px; overflow: hidden;}
+.footer .ft_txt .nameTxt > div:first-child {position: relative;}
+.footer .ft_txt .nameTxt > div:first-child:after {content: ''; position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 1px; height: 15px; background: #000;}
+.footer .ft_txt .nameTxt > div:last-child {margin-right: 0;}
+.footer .ft_txt .nameTxt > div span {font-size: 14px; line-height: 18px; float: left; margin-right: 10px;}
+.footer .ft_txt .nameTxt > div span:last-child {margin-right: 0;}
+.footer .ft_txt .nameTxt > div span.tit {font-weight: 700;}
+
+
+/* 모바일 */
+@media screen and (max-width: 1024px) {
+	.header {padding-bottom: 70px;}
+	.header .searchBox {margin-left: 0; padding-top: 0; position: absolute; left: 0; top: 130px; width: 100%;}
+	.header .searchBox form {width: 100%;}
+	.header .searchBox form .searchInput {width: calc(100% - 45px);}
+
+	.container {margin: 0 60px;}
+}

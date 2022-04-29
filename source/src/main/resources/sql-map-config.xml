@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+<configuration>
+	
+	<typeAliases>
+		<typeAlias type="com.chocobuy.biz.trade.TradeVO" alias="trade" />
+		<typeAlias type="com.chocobuy.biz.user.UserVO" alias="user" />
+		<typeAlias type="com.chocobuy.biz.inquiry.InqVO" alias="inq" />
+		<typeAlias type="com.chocobuy.biz.inquiry.InqReplyVO" alias="inqReply" />
+		<typeAlias type="com.chocobuy.biz.service.ServiceVO" alias="service"/>
+		<typeAlias alias="adminUser" type="com.chocobuy.biz.admin.AdminUserVO"/>
+		<typeAlias alias="adminTrade" type="com.chocobuy.biz.admin.AdminTradeVO"/>
+		<typeAlias alias="adminPay" type="com.chocobuy.biz.admin.AdminPayVO"/>
+		<typeAlias alias="adminService" type="com.chocobuy.biz.admin.AdminServiceVO"/>
+		<typeAlias alias="adminInquiry" type="com.chocobuy.biz.admin.AdminInquiryVO"/>
+		<typeAlias type="com.chocobuy.biz.pay.PayVO" alias="pay" />
+		<typeAlias type="com.chocobuy.biz.qna.QnaVO" alias="Qna"/>
+		<typeAlias type="com.chocobuy.biz.chat.MsgVO" alias="msg" />
+		<typeAlias type="com.chocobuy.biz.chat.ChatRoomVO" alias="chatroom" />
+		<typeAlias type="com.chocobuy.biz.chat.AppVO" alias="app" />
+		
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="mappings/chat-mapping.xml" />
+		<mapper resource="mappings/trade-mapping.xml" />
+		<mapper resource="mappings/user-mapping.xml" />
+		<mapper resource="mappings/inquiry-mapping.xml" />
+		<mapper resource="mappings/inqReply-mapping.xml" />
+		<mapper resource="mappings/service-mapping.xml" />
+		<mapper resource="mappings/admin-mapping.xml"/>
+		<mapper resource="mappings/pay-mapping.xml" />
+		<mapper resource="mappings/qna-mapping.xml" />
+	</mappers>
+</configuration>

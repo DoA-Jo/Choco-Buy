@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TradeDAO">
+
+
+	<insert id="insertTrade">
+		<![CDATA[
+		INSERT INTO TRADE_TABLE(TRADE_TITLE, TRADE_NICK, TRADE_CONTENT,TRADE_MONEY, TRADE_AREA, TRADE_CATEGORY, TRADE_IMG , TRADE_UUID)
+		VALUES( #{trade_title},#{trade_nick}, #{trade_content}, #{trade_money}, #{trade_area}, #{trade_category}, #{trade_img},#{trade_uuid})
+		]]>
+	</insert>
+	
+	<update id="updateTrade">
+		<![CDATA[
+		UPDATE TRADE_TABLE SET TRADE_TITLE = #{trade_title}, TRADE_MONEY= #{trade_money},
+		TRADE_CONTENT= #{trade_content} WHERE TRADE_SEQ= #{trade_seq}  
+		]]>
+	</update>
+	<update id="updateReporting">
+		<![CDATA[
+		UPDATE TRADE_TABLE SET trade_reporting = 1 WHERE TRADE_SEQ= #{trade_seq}  
+		]]>
+	</update>
+	
+	
+	<delete id="deleteTrade">
+		<![CDATA[
+		DELETE FROM TRADE_TABLE WHERE TRADE_SEQ = #{trade_seq} 
+		]]>
+	</delete>
+
+	<select id="getTrade" resultType="trade">
+		<![CDATA[
+		SELECT * FROM TRADE_TABLE WHERE TRADE_SEQ= #{trade_seq} 
+		]]>
+	</select>
+	
+	<select id="getTradeList" resultType="trade">
+	SELECT * FROM TRADE_TABLE WHERE 1=1
+	AND TRADE_CATEGORY LIKE CONCAT('%', #{searchCategory} ,'%') ORDER BY trade_seq DESC
+	</select>
+		
+		<select id="getSearchTradeList" resultType="trade">
+	SELECT * FROM TRADE_TABLE WHERE 1=1
+	AND TRADE_CONTENT LIKE CONCAT('%', #{searchInput} ,'%') ORDER BY trade_seq DESC
+	</select>
+	
+	<select id="getMyTradeList" resultType="trade">
+	SELECT * FROM TRADE_TABLE WHERE 1=1
+	AND TRADE_NICK LIKE CONCAT('%', #{trade_nick} ,'%') ORDER BY TRADE_NICK DESC
+	</select>
+		
+	<!--MypageTradeList.jsp 에서 리뷰 입력을 위한  글검색	 -->
+	<select id="getMypageTrade" resultType="trade">
+		<![CDATA[
+		SELECT * FROM TRADE_TABLE WHERE TRADE_SEQ= #{trade_seq} 
+		]]>
+	</select>
+	
+	<!-- MypageTrade.jsp 에서 리뷰 입력  -->
+	<update id="updateMypageTrade">
+		<![CDATA[
+		UPDATE TRADE_TABLE SET TRADE_REVIEW=#{trade_review} WHERE TRADE_SEQ=#{trade_seq}
+		]]>
+	</update>
+	
+	
+	<select id="getMypageTradeSerch" resultType="trade">
+		SELECT * FROM trade_table WHERE 1=1
+		<if test="searchMypageCondition == 'TITLE'"> AND TRADE_TITLE LIKE CONCAT('%', #{searchMypageKeyword} ,'%')ORDER BY trade_seq DESC</if>
+		<if test="searchMypageCondition == 'BUYINFO'"> AND TRADE_BUYINFO LIKE CONCAT('%', #{searchMypageKeyword} ,'%')ORDER BY trade_seq DESC</if>
+		<if test="searchMypageCondition == 'MYLIST'"> AND TRADE_UUID LIKE CONCAT('%', #{trade_uuid} ,'%')ORDER BY trade_seq DESC</if>
+		<if test="searchMypageCondition == 'ALL'"> AND TRADE_TITLE LIKE CONCAT('%', "" ,'%')ORDER BY trade_seq DESC</if>
+		LIMIT #{listcnt} OFFSET #{start}
+	</select>
+
+
+	<!-- 총 게시글 갯수 출력 -->
+	<select id="counMypageTrade" resultType="int">
+		SELECT COUNT(*) FROM trade_table WHERE 1=1
+		<if test="searchMypageCondition == 'TITLE' "> AND TRADE_TITLE LIKE CONCAT('%',#{searchMypageKeyword},'%') </if>
+		<if test="searchMypageCondition == 'BUYINFO' "> AND TRADE_BUYINFO LIKE CONCAT('%', #{searchMypageKeyword} ,'%') </if>
+		<if test="searchMypageCondition == 'MYLIST'"> AND TRADE_UUID LIKE CONCAT('%', #{trade_uuid} ,'%')</if>
+		<if test="searchMypageCondition == 'ALL'"> AND TRADE_TITLE LIKE CONCAT('%', "" ,'%')</if>
+	</select>
+		
+	
+		
+		
+		
+		
+		
+	
+
+</mapper>

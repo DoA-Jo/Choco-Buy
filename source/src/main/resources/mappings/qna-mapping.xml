@@ -1,0 +1,53 @@
+<!-- <?xml version="1.0" encoding="UTF-8" ?> -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="QnaDAO">
+	<resultMap type="Qna" id="QnaResult">
+		<id property="qna_seq" column="QNA_SEQ" />
+		<result property="qna_title" column="QNA_TITLE" />
+		<result property="qna_writer" column="QNA_WRITER" />
+		<result property="qna_content" column="QNA_CONTENT" />
+<!-- 		<result property="qna_date" column="QNA_DATE" /> -->
+<!-- 		<result property="qna_cnt" column="QNA_CNT" /> -->
+	</resultMap>
+
+	<insert id="insertQna">
+		<![CDATA[
+		INSERT INTO QNA_TABLE (QNA_TITLE, QNA_WRITER, QNA_CONTENT,QNA_DATE) VALUES ( #{qna_title},#{qna_writer}, #{qna_content},NOW())
+		]]>
+	</insert>
+	
+	<update id="updateQna">
+		<![CDATA[
+		UPDATE QNA_TABLE SET QNA_TITLE = #{qna_title}, QNA_WRITER= #{qna_writer}, QNA_CONTENT= #{qna_content} WHERE QNA_SEQ= #{qna_seq} 
+		]]>
+	</update>
+	
+	<delete id="deleteQna">
+		<![CDATA[
+		DELETE FROM QNA_TABLE WHERE QNA_SEQ = #{qna_seq} 
+		]]>
+	</delete>
+
+	<select id="getQna" resultType="Qna">
+		<![CDATA[
+		SELECT * FROM QNA_TABLE WHERE QNA_SEQ= #{qna_seq} 
+		]]>
+	</select>
+	
+	<select id="getQnaList" resultMap="QnaResult">
+		SELECT * FROM qna_table WHERE 1=1 
+		<if test="qna_searchCondition == 'QNA_TITLE'"> AND QNA_TITLE LIKE CONCAT('%', #{qna_searchKeyword} ,'%') ORDER BY qna_seq DESC</if>
+		<if test="qna_searchCondition == 'QNA_CONTENT'"> AND QNA_CONTENT LIKE CONCAT('%', #{qna_searchKeyword} ,'%') ORDER BY qna_seq DESC</if>
+		 LIMIT #{listcnt} OFFSET #{start}
+	</select>
+	
+	<!-- 총 게시글 갯수 출력 -->
+	<select id="countQna" resultType="int">
+		SELECT COUNT(*) FROM QNA_TABLE WHERE 1=1
+		<if test="qna_searchCondition == 'QNA_TITLE' "> AND QNA_TITLE LIKE CONCAT('%',#{qna_searchKeyword},'%') </if>
+		<if test="qna_searchCondition == 'QNA_CONTENT' "> AND QNA_CONTENT LIKE CONCAT('%',#{qna_searchKeyword},'%') </if>
+	</select>
+
+</mapper>

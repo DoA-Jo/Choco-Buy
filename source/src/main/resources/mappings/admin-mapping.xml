@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  <mapper namespace="AdminDAO">
+ 	<resultMap id="adminUserResult" type="adminUser">
+	  		<id property="user_uuid" column="USER_UUID" />
+	  		<result property="user_tel" column="USER_TEL" />
+	  		<result property="user_nick" column="USER_NICK" />
+	  		<result property="user_siNm" column="USER_SINM" />
+	  		<result property="user_sggNm" column="USER_SGGNM" />
+	  		<result property="user_emdNm" column="USER_EMDNM" />
+	  		<result property="user_profileImg" column="USER_PROFILEIMG" />
+	  		<result property="user_role" column="USER_ROLE" />
+  	</resultMap>
+  	
+  	<select id="getAdminUserList" resultMap="adminUserResult">
+  			SELECT * FROM user_table where 1=1 
+  			<if test="searchKeyword != '' "> AND (
+				user_uuid LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				user_tel LIKE CONCAT('%',#{searchKeyword},'%') OR
+				user_nick LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				user_siNm LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				user_sggNm LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				user_emdNm LIKE CONCAT('%',#{searchKeyword},'%')
+				) 
+			</if>
+			 AND ( 1=1
+			<if test="role0 != 1 ">
+				AND user_role!=0 
+			</if>
+			<if test="role1 != 1 ">
+				AND user_role!=1 
+			</if>
+			<if test="role2 != 1 ">
+				AND user_role!=2 
+			</if>
+			<if test="role100 != 1 ">
+				AND user_role!=100 
+			</if>
+			)
+  		LIMIT #{listcnt} OFFSET #{start}
+  	</select>
+  	
+  	<resultMap id="adminTradeResult" type="adminTrade">
+	  		<id property="trade_seq" column="TRADE_SEQ" />
+	  		<result property="trade_nick" column="TRADE_NICK" />
+	  		<result property="trade_title" column="TRADE_TITLE" />
+	  		<result property="trade_money" column="TRADE_MONEY" />
+	  		<result property="trade_content" column="TRADE_CONTENT" />
+	  		<result property="trade_area" column="TRADE_AREA" />
+	  		<result property="trade_img" column="TRADE_IMG" />
+	  		<result property="trade_category" column="TRADE_CATEGORY" />
+	  		<result property="trade_buyinfo" column="TRADE_BUYINFO" />
+	  		<result property="trade_review" column="TRADE_REVIEW" />
+	  		<result property="trade_date" column="TRADE_DATE" />
+  	</resultMap>
+  	
+  	<select id="getAdminTradeList" resultMap="adminTradeResult">
+			SELECT * FROM trade_table where 1=1 
+			<if test="searchKeyword != '' "> AND (
+				trade_seq LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				trade_nick LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				trade_title LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				trade_money LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				trade_area LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				trade_category LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				trade_buyinfo LIKE CONCAT('%',#{searchKeyword},'%')
+				)
+			</if>
+			 AND ( 1=1 
+			<if test="category1 != 1 ">
+				AND trade_category!='배달' 
+			</if>
+			<if test="category1 != 2 ">
+				AND trade_category!='쇼핑' 
+			</if>
+			<if test="category1 != 3 ">
+				AND trade_category!='청소' 
+			</if>
+			<if test="category1 != 4 ">
+				AND trade_category!='집안일' 
+			</if>
+			<if test="category1 != 5 ">
+				AND trade_category!='전문서비스' 
+			</if>
+			<if test="category1 != 6 ">
+				AND trade_category!='반려동물' 
+			</if>
+			<if test="category1 != 7 ">
+				AND trade_category!='역할대행' 
+			</if>
+			<if test="report1 != 1 ">
+				AND trade_reporting!=0 
+			</if>
+			<if test="report2 != 1 ">
+				AND trade_reporting!=1 
+			</if>
+			<if test="hidden1 != 1 ">
+				AND trade_hidden!=0 
+			</if>
+			<if test="hidden2 != 1 ">
+				AND trade_hidden!=1 
+			</if>
+			)
+  	</select>
+  
+  	<resultMap id="adminPayResult" type="adminPay">
+	  		<id property="pay_num" column="PAY_NUM" />
+	  		<result property="pay_ordernum" column="PAY_ORDERNUM" />
+	  		<result property="pay_sell" column="PAY_SELL" />
+	  		<result property="pay_buy" column="PAY_BUY" />
+	  		<result property="pay_category" column="PAY_CATEGORY" />
+	  		<result property="pay_date" column="PAY_DATE" />
+	  		<result property="pay_amount" column="PAY_AMOUNT" />
+	  		<result property="pay_method" column="PAY_METHOD" />
+  	</resultMap>
+  	
+  	<select id="getAdminPayList" resultMap="adminPayResult">
+ 		SELECT * FROM pay_table where 1=1 
+			<if test="searchKeyword != '' "> AND (
+				pay_num LIKE CONCAT('%',#{searchKeyword},'%') OR
+				pay_ordernum LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				pay_sell LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				pay_buy LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				pay_category LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				pay_amount LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				pay_method LIKE CONCAT('%',#{searchKeyword},'%')
+				)
+			</if>
+  	</select>
+  	
+  	<resultMap id="adminServiceResult" type="adminService">
+	  		<id property="service_seq" column="SERVICE_SEQ" />
+	  		<result property="service_title" column="SERVICE_TITLE" />
+	  		<result property="service_date" column="SERVICE_DATE" />
+	  		<result property="service_content" column="SERVICE_CONTENT" />
+	  		<result property="service_cnt" column="SERVICE_CNT" />
+	  		<result property="service_header" column="SERVICE_HEADER" />
+  	</resultMap>
+  	
+  	<select id="getAdminServiceList" resultMap="adminServiceResult">
+  		SELECT * FROM service_table where 1=1 
+			<if test="searchKeyword != '' "> AND (
+				service_seq LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				service_title LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				service_content LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				service_date LIKE CONCAT('%',#{searchKeyword},'%') 
+				) 
+			</if>
+			 AND ( 1=1 
+			<if test="notice != 1 ">
+				AND service_header!=1 
+			</if>
+			<if test="faq != 2 ">
+				AND service_header!=2 
+			</if>
+			)
+  	</select>
+  	
+  	<resultMap id="adminInquiryResult" type="adminInquiry">
+	  		<id property="inq_seq" column="INQUIRY_SEQ" />
+	  		<result property="inq_title" column="INQ_TITLE" />
+	  		<result property="inq_nickname" column="INQ_NICKNAME" />
+	  		<result property="inq_content" column="INQ_CONTENT" />
+	  		<result property="inq_filename" column="INQ_FILENAME" />
+	  		<result property="inq_date" column="INQ_DATE" />
+	  		<result property="inq_hiddenCK" column="INQ_HIDDENCK" />
+	  		<result property="inq_completeCK" column="INQ_COMPLETECK" />
+  	</resultMap>
+  	
+  	<select id="getAdminInquiryList" resultMap="adminInquiryResult">
+  		SELECT * FROM inq_table where 1=1 
+			<if test="searchKeyword != '' "> AND (
+				inq_num LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				inq_title LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				inq_nickname LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				inq_date LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				inq_title LIKE CONCAT('%',#{searchKeyword},'%') 
+				) 
+			</if>
+			 AND ( 1=1 
+			<if test="done0 != 1 ">
+				AND inq_completeCK!=0 
+			</if>
+			<if test="done1 != 1 ">
+				AND inq_completeCK!=1 
+			</if>
+			<if test="display0 != 1 ">
+				AND inq_hiddenCK!=0 
+			</if>
+			<if test="display1 != 1 ">
+				AND inq_hiddenCK!=1 
+			</if>
+			)
+  	</select>
+  	
+  	<insert id="insertUser">
+  		<![CDATA[
+  			INSERT INTO user_table VALUES(uuid(), #{user_tel},#{user_nick},#{user_siNm}, #{user_sggNm}, #{user_emdNm}, #{user_profileImg}, #{user_role})
+  		]]>
+  	</insert>
+  	
+  	
+  	<select id="getUser" resultType="adminUser">
+  		<![CDATA[
+  			SELECT * FROM user_table WHERE user_uuid=#{user_uuid} 
+  		]]>
+  	</select>
+  
+  	<update id="updateUser">
+  		<![CDATA[
+  			UPDATE user_table SET user_tel=#{user_tel}, user_nick=#{user_nick}, user_siNm=#{user_siNm}, user_sggNm=#{user_sggNm}, user_emdNm=#{user_emdNm}, user_profileImg=#{user_profileImg}, user_role=#{user_role} where user_uuid=#{user_uuid}
+  		]]>
+  	</update>
+  
+  	<select id="countUser" resultType="int">
+  			SELECT COUNT(*) FROM user_table where 1=1 
+			<if test="searchKeyword != '' "> AND (
+				user_uuid LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				user_tel LIKE CONCAT('%',#{searchKeyword},'%') OR
+				user_nick LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				user_siNm LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				user_sggNm LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				user_emdNm LIKE CONCAT('%',#{searchKeyword},'%')
+				)
+			</if>
+			 AND ( 1=1
+			<if test="role0 != 1 ">
+				AND user_role!=0 
+			</if>
+			<if test="role1 != 1 ">
+				AND user_role!=1 
+			</if>
+			<if test="role2 != 1 ">
+				AND user_role!=2 
+			</if>
+			<if test="role100 != 1 ">
+				AND user_role!=100 
+			</if>
+			)
+  	</select>
+  
+  	<select id="countTrade" resultType="int">
+  			SELECT COUNT(*) FROM trade_table where 1=1 
+			<if test="searchKeyword != '' "> AND (
+				trade_seq LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				trade_nick LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				trade_title LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				trade_money LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				trade_area LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				trade_category LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				trade_buyinfo LIKE CONCAT('%',#{searchKeyword},'%') OR
+				trade_date LIKE CONCAT('%',#{searchKeyword},'%')
+				)
+			</if>
+			 AND ( 1=1
+			<if test="category1 != 1 ">
+				AND trade_category!='배달' 
+			</if>
+			<if test="category1 != 2 ">
+				AND trade_category!='쇼핑' 
+			</if>
+			<if test="category1 != 3 ">
+				AND trade_category!='청소' 
+			</if>
+			<if test="category1 != 4 ">
+				AND trade_category!='집안일' 
+			</if>
+			<if test="category1 != 5 ">
+				AND trade_category!='전문서비스' 
+			</if>
+			<if test="category1 != 6 ">
+				AND trade_category!='반려동물' 
+			</if>
+			<if test="category1 != 7 ">
+				AND trade_category!='역할대행' 
+			</if><if test="report1 != 1 ">
+				AND trade_reporting!=0 
+			</if>
+			<if test="report2 != 1 ">
+				AND trade_reporting!=1 
+			</if>
+			<if test="hidden1 != 1 ">
+				AND trade_hidden!=0 
+			</if>
+			<if test="hidden2 != 1 ">
+				AND trade_hidden!=1 
+			</if>
+			)
+  	</select>
+  
+  
+  	<select id="countPay" resultType="int">
+  			SELECT COUNT(*) FROM pay_table where 1=1 
+			<if test="searchKeyword != '' "> AND (
+				pay_num LIKE CONCAT('%',#{searchKeyword},'%') OR
+				pay_ordernum LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				pay_sell LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				pay_buy LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				pay_category LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				pay_amount LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				pay_method LIKE CONCAT('%',#{searchKeyword},'%')
+				)
+			</if>
+  	</select>
+  	
+  	<select id="countService" resultType="int">
+  			SELECT COUNT(*) FROM service_table where 1=1 
+			<if test="searchKeyword != '' "> AND (
+				service_seq LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				service_title LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				service_content LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				service_date LIKE CONCAT('%',#{searchKeyword},'%') 
+				) 
+			</if>
+			 AND ( 1=1 
+			<if test="notice != 1 ">
+				AND service_header!=1 
+			</if>
+			<if test="faq != 2 ">
+				AND service_header!=2 
+			</if>
+			)
+  	</select>
+  	
+  	<select id="countInquiry" resultType="int">
+  			SELECT COUNT(*) FROM inq_table where 1=1 
+			<if test="searchKeyword != '' "> AND (
+				inq_num LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				inq_title LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				inq_nickname LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				inq_date LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				inq_title LIKE CONCAT('%',#{searchKeyword},'%') 
+				) 
+			</if>
+			 AND ( 1=1 
+			<if test="done0 != 1 ">
+				AND inq_completeCK!=0 
+			</if>
+			<if test="done1 != 1 ">
+				AND inq_completeCK!=1 
+			</if>
+			<if test="display0 != 1 ">
+				AND inq_hiddenCK!=0 
+			</if>
+			<if test="display1 != 1 ">
+				AND inq_hiddenCK!=1 
+			</if>
+			)
+  	</select>
+  	
+  	<update id="hideTrade">
+  		<![CDATA[
+  			UPDATE trade_table SET trade_hidden=1 where trade_seq=#{trade_seq}
+  		]]>
+  	</update>
+  	
+  	<update id="showTrade">
+  		<![CDATA[
+  			UPDATE trade_table SET trade_hidden=0 where trade_seq=#{trade_seq}
+  		]]>
+  	</update>
+  	
+  	<update id="hideService">
+  		<![CDATA[
+  			UPDATE service_table SET service_hidden=1 where service_seq=#{service_seq}
+  		]]>
+  	</update>
+  	
+  	<update id="showService">
+  		<![CDATA[
+  			UPDATE service_table SET service_hidden=0 where service_seq=#{service_seq}
+  		]]>
+  	</update>
+  	
+  	<update id="hideInquiry">
+  		<![CDATA[
+  			UPDATE inq_table SET inq_hiddenCK=1 where inq_num=#{inq_num}
+  		]]>
+  	</update>
+  	
+  	<update id="showInquiry">
+  		<![CDATA[
+  			UPDATE inq_table SET inq_hiddenCK=0 where inq_num=#{inq_num}
+  		]]>
+  	</update>
+  	
+  	<update id="doneInquiry">
+  		<![CDATA[
+  			UPDATE inq_table SET inq_completeCK=1 where inq_num=#{inq_num}
+  		]]>
+  	</update>
+  	
+  	<update id="undoneInquiry">
+  		<![CDATA[
+  			UPDATE inq_table SET inq_completeCK=0 where inq_num=#{inq_num}
+  		]]>
+  	</update>
+  </mapper>

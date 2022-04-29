@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+/*  trade.jsp */
+/*  TradeInsert.jsp */
+.custom-select{	border-radius: 0;}
+div#proBox{	margin-top: auto !important;}
+.form-control{	border : 1px solid rgba(88,166,166,0.4);	border-radius: 0;}
+.imgBox{	margin : 0 auto;	padding : 0 auto;	text-align: center;}
+.input-group-text{	background-color :  rgba(88,166,166,0.4) ;}
+.media{	border-top : 1px solid rgba(88,166,166,0.4);	border-bottom: 1px solid rgba(88,166,166,0.4);}
+
+
+/* tradelist.jsp */
+.sectionBox{	width : 1000px;	margin : 50px auto!important ;	}
+.flexContainer{	display : flex;	flex-wrap: wrap;}
+.listcontainer{	margin-top : 15px;	width : 300px;	padding : 10px;	margin : 15px;}
+.listcontainer:hover { 	border-radius: 15px; 	background-color : rgba(88,166,166,0.2);}
+.listContainerhover:hover::after{	background-color : rgba(88,166,166,0.2);}
+.textcontent{	border-top : 1px solid #ddd;	padding : 5px;	margin : 10px;}
+ .untitledchoco{ width : 250px; }
+/* usertradeprofile.jsp */
+.cardBox{ margin : 0 auto;}

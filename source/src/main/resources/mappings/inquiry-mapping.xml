@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="InqDAO">
+	<resultMap type="inq" id="inqResult">
+		<id property="inq_num" column="INQ_NUM" />
+		<result property="inq_title" column="INQ_TITLE" />
+		<result property="inq_nickname" column="INQ_NICKNAME" />
+		<result property="inq_content" column="INQ_CONTENT" />
+		<result property="inq_date" column="INQ_DATE" />
+<!-- 		<result property="inq_cnt" column="INQ_CNT" /> -->
+		<result property="inq_filename" column="INQ_FILENAME" />
+	</resultMap>
+
+	<insert id="insertInq">
+		<![CDATA[
+		INSERT INTO inq_table(INQ_TITLE, INQ_NICKNAME, INQ_CONTENT, INQ_FILENAME, INQ_DATE) VALUES( #{inq_title}, #{inq_nickname}, #{inq_content}, #{inq_filename}, NOW())
+		]]>
+	</insert>
+	
+	<update id="updateInq">
+		<![CDATA[
+		UPDATE inq_table SET INQ_TITLE = #{inq_title}, INQ_NICKNAME= #{inq_nickname}, INQ_CONTENT= #{inq_content} WHERE INQ_NUM= #{inq_num} 
+		]]>
+	</update>
+	
+<!-- 	<update id="updateInqCnt"> -->
+<!-- 		<![CDATA[ -->
+<!-- 		UPDATE inq_table SET INQ_CNT = INQ_CNT+1 WHERE INQ_NUM= #{inq_num}  -->
+<!-- 		]]> -->
+<!-- 	</update> -->
+	
+	<delete id="deleteInq">
+		<![CDATA[
+		DELETE FROM inq_table WHERE INQ_NUM = #{inq_num} 
+		]]>
+	</delete>
+
+	<select id="getInq" resultType="inq">
+		<![CDATA[
+		SELECT * FROM inq_table WHERE INQ_NUM = #{inq_num} 
+		]]>
+	</select>
+	
+	<select id="getInqList" resultMap="inqResult">
+		SELECT * FROM inq_table WHERE 1=1
+		<if test="inq_searchCondition == 'INQ_TITLE'"> AND INQ_TITLE LIKE CONCAT('%', #{inq_searchKeyword} ,'%') ORDER BY inq_num DESC</if>
+		<if test="inq_searchCondition == 'INQ_CONTENT'"> AND INQ_CONTENT LIKE CONCAT('%', #{inq_searchKeyword} ,'%') ORDER BY inq_num DESC</if>
+		LIMIT #{listcnt} OFFSET #{start}
+	</select>
+	
+	<!-- 총 게시글 갯수 출력 -->
+	<select id="countInq" resultType="int">
+		SELECT COUNT(*) FROM inq_table WHERE 1=1 
+		<if test="inq_searchCondition == 'INQ_TITLE' "> AND INQ_TITLE LIKE CONCAT('%',#{inq_searchKeyword},'%') </if>
+		<if test="inq_searchCondition == 'INQ_CONTENT' "> AND INQ_CONTENT LIKE CONCAT('%',#{inq_searchKeyword},'%') </if>
+	</select>
+
+</mapper>

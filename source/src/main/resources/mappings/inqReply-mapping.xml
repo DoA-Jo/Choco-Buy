@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="InqReplyDAO">
+	<resultMap type="inqReply" id="inqReplyResult">
+		<id property="inqRe_bno" column="INQRE_BNO" />
+		<id property="inqRe_rno" column="INQRE_RNO" />
+		<result property="inqRe_title" column="INQRE_TITLE" />
+		<result property="inqRe_nickname" column="INQRE_NICKNAME" />
+		<result property="inqRe_content" column="INQRE_CONTENT" />
+		<result property="inqRe_date" column="INQRE_DATE" />
+	</resultMap>
+
+<!-- 댓글 조회 -->
+	<select id="getInqReplyList" resultMap="inqReplyResult">
+		SELECT * FROM inq_reply WHERE inqRe_bno=#{inqRe_bno}
+	</select>
+
+<!-- 댓글 작성 -->
+	<insert id="insertInqReply">
+		INSERT INTO inq_reply(INQRE_BNO, INQRE_RNO, INQRE_CONTENT, INQRE_NICKNAME)VALUES(#{inqRe_bno}, (SELECT MAX(inqRe_rno) FROM inq_reply alias_for_subquery) +1, #{inqRe_content}, #{inqRe_nickname});
+	</insert>
+	
+<!-- 댓글 수정 -->
+	<update id="updateInqReply">
+		<![CDATA[
+		UPDATE inq_reply SET INQRE_CONTENT = #{inqRe_content} WHERE INQRE_RNO=#{inqRe_rno}
+		]]>
+	</update>
+	
+<!-- 댓글 삭제 -->
+	<delete id="deleteInqReply">
+		<![CDATA[
+		DELETE FROM inq_reply WHERE INQRE_RNO=#{inqRe_rno} AND INQRE_BNO=#{inqRe_bno}
+		]]>
+	</delete>
+
+</mapper>

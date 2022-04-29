@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ServiceDAO">
+	<resultMap type="service" id="ServiceResult">
+		<id property="service_seq" column="SERVICE_SEQ" />
+		<result property="service_title" column="SERVICE_TITLE" />
+		<result property="service_writer" column="SERVICE_WRITER" />
+		<result property="service_content" column="SERVICE_CONTENT" />
+		<result property="service_edit" column="SERVICE_EDIT" />
+		<result property="service_delete" column="SERVICE_DELETE" />
+		<result property="service_date" column="SERVICE_DATE" />
+		<result property="service_header" column="SERVICE_HEADER" />
+		<result property="service_cnt" column="SERVICE_CNT" />
+	</resultMap>
+
+	<insert id="insertService">
+		<![CDATA[
+		INSERT INTO SERVICE_TABLE (SERVICE_TITLE, SERVICE_WRITER, SERVICE_CONTENT,SERVICE_DATE) VALUES ( #{service_title},#{service_writer}, #{service_content},NOW())
+		]]>
+	</insert>
+	
+	<update id="updateService">
+		<![CDATA[
+		UPDATE SERVICE_TABLE SET SERVICE_TITLE = #{service_title}, WRITER= #{service_writer}, CONTENT= #{service_content} WHERE SEQ= #{service_seq} 
+		]]>
+	</update>
+	
+	<delete id="deleteService">
+		<![CDATA[
+		DELETE FROM SERVICE_TABLE WHERE SERVICE_SEQ = #{service_seq} 
+		]]>
+	</delete>
+
+	<select id="getService" resultType="service">
+		<![CDATA[
+		SELECT * FROM SERVICE_TABLE WHERE SERVICE_SEQ= #{service_seq} 
+		]]>
+	</select>
+	
+	<select id="getServiceList" resultMap="ServiceResult">
+		SELECT * FROM service_table WHERE 1=1 ORDER BY service_seq DESC
+<!-- 		<if test="searchCondition == 'TITLE'"> AND TITLE LIKE CONCAT('%', #{service_searchKeyword} ,'%') ORDER BY service_seq DESC</if> -->
+<!-- 		<if test="searchCondition == 'CONTENT'"> AND CONTENT LIKE CONCAT('%', #{service_searchKeyword} ,'%') ORDER BY seq DESC</if> -->
+		<!--  LIMIT #{listcnt} OFFSET #{start} -->
+	</select>
+	
+	<!-- 총 게시글 갯수 출력 -->
+	<select id="countService" resultType="int">
+		SELECT COUNT(*) FROM SERVICE_TABLE WHERE 1=1
+		<if test="service_searchCondition == 'SERVICE_TITLE' "> AND TITLE LIKE CONCAT('%',#{service_searchKeyword},'%') </if>
+		<if test="service_searchCondition == 'SERVICE_CONTENT' "> AND CONTENT LIKE CONCAT('%',#{service_searchKeyword},'%') </if>
+	</select>
+
+</mapper>

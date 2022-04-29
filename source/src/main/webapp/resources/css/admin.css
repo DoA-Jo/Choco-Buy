@@ -1,0 +1,46 @@
+@charset "UTF-8";
+	.hidden { display: none; }
+	.title { clear: both; }
+	.admin-nav { display: flex; margin-top: 15px; margin-bottom: 12px; justify-content: space-between; }
+	.admin-nav ul { border : 1px solid #eaeaea; padding: 0px; margin-left: 12px; display: block; }
+	.admin-nav ul>li { float : left; display : block; border-style : solid; border-color: #e5e5e5; border-width : 0 1px; margin-left : -1px; padding: 0px; }
+	.admin-nav ul>li>a { display: block; line-height: 22px; height: auto; background-color: #f8f8f8; height: auto; color: #585858; padding: 10px 14px; text-decoration: none; }
+	.admin-nav ul>li>a:hover { background-color: #999999;  }
+	.admin-search-bar { height: 250px; background-color: #E4F2F9; margin-top: 12px; margin-bottom: 12px; padding-left: 12px; padding-right: 12px; }
+	.list th { padding: 8px; }
+	.list td { padding: 4px; }
+	.container-fluid .table-bordered { width: 100% }
+	.buttons { height: 50px; }
+	.search { position: absolute; top: 100%; left: 50%; transform: translate(-50%,-120%); }
+	.admin-search-bar form { position: relative; height: 100%; }
+	th:nth-child(1) { width: 20px; }
+	td:nth-child(1) { width: 20px; padding: 8px; }
+	td:nth-child(2) { width: 50px; }
+	td, th{ text-align: center; }
+	#pgCnt { margin-top: 30px; }	
+	.one-line { overflow: hidden; text-overflow: ellipsis; max-width: 400px; max-height: 50px; white-space: nowrap; }
+	.user-spec { width: 450px; margin: 60px auto; }
+	.user-spec .buttons { margin: 20px auto; }
+	.user-spec label { font-weight: 700 !important; margin-top: 20px; }
+	.user-spec input, .user-spec select { border-style: solid; border-color: #dadada; padding: 10px 10px 10px 14px; }
+	.user-spec label, .user-spec input, .user-spec select { display: block; width: 100%; }
+	.chat { width: 50%; margin: 0 auto; }
+	.left-chat{
+		text-align: left;
+	}
+	.right-chat{
+		text-align: right;
+	}
+	.left-chat .msg-content {
+		background-color: #87CEEB;
+		border-radius: 10px;
+	}
+	.right-chat .msg-content {
+		background-color: #FEF250; 
+		border-radius: 10px;
+	}
+	.msg-content {
+		display: inline-block;
+		margin: 10px 0;
+		padding: 10px;
+	}

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ChatDAO">
+
+
+	<insert id="createChatRoom">
+		INSERT INTO CHATROOM_TABLE (TRADE_SEQ, TRADE_TITLE, TRADE_UUID, TRADE_NICK, TRADE_AREA, USER_UUID, USER_NICK, CHATROOM_REPORT_CONTENT)
+		VALUES(#{trade_seq}, #{trade_title}, #{trade_uuid}, #{trade_nick}, #{trade_area}, #{user_uuid}, #{user_nick}, #{chatroom_report_content})
+	</insert>
+	
+	<insert id="insertMsg">
+		<![CDATA[
+		INSERT INTO MSG_TABLE (CHATROOM_SEQ, TRADE_TITLE, USER_UUID, MSG_CONTENT, USER_NICK)
+		VALUES( #{chatroom_seq}, #{trade_title}, #{user_uuid}, #{msg_content}, #{user_nick})
+		]]>
+	</insert>
+	
+	<insert id="createApp">
+		INSERT INTO CHATROOM_TABLE (CHATROOM_SEQ, APP_TIME, APP_ADD, APP_PRICE)
+		VALUES(#{chatroom_seq},#{app_time} #{app_add}, #{app_price})
+	</insert>
+	
+	<select id="countRoom" resultType="int">
+		<![CDATA[ 
+		SELECT count(*) FROM CHATROOM_TABLE WHERE TRADE_SEQ = #{trade_seq} AND USER_UUID = #{user_uuid}
+		]]>
+	</select>
+	
+	<select id="countApp" resultType="int">
+		<![CDATA[ 
+		SELECT count(*) FROM CHATROOM_TABLE WHERE TRADE_SEQ = #{trade_seq} AND USER_UUID = #{user_uuid}
+		]]>
+	</select>	
+
+	<select id="getChatRoom" resultType="chatroom">
+		SELECT * FROM CHATROOM_TABLE WHERE CHATROOM_SEQ = #{chatroom_seq}
+	</select>	
+
+	<select id="getMyChatRoom" resultType="chatroom">
+		SELECT * FROM CHATROOM_TABLE WHERE TRADE_SEQ = #{trade_seq}
+	</select>	
+	 
+	<select id="getRoomSeq" resultType="int">
+		SELECT CHATROOM_SEQ FROM CHATROOM_TABLE WHERE TRADE_SEQ = #{trade_seq} AND USER_UUID = #{user_uuid}
+	</select>
+		
+	<select id="getApp" resultType="app">
+		SELECT * FROM APP_TABLE WHERE CHATROOM_SEQ = #{chatroom_seq} ORDER BY CHATROOM_SEQ ASC
+	</select>
+	
+	<select id="getMsgList" resultType="msg">
+		SELECT * FROM MSG_TABLE WHERE CHATROOM_SEQ = #{chatroom_seq} ORDER BY CHATROOM_SEQ ASC
+	</select>	
+	
+
+
+
+ 
+</mapper>
