@@ -137,7 +137,7 @@ window.onload = function(){
 	
 	str = '<div class="alert alert-warning">';
 	str +='<strong>Warning!</strong> 신고가 된 채팅방으로 더 이상 채팅이 불가합니다.<br>'
-		str +='자세한 사항은 <a href="#" class="alert-link">1:1 문의</a>를 통해 가능합니다.</div>'; 
+		str +='자세한 사항은 <a href="/Inquriy/GetInqList" class="alert-link">1:1 문의</a>를 통해 가능합니다.</div>'; 
 		
 	$("#msg_content_btn").append(str);
 	</c:if>
@@ -221,7 +221,7 @@ $("#reportSaveBtn").click(function(){
 	        		
 	        		str = '<div class="alert alert-warning">';
 	        		str +='<strong>Warning!</strong> 신고가 된 채팅방으로 더 이상 채팅이 불가합니다.<br>'
-	        			str +='자세한 사항은 <a href="#" class="alert-link">1:1 문의</a>를 통해 가능합니다.</div>'; 
+	        			str +='자세한 사항은 <a href="/Inquriy/GetInqList" class="alert-link">1:1 문의</a>를 통해 가능합니다.</div>'; 
 	        			
 	        		$("#msg_content_btn").append(str);
 	        	}
@@ -412,7 +412,7 @@ function enterkey() {
 						  </div>
 						<div class="form-control" id="chatBox"></div>
 						<div class="input-group mb-3" id="msg_content_btn">
-							<input type="text" onkeyup="enterkey();" class="form-control innm" id="msg_content" name="msg_content">
+							<input type="text" onkeydown="enterkey()" class="form-control innm" id="msg_content" name="msg_content">
 							<div class="input-group-append">
 							  <span class="input-group-text" id="chatSubmitBtn">전송</span>
 							</div>
