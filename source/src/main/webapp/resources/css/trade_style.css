@@ -8,7 +8,7 @@ div#proBox{	margin-top: auto !important;}
 .imgBox{	margin : 0 auto;	padding : 0 auto;	text-align: center;}
 .input-group-text{	background-color :  rgba(88,166,166,0.4) ;}
 .media{	border-top : 1px solid rgba(88,166,166,0.4);	border-bottom: 1px solid rgba(88,166,166,0.4);}
-
+#imgage-show{text-align : center;} 
 
 /* tradelist.jsp */
 .content-container .wrap{/* 	border : 1px solid #ddd; */}
@@ -23,7 +23,7 @@ div#proBox{	margin-top: auto !important;}
   /* hd menu Bar */
  .menuBox .container .categoryList {position : relative; font-size : 16px; margin-top : 4px; }
  .menuBox .container .categoryList .menuLink{ position :absolute; right : 0px; top : 8px; }
-  .menuBox .container .categoryList .menuLink:hover{cursor: default; position :absolute; right : 0px; top : 8px; }
+ .menuBox .container .categoryList .menuLink:hover{ cursor: default; position :absolute; right : 120px; top : 8px; }
  .menuBox .container .categoryList .categoryItem { margin :  auto 0; }
  .menuBox .container .categoryList .categoryItem :hover { margin :  auto 0;  color : #58a6a6;}
  .menuBox .container .categoryList .categoryItem .categoryToggle { float : left; margin : auto 0;}
