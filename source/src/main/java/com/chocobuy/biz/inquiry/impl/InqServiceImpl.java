@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.chocobuy.biz.inquiry.InqService;
 import com.chocobuy.biz.inquiry.InqVO;
+import com.chocobuy.biz.user.UserVO;
 
 
 @Service("inqService")
@@ -43,6 +44,11 @@ public class InqServiceImpl implements InqService {
 	@Override
 	public int countInq(InqVO inqVo) {
 		return inqDAO.countInq(inqVo);
+	}
+
+	@Override
+	public UserVO getVo_ck(UserVO vo) {
+		return inqDAO.getVo_ck(vo);
 	}
 
 }

@@ -2,6 +2,8 @@ package com.chocobuy.biz.inquiry;
 
 import java.util.List;
 
+import com.chocobuy.biz.user.UserVO;
+
 public interface InqService {
 
 	//CRUD 기능의 메소드 구현
@@ -22,5 +24,9 @@ public interface InqService {
 	
 	//게시물 총 갯수
 	int countInq(InqVO inqVo);
+	
+	
+	//관리자 체크
+	UserVO getVo_ck(UserVO vo);
 
 }

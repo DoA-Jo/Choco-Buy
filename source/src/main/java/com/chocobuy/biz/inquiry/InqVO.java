@@ -11,7 +11,11 @@ public class InqVO {
 	private String inq_content;			// 문의한 내용
 	private Date inq_date;			// 문의한 날짜
 //	private int inq_cnt;				// 조회수
+	private int inq_hiddenCK;			// 숨김처리
+	private int inq_completeCK;			// 답변완료
+	private int inqRole;
 	
+
 	private String inq_searchCondition;	// 문의검색창
 	private String inq_searchKeyword;	// 문의키워드
 	
@@ -97,12 +101,33 @@ public class InqVO {
 		this.listcnt = listcnt;
 	}
 	
+	public int getInq_hiddenCK() {
+		return inq_hiddenCK;
+	}
+	public void setInq_hiddenCK(int inq_hiddenCK) {
+		this.inq_hiddenCK = inq_hiddenCK;
+	}
+	public int getInq_completeCK() {
+		return inq_completeCK;
+	}
+	public void setInq_completeCK(int inq_completeCK) {
+		this.inq_completeCK = inq_completeCK;
+	}
+	
+	
+	public int getInqRole() {
+		return inqRole;
+	}
+	public void setInqRole(int inqRole) {
+		this.inqRole = inqRole;
+	}
+	
 	
 	@Override
 	public String toString() {
 		return "InqVO [inq_num=" + inq_num + ", inq_title=" + inq_title + ", inq_nickname=" + inq_nickname + ", inq_content=" + inq_content + ", inq_date="
 				+ inq_date + ", inq_searchCondition=" + inq_searchCondition + ", inq_searchKeyword=" + inq_searchKeyword
-				+ ", inq_uploadFile=" + inq_uploadFile + "]";
+				+ ", inq_uploadFile=" + inq_uploadFile + ", inq_hiddenCK=" + inq_hiddenCK + ", inq_completeCK=" + inq_completeCK + ", inqRole=" + inqRole + "]";
 	}
 
 	

@@ -3,10 +3,10 @@
 /* 1:1 문의 */
 
 /* inq 공통 */
-.ta_r {float:right;}
+.ta_r {text-align:right;}
 .btn-inqWrite {background-color: #58a6a6 !important; border-color: #58a6a6 !important; color: #ffffff !important; transition: all 0.7s ease-out;}
 .btn-inqWrite:hover {color:#fff; text-decoration:none; background-color:#0c7070 !important; border-color: #0c7070 !important;}
-.inqBtnBox {margin-bottom: 80px; display:inline-flex;}	/* 버튼 박스 */
+.inqBtnBox {margin-bottom: 80px; display:block;}	/* 버튼 박스 */
 .inqBtnBox > button {display:inline-block;}
 .inqBtnBox > button + button {margin-left:10px;}
 .hidden {display:none; text-indent:-9999px; opacity:0;}
@@ -29,7 +29,7 @@
 
 .inqListTable {}
 .inqListTable table {}
-.inqListTable table tr th {font-size:16px;}
+.inqListTable table tr th {font-size:16px; vertical-align: middle;}
 .inqListTable table tr td {font-size:14px;}
 .inqListTable table tr td a {color:#666;}
 .inqListTable table tr td a:hover {color:#000;}
@@ -45,17 +45,42 @@
 .inqInfoBox textarea{width:calc(100% - 100px); resize:none;}
 .inquiry_fileBtn {border: 1px solid #ced4da; border-radius: 0.25rem; padding: 2px 12px;}
 .inqInfoBox input::file-selector-button {width:100px; height:32px;}
-.inq_fileNameText {width: calc(100% - 100px); text-align: left; border: 1px solid #ced4da; border-radius: 0.25rem; padding: 2px 12px;}
+.inq_fileNameText {width: calc(100% - 100px); text-align: left; border: 1px solid #ced4da; border-radius: 0.25rem; padding: 2px 12px; line-height:32px;}
     
 
 /* 페이징 부분 */
 .inq_pgBtnBox {}
-.inq_pgBtnBox .btn-group > button + button {margin-left:5px !important; border-radius: 0.25rem !important;}
-.inq_pgBtnBox .btn-primary {background:#704224; color:#fff; border:0;}
-.inq_pgBtnBox .btn-primary:hover, .pgBtnBox .btn-primary:click, .pgBtnBox .btn-primary:focus {background:#bd845e;}
+.inq_pgBtnBox .btn-group > button + button {margin-left:5px !important;}
+.inq_pgBtnBox .btn-primary {background:#bd845e; color:#fff; border:0; border-radius: 0.25rem !important;}
+.inq_pgBtnBox .btn-primary:hover, .btn-primary:active, .btn-primary:focus {background:#704224;}
+.inq_pgBtnBox .btn-primary:not(:disabled):not(.disabled).active, .inq_pgBtnBox .btn-primary:not(:disabled):not(.disabled):active, .inq_pgBtnBox .show>.btn-primary.dropdown-toggle {background:#704224;}
 
 
 /* 하단 버튼 부분 */
 .inquiryFixBox {position: fixed; right: 20px; bottom: 50px; z-index:100;}
-.inquiryFixBtn {width: 50px; height: 50px;background: #2a0e11;font-size: 11px;font-weight: 500;color: #f9c48f; border-radius: 25px;  transition: all 0.3s ease-out;}
+body.scrollbar_hide .inquiryFixBox {right:37px;}
+.inquiryFixBtn {width: 50px; height: 50px;background: #2a0e11;font-size: 11px;font-weight: 500;color: #f9c48f; border-radius: 25px;  transition: all 0.2s ease-out;}
 .inquiryFixBtn:hover {width:80px; font-size:16px; /*transition-duration:0.5s;*/}
+
+
+/* 댓글 부분 */
+.inqReplyBox {}
+.inqReplyBox h4 {font-size: 20px; text-align: left; margin-bottom: 20px;}
+.inqReplyList {}
+.inqReplyList > li {margin-bottom: 50px;}
+.inqReplyList > li:last-child {margin-bottom: 0;}
+.inqReplyList > li > div {margin-bottom: 10px !important;}
+.inqReplyList > li > div:last-child {margin-bottom:0 !important;}
+.inqReplyList .inqBtnBox {margin-bottom:0;}
+
+
+
+/* 모달창 */
+.inq_modal{display:none;}
+.inq_modal.active {display:block; position:fixed; left:0; top:0; margin:auto; width: 100%; height: 100%; background: rgba(0,0,0,0.5);}
+.inq_modal-content {position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); background: #fff; width: 500px;}
+
+body.scrollbar_hide {-ms-overflow-style: none; /* IE and Edge */ scrollbar-width: none; /* Firefox */ margin-left:-17px;}
+body.scrollbar_hide::-webkit-scrollbar {display: none; /* Chrome, Safari, Opera*/}
+
+

@@ -23,17 +23,17 @@
 	<select id="nameCheck" resultType="integer">
 		SELECT COUNT(*) FROM user_table WHERE user_nick =#{sm_name} 
 	</select>
-
+	
 	<!--이름 중복확인 -->
 	<select id="mypageNameCheck" resultType="integer">
 		SELECT COUNT(*) FROM user_table WHERE user_nick=#{sm_name} 
 	</select>
-
+	
 	<!-- 전화번호 중복확인 -->
 	<select id="mypageNumCheck" resultType="integer">
 		SELECT COUNT(*) FROM user_table WHERE user_tel=#{sm_num} 
 	</select>
-
+	
 	<!--중복 방지 새로운 네이밍으로 구현함 추후 확인후 삭제요망 -->
 	<update id="updateUser">
 		<![CDATA[
@@ -43,7 +43,7 @@
 	<select id="getMypageUser" resultType="user">
 		SELECT * FROM USER_TABLE WHERE USER_UUID=#{user_uuid}
 	</select>
-
+	
 	<!--updateUser 의 새로운 이름(중복방지) -->
 	<update id="updateMypageUser">
 		<![CDATA[
@@ -57,4 +57,8 @@
 		UPDATE USER_TABLE SET USER_SINM=#{user_siNm}, USER_SGGNM=#{user_sggNm},USER_EMDNM=#{user_emdNm} WHERE USER_UUID=#{user_uuid}
 		]]>
 	</update>
+	
+	<select id="getUserInfo" resultType="user">
+		SELECT * FROM USER_TABLE WHERE USER_UUID=#{user_uuid}
+	</select>
 </mapper>

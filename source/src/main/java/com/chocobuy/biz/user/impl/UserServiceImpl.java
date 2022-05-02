@@ -91,5 +91,8 @@ public class UserServiceImpl implements UserService {
 		userDAO.updateUserArea(vo);
 	}
 
-	
+	@Override
+	public UserVO getUserInfo(UserVO vo) {
+		return userDAO.getUserInfo(vo);
+	}
 }
