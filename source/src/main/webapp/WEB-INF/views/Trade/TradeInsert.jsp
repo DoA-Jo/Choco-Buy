@@ -9,15 +9,16 @@
         <div class="warp">
             <section class="">
 				<div class="container-fluid">
-<!-- 					<form action="insertTrade.do" method="post" > -->
+					<!-- 20220502 김혜린 수정 -->
 					<form id="insertTrade_do" method="post" enctype="multipart/form-data">
 						<div class="imgBox mb-3 mt-3">
-							<img src="${pageContext.request.contextPath}/resources/img/eee.png">
-								 <label for="chooseFile">👉 CLICK HERE! 👈    </label>
-									<input type="file" class="form-control border" name="trade_uploadImg" value="trade_img">      
+							<label id="chooseFile" for="chooseFile"> 사진 올리기! </label>
+							<input id="uploadBtn" type="file" class="form-control border" name="trade_uploadImg" accept="image/*" onChange="loadFile(this)" value="trade_img" hidden>      
 						</div>
+						<div id="imageShow"></div>
+					<!-- 20220502 김혜린 수정 -->
 							<div class="media p-3">
-								<img src="${pageContext.request.contextPath}/resources/img/img_avatar3.png" alt="John Doe" class="mr-3 rounded-circle" style="width: 60px;">
+								<img src="${pageContext.request.contextPath}/resources/img/profileImg/pImg07.svg" alt="John Doe" class="mr-3 rounded-circle" style="width: 60px;">
 								
 								<div class="media-body" id="proBox">
 								
@@ -25,6 +26,8 @@
 									<p><small><input type="text" name="trade_area" value="${siNm += sggNm += emdNm}" readonly></small></p>
 									</div>
 								</div>
+					
+								
 						<div class="input-group">
 							<input type="text" class="form-control" id="td_title" name="trade_title"	placeholder="제목을 입력하세요...">
 						</div>

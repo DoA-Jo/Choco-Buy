@@ -41,6 +41,11 @@
 		    </li>
 <!-- 		    <li class="nav-item categoryItem"><a class="nav-link" href="#">이벤트</a></li> --><!-- 추후에! -->
 		    <li><span class="menuLink" >초코바이에서 원하는 모든 일을 찾으세요! </span></li>
+		    <li> 
+              	<a href="/Trade/tradeInsert">
+            		<div class="btnBox"><button type="button" class="writeBtn">글작성하기</button> </div>
+            	</a>
+            </li>
 	 		</ul>
         </div>
     </div>
