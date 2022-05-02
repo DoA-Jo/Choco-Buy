@@ -47,7 +47,7 @@
 	<!--updateUser 의 새로운 이름(중복방지) -->
 	<update id="updateMypageUser">
 		<![CDATA[
-		UPDATE USER_TABLE SET USER_TEL=#{user_tel},USER_NICK=#{user_nick},USER_SGGNM=#{user_sggNm},USER_EMDNM=#{user_emdNm} WHERE USER_UUID=#{user_uuid}
+		UPDATE USER_TABLE SET USER_TEL=#{user_tel},USER_NICK=#{user_nick} WHERE USER_UUID=#{user_uuid}
 		]]>
 	</update>
 
