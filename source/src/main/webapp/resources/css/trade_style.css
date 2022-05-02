@@ -11,12 +11,25 @@ div#proBox{	margin-top: auto !important;}
 
 
 /* tradelist.jsp */
-.sectionBox{	width : 1000px;	margin : 50px auto!important ;	}
-.flexContainer{	display : flex;	flex-wrap: wrap;}
-.listcontainer{	margin-top : 15px;	width : 300px;	padding : 10px;	margin : 15px;}
-.listcontainer:hover { 	border-radius: 15px; 	background-color : rgba(88,166,166,0.2);}
-.listContainerhover:hover::after{	background-color : rgba(88,166,166,0.2);}
-.textcontent{	border-top : 1px solid #ddd;	padding : 5px;	margin : 10px;}
- .untitledchoco{ width : 250px; }
+.content-container .wrap{/* 	border : 1px solid #ddd; */}
+.content-container .warp .sectionBox{	width : 1000px;	margin : 50px auto!important ;}
+.content-container .warp .sectionBox .flexContainer{	display : flex;	flex-wrap: wrap;}
+.content-container .warp .sectionBox .flexContainer .listcontainer{	margin-top : 15px;	width : 300px;	padding : 10px;	margin : 15px;}
+.content-container .warp .sectionBox .flexContainer .listcontainer:hover {	border-radius: 15px; 	background-color : rgba(88,166,166,0.2);}
+.content-container .warp .sectionBox .flexContainer .listContainerhover:hover::after{	background-color : rgba(88,166,166,0.2);}
+.content-container .warp .sectionBox .flexContainer .listcontainer .textcontent{	border-top : 1px solid #ddd;	padding : 5px;	margin : 10px;}
+.content-container .warp .sectionBox .flexContainer .listcontainer .textcontent .untitledchoco{ width : 250px; }
+ 
+  /* hd menu Bar */
+ .menuBox .container .categoryList {position : relative; font-size : 16px; margin-top : 4px; }
+ .menuBox .container .categoryList .menuLink{ position :absolute; right : 0px; top : 8px; }
+  .menuBox .container .categoryList .menuLink:hover{cursor: default; position :absolute; right : 0px; top : 8px; }
+ .menuBox .container .categoryList .categoryItem { margin :  auto 0; }
+ .menuBox .container .categoryList .categoryItem :hover { margin :  auto 0;  color : #58a6a6;}
+ .menuBox .container .categoryList .categoryItem .categoryToggle { float : left; margin : auto 0;}
+ .menuBox .container .categoryList .categoryItem .categoryToggle:hover { float : left; margin : auto 0; color : #58a6a6; }
+ .menuBox .container .categoryList .categoryItem .categoryToggle .categoryDropdown {}
+ .menuBox .container .categoryList .categoryItem .categoryToggle .categoryDropdown #bannerContainer{ clear : both;}
+ 
 /* usertradeprofile.jsp */
 .cardBox{ margin : 0 auto;}
