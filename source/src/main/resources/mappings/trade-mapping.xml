@@ -51,6 +51,10 @@
 	SELECT * FROM TRADE_TABLE WHERE 1=1
 	AND TRADE_NICK LIKE CONCAT('%', #{trade_nick} ,'%') ORDER BY TRADE_NICK DESC
 	</select>
+
+	<select id="getMypageTradeList" resultType="trade">
+		SELECT * FROM TRADE_TABLE 
+	</select>
 		
 	<!--MypageTradeList.jsp 에서 리뷰 입력을 위한  글검색	 -->
 	<select id="getMypageTrade" resultType="trade">
