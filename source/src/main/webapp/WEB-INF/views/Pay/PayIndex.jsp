@@ -77,9 +77,9 @@
 <!-- 				<input type="text" size="1" id="pay_start_time" value="" />시 ~ <input type="text" size="1" id="pay_end_time" value="" />시 -->
 <!-- 				<input type="text" size="30" id="pay_date" value="" /> -->
 				<c:forEach items="${AppointmentList }" var="app">
-					<!-- 채팅에서 날짜/시간 어떻게 잡는지에 따라 변경해야 함 -->
-					<input type="text" size="10" id="pay_date1" value="${appointment.app_created }" readonly/>
+					<!-- 2022.05.01 추가 수정 start -->
 					<input type="text" size="10" id="pay_date2" value="${appointment.app_time }" readonly/>
+					<!-- 2022.05.01 추가 수정 end -->
 				</c:forEach>
 			</td>
 		</tr>

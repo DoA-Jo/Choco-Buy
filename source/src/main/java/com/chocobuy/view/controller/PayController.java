@@ -4,11 +4,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -25,20 +25,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.chocobuy.biz.pay.PayService;
 import com.chocobuy.biz.pay.PayVO;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.siot.IamportRestClient.IamportClient;
-import com.siot.IamportRestClient.exception.IamportResponseException;
-import com.siot.IamportRestClient.response.IamportResponse;
-import com.siot.IamportRestClient.response.Payment;
 
 @Controller
 @SessionAttributes("pay")
@@ -109,25 +103,20 @@ public class PayController {
 			} 
 		} 
 	
-	//상품결제 폼 호출 - 앞에 식별코드 있어서 우선 주석처리
-//	@RequestMapping(value="/Pay/Payment", method=RequestMethod.GET)
-//	public String pay(HttpServletRequest request, Model model) {
-//		String nm = request.getParameter("unm");
-//		model.addAttribute("impKey", "imp76820413"); // 가맹점 식별코드
-//		return "redirect:/Pay/insertPay";
-//	}
-	
-	//결제 진행 폼=> 이곳에서 DB저장 로직도 추가하기
+//		2022.05.01 추가 수정 start
+	//결제 진행 폼
 	@RequestMapping(value="/Pay/Payment", method=RequestMethod.POST)
-	public String payment(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
-		String nm = request.getParameter("unm");
-		String amount = request.getParameter("amount");
-		String mid = request.getParameter("mid");
+	public String payment(PayVO vo, HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
+		System.out.println(vo.toString());
+		model.addAttribute("pay", vo);
 		String token = getImportToken();
-		setHackCheck(amount, mid, token);
+//		2022.05.01 추가 수정 end
+		setHackCheck(Integer.toString(vo.getPay_amount()), vo.getPay_ordernum(), token);
 		
-		// DB 저장 로직 - insertPay에 기능 있음?
+		// DB 저장 로직 start
+//		2022.05.01 추가 수정 start
 		return "redirect:/Pay/insertPay";
+//		2022.05.01 추가 수정 end
 		
 	}
 
@@ -147,7 +136,7 @@ public class PayController {
 	
 	// insert
 	@RequestMapping("/Pay/insertPay")
-	public String insertPay(PayVO vo) {
+	public String insertPay(@ModelAttribute("pay") PayVO vo, ServletRequest request) {
 		payService.insertPay(vo);
 		return "redirect:/Pay/getPay"; // list아님
 	}
@@ -160,7 +149,6 @@ public class PayController {
 		}else {
 			return "getPay?error=1";
 		}
-		
 	}
 	// delete
 	@RequestMapping("/Pay/deletePay")
@@ -170,9 +158,11 @@ public class PayController {
 	}
 	// get
 	@RequestMapping("/Pay/getPay")
-	public String getPay(PayVO vo, Model model) {
+	// 2022.05.01 추가 수정 start
+	public String getPay(@ModelAttribute("pay") PayVO vo, Model model) {
 		model.addAttribute("pay", payService.getPay(vo));
-		return "/Pay/PayComplete";
+		return "redirect:/Pay/PayComplete";
+	// 2022.05.01 추가 수정 end
 	}
 	//
 	@ModelAttribute("conditionMap")

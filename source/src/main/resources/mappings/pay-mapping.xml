@@ -3,7 +3,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="PayDAO">
-	<resultMap type="pay" id="payResult">
+	<resultMap id="payResult" type="pay">
 		<id property="pay_num" column="PAY_NUM"/>
 		<result property="pay_ordernum" column="PAY_ORDERNUM"/>
 		<result property="pay_sell" column="PAY_SELL"/>
@@ -14,47 +14,43 @@
 		<result property="pay_method" column="PAY_METHOD"/>
 	</resultMap>
 
-	<insert id="insertPay" parameterType="pay">
-<!-- 		"insert into pay_table(pay_ordernum,pay_sell,pay_buy,pay_category,pay_date,pay_amount,pay_method) values(?,?,?,?,?,?,?)" -->
+	<!-- 2022.05.01 추가 수정 start -->
+	<insert id="insertPay">
 		<![CDATA[
 			INSERT INTO PAY_TABLE(PAY_ORDERNUM,PAY_SELL,PAY_BUY,PAY_CATEGORY,PAY_DATE,PAY_AMOUNT,PAY_METHOD)
-			VALUES(#{pay_ordernum},#{pay_sell},#{pay_buy},#{pay_category},#{pay_date},#{pay_amount},#{pay_method})
+			 VALUES(#{pay_ordernum},#{pay_sell},#{pay_buy},#{pay_category},#{pay_date},#{pay_amount},#{pay_method})
 		]]>
 	</insert>
+	<!-- 2022.05.01 추가 수정 end -->
 	
 	<update id="updatePay">
-<!-- 		"update pay_table set pay_category=?,pay_amount=?" -->
 		<![CDATA[
 			UPDATE PAY_TABLE SET PAY_CATEGORY=#{pay_category},PAY_AMOUNT=#{pay_amount}
 		]]>
 	</update>
 	
 	<delete id="deletePay">
-<!-- 		"delete from pay_table where pay_num=?" -->
 		<![CDATA[
 			DELETE FROM PAY_TABLE WHERE PAY_NUM=#{pay_num}
 		]]>
 	</delete>
 
+	<!-- 2022.05.01 추가 수정 start -->
 	<select id="getPay" resultMap="payResult">
-<!-- 		"select * from pay_table where pay_num=?" -->
 		<![CDATA[
-			SELECT * FROM PAY_TABLE WHERE PAY_NUM=#{pay_num}
+			SELECT PAY_ORDERNUM,PAY_DATE,PAY_AMOUNT,PAY_METHOD FROM PAY_TABLE WHERE PAY_NUM=#{pay_num}
 		]]>
 	</select>
 
 	<select id="getPayList" resultMap="payResult">
-<!-- 		"select * from pay_table order by pay_num desc" -->
-<!-- 		"select * from pay_table where pay_ordernum like CONCAT('%',?,'%') order by pay_num desc" -->
-<!-- 		"select * from pay_table where pay_category like CONCAT('%',?,'%') order by pay_num desc" -->
 		SELECT * FROM PAY_TABLE WHERE 1=1
 		<if test="searchCondition=='pay_ordernum'">
-			AND TITLE PAY_ORDERNUM '%'||#{searchKeyword}||'%'
+			 AND TITLE PAY_ORDERNUM '%'||#{searchKeyword}||'%'
 		</if>
 		<if test="searchCondition=='pay_category'">
-			AND CONTENT PAY_CATEGORY '%'||#{searchKeyword}||'%'
+			 AND CONTENT PAY_CATEGORY '%'||#{searchKeyword}||'%'
 		</if>
-		ORDER BY PAY_NUM DESC
+		 ORDER BY PAY_NUM DESC
 	</select>
-
+	<!-- 2022.05.01 추가 수정 end -->
 </mapper>

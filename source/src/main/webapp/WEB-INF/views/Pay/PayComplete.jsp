@@ -27,21 +27,23 @@
 		<tr>
 			<th colspan="2"><font size="30">결제가 완료되었습니다!</font></th>
 		</tr>
+		<!-- 2022.05.01 추가 수정 start -->
 		<tr>
 			<th size="250">주문번호</th>
 			<th size="150">결제일시</th>
-			<th size="150">결제방법</th>
 			<th size="100">결제금액</th>
+			<th size="150">결제방법</th>
 		</tr>
-		<c:forEach items="${PayList }" var="pay">
 		<tr>
+<%-- 		<c:forEach items="${PayList }" var="pay"> --%>
 			<td>${pay.pay_ordernum }</td>
-			<!-- 채팅에서 날짜/시간 어떻게 잡는지에 따라 변경해야 함 -->
 			<td>${pay.pay_date }</td>
-			<td>${pay.pay_method }</td>
 			<td>${pay.pay_amount }</td>
+			<td>${pay.pay_method }</td>
+<%-- 		</c:forEach> --%>
+		<!-- 2022.05.01 추가 수정 end -->
 		</tr>
-		</c:forEach>
+		
 	</table>
 	<br><br>
 	<table class="w-auto mx-auto">
