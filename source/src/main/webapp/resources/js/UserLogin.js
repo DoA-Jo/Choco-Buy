@@ -1,7 +1,6 @@
 /* 전화번호 인증 */
 $(document).ready(function(){
 	var code2 = ""; 
-	
 	/* 인증번호 보내기 */
 	$("#phoneChk").on("click",function(){ 
 		var phone = $("#phone").val(); 
@@ -41,12 +40,13 @@ $(document).ready(function(){
 	/* 번호 일치 확인, 다음 버튼 활성화 */
 	$("#phoneChk2").on("click",function(){ 
 		if($("#phone2").val() == code2){ 
+			$(".successPhoneChk").css("color","inherit"); 
 			$(".successPhoneChk").text("인증번호가 일치합니다."); 
 			$("#phoneDoubleChk").val("true");
 			$("#phone2").attr("disabled",true);   
 			$(".login_next_btn").attr("disabled", false);
 		}else{ 
-			$(".successPhoneChk").text("인증번호가 일치하지 않습니다. 확인해주시기 바랍니다."); 
+			$(".successPhoneChk").text("인증번호가 일치하지 않습니다."); 
 			$(".successPhoneChk").css("color","red"); 
 			$("#phoneDoubleChk").val("false"); 
 			$(this).attr("autofocus",true); 

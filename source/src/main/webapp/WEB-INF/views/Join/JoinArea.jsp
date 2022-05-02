@@ -35,10 +35,10 @@ function init(){
 		</form>
 		
 		<form id="form" name="form" > 
-
 			<div id="list"></div>
 			<div id="callBackDiv">
 				<div>
+					<input type="hidden" name="user_uuid" value="${user1.user_uuid} ">
 					<input type="text" id="user_siNm" class="area_input" name="user_siNm" value="${siNm }" disabled />
 					<input type="text" id="user_sggNm" class="area_input" name="user_sggNm" value="${sggNm }" disabled />
 					<input type="text" id="user_emdNm" class="area_input" name="user_emdNm" value="${emdNm }" disabled />

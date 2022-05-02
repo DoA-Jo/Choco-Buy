@@ -3,14 +3,17 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-5.4.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 
-		<context:component-scan base-package="com.chocobuy.view"></context:component-scan>
-		<context:component-scan base-package="com.my.web" />
+	<context:component-scan base-package="com.chocobuy.view"></context:component-scan>
+	<context:component-scan base-package="com.chocobuy.biz" />
+	<context:component-scan base-package="com.my.web" />
 	
-		<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<mvc:annotation-driven />
@@ -29,9 +32,6 @@
 		<property name="maxUploadSize" value="50000000" /><!-- 50MB -->
 	</bean>	
 	
-	
-	<context:component-scan base-package="com.chocobuy.biz" />
-	
 	<!-- interceptors -->
 	<mvc:interceptors>
 		<mvc:interceptor>
@@ -43,4 +43,13 @@
 		</mvc:interceptor>
 	</mvc:interceptors>	
 
+	<!-- SECURITY -->	
+	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
+	
+	<bean id="webContentInterceptor" class="org.springframework.web.servlet.mvc.WebContentInterceptor">
+		<property name="cacheSeconds" value="0"/>
+		<property name="useExpiresHeader" value="true"/>
+		<property name="useCacheControlHeader" value="true"/>
+		<property name="useCacheControlNoStore" value="true"/>
+	</bean>
 </beans>

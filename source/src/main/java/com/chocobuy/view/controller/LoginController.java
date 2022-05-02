@@ -1,24 +1,26 @@
 package com.chocobuy.view.controller;
 
+import java.util.Date;
 import java.util.regex.Pattern;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.util.WebUtils;
 
 import com.chocobuy.biz.user.UserService;
 import com.chocobuy.biz.user.UserVO;
 import com.chocobuy.biz.util.CertifiedPhoneNumber;
-import com.chocobuy.biz.util.UseReg;
 
 @Controller
 @SessionAttributes("UserInfo")
@@ -27,11 +29,23 @@ public class LoginController {
 	private UserService userService;
 	
 	/* LOGOUT */
-	@RequestMapping("/Login/logout")
-	public String logout(HttpSession session) {
-		System.out.println("濡쒓렇�븘�썐 泥섎━");
-		return "redirect: /index";
-	}
+    @RequestMapping("/Login/logout")
+    public String logout(UserVO vo, HttpSession session , HttpServletRequest request , HttpServletResponse response) {
+       System.out.println("Controller >> logout");
+        if(session.getAttribute("UserInfo")!= null) {
+            session.removeAttribute("UserInfo"); 
+            session.invalidate();
+            Cookie cookie = WebUtils.getCookie(request,"loginCookie");
+            
+            //자동로그인을 한 상태의 사용자가 로그아웃을 할 경우
+            if(cookie != null) {
+                cookie.setMaxAge(0);
+                response.addCookie(cookie);
+                userService.autoLogin("none",new Date(),vo.getUser_uuid());
+            }
+        }
+        return "redirect:/index";
+    }
 
 	/* LOGIN */	
 	@RequestMapping(value="/Login/login",method=RequestMethod.GET)

@@ -10,6 +10,8 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <!-- JS -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/UserLogin.js"></script>
+<!-- FONT AWESOME 5.7 -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 <script>
 window.onpageshow = function(event) {
     if ( event.persisted ) {
@@ -51,13 +53,23 @@ window.onpageshow = function(event) {
 			</div>
 			<div class="login_btn_area">
 				<button type="button" class="login_next_btn next_btn" disabled>로그인</button> 
-			</div>		
+			</div>
+			<div class="login_opts_wrap">
+				<div class="autoLogin">
+					<input type="checkbox" name="autoLogin" id="autoLogin"/>
+					<label for="autoLogin">자동로그인</label>
+				</div>
+				<a class="link_to_inquiry" href="/Inquiry/GetInqList">로그인이 안되시나요?</a>
+			</div>
 		</form>
 		<div class="join_btn_area">
 			<span>아직 회원이 아니신가요?</span> <a href="/Join/joinAgree" class="join_btn">회원가입</a>
 		</div>
 	</div>
 </div>
+
+
+
 <%@ include file="/WEB-INF/views/template/LJ_footer.jsp"  %>
 </body>
 </html>

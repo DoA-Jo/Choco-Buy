@@ -23,15 +23,15 @@ window.onload=function(){
 		<%@ include file="/WEB-INF/views/template/ProgressBar.jsp"  %>
 		<!-- progress bar -->
 		<form id="join_nick" name="join_nick">
-			<input type="hidden" name="user_tel" value="${UserInfo.user_tel }"/> 
 			<div class="desc nick_desc"> 
 				<h2>사용할 별명을 입력하고<br>프로필 사진을 선택해주세요.</h2>
 			</div>
 			<div class="val_area">
 				<div>
+					<input type="hidden" name="user_uuid" value="${user1.user_uuid} ">
 					<input type="text" id="user_nick" class="user_input nick_input" name="user_nick" placeholder="별명을 입력하세요" maxlength="16" title="8자 까지 입력" required/> 
 					<button type="button" id="dup_btn" class="nick_dup_btn input_btn">중복확인</button>
-					<span class="successNameChk">이름은 2자 이상 8자 이하로 설정해주시기 바랍니다.</span> 
+					<span class="successNameChk">별명을 2자 이상 8자 이하로 설정해주시기 바랍니다.</span> 
 					<input type="hidden" id="nameDoubleChk"/>
 				</div>
 			</div>

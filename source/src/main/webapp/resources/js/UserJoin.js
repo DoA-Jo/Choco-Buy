@@ -1,10 +1,24 @@
 $(document).ready(function (){
-
 	/* 전화번호 인증 */
 	var code2 = ""; 
 	$("#phoneChk").on("click",function(){ 
 		var phone = $("#phone").val();
-		if(checkUser()==0){ 
+		if(telRegCheck()==false){
+			console.log("!telRegCheck()");
+			$(".tel_input").val('').focus();
+			$(".successPhoneChk").text("휴대폰 번호를 10~11자리로 입력하세요."); 
+			$(".successPhoneChk").css("color","red"); 
+		}else if(phone==""||phone.length>11||phone.length<10){
+			console.log("length");
+			$(".tel_input").val('').focus();
+			$(".successPhoneChk").text("휴대폰 번호를 정확하게 입력해주세요."); 
+			$(".successPhoneChk").css("color","red"); 
+		}else if(!(checkUser()==0)){
+			console.log("!(checkUser()==0)")
+			$(".tel_input").val('').focus();
+			$(".successPhoneChk").text("이미 가입된 번호입니다."); 
+			$(".successPhoneChk").css("color","red"); 
+		}else{
 			$.ajax({ 
 				url:"/Join/phoneCheck", 
 				type:"POST",
@@ -16,9 +30,10 @@ $(document).ready(function (){
 						alert("휴대폰 번호가 올바르지 않습니다."); 
 						$(".successPhoneChk").text("유효한 번호를 입력해주세요."); 
 						$(".successPhoneChk").css("color","red"); 
-						$("#phone").attr("autofocus",true); 
+						$("#phone").focus(); 
 					}else{ 
 						$("#phone2").attr("disabled",false); 
+						$("#phone2").focus(); 
 						$("#phoneChk2").attr("disabled",false); 
 						$("#phoneChk2").css("display","inline-block"); 
 						$(".successPhoneChk").text("인증번호를 입력한 뒤 본인인증을 눌러주십시오."); 
@@ -27,22 +42,19 @@ $(document).ready(function (){
 					} 
 				} 
 			}); 
-		}else{
-			$(".successPhoneChk").text("이미 가입된 번호입니다."); 
-			$(".successPhoneChk").css("color","red"); 
 		}
 	});
 
 	/* 번호 일치 확인, 다음 버튼 활성화 */
 	$("#phoneChk2").on("click",function(){ 
 		if($("#phone2").val() == code2){ 
-			alert("일치합니다.");
+			$(".successPhoneChk").css("color","inherit"); 
 			$(".successPhoneChk").text("인증번호가 일치합니다."); 
 			 $("#phoneDoubleChk").val("true");
 			$("#phone2").attr("disabled",true);   
 			$(".tel_next_btn").attr("disabled", false);
 		}else{ 
-			$(".successPhoneChk").text("인증번호가 일치하지 않습니다. 확인해주시기 바랍니다."); 
+			$(".successPhoneChk").text("인증번호가 일치하지 않습니다."); 
 			$(".successPhoneChk").css("color","red"); 
 			$("#phoneDoubleChk").val("false"); 
 			$(this).attr("autofocus",true); 
@@ -53,9 +65,8 @@ $(document).ready(function (){
 	/* 닉네임 인증 */
 	$("#dup_btn").on("click",function(){ 
 		var user_nick=$("#user_nick").val(); 
-		console.log("user_nick: "+user_nick);
-		if(user_nick == "" || user_nick.length < 2){ 
-			$(".successNameChk").text("이름은 2자 이상 8자 이하로 설정해주세요 :)"); 
+		if(user_nick == "" || user_nick.length < 2 || user_nick.length > 8){ 
+			$(".successNameChk").text("별명을 2자 이상 8자 이하로 설정해주세요."); 
 			$(".successNameChk").css("color", "red"); 
 			$("#nameDoubleChk").val("false"); 	
 		}else{ 
@@ -70,7 +81,6 @@ $(document).ready(function (){
 						$("#nameDoubleChk").val("true"); 
 						$(".nick_next_btn").attr("disabled", false);
 					} else { 
-						console.log(data);
 						$(".successNameChk").text("이미 사용중인 별명입니다."); 
 						$(".successNameChk").css("color", "red"); 
 						$("#nameDoubleChk").val("false"); 
@@ -83,11 +93,8 @@ $(document).ready(function (){
 		} 
 	});
 	
-
-	
     /* 약관동의 다음 버튼 토글 */
     $('#agree_cbox').on("click", function(){
-    console.log("clicked");
         if(!$(this).is(":checked")){
         	$(".agree_next_btn").attr("disabled", true);
         }else{
@@ -120,7 +127,6 @@ $(document).ready(function (){
 	
 	/* JoinNick 프로필 사진 변경 */
     $('.pImg_edit_btn').on("click", function(){
-    	console.log("click!!");
     	$('.pImg .pImg_box').show(function(){
     		 $('.pImg_edit_btn').on("click", function(){
     		 	$('.pImg .pImg_box').hide();
@@ -142,9 +148,7 @@ $(document).ready(function (){
 	
 	/* JoinNick [다음] 버튼 submit */
 	$(".nick_next_btn").on("click", function(){
-	console.log("다음 버튼");
 		if(user_nick!=null){
-			alert("if");
 			document.join_nick.action ='/Join/JoinNick';
 			document.join_nick.method='post';
 			document.join_nick.submit();
@@ -154,7 +158,6 @@ $(document).ready(function (){
 
 	/* join_done.jsp */
 	$(".done_next_btn").on("click", function(){
-		console.log("clicked");
 		document.join_done.action='/Join/JoinDone';
 		document.join_done.method='post';
 		document.join_done.submit();
@@ -162,9 +165,19 @@ $(document).ready(function (){
 	
 });
 
+/* 유효성검사 */
+function telRegCheck(){
+	var user_tel=document.querySelector('#phone');
+	/* 숫자만 입력하는 정규식 */
+	var reg= /^[0-9]*$/; 
+	/* test() 패턴이 문자열 내에 존재하는지 여부. 일치하면 true */ 
+	if(!reg.test(user_tel.value)){
+		user_tel.focus();
+	}
+}
+
 /* 회원확인 */
 function checkUser(){
-	console.log("checkUser() 실행");
 	var phone = $("#phone").val();
 	var telInfo; 
 	$.ajax({
@@ -175,7 +188,6 @@ function checkUser(){
   		cache : false, 
   		success : function(data){
   			telInfo=data;
-  			console.log("data:"+data);
   		},
   		error : function(){alert("실패");}
 	});

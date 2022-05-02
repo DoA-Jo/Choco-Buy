@@ -1,6 +1,9 @@
 package com.chocobuy.biz.user.impl;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,8 +55,6 @@ public class UserServiceImpl implements UserService {
 	public int userTelCheck(String user_tel) {
 		return userDAO.userTelCheck(user_tel);
 	}
-	////
-
 	
 	@Override
 	public int updateUser(UserVO vo) {
@@ -94,5 +95,30 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserVO getUserInfo(UserVO vo) {
 		return userDAO.getUserInfo(vo);
+	}
+
+	@Override
+	public void autoLogin(String sessionId, Date limitDate, String id) {
+		Map<String,Object> map = new HashMap<>();
+        map.put("sessionId",sessionId);
+        map.put("limitDate",limitDate);
+        map.put("id",id);
+        System.out.print(map);
+        userDAO.autoLogin(map);
+	}
+
+	@Override
+	public UserVO selectSession(String sessionId) {
+		return userDAO.selectSession(sessionId);
+	}
+
+	@Override
+	public UserVO getUserUuid(UserVO vo) {
+		return userDAO.getUserUuid(vo);
+	}
+
+	@Override
+	public int nameCheck(String sm_name) {
+		return userDAO.nameCheck(sm_name);
 	}
 }

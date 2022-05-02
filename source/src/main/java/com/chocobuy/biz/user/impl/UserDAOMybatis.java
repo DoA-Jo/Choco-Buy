@@ -1,6 +1,7 @@
 package com.chocobuy.biz.user.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,5 +102,26 @@ public class UserDAOMybatis{
 	public UserVO getUserInfo(UserVO vo) {
 		System.out.println("===> Mybatis로 getUserInfo() 기능 처리");
 		return (UserVO) mybatis.selectOne("UserDAO.getUserInfo", vo);
+	}
+	
+	//autoLogin(map);
+	public void autoLogin(Map<String, Object> map){
+		System.out.println("Mybatis >> autoLogin");
+		mybatis.update("UserDAO.autoLogin", map);
+	}
+	
+	public UserVO selectSession(String sessionId) {
+		System.out.println("Mybatis >> selectSession");
+		return (UserVO) mybatis.selectList("UserDAO.selectSession", sessionId);
+	}
+	
+	public int nameCheck(String sm_name) {
+		System.out.println(sm_name);
+		return mybatis.selectOne("UserDAO.nameCheck", sm_name);
+	}
+	
+	public UserVO getUserUuid(UserVO vo) {
+		System.out.println("Mybatis >> getUserUuid");
+		return (UserVO) mybatis.selectOne("UserDAO.getUserUuid", vo);
 	}
 }
