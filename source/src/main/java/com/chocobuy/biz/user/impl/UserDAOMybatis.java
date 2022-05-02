@@ -92,6 +92,10 @@ public class UserDAOMybatis{
 		return mybatis.selectOne("UserDAO.mypageNameCheck", sm_name);
 	}
 
-	
+	// 주소 검색후 저장 
+	public int updateMypageUseArea(UserVO vo) {
+		System.out.println("===> JDBC로 updateMypageUser() 기능 처리");
+		return mybatis.update("UserDAO.updateMypageUseArea", vo);
+	}
 	
 }
