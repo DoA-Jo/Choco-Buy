@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%-- <% if(request.getAttribute("tradeList")==null){ --%>
+<!-- // 	response.sendRedirect("/index"); -->
+<%-- } %> --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,12 +18,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/inquiry.css">
-<%
-//캐시 유지 유지되어야하는 모든 페이지에 추가해야함.(대부분 공통적으로 include되는 header페이지에 많이 추가함)
-response.setHeader("Cache-Control", "no-store");
-response.setHeader("Pragma", "no-cache");
-response.setDateHeader("Expires", 0);
-if (request.getProtocol().equals("HTTP/1.1"))
-	response.setHeader("Cache-Control", "no-cache");
-%>
+
+<link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<script src="https://kit.fontawesome.com/5661832475.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+<script type="text/javascript" src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>

@@ -4,9 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,13 +12,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.chocobuy.biz.trade.TradeService;
 import com.chocobuy.biz.trade.TradeVO;
+import com.chocobuy.biz.user.UserVO;
 
 @Controller
 @SessionAttributes("trade")
@@ -29,38 +27,28 @@ public class TradeController {
 	@Autowired
 	private TradeService tradeService;
 	
-
-	//로그인
-//	@RequestMapping("/Trade/login")
-//	public String loginTrade(TradeVO vo) throws IOException{
-//		return "/Login/login";
-//	}
 	//글 등록 페이지로 가기
 	@RequestMapping("/Trade/tradeInsert")
 	public String insertTradePage(TradeVO vo) throws IOException{
 		return "/Trade/TradeInsert";
 	}
-	
-//	// 구매글 등록
-//	@RequestMapping("/Trade/insertTrade")
-//	public String insertTrade(TradeVO vo) throws IOException{
-//		tradeService.insertTrade(vo);
-//		return "redirect:/Trade/getTradeList";
-//	}
+//	20220502 김혜린 수정(real path 수정) 
 	// 글 등록
 	@RequestMapping(value = "/Trade/insertTrade")
 	public String insertTrade(TradeVO vo, MultipartHttpServletRequest request , HttpSession session) throws IOException{
 		
-//	String realPath=request.getSession().getServletContext().getRealPath("/");	
+	String realPath=request.getSession().getServletContext().getRealPath("/");	
+	
 //	String savePath=realPath+"/resources/img/upload/";
-	String savePath="C:/swork/ChocoBuyProto/src/main/webapp/resources/img/upload/";
-//	System.out.println("realPath : "+realPath);
+//	String savePath="C:/swork/ChocoBuyProto/src/main/webapp/resources/img/upload/";
+	
+	System.out.println("realPath : "+realPath);
 		MultipartFile trade_uploadImg = vo.getTrade_uploadImg();
 		
 		if(!trade_uploadImg.isEmpty()) {
 			String trade_img = trade_uploadImg.getOriginalFilename();
 			
-			File file = new File(savePath+trade_img);
+			File file = new File(realPath+trade_img);
 			if(!file.exists()) {
 				file.mkdirs();
 			}
@@ -69,15 +57,15 @@ public class TradeController {
 		}
 		session = request.getSession();
 		String UserInfo = (String)session.getAttribute("UserInfo");
-		vo.setTrade_imgpath(savePath);
+		vo.setTrade_imgpath(realPath);
 		vo.setTrade_uuid(UserInfo);
-		System.out.println("savePath :"+savePath+vo.getTrade_img());
+		System.out.println("savePath :"+realPath+vo.getTrade_img());
 		System.out.println(vo.getTrade_img());
 		System.out.println(vo.getTrade_imgpath());
 		tradeService.insertTrade(vo);
 		return "redirect:/Trade/getTradeList";
 	}
-	
+//여기까지 수정	
 	
 	// 글 수정
 	@RequestMapping("/Trade/updateTrade")
@@ -111,9 +99,13 @@ public class TradeController {
 
 	// 글 목록
 	@RequestMapping(value="/Trade/getTradeList" ,method=RequestMethod.GET)
-	public String getTradeListPost( TradeVO vo, Model model) {
+	public String getTradeListPost( TradeVO vo, UserVO uvo,/* HttpServletRequest request, HttpSession session,*/ Model model) {
 		System.out.println("글 목록 검색 처리");
-	
+//		20220502 김혜린 수정중
+//		session = request.getSession();
+//		session.getAttribute(siNm);
+//		
+		
 		if (vo.getSearchCategory() != null) vo.setSearchCategory(vo.getSearchCategory());
 		else vo.setSearchCategory("");
 		model.addAttribute("tradeList", tradeService.getTradeList(vo));

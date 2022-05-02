@@ -1,0 +1,50 @@
+/* slick track */
+#bannerContainer{background-color: transparent; width : 100%; height: 440px; padding : 0 ; margin : 0; }
+#bannerContainer .bannerInner {position : relative; height: 440px; margin:0 auto; padding : 30px 0;}
+#bannerContainer .bannerInner .arrow{ position : absolute; z-index : 100; border-radius: 50% ; width : 40px; height : 40px;  background-color : rgba(255,255,255,0.8)}
+#bannerContainer .bannerInner .prev{ right : 870px; top : 200px;  }
+#bannerContainer .bannerInner .prev::before {}
+#bannerContainer .bannerInner .next{ right : 330px; top : 200px;}
+#bannerContainer .bannerInner .next::before {}
+#bannerContainer .bannerInner .bannerSlide {position : relative; width : 1200px; height: 380px; margin:0 auto;} 
+#bannerContainer .bannerInner .bannerSlide .slick-track {position : absolute; top : 0; right :0;} 
+#bannerContainer .bannerInner .slick-slider{position:relative;} 
+#bannerContainer .bannerInner .bannerSlide .slick-slider .slick-list{ position:absolute; width:540px; height:380px; right:0;}
+#bannerContainer .bannerInner .slick-slider .slick-list .slick-track>div{border-radius: 4px; overflow : hidden; }
+#bannerContainer .bannerInner .slick-slider .slick-list .slick-track>div .slideImg{border-radius: 4px; }
+/* slick-background */
+#bannerContainer .slick-background { transition : background-color 350ms ease-out 0s; z-index : -99; position : relative; top: -470px; left : opx; width:100%; height: 440px;margin:0 auto; padding : 30px 0;}
+#bannerContainer .slick-background .slick-arrow{ position : absolute; left : 0px; top : 30px; z-index:-999; color : transparent;}
+#bannerContainer .slick-background  .bannerWrap{ width: 1200px; margin : 0 auto;}
+#bannerContainer .slick-background .ban01{color : transparent; background-color : #cf2b3b;	width:100%; height: 440px; }
+#bannerContainer .slick-background .ban02{color : transparent; background-color : #601b00;	width:100%; height: 440px; }
+#bannerContainer .slick-background .ban03{color : transparent; background-color : #033bc2;	width:100%; height: 440px; }
+#bannerContainer .slick-background .ban04{color : transparent; background-color : #007e7e;	width:100%; height: 440px; }
+#bannerContainer .slick-background .banColor {}
+#bannerContainer .slick-background .banColor .banTextBox { padding-top : 70px; padding-left : 150px;}
+#bannerContainer .slick-background .banColor .banText {  color : white; font-size: 20px; }
+/* index Style*/
+.content-container .wrap{/* 	border : 1px solid #ddd; */}
+.content-container .warp .sectionBox{	width : 1000px;	margin : 50px auto!important ;}
+.content-container .warp .sectionBox .flexContainer{	display : flex;	flex-wrap: wrap;}
+.content-container .warp .sectionBox .flexContainer .listcontainer{	margin-top : 15px;	width : 300px;	padding : 10px;	margin : 15px;}
+.content-container .warp .sectionBox .flexContainer .listcontainer:hover {	border-radius: 15px; 	background-color : rgba(88,166,166,0.2);}
+.content-container .warp .sectionBox .flexContainer .listContainerhover:hover::after{	background-color : rgba(88,166,166,0.2);}
+.content-container .warp .sectionBox .flexContainer .listcontainer .textcontent{	border-top : 1px solid #ddd;	padding : 5px;	margin : 10px;}
+.content-container .warp .sectionBox .flexContainer .listcontainer .textcontent .untitledchoco{ width : 250px; }
+ /* hd menu Bar */
+ .menuBox .container .categoryList {position : relative; font-size : 16px; margin-top : 4px; }
+ .menuBox .container .categoryList .menuLink{ position :absolute; right : 0px; top : 8px; }
+ .menuBox .container .categoryList .menuLink:hover{ cursor: pointer; position :absolute; right : 0px; top : 8px; }
+ .menuBox .container .categoryList .categoryItem { margin :  auto 0; }
+ .menuBox .container .categoryList .categoryItem :hover { margin :  auto 0;  color : #58a6a6;}
+ .menuBox .container .categoryList .categoryItem .categoryToggle { float : left; margin : auto 0;}
+ .menuBox .container .categoryList .categoryItem .categoryToggle:hover { float : left; margin : auto 0; color : #58a6a6; }
+ .menuBox .container .categoryList .categoryItem .categoryToggle .categoryDropdown {}
+ .menuBox .container .categoryList .categoryItem .categoryToggle .categoryDropdown #bannerContainer{ clear : both;}
+ /* bannerSearchBox */
+#bannerContainer .slick-background .banColor .banSearchBox { margin-left : 150px; margin-top : 20px; position : relative;}
+#bannerContainer .slick-background .banColor .banSearchBox form { width: 350px; height: 40px; border : 3px solid white; }
+#bannerContainer .slick-background .banColor .banSearchBox form .searchInput{ padding : 5px;  width: 344px; height: 34px; border:0px; background-color: transparent; color : white;}
+#bannerContainer .slick-background .banColor .banSearchBox form .searchInput::placeholder{ font-size : 15px; color : white;}
+#bannerContainer .slick-background .banColor .banSearchBox form .searchBtn {width: 20px; height: 20px; background-size: contain;  text-indent: -9999px;  position: absolute; left: 370px; top: 50%; transform: translateY(-50%);}
