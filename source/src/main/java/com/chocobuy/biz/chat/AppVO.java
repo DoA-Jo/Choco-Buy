@@ -5,9 +5,8 @@ public class AppVO {
 	private int chatroom_seq;
 	private String app_time;
 	private String app_add;
-	private String app_price;
+	private int app_price;
 	private String app_create;
-	
 	public int getApp_seq() {
 		return app_seq;
 	}
@@ -32,10 +31,10 @@ public class AppVO {
 	public void setApp_add(String app_add) {
 		this.app_add = app_add;
 	}
-	public String getApp_price() {
+	public int getApp_price() {
 		return app_price;
 	}
-	public void setApp_price(String app_price) {
+	public void setApp_price(int app_price) {
 		this.app_price = app_price;
 	}
 	public String getApp_create() {
@@ -44,11 +43,11 @@ public class AppVO {
 	public void setApp_create(String app_create) {
 		this.app_create = app_create;
 	}
-	
 	@Override
 	public String toString() {
 		return "AppVO [app_seq=" + app_seq + ", chatroom_seq=" + chatroom_seq + ", app_time=" + app_time + ", app_add="
 				+ app_add + ", app_price=" + app_price + ", app_create=" + app_create + "]";
 	}
+	
 	
 }

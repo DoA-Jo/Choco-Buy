@@ -11,11 +11,11 @@
 		<typeAlias type="com.chocobuy.biz.inquiry.InqVO" alias="inq" />
 		<typeAlias type="com.chocobuy.biz.inquiry.InqReplyVO" alias="inqReply" />
 		<typeAlias type="com.chocobuy.biz.service.ServiceVO" alias="service"/>
-		<typeAlias alias="adminUser" type="com.chocobuy.biz.admin.AdminUserVO"/>
-		<typeAlias alias="adminTrade" type="com.chocobuy.biz.admin.AdminTradeVO"/>
-		<typeAlias alias="adminPay" type="com.chocobuy.biz.admin.AdminPayVO"/>
-		<typeAlias alias="adminService" type="com.chocobuy.biz.admin.AdminServiceVO"/>
-		<typeAlias alias="adminInquiry" type="com.chocobuy.biz.admin.AdminInquiryVO"/>
+		<typeAlias type="com.chocobuy.biz.admin.AdminUserVO" alias="adminUser"/>
+		<typeAlias type="com.chocobuy.biz.admin.AdminTradeVO" alias="adminTrade"/>
+		<typeAlias type="com.chocobuy.biz.admin.AdminPayVO" alias="adminPay"/>
+		<typeAlias type="com.chocobuy.biz.admin.AdminServiceVO" alias="adminService"/>
+		<typeAlias type="com.chocobuy.biz.admin.AdminInquiryVO" alias="adminInquiry"/>
 		<typeAlias type="com.chocobuy.biz.pay.PayVO" alias="pay" />
 		<typeAlias type="com.chocobuy.biz.qna.QnaVO" alias="Qna"/>
 		<typeAlias type="com.chocobuy.biz.chat.MsgVO" alias="msg" />
