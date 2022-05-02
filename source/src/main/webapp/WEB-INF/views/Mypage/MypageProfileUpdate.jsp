@@ -1,7 +1,25 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/template/head.jsp"  %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+function init(){
+	if('${inputYn}'=='Y'){
+		$('.area_next_btn').removeAttr('disabled');
+	}
+	document.querySelector('.progress_container > #sixty').setAttribute('checked',true);
+}
+</script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 <title>글 상세</title>
 <style>
 /* .inner {width: 700px;height: 100%;margin: 100px auto;padding-bottom: 20px;border-bottom: 1px solid gray;position: relative;} */
@@ -11,19 +29,20 @@ h1 {font-size: 35px; margin:30px auto; text-align: center;padding-bottom: 10px;}
 table {margin: 60px auto 0px auto;width: 500px;}
 table input, table textarea {width: 100%;}
 table button {border: none;background-color: #fff}
-.btn{display: flex;justify-content: center; margin:5px;}
+.btn{display: flex; margin:5px;}
+.btn-outline-secondary {background-color:#831616; color: white;}
 .btn-outline-secondary:hover {background-color:#4B0E0E; color: white;}
 .mylogo {width: 200px; height: 200px; background: url("/resources/img/img_avatar3.png") no-repeat; background-size: 200px; display: inline-block; margin-top: 15px;}
 .item-content{background-color: #ddd;}
-#aa{font-size: 20px;}
-
+#aa{font-size: 20px; background-color:#58a6a6 }
+.list-group{margin-top: 50px;}
+button.btn.btn-outline-secondary {
+    margin: 0;
+}
 </style>
-<%@ include file="/WEB-INF/views/template/header.jsp" %>
-<%@ include file="/WEB-INF/views/template/menu.jsp" %>
-	<div class="inner">
-<!-- 		<h1>내 정보 수정</h1> -->
-<%-- 		<h2>${UserInfo}</h2> --%>
-	</div>
+</head>
+<body>
+	<%@ include file="/WEB-INF/views/template/header.jsp" %>
 	<div class="inner">
 		<div class="container mt-3">
 		   <ul class="list-group">
@@ -32,28 +51,38 @@ table button {border: none;background-color: #fff}
 					<div class="row">
 					    <div class="col-sm-3"> <img class="mylogo"></div>
 				    	<div class="col-sm-9">
-							<form action="/Mypage/updateMypageUser" method="post" name="fr">
-							    <div class="form-group">
-							    	<input type="text" class="form-control" id="address_kakao" name="user_sggNm" value="${user.user_sggNm}" placeholder="${user.user_sggNm}" maxlength="50">
+				    		<form name="form2" method="post">
+								<input type="hidden" id="confmKey" name="confmKey" value=""/>
+								<input type="hidden" id="returnUrl" name="returnUrl" value=""/>
+								<input type="hidden" id="resultType" name="resultType" value=""/>
+							</form>
+							<form action="form"  name="form">
+						 	</form>
+						 	<form action="/Mypage/updateMypageUser" method="post" name="fr">
+								<div id="list"></div>
+								<div id="callBackDiv">
+									<div class="input-group mb-2">
+									   <input type="text" id="user_siNm" class="form-control"  name="user_siNm" value="${siNm }"  placeholder="${user.user_siNm}" disabled />
+									   <input type="text" id="user_sggNm" class="form-control"  name="user_sggNm" value="${sggNm }" placeholder="${user.user_sggNm}" disabled />
+									   <input type="text" id="user_emdNm" class="form-control"  name="user_emdNm" value="${emdNm }" placeholder="${user.user_emdNm}" disabled />
+								    	<div class="input-group-append"><button  type="button" class="btn btn-outline-secondary" onClick="goPopup();" >수정하기</button> </div>
+							   		</div>
 							    </div>
-							    <div class="form-group">
-							      <input type="text" class="form-control" name="user_emdNm" value="${user.user_emdNm}" placeholder="${user.user_emdNm}" maxlength="50">
-							    </div>
-						   		<div class="form-group">
+						    	<div class="form-group">
+		                        	<span class="point successNumChk">번호는 2자 이상 8자 이하로 설정해주시기 바랍니다.</span> 
 						      		<input id="user_tel" class="form-control" type="text"  name="user_tel" value="${user.user_tel}" placeholder="${user.user_tel}" maxlength="20" >
-						      		<input id="phnum_btn" type="button" value="휴대폰번호 중복확인"  > 
-		                        	<span class="point successNumChk">이름은 2자 이상 8자 이하로 설정해주시기 바랍니다.</span> 
+<!-- 						      		<input id="phnum_btn" type="button" value="중복확인"  >  -->
 			                		<input type="hidden" id="NumDoubleChk"/> 
 						    	</div>
 						    	<div class="form-group">
-						      		<input id="user_nick" class="form-control" type="text" name="user_nick" value="${user.user_nick}" placeholder="${user.user_nick}" maxlength="20" title="8자 까지 입력" required autofocus/> 
-						      		<input id="dup_btn" type="button" value="닉네임 중복확인" >
 			                		<span class="point successNameChk">이름은 2자 이상 8자 이하로 설정해주시기 바랍니다.</span> 
+						      		<input id="user_nick" class="form-control" type="text" name="user_nick" value="${user.user_nick}" placeholder="${user.user_nick}" maxlength="20" title="8자 까지 입력" required autofocus/>
+<!-- 						      		<input id="dup_btn" type="button" value="중복확인" > -->
 			                		<input type="hidden" id="nameDoubleChk"/> 
 						    	</div>
 						    	<div class="btn">
 						    	<button class="btn btn-outline-secondary" type="button" onClick="check()" >수정완료</button>
-						    	<button class="btn btn-outline-secondary" type="button" onClick="javascript:history.back();">취소</button>
+							    <button class="btn btn-outline-secondary" type="button" onClick="location.href='getMypageUser'">취소</button>
 						    	</div>
 					      	</form>
 					    </div>
@@ -65,110 +94,22 @@ table button {border: none;background-color: #fff}
 	<%@ include file="/WEB-INF/views/template/footer.jsp" %>
 </body>
 <script>
-// // 중복확인 검사 
-// $(document).ready(function(){
-// 	$(phnum_btn).on("click", function(){
-// 	var successNumChk=$("#successNumChk");
-// 	var successNameChk=$("#successNameChk");
-// if(true){
-// 	console.log(aaaaa);
-// }else{
-// 	console.log(bbbb); 
-// }
-// }
-// }
+var bootel=true;
+var boonick=true;
+var checktel = false;
+var checknick = false; 
 
-
-	var bootel=true;
-	var boonick=true;
-// 핸드폰 번호 확인 
-$(document).ready(function(){
-	var phnum_btn=$("#phnum_btn");
-	$(phnum_btn).on("click", function(){
-		var sm_tel = $("#user_tel").val();
-		console.log(phnum_btn);
-		console.log(sm_tel);
-		console.log("aaaaaa");
-	 		if(sm_tel == "" || sm_tel.length < 2){
-	 			$(".successNumChk").text("이름은 2자 이상 8자 이하로 설정해주세요!"); 
-	 			$(".successNumChk").css("color", "red"); 
-	 			$("#numDoubleChk").val("false"); 
-	 		}else{  
-				$.ajax({ 
-	 				url : '${pageContext.request.contextPath}/Mypage/mypageNumCheck?sm_tel='+sm_tel,
-	 				type : 'post', 
-					cache : false, 
-					success : function(data) {
-						if (data==0) { 
-							$(".successNumChk").text("사용가능한 이름입니다."); 
-							$(".successNumChk").css("color", "green"); 
-							$("#numDoubleChk").val("true"); 
-							bootel=true;
-						} else {
-							console.log("cccc");
-							$(".successNumChk").text("사용중인 이름입니다 :p"); 
-							$(".successNumChk").css("color", "red"); 
-							$("#numDoubleChk").val("false"); 
-							bootel=false;
-						} 
-					}, 
-					error : function() {
-						console.log("error"); 
-					} 
-				}); 
-	 		} 
-	});
-	
-
-
-// 닉네임 중복 확인 
-
-	var dup_btn=$("#dup_btn");
-	$(dup_btn).on("click", function(){
-		var sm_name = $("#user_nick").val();
-		console.log(dup_btn);
-		console.log(sm_name);
-		console.log("aaaaaa");
-	 		if(sm_name == "" || sm_name.length < 2){
-	 			$(".successNameChk").text("이름은 2자 이상 8자 이하로 설정해주세요 :)"); 
-	 			$(".successNameChk").css("color", "red"); 
-	 			$("#nameDoubleChk").val("false"); 
-	 		}else{  
-				$.ajax({ 
-	 				url : '${pageContext.request.contextPath}/Mypage/mypageNameCheck?sm_name='+sm_name,
-	 				type : 'post', 
-					cache : false, 
-					success : function(data) {
-						if (data==0) { 
-							$(".successNameChk").text("사용가능한 이름입니다."); 
-							$(".successNameChk").css("color", "green"); 
-							$("#nameDoubleChk").val("true"); 
-							boonick=true;
-							
-						} else {
-							console.log("cccc");
-							$(".successNameChk").text("사용중인 이름입니다 :p"); 
-							$(".successNameChk").css("color", "red"); 
-							$("#nameDoubleChk").val("false"); 
-							boonick=false;
-						} 
-					}, 
-					error : function() {
-						console.log("error"); 
-					} 
-				}); 
-	 		} 
-	});
-	
-});
-
-function check(){
-// 	// tel 변경유뮤 확
+$(document).ready(function(){ 
+var phnum_btn=$("#phnum_btn");
+	$("#user_tel").keyup(function(){
+	bootel=false;
+	checktel = false
 	var sm_tel = $("#user_tel").val();
  		if(sm_tel == "" || sm_tel.length < 2){
  			$(".successNumChk").text("이름은 2자 이상 8자 이하로 설정해주세요!"); 
  			$(".successNumChk").css("color", "red"); 
  			$("#numDoubleChk").val("false"); 
+ 			checktel = false;
  		}else{  
 			$.ajax({ 
  				url : '${pageContext.request.contextPath}/Mypage/mypageNumCheck?sm_tel='+sm_tel,
@@ -176,67 +117,135 @@ function check(){
 				cache : false, 
 				success : function(data) {
 					if (data==0) { 
-						// 중복값이 없음== 값이 변경이 되었다 
-						bootel=false;
-						alert("전화번호 중복체크를 해주세요");
+						$(".successNumChk").text("사용가능한 번호입니다."); 
+						$(".successNumChk").css("color", "green"); 
+						$("#numDoubleChk").val("true"); 
+						checktel = true;
 					} else {
-						// 중복값이 있다 == 값이 변경이 일어나지 않음  
-						bootel=true;
+						console.log("cccc");
+						$(".successNumChk").text("사용중인 번호입니다 :p"); 
+						$(".successNumChk").css("color", "red"); 
+						$("#numDoubleChk").val("false");
+						checktel = false;
 					} 
 				}, 
 				error : function() {
 					console.log("error"); 
 				} 
 			}); 
-			
-			
-			// nick 값 변경유무 
-			var sm_name = $("#user_nick").val();
-			console.log(dup_btn);
-			console.log(sm_name);
-			console.log("aaaaaa");
-		 		if(sm_name == "" || sm_name.length < 2){
-		 			$(".successNameChk").text("이름은 2자 이상 8자 이하로 설정해주세요 :)"); 
-		 			$(".successNameChk").css("color", "red"); 
-		 			$("#nameDoubleChk").val("false"); 
-		 		}else{  
-					$.ajax({ 
-		 				url : '${pageContext.request.contextPath}/Mypage/mypageNameCheck?sm_name='+sm_name,
-		 				type : 'post', 
-						cache : false, 
-						success : function(data) {
-							if (data==0) { 
-								boonick=false;
-								alert("닉네임 중복체크를 해주세요");
-								
-							} else {
-								boonick=true;
-							} 
-						}, 
-						error : function() {
-							console.log("error"); 
-						} 
-					}); 
-	
-	
-				if(boonick == true && bootel == true) document.fr.submit();
+ 		} 
+	});
+
+
+	//닉네임 중복 확인 
+	var dup_btn=$("#dup_btn");
+	$("#user_nick").keyup(function(){
+	boonick=false;
+	checknick = false;
+	var sm_name = $("#user_nick").val();
+ 		if(sm_name == "" || sm_name.length < 2){
+ 			$(".successNameChk").text("이름은 2자 이상 8자 이하로 설정해주세요 :)"); 
+ 			$(".successNameChk").css("color", "red"); 
+ 			$("#nameDoubleChk").val("false"); 
+ 			checknick = false;
+ 		}else{  
+			$.ajax({ 
+ 				url : '${pageContext.request.contextPath}/Mypage/mypageNameCheck?sm_name='+sm_name,
+ 				type : 'post', 
+				cache : false, 
+				success : function(data) {
+						console.log(data);
+					if (data==0) { 
+						$(".successNameChk").text("사용가능한 이름입니다.");
+						$(".successNameChk").css("color", "green"); 
+						$("#nameDoubleChk").val("true"); 
+						checknick = true;
+					} else {
+						console.log("cccc");
+						$(".successNameChk").text("사용중인 이름입니다 :p"); 
+						$(".successNameChk").css("color", "red"); 
+						$("#nameDoubleChk").val("false");
+						checknick = false;
+					} 
+				}, 
+				error : function() {
+					console.log("error"); 
+				} 
+			}); 
+ 		} 
+	});
+
+});
+
+
+
+function check() {
+var sm_name = $("#user_nick").val();   
+var sm_tel = $("#user_tel").val();
+
+		if(bootel == true && boonick == true){
+				document.fr.submit();
+		}
+		if(bootel==false && boonick==true){
+			$.ajax({ 
+				url : '${pageContext.request.contextPath}/Mypage/mypageNumCheck?sm_tel='+sm_tel,
+				type : 'post', 
+				cache : false, 
+				success : function(data) {
+					if (data==0 && checktel==true) {   
+						alert("핸드폰 번호 수정 완료");
+						document.fr.submit();
+					}else{		
+						alert("핸드폰 번호가 중복 되었습니다");
+					} 
+				}, 
+			}); 
+		}
+		
+		if(boonick==false && bootel==true){
+			$.ajax({ 
+ 				url : '${pageContext.request.contextPath}/Mypage/mypageNameCheck?sm_name='+sm_name,
+ 				type : 'post', 
+				cache : false, 
+				success : function(data) {
+					if (data==0 && checknick==true) {  
+						alert("닉 네임 수정 완료");
+						document.fr.submit();
+					} else {        
+						alert("닉 네임이 중복 입니다");
+					} 
+				}, 
+			}); 
+		}
+		
+		if(boonick==false && bootel==false && checktel==true && checknick == true){
+			alert("핸드폰 번호와 닉네임 수정 완료");
+			document.fr.submit();
+		}
 }
 
-</script>
-<script>
-window.onload = function(){
-    document.getElementById("address_kakao").addEventListener("click", function(){ //주소입력칸을 클릭하면
-        //카카오 지도 발생
-        new daum.Postcode({
-            oncomplete: function(data) { //선택시 입력값 세팅
-                document.getElementById("address_kakao").value = data.address; // 주소 넣기
-                document.querySelector("input[name=user_sggNm]").focus(); //상세입력 포커싱
-            }
-        }).open();
-    });
+
+
+/* 주소 인증 */
+function goPopup(){
+	var url = location.href;
+// 	alert(url);
+	var inputYn= "${inputYn}";
+	var confmKey = "devU01TX0FVVEgyMDIyMDQwNzE1NTgzMTExMjQzNTk=";
+	var resultType = "1"; // 도로명주소 검색결과 화면 출력내용, 1 : 도로명, 2 : 도로명+지번+상세보기(관련지번, 관할주민센터), 3 : 도로명+상세보기(상세건물명), 4 : 도로명+지번+상세보기(관련지번, 관할주민센터, 상세건물명)
+	
+	if(inputYn != "Y"){
+		document.form2.confmKey.value = confmKey;
+		document.form2.returnUrl.value = url;
+		document.form2.resultType.value = resultType;
+		document.form2.action= "https://www.juso.go.kr/addrlink/addrLinkUrl.do"; //인터넷망
+		document.form2.submit();
+	} 
 }
 </script>
+
 </html>
+
 
 
 

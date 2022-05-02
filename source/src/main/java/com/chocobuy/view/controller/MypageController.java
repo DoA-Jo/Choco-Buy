@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -29,6 +30,7 @@ public class MypageController {
 	private UserService userService;
 	@Autowired
 	private TradeService tradeService; 
+	
 	
 	// 검색어 챠트
 	@ModelAttribute("searchMypageConditionMap")
@@ -54,7 +56,7 @@ public class MypageController {
 	}
 
 	// 내정보 수정 페이지 이동
-	@RequestMapping("/Mypage/getMypageProfileUpdate")
+	@RequestMapping(value="/Mypage/getMypageProfileUpdate", method=RequestMethod.GET)
 	public String getMypageProfileUpdate(UserVO vo, Model model, HttpSession session,HttpServletRequest request) {
 		System.out.println("profileUpdate");
 		session= request.getSession();
@@ -64,21 +66,6 @@ public class MypageController {
 		return "/Mypage/MypageProfileUpdate";
 	}
 	
-	
-	// 회원정보 수정 
-	// 중복 요인이 있어 새로운 이름으로 다시 작성함
-	// 확인후 서로 사용하지 않는 Controller 이면 삭제 요망 
-	// 생각 없이 작하다.. 조금 수정한 내용이 있을수 있음 4/22 일 
-	@RequestMapping("/Mypage/updateUser")
-	public String updateUser(UserVO vo, Model model, HttpSession session) {
-		System.out.println("updateUser");
-		UserVO us =(UserVO)session.getAttribute("user_uuid");
-		vo.setUser_uuid(us.getUser_uuid());
-		System.out.println(vo);
-		userService.updateUser(vo);
-		session.setAttribute("user_nick",vo.getUser_nick());
-		return "redirect:/Mypage/getMypageUser";
-	}
 	
 	
 	// 넥네임 중복확인 
@@ -165,6 +152,7 @@ public class MypageController {
 		vo.setUser_uuid((String)session.getAttribute("UserInfo"));
 		System.out.println(vo);
 		userService.updateMypageUser(vo);
+		
 	//	session.setAttribute("user_nick",vo.getUser_nick());
 		return "redirect:/Mypage/getMypageUser";
 	}
@@ -199,4 +187,53 @@ public class MypageController {
 		model.addAttribute("searchCondition", vo.getSearchMypageCondition());
 		return "/Mypage/MypageTradeList";
 	}
+	
+	
+	
+	   @RequestMapping(value="/Mypage/getMypageProfileUpdate", method=RequestMethod.POST)
+	   public String join_Area(Model model, UserVO vo, HttpSession session, @RequestParam(value="addrDetail", defaultValue = "", required = false) String addrDetail,  @RequestParam(value="inputYn", defaultValue = "", required = false) String inputYn,  @RequestParam(value="siNm", defaultValue = "", required = false) String siNm, @RequestParam(value="sggNm", defaultValue = "", required = false) String sggNm, @RequestParam(value="emdNm", defaultValue = "", required = false) String emdNm) {
+	      System.out.println("Controller >> using address API and update user_area");
+System.out.println("uuid세션 값: "+(String)session.getAttribute("UserInfo"));
+	      model.addAttribute("inputYn", inputYn);
+	      model.addAttribute("siNm", siNm);
+	      model.addAttribute("sggNm", sggNm);
+	      model.addAttribute("emdNm", emdNm);
+	      
+	      vo.setUser_siNm(siNm);
+	      vo.setUser_sggNm(sggNm);
+	      vo.setUser_emdNm(emdNm);
+	      vo.setUser_uuid((String)session.getAttribute("UserInfo"));
+	      userService.updateMypageUseArea(vo);
+//	      System.out.println(userService.getMypageUser(vo).toString());
+	      model.addAttribute("user", userService.getMypageUser(vo));
+	     
+	      return "/Mypage/MypageProfileUpdate";
+	   }
+
 }
+
+
+
+
+
+  
+   
+   
+   
+   
+// 회원정보 수정 
+// 중복 요인이 있어 새로운 이름으로 다시 작성함
+// 확인후 서로 사용하지 않는 Controller 이면 삭제 요망 
+// 생각 없이 작하다.. 조금 수정한 내용이 있을수 있음 4/22 일 
+//	@RequestMapping("/Mypage/updateUser")
+//	public String updateUser(UserVO vo, Model model, HttpSession session) {
+//		System.out.println("updateUser");
+//		UserVO us =(UserVO)session.getAttribute("user_uuid");
+//		vo.setUser_uuid(us.getUser_uuid());
+//		System.out.println(vo);
+//		userService.updateUser(vo);
+//		session.setAttribute("user_nick",vo.getUser_nick());
+//		return "redirect:/Mypage/getMypageUser";
+//	}
+   
+

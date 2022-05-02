@@ -23,6 +23,7 @@ public interface UserService {
 	int mypageNameCheck(String sm_name);
 	
 	int updateMypageUser(UserVO vo); 
+	void updateMypageUseArea(UserVO vo);
 	
 	int mypageNumCheck(String sm_num); 
 

@@ -76,7 +76,6 @@ public class UserServiceImpl implements UserService {
 		return userDAO.getMypageUser(vo);
 	}
 	
-	// 확인요
 	@Override
 	public int updateMypageUser(UserVO vo) {
 		return userDAO.updateMypageUser(vo);
@@ -87,7 +86,10 @@ public class UserServiceImpl implements UserService {
 		return userDAO.mypageNumCheck(sm_num);
 	}
 
-	
-	
+	@Override
+	public void updateMypageUserArea(UserVO vo) {
+		userDAO.updateUserArea(vo);
+	}
+
 	
 }
