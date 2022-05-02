@@ -14,13 +14,18 @@
 
 <!-- 댓글 조회 -->
 	<select id="getInqReplyList" resultMap="inqReplyResult">
+		<![CDATA[
 		SELECT * FROM inq_reply WHERE inqRe_bno=#{inqRe_bno}
+		]]>
 	</select>
 
 <!-- 댓글 작성 -->
 	<insert id="insertInqReply">
-		INSERT INTO inq_reply(INQRE_BNO, INQRE_RNO, INQRE_CONTENT, INQRE_NICKNAME)VALUES(#{inqRe_bno}, (SELECT MAX(inqRe_rno) FROM inq_reply alias_for_subquery) +1, #{inqRe_content}, #{inqRe_nickname});
+		<![CDATA[
+		INSERT INTO inq_reply(INQRE_BNO, INQRE_RNO, INQRE_CONTENT, INQRE_NICKNAME, INQRE_DATE) VALUES (#{inqRe_bno}, (SELECT ifnull(MAX(inqRe_rno),1) FROM inq_reply alias_for_subquery) +1, #{inqRe_content}, #{inqRe_nickname}, now());
+		]]>
 	</insert>
+<!-- 		insert inq_reply values(1,1,'안녕하세요', '운영자', now()); -->
 	
 <!-- 댓글 수정 -->
 	<update id="updateInqReply">

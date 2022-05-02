@@ -21,10 +21,26 @@ public class ChatDAOMybatis {
 		mybatis.insert("ChatDAO.createChatRoom",cvo);
 	}
 	
-//	public void createApp(AppVO avo) {
-//		mybatis.insert("ChatDAO.createApp",avo);
-//	}
-
+	public void updateChatRoom(AppVO avo) {
+		System.out.println("===>JDBC로 updateChatRoom() 기능처리");
+		mybatis.update("ChatDAO.updateChatRoom", avo);
+	}
+	
+	public int createApp(AppVO avo) {
+		updateChatRoom(avo) ;
+		return mybatis.insert("ChatDAO.createApp",avo);
+	}
+	
+	public void updateApp(AppVO avo) {
+		System.out.println("===>JDBC로 updateApp() 기능처리");
+		mybatis.update("ChatDAO.updateApp", avo);
+	}
+	
+	public AppVO getApp(AppVO avo) {
+		System.out.println("ChatDAOMybatis getApp()메소드");
+		return mybatis.selectOne("ChatDAO.getApp",avo);
+	}
+	
 	public ChatRoomVO getChatRoom(ChatRoomVO cvo) {
 		System.out.println("ChatDAOMybatis getChatRoom()메소드");
 		return (ChatRoomVO) mybatis.selectOne("ChatDAO.getChatRoom",cvo);
@@ -52,15 +68,14 @@ public class ChatDAOMybatis {
 	public int getRoomSeq(ChatRoomVO cvo) {
 		return mybatis.selectOne("ChatDAO.getRoomSeq",cvo);
 	}
+
+	public int updateReport(ChatRoomVO cvo) {
+		System.out.println("===>JDBC로 updateReport() 기능처리");
+		return mybatis.update("ChatDAO.updateReport", cvo);
+	}
 	
-//	public AppVO getApp(AppVO avo) {
-//		System.out.println("ChatDAOMybatis getApp()메소드");
-//		return (AppVO) mybatis.selectOne("ChatDAO.getApp",avo);
-//	}
-//	
-//	public List<AppVO> getMyApp(AppVO avo) {
-//		System.out.println("ChatDAOMybatis getMyApp()메소드");
-//		return mybatis.selectList("ChatDAO.getMyApp",avo);
-//	}
-	
+	public int countApp(AppVO avo) {
+		return mybatis.selectOne("ChatDAO.countApp",avo);
+	}
+
 }

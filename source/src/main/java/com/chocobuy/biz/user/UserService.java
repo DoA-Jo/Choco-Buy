@@ -27,5 +27,6 @@ public interface UserService {
 	
 	int mypageNumCheck(String sm_num); 
 
+	UserVO getUserInfo(UserVO vo);
 }
 

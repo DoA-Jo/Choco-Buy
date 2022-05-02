@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.chocobuy.biz.inquiry.InqVO;
+import com.chocobuy.biz.user.UserVO;
 
 @Repository
 public class InqDAOMybatis{
@@ -52,5 +53,10 @@ public class InqDAOMybatis{
 		return mybatis.selectOne("InqDAO.countInq", inqVo);
 	}
 	
+	//관리자 체크
+	public UserVO getVo_ck(UserVO vo) {
+		System.out.println("===>JDBC로 getInqRole() 기능처리");
+		return (UserVO) mybatis.selectOne("InqDAO.getVo_ck", vo);
+	}
 
 }

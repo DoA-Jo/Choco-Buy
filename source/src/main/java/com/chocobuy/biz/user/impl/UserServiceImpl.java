@@ -87,9 +87,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void updateMypageUserArea(UserVO vo) {
+	public void updateMypageUseArea(UserVO vo) {
 		userDAO.updateUserArea(vo);
 	}
 
-	
+	@Override
+	public UserVO getUserInfo(UserVO vo) {
+		return userDAO.getUserInfo(vo);
+	}
 }

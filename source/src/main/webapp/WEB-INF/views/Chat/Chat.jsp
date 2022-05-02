@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -105,6 +105,10 @@ div#proBox{
 .ipml , .ipmr {color:red; cursor: pointer;}
 .ipml {padding-left:20px;}
 .ipmr {padding-right:20px;}
+
+.alert.alert-warning {
+    width: 100%;
+}
 </style>
 <script>
 var timerId = null;
@@ -114,6 +118,29 @@ var confCnt = 0;
 window.onload = function(){
 	getChatBox();
 	startInterval();
+	
+	<c:if test="${chatRoom.chatroom_app eq 'Y'}">
+	$("#appBtnName").empty();
+	$("#appBtnName").append("약속수정");
+	$("#msgbox").empty();
+	let str = '<div class="alert alert-success">';
+		str +='<strong>☞약속☜</strong> [ 약속날짜 : ${appointment.app_time} ] [ 약속장소 :   ${appointment.app_add} ] [ 약속금액 :  ${appointment.app_price} ] </div>'; 
+	$("#msgbox").append(str);
+	$("#app_add").val("${appointment.app_add}");
+	$("#app_price").val("${appointment.app_price}");
+	</c:if>
+	
+	<c:if test="${chatRoom.chatroom_report eq 'Y'}">
+	$("#reportBtn").empty();
+	$("#reportBtn").append('<button type="button" id="reportBtn" class="btn btn-outline-danger" data-toggle="modal" data-target="#notify" disabled>신고하기</button>');
+	$("#msg_content_btn").empty();
+	
+	str = '<div class="alert alert-warning">';
+	str +='<strong>Warning!</strong> 신고가 된 채팅방으로 더 이상 채팅이 불가합니다.<br>'
+		str +='자세한 사항은 <a href="/Inquriy/GetInqList" class="alert-link">1:1 문의</a>를 통해 가능합니다.</div>'; 
+		
+	$("#msg_content_btn").append(str);
+	</c:if>
 	
 	$("#chatSubmitBtn").click(function(){
 		var formData = {
@@ -141,6 +168,73 @@ window.onload = function(){
 	        }
 	    });
 	});
+	
+	
+
+	$("#appSaveBtn").click(function(){
+		alert("약속되었습니다!");
+		$.ajax({
+	        method:"POST", 
+	        url : "/Chat/App",
+	        data: { 
+	        		"chatroom_seq": $("#chatroom_seq").val(),
+	        		"app_time": $("#app_time").val(),
+	        		"app_add": $("#app_add").val(),
+	        		"app_price": $("#app_price").val()
+	        },
+	        cache :  false,
+	        success : function(result) {
+	        	if(result > 0 ){
+	        		$("#msgbox").empty();
+	        		
+	        		str = '<div class="alert alert-success">';
+	        		str +='<strong>☞약속☜</strong> [ 약속날짜 : ${appointment.app_time} ] [ 약속장소 :   ${appointment.app_add} ] [ 약속금액 :  ${appointment.app_price} ] </div>'; 
+	        			
+	        		$("#msgbox").append(str);
+	        				
+	        	}
+	        	location.reload();
+	        },
+	        error : function(result) {
+	        	alert("연결실패");
+	        }
+		}); 
+		
+	});
+	
+
+$("#reportSaveBtn").click(function(){
+	
+	if (confirm("신고하시겠습니까?")) {
+		$.ajax({
+	        method:"POST", 
+	        url : "/Chat/Report",
+	        data: { 
+	        		"chatroom_seq": $("#chatroom_seq").val(),
+	        		"chatroom_report_content": $("#chatroom_report_content").val(),
+	        },
+	        cache :  false,
+	        success : function(result) {
+	        	if(result > 0 ){
+	        		alert("신고되었습니다.") ; 
+	        		$("#msg_content_btn").empty();
+	        		
+	        		str = '<div class="alert alert-warning">';
+	        		str +='<strong>Warning!</strong> 신고가 된 채팅방으로 더 이상 채팅이 불가합니다.<br>'
+	        			str +='자세한 사항은 <a href="/Inquriy/GetInqList" class="alert-link">1:1 문의</a>를 통해 가능합니다.</div>'; 
+	        			
+	        		$("#msg_content_btn").append(str);
+	        	}
+	        	location.reload();
+	        },
+	        error : function(result) {
+	        	alert("연결실패");
+	        }
+		}); 
+    }
+	
+});
+
 }
 
 
@@ -184,6 +278,7 @@ function getChatBox(){
     });
 }
 
+        	
 function startInterval(){
 	timerId = window.setInterval("getChatBox()", 1000);
 }
@@ -195,17 +290,17 @@ function stopInterval(){
     }
 }
 
-function button_event(){
-	if (confirm("신고하시겠습니까?")) {
-		alert("신고되었습니다.")      
-    } else {
-      
+function enterkey() {
+    if (window.event.keyCode == 13) {
+         $("#chatSubmitBtn").click();
     }
 }
+
+
 </script>
-<%@ include file="../template/header.jsp"  %>
-
-
+</head>
+<body>
+<%@ include file="../template/header.jsp"  %>	
    <div class="container">
         <div class="warp">
             <section class="">
@@ -226,8 +321,8 @@ function button_event(){
 										<p><small>${tradeUser.trade_area}</small></p>
 										</div>
 											<!-- Button to Open the Modal -->
-											<button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#appointment">
-											   약속잡기
+											<button type="button" id="appBtn" class="btn btn-outline-info" data-toggle="modal" data-target="#appointment">
+											  <span id="appBtnName">약속잡기</span>
 											</button>
 											<!-- The Modal -->
 											<div class="modal fade" id="appointment">
@@ -240,16 +335,15 @@ function button_event(){
 										      </div>
 	  								         <!-- Modal body -->
 										       <div class="modal-body">
-												  <form action="/Chat/App" method="post">
 												   	  <text> 약속날짜 :</text>
-												      <input type="datetime-local" class="form-control mb-3" name="app_time">
+												      <input type="datetime-local" class="form-control mb-3" id="app_time">
 												      
 												      <text> 약속장소 :</text>
-												      <input type="text" class="form-control mb-3" name="app_add" placeholder="약속한 장소를 입력해주세요">
+												      <input type="text" class="form-control mb-3" id="app_add" placeholder="약속한 장소를 입력해주세요">
 												      
 												      <text> 약속금액 :</text>
-												      <div class="input-group mb-3" name="app_pay">
-												      <input type="text" class="form-control" placeholder="약속한 금액을 입력해주세요">
+												      <div class="input-group mb-3" >
+												      <input type="number" class="form-control" id="app_price" placeholder="약속한 금액을 입력해주세요">
 												      <div class="input-group-append">
 												        <span class="input-group-text">원</span>
 												      </div>
@@ -257,20 +351,21 @@ function button_event(){
 										       </div> 
 												     <!-- Modal footer -->
 												      <div class="modal-footer">
-												    	<button type="button" class="btn btn-success" data-dismiss="modal">저장</button>
+												    	<button type="button" class="btn btn-success" data-dismiss="modal" id="appSaveBtn" >저장</button>
 												        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">취소</button>
 												     </div>
 												    </div>
 												   </div>
 												  </div>
-										 		 </form>
 											<button type="button" class="btn btn-outline-warning ml-3 mr-3" onclick="location.href='/Pay/PayIndex?app_seq=${app.app_seq}'">결제하기</button>
 										
 											<!-- Button to Open the Modal -->
 											<c:if test="${tradeUser.trade_uuid ne userUser.user_uuid}">
+											<div id="reportBtn">
 											<button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#notify">
 											   신고하기
 											</button>
+											</div>
 											</c:if>
 											<!-- The Modal -->
 											<div class="modal fade" id="notify">
@@ -286,10 +381,10 @@ function button_event(){
 										          <form>
 												    <div class="form-group">
 												      <label for="comment">신고사유:</label>
-												      <textarea class="form-control" rows="5" id="comment" name="text" placeholder="신고사유를 입력해주세요"></textarea>
+												      <textarea class="form-control" rows="5" id="chatroom_report_content" name="text" placeholder="신고사유를 입력해주세요"></textarea>
 												    </div>
 												    <center>
-												    <button type="button" class="btn btn-danger" id="report_btn" data-dismiss="modal" onclick="button_event();">신고하기</button>
+												    <button type="button" class="btn btn-danger" id="reportSaveBtn" data-dismiss="modal" >신고하기</button>
 												    </center>
 												  
 										       </div>
@@ -309,13 +404,15 @@ function button_event(){
 						    </div>
 							 <input type="text" class="form-control" id="trade_title" value="${chatRoom.trade_title }" readonly>
 						</div>
+						<div id="msgbox">
 						 <div class="alert alert-danger alert-dismissible fade show">
 						    <button type="button" class="close" data-dismiss="alert">&times;</button>
-						    <strong>※경고※</strong> 잠깐만요! 사기 등 피해 위험이 있을 수 있으니 주의하세요
+							    <strong>※경고※</strong> 잠깐만요! 사기 등 피해 위험이 있을 수 있으니 주의하세요
+						  </div>
 						  </div>
 						<div class="form-control" id="chatBox"></div>
-						<div class="input-group mb-3">
-							<input type="text" class="form-control innm" id="msg_content" name="msg_content">
+						<div class="input-group mb-3" id="msg_content_btn">
+							<input type="text" onkeydown="enterkey()" class="form-control innm" id="msg_content" name="msg_content">
 							<div class="input-group-append">
 							  <span class="input-group-text" id="chatSubmitBtn">전송</span>
 							</div>

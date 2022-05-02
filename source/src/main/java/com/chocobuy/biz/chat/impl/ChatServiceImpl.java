@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.chocobuy.biz.chat.AppVO;
 import com.chocobuy.biz.chat.ChatRoomVO;
 import com.chocobuy.biz.chat.ChatService;
 import com.chocobuy.biz.chat.MsgVO;
@@ -56,6 +57,43 @@ public class ChatServiceImpl implements ChatService{
 	@Override
 	public int getRoomSeq(ChatRoomVO cvo) {
 		return chatDAO.getRoomSeq(cvo);
+	}
+
+
+	@Override
+	public void updateChatRoom(AppVO avo) {
+		chatDAO.updateChatRoom(avo);
+	}
+
+
+	@Override
+	public int createApp(AppVO avo) {
+		return chatDAO.createApp(avo);
+	}
+
+
+	@Override
+	public void updateApp(AppVO avo) {
+		chatDAO.updateApp(avo);
+	}
+
+
+	@Override
+	public AppVO getApp(AppVO avo) {
+		return chatDAO.getApp(avo);
+	}
+
+
+	@Override
+	public int updateReport(ChatRoomVO cvo) {
+		return chatDAO.updateReport(cvo);
+	}
+
+
+	@Override
+	public int countApp(AppVO avo) {
+		return chatDAO.countApp(avo);
+		
 	}
 
 }

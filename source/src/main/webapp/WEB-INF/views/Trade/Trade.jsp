@@ -21,7 +21,7 @@
 										<h3>${trade.trade_nick}</h3>
 										<p><small>${trade.trade_area}</small></p>
 									</div>
-									    <button type="button" class="btn btn-outline-info" onclick="location.href='/Chat/ChatMyRoom?trade_seq=${trade.trade_seq}'">채팅으로 거래하기</button>
+									    <button type="button" class="btn btn-outline-info" onClick="location.href='/Chat/Chat?trade_seq=${trade.trade_seq}'">채팅으로 거래하기</button>
 							</div>
 						<div class="input-group">
 							<input type="text" class="form-control" name="trade_title"	value="${trade.trade_title }">

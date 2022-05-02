@@ -4,11 +4,16 @@
 
 <mapper namespace="ChatDAO">
 
-
 	<insert id="createChatRoom">
-		INSERT INTO CHATROOM_TABLE (TRADE_SEQ, TRADE_TITLE, TRADE_UUID, TRADE_NICK, TRADE_AREA, USER_UUID, USER_NICK, CHATROOM_REPORT_CONTENT)
-		VALUES(#{trade_seq}, #{trade_title}, #{trade_uuid}, #{trade_nick}, #{trade_area}, #{user_uuid}, #{user_nick}, #{chatroom_report_content})
+		INSERT INTO CHATROOM_TABLE (TRADE_SEQ, TRADE_TITLE, TRADE_UUID, TRADE_NICK, TRADE_AREA, USER_UUID, USER_NICK)
+		VALUES(#{trade_seq}, #{trade_title}, #{trade_uuid}, #{trade_nick}, #{trade_area}, #{user_uuid}, #{user_nick})
 	</insert>
+	
+	<update id="updateChatRoom">
+		<![CDATA[
+		UPDATE CHATROOM_TABLE SET CHATROOM_APP = 'Y' WHERE CHATROOM_SEQ= #{chatroom_seq}  
+		]]>
+	</update>
 	
 	<insert id="insertMsg">
 		<![CDATA[
@@ -18,9 +23,26 @@
 	</insert>
 	
 	<insert id="createApp">
-		INSERT INTO CHATROOM_TABLE (CHATROOM_SEQ, APP_TIME, APP_ADD, APP_PRICE)
-		VALUES(#{chatroom_seq},#{app_time} #{app_add}, #{app_price})
+		INSERT INTO APP_TABLE (CHATROOM_SEQ, APP_TIME, APP_ADD, APP_PRICE)
+		VALUES(#{chatroom_seq}, #{app_time}, #{app_add}, #{app_price})
 	</insert>
+	
+	<update id="updateApp">
+		<![CDATA[
+		UPDATE APP_TABLE SET APP_TIME = #{app_time}, APP_ADD = #{app_add}, APP_PRICE = #{app_price}
+		 WHERE CHATROOM_SEQ= #{chatroom_seq}  
+		]]>
+	</update>
+	
+	<select id="getApp" resultType="app">
+		SELECT * FROM APP_TABLE WHERE CHATROOM_SEQ = #{chatroom_seq}
+	</select>
+	
+	<select id="countApp" resultType="int">
+		<![CDATA[ 
+		SELECT COUNT(*) FROM APP_TABLE WHERE CHATROOM_SEQ = #{chatroom_seq}
+		]]>
+	</select>
 	
 	<select id="countRoom" resultType="int">
 		<![CDATA[ 
@@ -28,11 +50,11 @@
 		]]>
 	</select>
 	
-	<select id="countApp" resultType="int">
-		<![CDATA[ 
-		SELECT count(*) FROM CHATROOM_TABLE WHERE TRADE_SEQ = #{trade_seq} AND USER_UUID = #{user_uuid}
-		]]>
-	</select>	
+<!-- 	<select id="countApp" resultType="int"> -->
+<!-- 		<![CDATA[  -->
+<!-- 		SELECT count(*) FROM CHATROOM_TABLE WHERE TRADE_SEQ = #{trade_seq} AND USER_UUID = #{user_uuid} -->
+<!-- 		]]> -->
+<!-- 	</select>	 -->
 
 	<select id="getChatRoom" resultType="chatroom">
 		SELECT * FROM CHATROOM_TABLE WHERE CHATROOM_SEQ = #{chatroom_seq}
@@ -45,17 +67,16 @@
 	<select id="getRoomSeq" resultType="int">
 		SELECT CHATROOM_SEQ FROM CHATROOM_TABLE WHERE TRADE_SEQ = #{trade_seq} AND USER_UUID = #{user_uuid}
 	</select>
-		
-	<select id="getApp" resultType="app">
-		SELECT * FROM APP_TABLE WHERE CHATROOM_SEQ = #{chatroom_seq} ORDER BY CHATROOM_SEQ ASC
-	</select>
 	
 	<select id="getMsgList" resultType="msg">
 		SELECT * FROM MSG_TABLE WHERE CHATROOM_SEQ = #{chatroom_seq} ORDER BY CHATROOM_SEQ ASC
 	</select>	
 	
+	<update id="updateReport">
+		<![CDATA[
+		UPDATE CHATROOM_TABLE SET CHATROOM_REPORT_CONTENT = #{chatroom_report_content}, CHATROOM_REPORT = 'Y' WHERE CHATROOM_SEQ= #{chatroom_seq}
+		]]>
+	</update>
+	
 
-
-
- 
 </mapper>

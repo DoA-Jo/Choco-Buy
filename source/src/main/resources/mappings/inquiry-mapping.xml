@@ -56,5 +56,12 @@
 		<if test="inq_searchCondition == 'INQ_TITLE' "> AND INQ_TITLE LIKE CONCAT('%',#{inq_searchKeyword},'%') </if>
 		<if test="inq_searchCondition == 'INQ_CONTENT' "> AND INQ_CONTENT LIKE CONCAT('%',#{inq_searchKeyword},'%') </if>
 	</select>
+	
+	<!-- 관리자확인 -->
+	<select id="getVo_ck" resultType="user">
+		<![CDATA[
+		SELECT * FROM USER_TABLE WHERE USER_UUID= #{user_uuid}
+		]]>
+	</select>
 
 </mapper>

@@ -1,18 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ include file="/WEB-INF/views/template/header.jsp" %>
+<%@ page import="java.util.*,com.chocobuy.biz.inquiry.InqVO" %>
+<%@ page import="java.util.*,com.chocobuy.biz.user.UserVO" %>
+<%@ include file="/WEB-INF/views/template/head.jsp"  %>
 <%	
 	String sts = ""; 
 	String hide = "";
+	String replyHide = "";
+	UserVO userVo = (UserVO) request.getAttribute("vo_ck"); 
+	int role = userVo.getUser_role(); 
+	String nick= userVo.getUser_nick();
+	
+	InqVO inqVo = (InqVO) request.getAttribute("inq");
+	String inqNick= inqVo.getInq_nickname();
+	
 %>
-<c:if test="${userName ne inq.inq_nickname }"><% sts = "disabled"; %></c:if>
-<%@ include file="/WEB-INF/views/template/menu.jsp" %>
-<!-- <div id="popBox"> -->
-<%-- <img src="img/${inq.inq_filename}"> --%>
-<!-- </div> -->
-<!-- <div class="container-fluid"> -->
+<c:if test="${user_nick ne inq.inq_nickname }"><% sts = "disabled"; %></c:if>	<!-- 작성자가 로그인회원이랑 다를 때 컨트롤 못하게 disabled (= 작성자만보기) -->
+<c:if test="${user_nick ne inq.inq_nickname }"><% hide = "hidden"; %></c:if>	<!-- 작성자가 로그인회원이랑 다를 때 숨기기 hidden (= 작성자만보기) -->
+<%
+	if(role != 100 && !nick.equals(inqNick)){
+		replyHide="hidden";
+	}
+%>
 
+
+<title>Inquiry page</title>
+<%@ include file="/WEB-INF/views/template/header.jsp"  %>
+<%@ include file="/WEB-INF/views/template/menu.jsp" %> 
 
 	<div class="container" align="center">
 		<div class="warp">
@@ -48,7 +62,7 @@
 					    <div class="inq_fileNameText">
 						  	<span id="imgShow">${inq.inq_filename}</span>
 							<c:choose>
-								<c:when test="${inq.inq_filename eq ''}">파일없음</c:when>
+								<c:when test="${empty inq.inq_filename}">파일없음</c:when>
 								<c:otherwise><button type="button" class="btn btn-info" onclick="downloadFile('${inq.inq_filename}')">파일다운</button></c:otherwise>
 							</c:choose>
 						</div>
@@ -60,9 +74,9 @@
 					    <input type="text" class="form-control innm" name="regDate" value="${inq.inq_date}" readonly <%=sts %>>      
 					</div>
 					<div class="inqBtnBox">
-						<button type="submit" class="btn btn-primary" <%=sts %>>수정완료</button>
+						<button type="submit" class="btn btn-primary" <%=hide %>>수정완료</button>
 					 	<button type="button" class="btn btn-inqWrite"  onclick="location.href='/Inquiry/InsertInq'">새 문의글 작성</button>
-						<button type="button" class="btn btn-danger"  onclick="location.href='/Inquiry/DeleteInq?inq_num=${inq.inq_num}'">삭제하기</button>
+						<button type="button" class="btn btn-danger"  onclick="location.href='/Inquiry/DeleteInq?inq_num=${inq.inq_num}'" <%=hide %>>삭제하기</button>
 						<button type="button" class="btn btn-inqList"  onclick="location.href='/Inquiry/GetInqList'">목록가기</button>
 					</div>
 				</div>
@@ -70,7 +84,7 @@
   
   
 		 	<!-- 댓글 -->
-		 	<div class="inqReplyBox">
+		 	<div class="inqReplyBox" <%=replyHide %>>
 		 		<h4>댓글</h4>
 		 		<form action="/Inquiry/InsertInqReply" method="post" enctype="multipart/form-data">
 					<div class="inqInfoBox">
@@ -91,7 +105,7 @@
 						    <div class="input-group-prepend">
 						    	<span class="input-group-text">작성자</span>
 						    </div>
-						    <input type="text" class="form-control innm" name="inqRe_nickname" value="${userName}" readonly>      
+						    <input type="text" class="form-control innm" name="inqRe_nickname" value="${user_nick}" readonly>      
 						</div>
 						<div class="input-group mb-3">
 						    <div class="input-group-prepend">
@@ -113,6 +127,7 @@
 					<div id="inqReply">
 						<ol class="inqReplyList">
 							<c:forEach items="${inqReplyList}" var="getInqReply">
+								<c:if test="${user_nick ne getInqReply.inqRe_nickname }"><% hide = "hidden"; %></c:if>
 								<li>
 									<div class="input-group mb-3">
 									    <div class="input-group-prepend">
@@ -133,7 +148,7 @@
 				    					<textarea class="form-control innm" rows="10" id="comment" name="content" readonly>${getInqReply.inqRe_content}</textarea>
 									</div>
 									<div class="inqBtnBox ta_r">
-										<button type="button" class="btn btn-danger" onclick="location.href='/Inquiry/DeleteInqReply?bno=${getInqReply.inqRe_bno}&rno=${getInqReply.inqRe_rno}'">답변삭제</button>
+										<button type="button" class="btn btn-danger" onclick="location.href='/Inquiry/DeleteInqReply?bno=${getInqReply.inqRe_bno}&rno=${getInqReply.inqRe_rno}'"<%=hide %>>답변삭제</button>
 									</div>
 								</li>
 							</c:forEach>   
