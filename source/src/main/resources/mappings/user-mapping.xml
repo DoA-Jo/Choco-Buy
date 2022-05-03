@@ -65,11 +65,4 @@
 	<select id="mypageNumCheck" resultType="integer">
 		SELECT COUNT(*) FROM user_table WHERE user_tel=#{sm_num} 
 	</select>
-	
-	<!--중복 방지 새로운 네이밍으로 구현함 추후 확인후 삭제요망 -->
-	<update id="updateUser">
-		<![CDATA[
-		UPDATE USER_TABLE SET  USER_TEL=#{user_tel}, USER_NICK=#{user_nick} WHERE USER_UUID=#{user_uuid}
-		]]>
-	</update>
 </mapper>
