@@ -36,7 +36,7 @@ public class UserDAOMybatis{
 	/* 별명 입력 */
 	public void updateUserNick(UserVO vo) {
 		System.out.println("===> Mybatis로 updateUserNick() 기능 처리");
-		mybatis.update("UserDAO.updateUserNick", vo);
+		mybatis.update("UserDAO.update_userNick", vo);
 	}
 	
 	/* 별명 중복 체크 */
