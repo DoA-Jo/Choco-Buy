@@ -21,7 +21,7 @@
 	
 <!-- JOIN (Update User Data) -->
 	<insert id="insert_userTel">
-		INSERT INTO USER_TABLE VALUES (uuid(), #{user_tel}, 'null', 'null', 'null', 'null', 'null', 0, 'null', now())
+		INSERT INTO USER_TABLE VALUES (uuid(), #{user_tel}, floor(rand()*100000000000000), 'null', 'null', 'null', 'null', 0, 'null', current_timestamp)
 	</insert>	
 
  	<update id="update_userArea">
