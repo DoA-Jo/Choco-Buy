@@ -13,6 +13,7 @@ public class TradeVO {
 	private String trade_content;//	글 내용
 	private String trade_area;//	거래 지역
 	private String trade_img;//	이미지 이름
+	private String trade_profileimg;//	프로필 이미지 이름
 	private String trade_category;//	카테고리
 	private String trade_buyinfo;//	구매자정보
 	private String trade_review;//	리뷰
@@ -28,6 +29,12 @@ public class TradeVO {
 	private int start;
 	private int listcnt;
 	
+	public String getTrade_profileimg() {
+		return trade_profileimg;
+	}
+	public void setTrade_profileimg(String trade_profileimg) {
+		this.trade_profileimg = trade_profileimg;
+	}
 	public String getTrade_uuid() {
 		return trade_uuid;
 	}

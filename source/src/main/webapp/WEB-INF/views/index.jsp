@@ -3,32 +3,7 @@
 <%@ include file="/WEB-INF/views/template/index_head.jsp"  %>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/trade_indexstyle.css">
-
-<script>
-$(document).ready(function(){
-	$('.slick-track').slick({
-		  slidesToShow: 1,
-		  autoplay: true,
-		  autoplaySpeed: 2000,
-		  prevArrow: $('.prev'),
-		  nextArrow: $('.next')
-		});
-		$('.slick-background').slick({
-		  slidesToShow: 1,
-		  autoplay: true,
-		  fade: true,
-		  cssEase: 'linear',
-		  autoplaySpeed: 2000
-		});
-	$('.next').click(function(){
-		$('.slick-next').click();
-	});
-	$('.prev').click(function(){
-		$('.slick-prev').click();
-	});
-});
-</script>
-
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/IndexTradeScript.js"></script>
 <title>CHOCOBUY</title>
 <%@ include file="/WEB-INF/views/template/index_header.jsp"  %>
 <%@ include file="/WEB-INF/views/template/index_menu.jsp"  %>

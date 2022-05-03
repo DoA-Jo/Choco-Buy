@@ -8,8 +8,7 @@ div#proBox{	margin-top: auto !important;}
 .imgBox{	margin : 0 auto;	padding : 0 auto;	text-align: center;}
 .input-group-text{	background-color :  rgba(88,166,166,0.4) ;}
 .media{	border-top : 1px solid rgba(88,166,166,0.4);	border-bottom: 1px solid rgba(88,166,166,0.4);}
-#imgage-show{text-align : center;} 
-
+#imageShow{text-align : center;} 
 /* tradelist.jsp */
 .content-container .wrap{/* 	border : 1px solid #ddd; */}
 .content-container .warp .sectionBox{	width : 1000px;	margin : 50px auto!important ;}
@@ -31,5 +30,4 @@ div#proBox{	margin-top: auto !important;}
  .menuBox .container .categoryList .categoryItem .categoryToggle .categoryDropdown {}
  .menuBox .container .categoryList .categoryItem .categoryToggle .categoryDropdown #bannerContainer{ clear : both;}
  
-/* usertradeprofile.jsp */
-.cardBox{ margin : 0 auto;}
+/* usertradeprofile.jsp *//* 20220503김혜린 수정 */

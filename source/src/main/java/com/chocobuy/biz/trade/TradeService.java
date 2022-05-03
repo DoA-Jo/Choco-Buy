@@ -16,6 +16,8 @@ public interface TradeService {
 	void updateMypageTrade(TradeVO vo);
 	
 	TradeVO getTrade(TradeVO vo);
+//	20220503김혜린 수정
+	List<TradeVO> getMyTradeList(TradeVO vo);
 	
 	TradeVO getMypageTrade(TradeVO vo);
 

@@ -3,7 +3,6 @@ package com.chocobuy.view.controller;
 import java.io.File;
 import java.io.IOException;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +17,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.chocobuy.biz.trade.TradeService;
 import com.chocobuy.biz.trade.TradeVO;
+import com.chocobuy.biz.user.UserService;
 import com.chocobuy.biz.user.UserVO;
 
 @Controller
@@ -26,16 +26,25 @@ public class TradeController {
 	
 	@Autowired
 	private TradeService tradeService;
+	@Autowired
+	private UserService userService;
 	
 	//글 등록 페이지로 가기
 	@RequestMapping("/Trade/tradeInsert")
-	public String insertTradePage(TradeVO vo) throws IOException{
+	public String insertTradePage(TradeVO vo, UserVO uvo, Model model, HttpSession session) throws IOException{
+		String UserInfo = (String)session.getAttribute("UserInfo");
+		uvo.setUser_uuid(UserInfo);
+		model.addAttribute("user", userService.getMypageUser(uvo));
+		
+		
 		return "/Trade/TradeInsert";
 	}
+	
+	
 //	20220502 김혜린 수정(real path 수정) 
 	// 글 등록
 	@RequestMapping(value = "/Trade/insertTrade")
-	public String insertTrade(TradeVO vo, MultipartHttpServletRequest request , HttpSession session) throws IOException{
+	public String insertTrade(TradeVO vo, UserVO uvo, Model model, MultipartHttpServletRequest request , HttpSession session) throws IOException{
 		
 	String realPath=request.getSession().getServletContext().getRealPath("/");	
 	
@@ -55,8 +64,14 @@ public class TradeController {
 			trade_uploadImg.transferTo(file);
 			vo.setTrade_img(trade_img);
 		}
+		
 		session = request.getSession();
 		String UserInfo = (String)session.getAttribute("UserInfo");
+		uvo.setUser_uuid(UserInfo);
+		userService.getMypageUser(uvo);
+		
+		
+		vo.setTrade_profileimg(uvo.getUser_profileImg());
 		vo.setTrade_imgpath(realPath);
 		vo.setTrade_uuid(UserInfo);
 		System.out.println("savePath :"+realPath+vo.getTrade_img());
@@ -122,12 +137,15 @@ public class TradeController {
 		model.addAttribute("tradeList", tradeService.getSearchTradeList(vo));
 		return "/Trade/TradeList";
 	}
+	
 	//판매자 프로필 열람
 	@RequestMapping("/Trade/getTradeProfile")
 	public String getTradeUserProfile(TradeVO vo, Model model) {
 		System.out.println("프로필 열람 처리");
+		vo.setTrade_nick(vo.getTrade_nick());
 		
-		model.addAttribute("trade",tradeService.getTrade(vo));
+		model.addAttribute("tradeList",tradeService.getMyTradeList(vo));
+		
 		return "/Trade/UserTradeProfile";
 	}
 	

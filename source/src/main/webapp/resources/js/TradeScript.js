@@ -7,34 +7,12 @@
 			}else {	$("#insertTrade_do").attr("action","insertTrade").submit();	}
 		});
 		
-	$('.slick-track').slick({
-		  slidesToShow: 1,
-		  autoplay: true,
-		  autoplaySpeed: 2000,
-		  prevArrow: $('.prev'),
-		  nextArrow: $('.next')
-		});
-		$('.slick-background').slick({
-		  slidesToShow: 1,
-		  autoplay: true,
-		  fade: true,
-		  cssEase: 'linear',
-		  autoplaySpeed: 2000
-		});
-	$('.next').click(function(){
-		$('.slick-next').click();
-	});
-	$('.prev').click(function(){
-		$('.slick-prev').click();
-	});
-		
-		
-		
 	$("#chooseFile").click(function(){
 		$("#uploadBtn").click();
 	});
+	    });
 		
-	});
+	
 
 		function loadFile(input) {
 	    var file = input.files[0];	//선택된 파일 가져오기
@@ -58,3 +36,5 @@
 	    
 	    $("#chooseFile").hide();
 	    }
+	    
+	    

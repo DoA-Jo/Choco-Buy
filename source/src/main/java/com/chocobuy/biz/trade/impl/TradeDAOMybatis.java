@@ -41,6 +41,11 @@ public class TradeDAOMybatis {
 		System.out.println("===>JDBC로 getTrade() 기능처리");
 		return (TradeVO) mybatis.selectOne("TradeDAO.getTrade", vo);
 	}
+	//프로필 상세 조회
+	public List<TradeVO> getMyTradeList(TradeVO vo) {
+		System.out.println("===>JDBC로 getTrade() 기능처리");
+		return mybatis.selectList("TradeDAO.getMyTradeList", vo);
+	}
 	
 	//글목록 조회
 	public List<TradeVO> getTradeList(TradeVO vo) {
