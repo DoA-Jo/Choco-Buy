@@ -73,8 +73,8 @@ public class ChatServiceImpl implements ChatService{
 
 
 	@Override
-	public void updateApp(AppVO avo) {
-		chatDAO.updateApp(avo);
+	public int updateApp(AppVO avo) {
+		return chatDAO.updateApp(avo);
 	}
 
 

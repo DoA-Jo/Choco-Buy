@@ -14,8 +14,8 @@ public interface ChatService {
 	List<MsgVO> getMsgList(MsgVO cvo);
 	List<ChatRoomVO> getMyChatRoom(ChatRoomVO cvo);
 	int createApp(AppVO avo);
-	void updateApp(AppVO avo);
 	AppVO getApp(AppVO avo);
 	int updateReport(ChatRoomVO cvo);
 	int countApp(AppVO avo);
+	int updateApp(AppVO avo);
 }

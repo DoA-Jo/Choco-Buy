@@ -13,7 +13,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
-<title>Trade page</title>
+<link rel="stylesheet" href="${pagecontext.request.contextPath}/resources/css/trade_style.css">
+<title>Chat page</title>
 <style>
 .media{
 	border-top : 1px solid rgba(88,166,166,0.4);
@@ -121,7 +122,9 @@ window.onload = function(){
 	
 	<c:if test="${chatRoom.chatroom_app eq 'Y'}">
 	$("#appBtnName").empty();
-	$("#appBtnName").append("약속수정");
+	$("#appBtnName").append('<button type="button" id="appBtn" class="btn btn-outline-info" data-toggle="modal" data-target="#appointment">약속수정</button>');
+	$("#appsave").empty();
+	$("#appsave").append('<button type="button" class="btn btn-success" data-dismiss="modal" id="appCorrection">수정</button>');
 	$("#msgbox").empty();
 	let str = '<div class="alert alert-success">';
 		str +='<strong>☞약속☜</strong> [ 약속날짜 : ${appointment.app_time} ] [ 약속장소 :   ${appointment.app_add} ] [ 약속금액 :  ${appointment.app_price} ] </div>'; 
@@ -133,11 +136,15 @@ window.onload = function(){
 	<c:if test="${chatRoom.chatroom_report eq 'Y'}">
 	$("#reportBtn").empty();
 	$("#reportBtn").append('<button type="button" id="reportBtn" class="btn btn-outline-danger" data-toggle="modal" data-target="#notify" disabled>신고하기</button>');
+	$("#appBtnName").empty();
+	$("#appBtnName").append('<button type="button" id="appBtn" class="btn btn-outline-info" data-toggle="modal" data-target="#appointment" disabled>약속수정</button>');
+	$("#reportPay").empty();
+	$("#reportPay").append('<button type="button" class="btn btn-outline-warning ml-3 mr-3" disabled>결제하기</button>');
 	$("#msg_content_btn").empty();
 	
 	str = '<div class="alert alert-warning">';
-	str +='<strong>Warning!</strong> 신고가 된 채팅방으로 더 이상 채팅이 불가합니다.<br>'
-		str +='자세한 사항은 <a href="/Inquriy/GetInqList" class="alert-link">1:1 문의</a>를 통해 가능합니다.</div>'; 
+	str +='<strong>Warning!</strong> 신고가 된 채팅방으로 더 이상 채팅이 불가합니다.<br>';
+		str +='자세한 사항은 <a href="/Inquriy/GetInqList?chatroom_seq=${chatroom.chatroom_seq}" class="alert-link">1:1 문의</a>를 통해 가능합니다.</div>'; 
 		
 	$("#msg_content_btn").append(str);
 	</c:if>
@@ -169,10 +176,9 @@ window.onload = function(){
 	    });
 	});
 	
-	
 
 	$("#appSaveBtn").click(function(){
-		alert("약속되었습니다!");
+		
 		$.ajax({
 	        method:"POST", 
 	        url : "/Chat/App",
@@ -184,7 +190,42 @@ window.onload = function(){
 	        },
 	        cache :  false,
 	        success : function(result) {
+	        	alert("약속되었습니다!");
 	        	if(result > 0 ){
+	        		
+	        		$("#msgbox").empty();
+	        		
+	        		str = '<div class="alert alert-success">';
+	        		str +='<strong>☞약속☜</strong> [ 약속날짜 : ${appointment.app_time} ] [ 약속장소 :   ${appointment.app_add} ] [ 약속금액 :  ${appointment.app_price} ] </div>'; 
+	        			
+	        		$("#msgbox").append(str);
+	        				
+	        	}
+	        	location.reload();
+	        },
+	        error : function(result) {
+	        	alert("연결실패");
+	        }
+		}); 
+		
+	});
+	
+$("#appCorrection").click(function(){
+		
+		$.ajax({
+	        method:"POST", 
+	        url : "/Chat/UpdateApp",
+	        data: { 
+	        		"chatroom_seq": $("#chatroom_seq").val(),
+	        		"app_time": $("#app_time").val(),
+	        		"app_add": $("#app_add").val(),
+	        		"app_price": $("#app_price").val()
+	        },
+	        cache :  false,
+	        success : function(result) {
+	        	alert("약속이 변경 되었습니다!");
+	        	if(result > 0 ){
+	        		
 	        		$("#msgbox").empty();
 	        		
 	        		str = '<div class="alert alert-success">';
@@ -220,8 +261,8 @@ $("#reportSaveBtn").click(function(){
 	        		$("#msg_content_btn").empty();
 	        		
 	        		str = '<div class="alert alert-warning">';
-	        		str +='<strong>Warning!</strong> 신고가 된 채팅방으로 더 이상 채팅이 불가합니다.<br>'
-	        			str +='자세한 사항은 <a href="/Inquriy/GetInqList" class="alert-link">1:1 문의</a>를 통해 가능합니다.</div>'; 
+	        		str +='<strong>Warning!</strong> 신고가 된 채팅방으로 더 이상 채팅이 불가합니다.<br>';
+	        			str +='자세한 사항은 <a href="/Inquriy/GetInqList?chatroom_seq=${chatroom.chatroom_seq}" class="alert-link">1:1 문의</a>를 통해 가능합니다.</div>'; 
 	        			
 	        		$("#msg_content_btn").append(str);
 	        	}
@@ -300,7 +341,8 @@ function enterkey() {
 </script>
 </head>
 <body>
-<%@ include file="../template/header.jsp"  %>	
+<%@ include file="/WEB-INF/views/template/header.jsp"  %>
+
    <div class="container">
         <div class="warp">
             <section class="">
@@ -321,9 +363,9 @@ function enterkey() {
 										<p><small>${tradeUser.trade_area}</small></p>
 										</div>
 											<!-- Button to Open the Modal -->
-											<button type="button" id="appBtn" class="btn btn-outline-info" data-toggle="modal" data-target="#appointment">
-											  <span id="appBtnName">약속잡기</span>
-											</button>
+											<div id="appBtnName">
+											<button type="button" id="appBtn" class="btn btn-outline-info" data-toggle="modal" data-target="#appointment">약속잡기</button>
+											</div>
 											<!-- The Modal -->
 											<div class="modal fade" id="appointment">
 											  <div class="modal-dialog modal-dialog-centered">
@@ -351,14 +393,17 @@ function enterkey() {
 										       </div> 
 												     <!-- Modal footer -->
 												      <div class="modal-footer">
+												       <div id="appsave">
 												    	<button type="button" class="btn btn-success" data-dismiss="modal" id="appSaveBtn" >저장</button>
+												       </div>
 												        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">취소</button>
 												     </div>
 												    </div>
 												   </div>
 												  </div>
+											<div id="reportPay">	  
 											<button type="button" class="btn btn-outline-warning ml-3 mr-3" onclick="location.href='/Pay/PayIndex?app_seq=${app.app_seq}'">결제하기</button>
-										
+											</div>
 											<!-- Button to Open the Modal -->
 											<c:if test="${tradeUser.trade_uuid ne userUser.user_uuid}">
 											<div id="reportBtn">
@@ -378,7 +423,6 @@ function enterkey() {
 										      </div>
 	  								         <!-- Modal body -->
 										       <div class="modal-body">
-										          <form>
 												    <div class="form-group">
 												      <label for="comment">신고사유:</label>
 												      <textarea class="form-control" rows="5" id="chatroom_report_content" name="text" placeholder="신고사유를 입력해주세요"></textarea>
@@ -395,7 +439,6 @@ function enterkey() {
 										    </div>
 										   </div>
 										  </div>
-										  </form>
 									</div>
 							</div>
 						<div class="input-group">
@@ -423,7 +466,6 @@ function enterkey() {
 			</section>
         </div>
     </div>
-
 
 <%@ include file="../template/footer.jsp"  %>
 </body>

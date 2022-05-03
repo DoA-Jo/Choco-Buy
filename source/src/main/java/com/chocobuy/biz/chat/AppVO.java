@@ -7,6 +7,7 @@ public class AppVO {
 	private String app_add;
 	private int app_price;
 	private String app_create;
+	
 	public int getApp_seq() {
 		return app_seq;
 	}

@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -37,27 +36,31 @@ public class ChatController {
 
 	//참가자 채팅 접속
 	@RequestMapping(value="/Chat/Chat", method= RequestMethod.GET)
-	public String getTradeChat(TradeVO tvo, ChatRoomVO cvo, AppVO avo, Model model, HttpSession session) {
-		UserVO uvo = (UserVO) session.getAttribute("UserInfo");
+	public String getTradeChat(TradeVO tvo, ChatRoomVO cvo, AppVO avo, UserVO uvo, Model model, HttpSession session) {
+		String user_uuid = (String) session.getAttribute("UserInfo");//user_uuid
+		uvo.setUser_uuid(user_uuid);
+		UserVO vo = userService.getMypageUser(uvo);
+		
+		System.out.println(user_uuid.toString());
 		tvo = tradeService.getTrade(tvo);
 		System.out.println(tvo.toString());
-		if(uvo.getUser_uuid().equals(tvo.getTrade_uuid())) {
+		if(user_uuid.equals(tvo.getTrade_uuid())) {
 			return "redirect:/Chat/ChatMyRoom?trade_seq="+tvo.getTrade_seq();
 		}else {
 			cvo.setTrade_seq(tvo.getTrade_seq());
-			cvo.setUser_uuid(uvo.getUser_uuid());
+			cvo.setUser_uuid(user_uuid);
 			cvo.setTrade_uuid(tvo.getTrade_uuid());
 			cvo.setTrade_title(tvo.getTrade_title());
 			cvo.setTrade_nick(tvo.getTrade_nick());
 			cvo.setTrade_area(tvo.getTrade_area());
-			cvo.setUser_nick(uvo.getUser_nick());
+			cvo.setUser_nick( (String) session.getAttribute("user_nick"));
 			if(chatService.countRoom(cvo) <= 0 ) chatService.createChatRoom(cvo);
 			int chatroom_seq = chatService.getRoomSeq(cvo);
 			avo.setChatroom_seq(chatroom_seq);
 			cvo.setChatroom_seq(chatroom_seq);
 			System.out.println(cvo.toString());
 			System.out.println(avo.toString());
-			model.addAttribute("userUser", uvo);
+			model.addAttribute("userUser", vo);
 			model.addAttribute("tradeUser", tvo);
 			model.addAttribute("chatRoom", chatService.getChatRoom(cvo));
 			//처리해야할 사항
@@ -65,21 +68,21 @@ public class ChatController {
 //			갯수가 0보다 클 경우 getApp(avo)를  실행하도록 처리한다.
 			if(chatService.countApp(avo) > 0) {
 				model.addAttribute("appointment", chatService.getApp(avo));
-				}
+			}
 			System.out.println(chatService.getChatRoom(cvo).toString());
-//			if(cvo.getChatroom_report().equals("Y")) {
-//				return "redirect:/Trade/getTrade";
-//			}
 			return "/Chat/Chat";
 		}
 	}
 	
 	//등록자 채팅접속
 	@RequestMapping(value="/Trade/TradeSel", method= RequestMethod.GET)
-	public String getTradeChat(ChatRoomVO cvo, Model model, HttpSession session) {
-		UserVO uvo = (UserVO) session.getAttribute("UserInfo");
-		model.addAttribute("userUser", uvo);
+	public String getTradeChat(ChatRoomVO cvo, UserVO uvo, AppVO avo, Model model, HttpSession session) {
+		String user_uuid = (String) session.getAttribute("UserInfo");
+		uvo.setUser_uuid(user_uuid);
+		UserVO vo = userService.getMypageUser(uvo);
+		model.addAttribute("userUser", vo);
 		model.addAttribute("chatRoom", chatService.getChatRoom(cvo));
+		model.addAttribute("appointment", chatService.getApp(avo));
 		return "/Chat/Chat";
 	}
 	
@@ -113,6 +116,13 @@ public class ChatController {
 	public int App(AppVO avo) {
 		System.out.println(avo.toString());
 		return chatService.createApp(avo);
+	}
+	
+	@RequestMapping(value="/Chat/UpdateApp", method=RequestMethod.POST)
+	@ResponseBody
+	public int UpdateApp(AppVO avo) {
+		System.out.println(avo.toString());
+		return chatService.updateApp(avo);
 	}
 	
 	@RequestMapping(value="/Chat/Report", method=RequestMethod.POST)

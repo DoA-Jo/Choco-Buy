@@ -31,9 +31,9 @@ public class ChatDAOMybatis {
 		return mybatis.insert("ChatDAO.createApp",avo);
 	}
 	
-	public void updateApp(AppVO avo) {
+	public int updateApp(AppVO avo) {
 		System.out.println("===>JDBC로 updateApp() 기능처리");
-		mybatis.update("ChatDAO.updateApp", avo);
+		return mybatis.update("ChatDAO.updateApp", avo);
 	}
 	
 	public AppVO getApp(AppVO avo) {
