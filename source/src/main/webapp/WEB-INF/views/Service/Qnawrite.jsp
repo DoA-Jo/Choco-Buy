@@ -1,10 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/template/head.jsp"  %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="../template/header.jsp" %>
+<%	String sts = ""; %>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="${pagecontext.request.contextPath}/resources/css/reset.css">
+<link rel="stylesheet" href="${pagecontext.request.contextPath}/resources/css/style.css">
 <link rel="stylesheet" href="${pagecontext.request.contextPath}/resources/css/serviceBoard.css">
-<title>title 삽입해주세요</title>
-<%@ include file="/WEB-INF/views/template/header.jsp"  %>
-<%@ include file="/WEB-INF/views/template/menu.jsp" %> 
-
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
+<c:if test="${userName ne board.writer }"><% sts = "disabled"; %></c:if>
+<body>
 	<div class="container">
 		<div class="jumbotron">
 			<h1 align="left">고객센터 글쓰기 상세페이지</h1>

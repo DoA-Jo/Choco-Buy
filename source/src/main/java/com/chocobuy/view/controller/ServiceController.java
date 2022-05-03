@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,10 +17,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.chocobuy.biz.service.ServiceService;
 import com.chocobuy.biz.service.ServiceVO;
 import com.chocobuy.biz.trade.TradeService;
+import com.chocobuy.biz.user.UserService;
+import com.chocobuy.biz.user.UserVO;
 import com.chocobuy.biz.util.PagingVO;
 
 @Controller
 public class ServiceController {
+	@Autowired
+	private UserService userService;
 	@Autowired
 	private ServiceService serviceService;
 	@Autowired
@@ -107,8 +113,16 @@ public class ServiceController {
 		   
 		// 글 목록
 		@RequestMapping("/Service/getServiceList")
-		public String getServiceListPost(PagingVO pv, ServiceVO serviceVo, Model model,@RequestParam(value = "nowPage", required = false) String nowPage) {
+		public String getServiceListPost(HttpSession session, UserVO uvo, PagingVO pv, ServiceVO serviceVo, Model model,@RequestParam(value = "nowPage", required = false) String nowPage) { //5월2일 추가
 			System.out.println("글 목록 검색 처리");
+			
+			uvo.setUser_uuid(session.getAttribute("UserInfo").toString()); //5월2일 추가
+			System.out.println("user_uuid: "+session.getAttribute("UserInfo")); //5월2일 추가
+		    UserVO user =  userService.getMypageUser(uvo);//5월2일 추가
+		    System.out.println(" user.getUser_role(): "+ user.getUser_role());//5월2일 추가
+		    
+		    model.addAttribute("user_role", user.getUser_role());//5월2일 추가
+			
 			String cntPerPage = "5";
 			if (serviceVo.getService_searchCondition() != null) serviceVo.setService_searchCondition(serviceVo.getService_searchCondition());
 			else serviceVo.setService_searchCondition("SERVIVE_TITLE");
@@ -119,6 +133,7 @@ public class ServiceController {
 			System.out.println("111: "+serviceVo.getService_searchKeyword());
 
 			int total = serviceService.countService(serviceVo);
+			System.out.println(total);
 			if (nowPage == null)  nowPage = "1";
 
 			pv = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));

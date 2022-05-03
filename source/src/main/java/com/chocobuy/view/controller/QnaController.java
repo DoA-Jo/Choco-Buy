@@ -2,10 +2,10 @@ package com.chocobuy.view.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,11 +18,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.chocobuy.biz.qna.QnaService;
 import com.chocobuy.biz.qna.QnaVO;
 import com.chocobuy.biz.trade.TradeService;
+import com.chocobuy.biz.user.UserService;
+import com.chocobuy.biz.user.UserVO;
 import com.chocobuy.biz.util.PagingVO;
 
 @Controller
 public class QnaController {
-	
+	@Autowired
+	private UserService userService;
 	@Autowired
 	private TradeService tradeService;
 	@Autowired
@@ -113,8 +116,16 @@ public class QnaController {
 	
 	// 글 목록
 		@RequestMapping("/Service/getQnaList")
-		public String getQnaListPost(PagingVO pv, QnaVO qnaVo, Model model,@RequestParam(value = "nowPage", required = false) String nowPage) {
+		public String getQnaListPost(HttpSession session, UserVO uvo, PagingVO pv, QnaVO qnaVo, Model model,@RequestParam(value = "nowPage", required = false) String nowPage) {  //5월2일 추가
 			System.out.println("글 목록 검색 처리");
+			
+			uvo.setUser_uuid(session.getAttribute("UserInfo").toString());  //5월2일 추가
+			System.out.println("user_uuid: "+session.getAttribute("UserInfo"));	//5월2일 추가
+		    UserVO user =  userService.getMypageUser(uvo);	//5월2일 추가
+		    System.out.println(" user.getUser_role(): "+ user.getUser_role());	//5월2일 추가
+		    
+		    model.addAttribute("user_role", user.getUser_role());	//5월2일 추가
+			
 			String cntPerPage = "5";
 			if (qnaVo.getQna_searchCondition() != null) qnaVo.setQna_searchCondition(qnaVo.getQna_searchCondition());
 			else qnaVo.setQna_searchCondition("QNA_TITLE");

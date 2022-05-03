@@ -1,9 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/template/head.jsp"  %>
+<%@page import="java.util.List"%>
+<%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
+<link href="../css/serviceBoard.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 <link rel="stylesheet" href="${pagecontext.request.contextPath}/resources/css/serviceBoard.css">
+<!-- <script src="../WebContent/resources/jquery-3.5.1.js"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<meta charset="UTF-8">
 <title>고객센터 내용 상세보기</title>
-<%@ include file="/WEB-INF/views/template/header.jsp"  %>
-<%@ include file="/WEB-INF/views/template/menu.jsp" %> 
+</head>
+<body>
+<%@ include file="/WEB-INF/views/template/header.jsp" %>
 	<div class="container">
 		<div class="">
 			<h1 style="display: flex; justify-content: center;">공지내용 수정페이지</h1>

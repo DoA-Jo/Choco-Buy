@@ -3,7 +3,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ServiceDAO">
-	<resultMap type="service" id="ServiceResult">
+	<resultMap type="Service" id="ServiceResult">
 		<id property="service_seq" column="SERVICE_SEQ" />
 		<result property="service_title" column="SERVICE_TITLE" />
 		<result property="service_writer" column="SERVICE_WRITER" />
@@ -23,7 +23,7 @@
 	
 	<update id="updateService">
 		<![CDATA[
-		UPDATE SERVICE_TABLE SET SERVICE_TITLE = #{service_title}, WRITER= #{service_writer}, CONTENT= #{service_content} WHERE SEQ= #{service_seq} 
+		UPDATE SERVICE_TABLE SET SERVICE_TITLE = #{service_title}, SERVICE_WRITER= #{service_writer}, SERVICE_CONTENT= #{service_content} WHERE SERVICE_SEQ= #{service_seq} 
 		]]>
 	</update>
 	
@@ -33,24 +33,27 @@
 		]]>
 	</delete>
 
-	<select id="getService" resultType="service">
+	<select id="getService" resultType="Service">
 		<![CDATA[
 		SELECT * FROM SERVICE_TABLE WHERE SERVICE_SEQ= #{service_seq} 
 		]]>
 	</select>
 	
 	<select id="getServiceList" resultMap="ServiceResult">
-		SELECT * FROM service_table WHERE 1=1 ORDER BY service_seq DESC
-<!-- 		<if test="searchCondition == 'TITLE'"> AND TITLE LIKE CONCAT('%', #{service_searchKeyword} ,'%') ORDER BY service_seq DESC</if> -->
-<!-- 		<if test="searchCondition == 'CONTENT'"> AND CONTENT LIKE CONCAT('%', #{service_searchKeyword} ,'%') ORDER BY seq DESC</if> -->
-		<!--  LIMIT #{listcnt} OFFSET #{start} -->
+		SELECT * FROM service_table WHERE 1=1
+		<if test="service_searchCondition == 'SERVICE_TITLE'"> AND SERVICE_TITLE LIKE CONCAT('%', #{service_searchKeyword} ,'%')</if>
+		<if test="service_searchCondition == 'SERVICE_CONTENT'"> AND SERVICE_CONTENT LIKE CONCAT('%', #{service_searchKeyword} ,'%')</if>
+		ORDER BY service_seq DESC
+		LIMIT #{listcnt} OFFSET #{start}
 	</select>
 	
 	<!-- 총 게시글 갯수 출력 -->
 	<select id="countService" resultType="int">
-		SELECT COUNT(*) FROM SERVICE_TABLE WHERE 1=1
-		<if test="service_searchCondition == 'SERVICE_TITLE' "> AND TITLE LIKE CONCAT('%',#{service_searchKeyword},'%') </if>
-		<if test="service_searchCondition == 'SERVICE_CONTENT' "> AND CONTENT LIKE CONCAT('%',#{service_searchKeyword},'%') </if>
+		SELECT COUNT(*) FROM service_table WHERE 1=1 
+		<if test="service_searchCondition == 'SERVICE_TITLE' "> AND SERVICE_TITLE LIKE CONCAT('%',#{service_searchKeyword},'%') </if>
+		<if test="service_searchCondition == 'SERVICE_CONTENT' "> AND SERVICE_CONTENT LIKE CONCAT('%',#{service_searchKeyword},'%') </if>
 	</select>
+	
+	
 
 </mapper>
