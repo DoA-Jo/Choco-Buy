@@ -23,8 +23,8 @@
 							<div class="media p-3">
 								<img src="${pageContext.request.contextPath}/resources/img/profileImg/${user.user_profileImg}" alt="profileImg" class="mr-3 rounded-circle" style="width: 60px;">
 								<div class="media-body" id="proBox">
-									<h4>${user_nick}<input type="hidden" name="trade_nick" value="${user_nick}" ></h4>
-									<p><small>${siNm += sggNm += emdNm}<input type="hidden" name="trade_area" value="${siNm += sggNm += emdNm}" ></small></p>
+									<h4>${user.user_nick}<input type="hidden" name="trade_nick" value="${user.user_nick}" ></h4>
+									<p><small>${user.user_siNm += user.user_sggNm += user.user_emdNm}<input type="hidden" name="trade_area" value="${siNm += sggNm += emdNm}" ></small></p>
 									</div>
 								</div>
 						<div class="input-group">
