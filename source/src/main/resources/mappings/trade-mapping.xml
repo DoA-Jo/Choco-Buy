@@ -5,8 +5,8 @@
 <mapper namespace="TradeDAO">
 	<insert id="insertTrade">
 		<![CDATA[
-		INSERT INTO TRADE_TABLE(TRADE_TITLE, TRADE_NICK, TRADE_CONTENT,TRADE_MONEY, TRADE_AREA, TRADE_CATEGORY, TRADE_IMG , TRADE_UUID)
-		VALUES( #{trade_title},#{trade_nick}, #{trade_content}, #{trade_money}, #{trade_area}, #{trade_category}, #{trade_img},#{trade_uuid})
+		INSERT INTO TRADE_TABLE(TRADE_TITLE, TRADE_NICK, TRADE_CONTENT,TRADE_MONEY, TRADE_AREA, TRADE_PROFILEIMG, TRADE_CATEGORY, TRADE_IMG , TRADE_UUID)
+		VALUES( #{trade_title},#{trade_nick}, #{trade_content}, #{trade_money}, #{trade_area},#{trade_profileimg} ,#{trade_category}, #{trade_img},#{trade_uuid})
 		]]>
 	</insert>
 	<update id="updateTrade">
