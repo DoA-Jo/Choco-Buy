@@ -24,13 +24,13 @@ public class UserDAOMybatis{
 	/* 전화번호 입력 */
 	public void insertUser(UserVO vo) {
 		System.out.println("===> Mybatis로 insertUser() 기능 처리");
-		mybatis.insert("UserDAO.insertUser_tel", vo);
+		mybatis.insert("UserDAO.insert_userTel", vo);
 	}
 	
 	/* 주소 입력 */
 	public void updateUserArea(UserVO vo) {
 		System.out.println("===> Mybatis로 updateUserArea() 기능 처리");
-		mybatis.update("UserDAO.updateUserArea", vo);
+		mybatis.update("UserDAO.update_userArea", vo);
 	}
 	
 	/* 별명 입력 */
