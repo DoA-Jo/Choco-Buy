@@ -69,4 +69,19 @@
 	<select id="getUserInfo" resultType="user">
 	    SELECT * FROM USER_TABLE WHERE USER_UUID=#{user_uuid}
 	</select>
+	
+	<!--updateUser 의 새로운 이름(중복방지) -->
+	<update id="updateMypageUser">
+		<![CDATA[
+		UPDATE USER_TABLE SET USER_TEL=#{user_tel},USER_NICK=#{user_nick} WHERE USER_UUID=#{user_uuid}
+		]]>
+	</update>
+
+	<!--updateUser 의 새로운 이름(중복방지) 사용안함 삭제 예 정-->
+	<update id="updateMypageUseArea">
+		<![CDATA[
+		UPDATE USER_TABLE SET USER_SINM=#{user_siNm}, USER_SGGNM=#{user_sggNm},USER_EMDNM=#{user_emdNm} 
+	        WHERE USER_UUID=#{user_uuid}
+		]]>
+	</update>
 </mapper>
