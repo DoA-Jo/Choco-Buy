@@ -1,7 +1,6 @@
 package com.chocobuy.view.controller;
 
 import java.util.Date;
-import java.util.regex.Pattern;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,29 +28,18 @@ public class LoginController {
 	@Autowired
 	private UserService userService;
 	
+	
 	/* LOGOUT */
-    @RequestMapping("/Login/logout")
-    public String logout(UserVO vo, HttpSession session , HttpServletRequest request , HttpServletResponse response) {
-       System.out.println("Controller >> logout");
-        if(session.getAttribute("UserInfo")!= null) {
-            session.removeAttribute("UserInfo"); 
-            session.invalidate();
-            Cookie cookie = WebUtils.getCookie(request,"loginCookie");
-            
-            //자동로그인을 한 상태의 사용자가 로그아웃을 할 경우
-            if(cookie != null) {
-                cookie.setMaxAge(0);
-                response.addCookie(cookie);
-                userService.autoLogin("none",new Date(),vo.getUser_uuid());
-            }
-        }
-        return "redirect:/index";
-    }
+	@RequestMapping("/Login/logout")
+	public String logout(HttpSession session) {
+		System.out.println("Controller >> logout");
+		session.invalidate();
+		return "redirect:/index";
+	}
 
 	/* LOGIN */	
 	@RequestMapping(value="/Login/login",method=RequestMethod.GET)
 	public String login_View() {
-		System.out.println("Controller >> login");
 		return "/Login/login";
 	}
 	
@@ -58,7 +47,6 @@ public class LoginController {
 	@RequestMapping(value={"/Login/getTelInfo","/Join/getTelInfo"})
 	@ResponseBody 
 	public int getTelInfo(@RequestParam("user_tel") String user_tel) {
-		System.out.println("user_tel:"+user_tel);
 		return userService.userTelCheck(user_tel); 
 	}
 	
@@ -67,13 +55,8 @@ public class LoginController {
 		UserVO user=userService.getUser(vo);
 		System.out.println("user: "+user);
 		if(userService.getUser(vo)!=null){
-			//session update : user_uuid, user_tel
+			//session update : user_uuid
 			session.setAttribute("UserInfo", user.getUser_uuid());
-			session.setAttribute("user_tel", user.getUser_tel());
-			session.setAttribute("user_nick", user.getUser_nick());
-			session.setAttribute("siNm", user.getUser_siNm());
-			session.setAttribute("sggNm", user.getUser_sggNm());
-			session.setAttribute("emdNm", user.getUser_emdNm());
 			if(user.getUser_role()==100) {
 				return "redirect:/Admin/adminMain";
 			}
@@ -82,22 +65,13 @@ public class LoginController {
 			return "/Login/login";
 		}
 	}
-	
-	private boolean UseReg(String testTel) {
-		System.out.println("UseReg() 호출됨");
-		String tel="^01(?:0|1[6-9])-(?:\\d{3}\\d{4})-\\d{4}$";
-		boolean tel_check=Pattern.matches(tel, testTel);
-		System.out.println("tel_check: "+tel_check);
-		return tel_check;
-		
-	}
 
 	@RequestMapping(value="/Join/joinAgree")
 	public String joinAgree_view() {
 		return "/Join/JoinAgree";
 	}
 	
-	/* user_tel duplication check */
+	/* user_tel send validation number */
 	@RequestMapping(value={"/Join/phoneCheck","/Login/phoneCheck"}) 
 	@ResponseBody 
 	public String sendSMS(@RequestParam("phone") String userPhoneNumber, CertifiedPhoneNumber ctp) { 
@@ -119,23 +93,32 @@ public class LoginController {
 		System.out.println("Controller >> jointel");
 		if(userService.getUser(vo)==null) {
 			userService.insertUser(vo);
+			System.out.println("JoinTel컨트롤러vo"+userService.getUser(vo));		
 		}
+		// 세션이 생성되어 있으면 해당 세션 리턴, 생성되어 있지 않으면 null을 리턴
 		session = request.getSession(false);
+		// 세션이 있으면 삭제합니다
 		if(session != null && session.getAttribute("UserInfo") != null) {
 			session.invalidate();
 		}else {
-			session.setAttribute("UserInfo", userService.getUser(vo));
+		UserVO user=userService.getUser(vo);
+		session.setAttribute("UserInfo", user.getUser_uuid());
+		System.out.println("session추가 후 확인: "+session.getAttribute("UserInfo"));
 		}
 		return "redirect:/Join/joinArea";
 	}
 	
 	@RequestMapping(value="/Join/joinArea", method=RequestMethod.GET)
-	public String joinArea_view() {
+	public String joinArea_view(UserVO vo, Model model2, HttpSession session) {
+		vo.setUser_uuid((String)session.getAttribute("UserInfo"));
+		model2.addAttribute("user1", userService.getUserUuid(vo));
+		System.out.println(userService.getUserUuid(vo));
 		return "/Join/JoinArea";
 	}
 	
 	@RequestMapping(value="/Join/joinArea", method=RequestMethod.POST)
-	public String join_Area(Model model, UserVO vo, @RequestParam(value="addrDetail", defaultValue = "", required = false) String addrDetail, 
+	public String join_Area(Model model, UserVO vo, Model model2, HttpSession session,
+			@RequestParam(value="addrDetail", defaultValue = "", required = false) String addrDetail, 
 			@RequestParam(value="inputYn", defaultValue = "", required = false) String inputYn, 
 			@RequestParam(value="siNm", defaultValue = "", required = false) String siNm, 
 			@RequestParam(value="sggNm", defaultValue = "", required = false) String sggNm, 
@@ -148,19 +131,23 @@ public class LoginController {
 		vo.setUser_siNm(siNm);
 		vo.setUser_sggNm(sggNm);
 		vo.setUser_emdNm(emdNm);
+		vo.setUser_uuid((String)session.getAttribute("UserInfo"));
+		model2.addAttribute("user1", userService.getUserUuid(vo));
 		userService.updateUserArea(vo);
 		return "/Join/JoinArea";
 	}
 
-	/* 二쇱냼�씤利� */
 	@RequestMapping(value="/Join/JoinArea", method=RequestMethod.POST)
-	public String join_Area(Model model, UserVO vo, HttpSession session) {
-		System.out.println("而⑦듃濡ㅻ윭> 二쇱냼 db ");
+	public String join_Area( Model model, UserVO vo ,HttpSession session) {
+		System.out.println("db작업을 해버려서 할 일이 없음 그래서 그냥 리다이렉트만 합니다.. ");
 		return "redirect:/Join/joinNick";
 	}
 	
 	@RequestMapping(value="/Join/joinNick", method=RequestMethod.GET)
-	public String joinNick_view() {
+	public String joinNick_view(UserVO vo, Model model, HttpSession session) {
+		vo.setUser_uuid((String)session.getAttribute("UserInfo"));
+		model.addAttribute("user1", userService.getUserUuid(vo));
+		System.out.println(userService.getUserUuid(vo));
 		return "/Join/JoinNick";
 	}
 	
@@ -179,17 +166,16 @@ public class LoginController {
 		userService.updateUserNick(vo);
 		return "redirect:/Join/Joindone";
 	}
-	
+	 
 	@RequestMapping(value="/Join/Joindone", method=RequestMethod.GET)
 	public String joindone_view() {
 		return "/Join/JoinDone";
 	}
 	
-	/* �쉶�썝媛��엯 �셿猷�, �꽭�뀡 �궘�젣  */
+	/* delete session & redirect to login */
 	@RequestMapping(value="/Join/JoinDone", method=RequestMethod.POST)
 	public String join_Done(UserVO vo, HttpSession session, HttpServletRequest request) {
-		System.out.println("而⑦듃濡ㅻ윭> join�뿉�꽌 �궗�슜�븳 �꽭�꽑 �궘�젣");
-		// �꽭�뀡�씠 �엳�쓣 �븣 �궘�젣
+		System.out.println("Controller >> Join process done. Redircet to Login");
 		if(request.getSession(false)!=null) {
 			session.invalidate();			
 		}
