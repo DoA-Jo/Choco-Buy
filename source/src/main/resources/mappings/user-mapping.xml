@@ -65,4 +65,8 @@
 	<select id="mypageNumCheck" resultType="integer">
 		SELECT COUNT(*) FROM user_table WHERE user_tel=#{sm_num} 
 	</select>
+	
+	<select id="getUserInfo" resultType="user">
+	    SELECT * FROM USER_TABLE WHERE USER_UUID=#{user_uuid}
+	</select>
 </mapper>
