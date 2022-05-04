@@ -16,7 +16,7 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDAOMybatis userDAO;
 
-	// Area 추가
+	// Area 異붽�
 	@Override
 	public void updateUserArea(UserVO vo) {
 		userDAO.updateUserArea(vo);
@@ -27,13 +27,13 @@ public class UserServiceImpl implements UserService {
 		return userDAO.getUserList(vo);
 	}
 	
-	//회원가입 (전화번호 db 입력)
+	//�쉶�썝媛��엯 (�쟾�솕踰덊샇 db �엯�젰)
 	@Override
 	public void insertUser(UserVO vo) {
 		userDAO.insertUser(vo);
 	}
 
-	// getUser 기준:user_tel
+	// getUser 湲곗�:user_tel
 	@Override
 	public UserVO getUser(UserVO vo) {
 		return userDAO.getUser(vo);
@@ -44,13 +44,13 @@ public class UserServiceImpl implements UserService {
 		
 	}
 	
-	// 별명 중복 체크
+	// 蹂꾨챸 以묐났 泥댄겕
 	@Override
 	public int nickDupCheck(String user_nick) {
 		return userDAO.nickDupCheck(user_nick);
 	}
 	
-	// 휴대폰 번호 체크
+	// �쑕���룿 踰덊샇 泥댄겕
 	@Override
 	public int userTelCheck(String user_tel) {
 		return userDAO.userTelCheck(user_tel);
