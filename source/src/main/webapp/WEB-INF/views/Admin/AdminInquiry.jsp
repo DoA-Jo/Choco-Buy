@@ -170,10 +170,10 @@
 		</nav>
 		
 		<div class="buttons">
-			<button class="btn btn-primary delete-button" onclick="hideInquiry()">숨김</button>
-			<button class="btn btn-primary delete-button" onclick="showInquiry()">보임</button>
-			<button class="btn btn-primary done-button" onclick="doneInquiry()">완료 처리</button>
-			<button class="btn btn-primary done-button" onclick="undoneInquiry()">미완료 처리</button>
+			<button class="btn btn-success delete-button" onclick="hideInquiry()">숨김 처리</button>
+			<button class="btn btn-success delete-button" onclick="showInquiry()">보임 처리</button>
+			<button class="btn btn-success done-button" onclick="doneInquiry()">완료 처리</button>
+			<button class="btn btn-success done-button" onclick="undoneInquiry()">미완료 처리</button>
 		</div>
 		
 		<div class="list">
@@ -199,8 +199,8 @@
 							<td><%out.print(num++); %></td>
 							<td>${inq.inq_num }</td>
 							<td>${inq.inq_nickname }</td>
-							<td><a target="_blank" href="/Inquiry/getInq?inq_num=${inq.inq_num }">${inq.inq_title }</a></td>
-							<td>${inq.inq_content }</td>
+							<td class="one-line"><a target="_blank" href="/Inquiry/GetInq?inq_num=${inq.inq_num }">${inq.inq_title }</a></td>
+							<td class="one-line">${inq.inq_content }</td>
 							<td>${inq.inq_date }</td>
 							<td>${inq.inq_filename }</td>
 							<td>
@@ -220,20 +220,20 @@
 		  <div id="btnBox"  style="text-align: center;">
 	<div id="pgCnt" class="btn-group">
 	<c:if test="${paging.startPage != 1 }">
-		<button type="button" class="pageBtn btn btn-primary" onClick="pageFnc(${paging.startPage - 1 })">&lt;</button>
+		<button type="button" class="pageBtn btn btn-success" onClick="pageFnc(${paging.startPage - 1 })">&lt;</button>
 	</c:if>
 	<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
 		<c:choose>
 			<c:when test="${p == paging.nowPage }">
-				<button type="button" class="btn btn-primary" style="color:#f00;">${p }</button>
+				<button type="button" class="btn btn-success" style="color:#fff;">${p }</button>
 			</c:when>
 			<c:when test="${p != paging.nowPage }">
-				<button type="button" class="pageBtn btn btn-primary" onClick="pageFnc(${p })">${p }</button>
+				<button type="button" class="pageBtn btn btn-success" onClick="pageFnc(${p })">${p }</button>
 			</c:when>
 		</c:choose>
 	</c:forEach>
 	<c:if test="${paging.endPage != paging.lastPage}">
-		<button type="button" class="pageBtn btn btn-primary" onClick="pageFnc(${paging.endPage+1})">&gt;</button>
+		<button type="button" class="pageBtn btn btn-success" onClick="pageFnc(${paging.endPage+1})">&gt;</button>
 	</c:if>
 	</div>
   </div><br>

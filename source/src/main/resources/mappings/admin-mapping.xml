@@ -103,6 +103,7 @@
 				AND trade_hidden!=1 
 			</if>
 			)
+			 ORDER BY trade_seq DESC
   	</select>
   
   	<resultMap id="adminPayResult" type="adminPay">
@@ -128,6 +129,7 @@
 				pay_method LIKE CONCAT('%',#{searchKeyword},'%')
 				)
 			</if>
+			 ORDER BY pay_num DESC
   	</select>
   	
   	<resultMap id="adminServiceResult" type="adminService">
@@ -156,6 +158,7 @@
 				AND service_header!=2 
 			</if>
 			)
+			 ORDER BY service_seq DESC
   	</select>
   	
   	<resultMap id="adminInquiryResult" type="adminInquiry">
@@ -193,6 +196,53 @@
 				AND inq_hiddenCK!=1 
 			</if>
 			)
+			 ORDER BY inq_num DESC
+  	</select>
+  	
+  	<resultMap id="adminChatRoomResult" type="adminChatRoom">
+	  		<id property="chatroom_seq" column="CHATROOM_SEQ" />
+	  		<result property="trade_seq" column="TRADE_SEQ" />
+	  		<result property="trade_uuid" column="TRADE_UUID" />
+	  		<result property="trade_nick" column="TRADE_NICK" />
+	  		<result property="trade_title" column="TRADE_TITLE" />
+	  		<result property="chatroom_app" column="CHATROOM_APP" />
+	  		<result property="chatroom_report" column="CHATROOM_REPORT" />
+	  		<result property="chatroom_date" column="CHATROOM_DATE" />
+  	</resultMap>
+  	
+  	<select id="getAdminChatRoomList" resultMap="adminChatRoomResult">
+  		SELECT * FROM chatroom_table where 1=1 
+			<if test="searchKeyword != '' "> AND (
+				chatroom_seq LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				trade_uuid LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				trade_nick LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				trade_title LIKE CONCAT('%',#{searchKeyword},'%') 
+				)
+			</if>
+			 AND ( 1=1 
+			<if test="report0 != 1 ">
+				AND chatroom_report!=0 
+			</if>
+			<if test="report1 != 1 ">
+				AND chatroom_report!=1 
+			</if>
+			)
+			 ORDER BY chatroom_date DESC
+  	</select>
+  	
+  	<resultMap id="adminMsgResult" type="adminMsg">
+	  		<id property="msg_num" column="msg_num" />
+	  		<result property="chatroom_seq" column="CHATROOM_SEQ" />
+	  		<result property="trade_title" column="TRADE_TITLE" />
+	  		<result property="user_uuid" column="USER_UUID" />
+	  		<result property="user_nick" column="USER_NICK" />
+	  		<result property="msg_content" column="MSG_CONTENT" />
+	  		<result property="msg_date" column="MSG_DATE" />
+  	</resultMap>
+  	
+  	<select id="getAdminChatMsgList" resultMap="adminMsgResult">
+  		SELECT * FROM msg_table where chatroom_seq = #{chatroom_seq} 
+			 ORDER BY msg_date
   	</select>
   	
   	<insert id="insertUser">
@@ -206,6 +256,10 @@
   		<![CDATA[
   			SELECT * FROM user_table WHERE user_uuid=#{user_uuid} 
   		]]>
+  	</select>
+  	
+  	<select id="getChatRoom" resultType="adminChatRoom">
+		SELECT * FROM chatroom_table WHERE chatroom_seq = #{chatroom_seq } 
   	</select>
   
   	<update id="updateUser">
@@ -346,6 +400,25 @@
 			</if>
 			<if test="display1 != 1 ">
 				AND inq_hiddenCK!=1 
+			</if>
+			)
+  	</select>
+  	
+  	<select id="countChatRoom" resultType="int">
+  			SELECT COUNT(*) FROM chatroom_table where 1=1 
+			<if test="searchKeyword != '' "> AND (
+				chatroom_seq LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				trade_uuid LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				trade_nick LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				trade_title LIKE CONCAT('%',#{searchKeyword},'%') 
+				)
+			</if>
+			 AND ( 1=1 
+			<if test="report0 != 1 ">
+				AND chatroom_report!=0 
+			</if>
+			<if test="report1 != 1 ">
+				AND chatroom_report!=1 
 			</if>
 			)
   	</select>

@@ -11,12 +11,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.chocobuy.biz.admin.AdminChatRoomVO;
 import com.chocobuy.biz.admin.AdminInquiryVO;
+import com.chocobuy.biz.admin.AdminMsgVO;
 import com.chocobuy.biz.admin.AdminPayVO;
 import com.chocobuy.biz.admin.AdminService;
 import com.chocobuy.biz.admin.AdminServiceVO;
 import com.chocobuy.biz.admin.AdminTradeVO;
 import com.chocobuy.biz.admin.AdminUserVO;
+import com.chocobuy.biz.chat.ChatRoomVO;
+import com.chocobuy.biz.chat.ChatService;
 import com.chocobuy.biz.pay.PayService;
 import com.chocobuy.biz.pay.PayVO;
 import com.chocobuy.biz.user.UserVO;
@@ -164,8 +168,25 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/Admin/adminChat")
-	public String getAdminChatList(AdminInquiryVO vo, Model model, PagingVO pv, @RequestParam(value = "nowPage", required = false) String nowPage) {
+	public String getAdminChatroomList(AdminChatRoomVO vo, Model model, PagingVO pv, @RequestParam(value = "nowPage", required = false) String nowPage) {
+		String cntPerPage = "20";
 		
+		if(vo.getReport0()==0 && vo.getReport1()==0) {
+			vo.setReport0(1);
+			vo.setReport1(1);			
+		}
+		
+		if (vo.getSearchKeyword() != null) vo.setSearchKeyword(vo.getSearchKeyword());
+		else vo.setSearchKeyword("");
+		int total = adminService.countChatRoom(vo);
+		if (nowPage == null)  nowPage = "1";
+		
+		pv = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		model.addAttribute("paging", pv);
+		vo.setStart(pv.getStart());
+		vo.setListcnt(Integer.parseInt(cntPerPage));
+		
+		model.addAttribute("adminChatRoomList", adminService.getChatRoomList(vo));
 		return "/Admin/AdminChat";
 	}
 	
@@ -185,11 +206,20 @@ public class AdminController {
 		model.addAttribute("adminUser", adminService.getUser(vo));
 		return "/Admin/AdminGetUser";
 	}
+	
+	@RequestMapping("/Admin/adminGetChat")
+	public String adminGetChat(AdminChatRoomVO chat, AdminMsgVO vo, Model model, HttpServletRequest request) {
+		chat.setChatroom_seq(vo.getChatroom_seq());
+		model.addAttribute("adminChatRoom", adminService.getChatRoom(chat));
+		
+		model.addAttribute("adminMsgList", adminService.getMsgList(vo));
+		return "/Admin/AdminGetChat";
+	}
 
 	@RequestMapping("/Admin/adminUpdateUser")
 	public String adminUpdateUser(AdminUserVO vo, Model model) {
 		adminService.updateUser(vo);
-		return "redirect:/Admin/adminMain";
+		return "redirect:/Admin/AdminMain";
 	}
 	
 	@RequestMapping("/Admin/getPay")

@@ -16,6 +16,8 @@
 		<typeAlias type="com.chocobuy.biz.admin.AdminPayVO" alias="adminPay"/>
 		<typeAlias type="com.chocobuy.biz.admin.AdminServiceVO" alias="adminService"/>
 		<typeAlias type="com.chocobuy.biz.admin.AdminInquiryVO" alias="adminInquiry"/>
+		<typeAlias type="com.chocobuy.biz.admin.AdminChatRoomVO" alias="adminChatroom"/>
+		<typeAlias type="com.chocobuy.biz.admin.AdminMsgVO" alias="adminMsg"/>
 		<typeAlias type="com.chocobuy.biz.pay.PayVO" alias="pay" />
 		<typeAlias type="com.chocobuy.biz.qna.QnaVO" alias="Qna"/>
 		<typeAlias type="com.chocobuy.biz.chat.MsgVO" alias="msg" />

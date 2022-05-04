@@ -144,8 +144,8 @@
 		</nav>
 		
 		<div class="buttons">
-			<button class="btn btn-primary" onclick="hideTrade()">숨김</button>
-			<button class="btn btn-primary" onclick="showTrade()">보임</button>
+			<button class="btn btn-success" onclick="hideTrade()">숨김 처리</button>
+			<button class="btn btn-success" onclick="showTrade()">보임 처리</button>
 		</div>
 		
 		<div class="list">
@@ -176,8 +176,8 @@
 							<td><%out.print(num++); %></td>
 							<td>${trade.trade_seq }</td>
 							<td>${trade.trade_category }</td>
-							<td><a target="_blank" href="/Trade/getTrade">${trade.trade_title }</a></td>
-							<td>${trade.trade_content }</td>
+							<td><div class="one-line"><a target="_blank" href="/Trade/getTrade?trade_seq=${trade.trade_seq }">${trade.trade_title }</a></div></td>
+							<td><div class="one-line">${trade.trade_content }</div></td>
 							<td>${trade.trade_date }</td>
 							<td>${trade.trade_nick }</td>
 							<td>${trade.trade_money }</td>
@@ -202,20 +202,20 @@
 		<div id="btnBox"  style="text-align: center;">
 	<div id="pgCnt" class="btn-group">
 	<c:if test="${paging.startPage != 1 }">
-		<button type="button" class="pageBtn btn btn-primary" onClick="pageFnc(${paging.startPage - 1 })">&lt;</button>
+		<button type="button" class="pageBtn btn btn-success" onClick="pageFnc(${paging.startPage - 1 })">&lt;</button>
 	</c:if>
 	<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
 		<c:choose>
 			<c:when test="${p == paging.nowPage }">
-				<button type="button" class="btn btn-primary" style="color:#f00;">${p }</button>
+				<button type="button" class="btn btn-success" style="color:#fff;">${p }</button>
 			</c:when>
 			<c:when test="${p != paging.nowPage }">
-				<button type="button" class="pageBtn btn btn-primary" onClick="pageFnc(${p })">${p }</button>
+				<button type="button" class="pageBtn btn btn-success" onClick="pageFnc(${p })">${p }</button>
 			</c:when>
 		</c:choose>
 	</c:forEach>
 	<c:if test="${paging.endPage != paging.lastPage}">
-		<button type="button" class="pageBtn btn btn-primary" onClick="pageFnc(${paging.endPage+1})">&gt;</button>
+		<button type="button" class="pageBtn btn btn-success" onClick="pageFnc(${paging.endPage+1})">&gt;</button>
 	</c:if>
 	</div>
   </div><br>

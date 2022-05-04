@@ -104,9 +104,9 @@
 		</nav>
 		
 		<div class="buttons">
-			<button class="btn btn-primary" onclick="window.open('/Service/ServiceWrite')">글쓰기</button>
-			<button class="btn btn-primary" onclick="hideService()">숨김</button>
-			<button class="btn btn-primary" onclick="showService()">보임</button>
+			<button class="btn btn-success" onclick="window.open('/Service/ServiceWrite')">글쓰기</button>
+			<button class="btn btn-success" onclick="hideService()">숨김 처리</button>
+			<button class="btn btn-success" onclick="showService()">보임 처리</button>
 		</div>
 		
 		<div class="list">
@@ -134,8 +134,8 @@
 									<c:if test="${service.service_header == 1}">공지사항</c:if>
 									<c:if test="${user.service_header == 2}">자주 묻는 질문</c:if>
 							</td>
-							<td><a target="_blank" href="/Service/getService">${service.service_title }</a></td>
-							<td>${service.service_content }</td>
+							<td class="one-line"><a target="_blank" href="/Service/getService?service_seq=${service.service_seq }">${service.service_title }</a></td>
+							<td class="one-line">${service.service_content }</td>
 							<td>${service.service_date }</td>
 							<td>${service.service_cnt }</td>
 							<td>
@@ -151,20 +151,20 @@
   <div id="btnBox"  style="text-align: center;">
 	<div id="pgCnt" class="btn-group">
 	<c:if test="${paging.startPage != 1 }">
-		<button type="button" class="pageBtn btn btn-primary" onClick="pageFnc(${paging.startPage - 1 })">&lt;</button>
+		<button type="button" class="pageBtn btn btn-success" onClick="pageFnc(${paging.startPage - 1 })">&lt;</button>
 	</c:if>
 	<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
 		<c:choose>
 			<c:when test="${p == paging.nowPage }">
-				<button type="button" class="btn btn-primary" style="color:#f00;">${p }</button>
+				<button type="button" class="btn btn-success" style="color:#fff;">${p }</button>
 			</c:when>
 			<c:when test="${p != paging.nowPage }">
-				<button type="button" class="pageBtn btn btn-primary" onClick="pageFnc(${p })">${p }</button>
+				<button type="button" class="pageBtn btn btn-success" onClick="pageFnc(${p })">${p }</button>
 			</c:when>
 		</c:choose>
 	</c:forEach>
 	<c:if test="${paging.endPage != paging.lastPage}">
-		<button type="button" class="pageBtn btn btn-primary" onClick="pageFnc(${paging.endPage+1})">&gt;</button>
+		<button type="button" class="pageBtn btn btn-success" onClick="pageFnc(${paging.endPage+1})">&gt;</button>
 	</c:if>
 	</div>
   </div><br>

@@ -16,11 +16,7 @@
 			</ul>
 		</span>
 		<span>
-			<%
-				String user_nick = (String)request.getSession().getAttribute("user_nick");
-			%>
-			<%out.print(user_nick); %>님 환영합니다
-			<a target="_blank" href="/Trade/getTradeList">사용자 페이지 보기</a>
+			<a target="_blank" href="/Trade/getTradeList">사용자 페이지</a>
 			<a href="/Login/logout">로그아웃</a>
 		</span>
 	</div>
