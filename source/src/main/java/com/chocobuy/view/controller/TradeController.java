@@ -33,9 +33,9 @@ public class TradeController {
 	@RequestMapping("/Trade/tradeInsert")
 	public String insertTradePage(TradeVO vo, UserVO uvo, Model model, HttpSession session) throws IOException{
 		String UserInfo = (String)session.getAttribute("UserInfo");
+		System.out.println("useruuid : "+UserInfo);
 		uvo.setUser_uuid(UserInfo);
 		model.addAttribute("user", userService.getMypageUser(uvo));
-		
 		
 		return "/Trade/TradeInsert";
 	}
@@ -47,10 +47,11 @@ public class TradeController {
 	public String insertTrade(TradeVO vo, UserVO uvo, Model model, MultipartHttpServletRequest request , HttpSession session) throws IOException{
 		
 	String realPath=request.getSession().getServletContext().getRealPath("/");	
-	
+	//톰캣에 올릴때는 realPath로 !!!
 //	String savePath=realPath+"/resources/img/upload/";
 //	String savePath="C:/swork/ChocoBuyProto/src/main/webapp/resources/img/upload/";
 	
+//	System.out.println("savePath : "+savePath);
 	System.out.println("realPath : "+realPath);
 		MultipartFile trade_uploadImg = vo.getTrade_uploadImg();
 		
@@ -58,23 +59,28 @@ public class TradeController {
 			String trade_img = trade_uploadImg.getOriginalFilename();
 			
 			File file = new File(realPath+trade_img);
+//			File file = new File(savePath+trade_img);
 			if(!file.exists()) {
 				file.mkdirs();
 			}
 			trade_uploadImg.transferTo(file);
 			vo.setTrade_img(trade_img);
 		}
-		
+//		20220504김혜린 수정  개발환경에서는 savepath 사용해야함	
 		session = request.getSession();
 		String UserInfo = (String)session.getAttribute("UserInfo");
 		uvo.setUser_uuid(UserInfo);
-		userService.getMypageUser(uvo);
+		uvo = userService.getMypageUser(uvo);
 		
+		System.out.println("getMypageUser after: "+userService.getMypageUser(uvo));
+		
+		System.out.println("userprofileimg after: "+uvo.getUser_profileImg());
 		
 		vo.setTrade_profileimg(uvo.getUser_profileImg());
-		vo.setTrade_imgpath(realPath);
+		
+		vo.setTrade_imgpath(realPath); 
+//		vo.setTrade_imgpath(savePath);     // savePath 지우지 말아주세용
 		vo.setTrade_uuid(UserInfo);
-		System.out.println("savePath :"+realPath+vo.getTrade_img());
 		System.out.println(vo.getTrade_img());
 		System.out.println(vo.getTrade_imgpath());
 		tradeService.insertTrade(vo);
