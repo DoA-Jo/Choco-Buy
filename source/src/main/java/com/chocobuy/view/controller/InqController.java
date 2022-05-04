@@ -121,38 +121,31 @@ public class InqController {
 
 	// 글 상세 조회
 	@RequestMapping("/Inquiry/GetInq")
-	public String getInq(InqVO inqVo, UserVO vo, InqReplyVO inqReplyVo, Model model, HttpServletRequest request) {
+	public String getInq(InqVO inqVo, UserVO vo, InqReplyVO inqReplyVo, Model model, HttpSession session) {
 		System.out.println(inqVo);
 		System.out.println("에러?1");
 		inqReplyVo.setInqRe_bno(inqVo.getInq_num());
 		System.out.println("에러?2");
 		System.out.println("에러?3");
 		
-		if(inqService.getInq(inqVo) == null) {
-			inqVo.setInq_num((Integer) request.getAttribute("inqNum"));
-			inqReplyVo.setInqRe_bno((Integer) request.getAttribute("inqNum"));
-			System.out.println((Integer) request.getAttribute("inqNum"));
-		}
+//		if(inqService.getInq(inqVo) == null) {
+//			inqVo.setInq_num((Integer) request.getAttribute("inqNum"));
+//			inqReplyVo.setInqRe_bno((Integer) request.getAttribute("inqNum"));
+//			System.out.println((Integer) request.getAttribute("inqNum"));
+//		}
+		
+
+		vo.setUser_uuid((String) session.getAttribute("UserInfo"));
+		model.addAttribute("vo_ck", inqService.getVo_ck(vo));
+		System.out.println(inqService.getVo_ck(vo) +"111111");
+		
 		
 		model.addAttribute("inq", inqService.getInq(inqVo));
-
-		System.out.println(inqVo+"22");
+		System.out.println(inqService.getInq(inqVo) +"22");
+		
 //		댓글기능 목록
 		model.addAttribute("inqReplyList", inqReplyService.getInqReplyList(inqReplyVo));
-		
-		vo.setUser_uuid((String)request.getSession().getAttribute("UserInfo"));
-		model.addAttribute("vo_ck", inqService.getVo_ck(vo));
-		
-		System.out.println(inqReplyVo);
-		System.out.println("에러?4");
-		
-		
-//		팝업창 or getInq창
-//		if() {
-//			
-//		}else {
-//			return "/Inquiry/GetInq";
-//		}
+		System.out.println(inqReplyService.getInqReplyList(inqReplyVo) +"333");
 		
 		return "/Inquiry/GetInq";
 		
@@ -228,6 +221,7 @@ public class InqController {
 		vo.setUser_uuid((String) request.getSession().getAttribute("UserInfo"));
 		vo = userService.getUserInfo(vo);
 		request.setAttribute("nick_ck", vo.getUser_nick());
+		request.setAttribute("role_ck", vo.getUser_role());
 		
 		return "/Inquiry/GetInqList";
 	}

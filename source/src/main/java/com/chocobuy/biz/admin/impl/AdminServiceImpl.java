@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.chocobuy.biz.admin.AdminChatRoomVO;
 import com.chocobuy.biz.admin.AdminInquiryVO;
+import com.chocobuy.biz.admin.AdminMsgVO;
 import com.chocobuy.biz.admin.AdminPayVO;
 import com.chocobuy.biz.admin.AdminService;
 import com.chocobuy.biz.admin.AdminServiceVO;
@@ -44,6 +46,11 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
+	public List<AdminMsgVO> getMsgList(AdminMsgVO vo) {
+		return mybatis.getMsgList(vo);
+	}
+
+	@Override
 	public void insertUser(AdminUserVO vo) {
 		mybatis.insertUser(vo);
 	}
@@ -51,6 +58,11 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public AdminUserVO getUser(AdminUserVO vo) {
 		return mybatis.getUser(vo);
+	}
+
+	@Override
+	public AdminChatRoomVO getChatRoom(AdminChatRoomVO vo) {
+		return mybatis.getChatRoom(vo);
 	}
 
 	@Override
@@ -121,5 +133,15 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public void undoneInquiry(AdminInquiryVO vo) {
 		mybatis.undoneInquiry(vo);
+	}
+
+	@Override
+	public List<AdminChatRoomVO> getChatRoomList(AdminChatRoomVO vo) {
+		return mybatis.getChatroomList(vo);
+	}
+
+	@Override
+	public int countChatRoom(AdminChatRoomVO vo) {
+		return mybatis.countChatRoom(vo);
 	}
 }

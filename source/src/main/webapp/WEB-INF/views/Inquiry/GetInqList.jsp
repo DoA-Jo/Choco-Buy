@@ -6,7 +6,9 @@
 <%	
 // 	로그인 시 가져오는 닉네임
 	String nick= (String) request.getAttribute("nick_ck");
+	int role= (Integer) request.getAttribute("role_ck");
 	System.out.println("nick : " + nick);
+	System.out.println("role : " + role);
 %>
 
 <title>Inquiry page</title>
@@ -57,7 +59,7 @@
 <%-- 						<c:if test="${nick ne inq.inq_nickname}"></c:if> --%>
 						<tr>
 						  <td>${inq.inq_num}</td>
-						  <td class="title"><a id="inq_contLink" onClick="mypage_check('<%=nick%>','${inq.inq_nickname}','${inq.inq_num}');">${inq.inq_title}</a></td>
+						  <td class="title"><a id="inq_contLink" onClick="mypage_check('<%=nick%>','${inq.inq_nickname}','${inq.inq_num}','<%=role %>');">${inq.inq_title}</a></td>
 <%-- 						  <td class="title"><a class="inq_contLink" href="GetInq?inq_num=${inq.inq_num}">${inq.inq_title}</a></td> --%>
 						  <td>${inq.inq_nickname}</td>
 						  <td>${inq.inq_date}</td>
@@ -124,10 +126,12 @@
 		frm.submit();	
 	}
 	
-	function mypage_check(usernick, inqContnick, inqListnum){ 
+	function mypage_check(usernick, inqContnick, inqListnum, userRole){ 
 	// 	alert(usernick + inqContnick + inqListnum);
 		
 	     if(usernick == inqContnick){ 
+	    	 location.href = "GetInq?inq_num="+inqListnum;
+	     }else if(userRole == 100){
 	    	 location.href = "GetInq?inq_num="+inqListnum;
 	     }else{
 	        $('#inq_myModal').show();

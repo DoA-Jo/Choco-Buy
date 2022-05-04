@@ -6,7 +6,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.chocobuy.biz.admin.AdminChatRoomVO;
 import com.chocobuy.biz.admin.AdminInquiryVO;
+import com.chocobuy.biz.admin.AdminMsgVO;
 import com.chocobuy.biz.admin.AdminPayVO;
 import com.chocobuy.biz.admin.AdminServiceVO;
 import com.chocobuy.biz.admin.AdminTradeVO;
@@ -38,12 +40,24 @@ public class AdminDAOMybatis {
 		return mybatis.selectList("AdminDAO.getAdminInquiryList", vo);
 	}
 	
+	public List<AdminChatRoomVO> getChatroomList(AdminChatRoomVO vo) {
+		return mybatis.selectList("AdminDAO.getAdminChatRoomList", vo);
+	}
+	
+	public List<AdminMsgVO> getMsgList(AdminMsgVO vo) {
+		return mybatis.selectList("AdminDAO.getAdminChatMsgList", vo);
+	}
+	
 	public void insertUser(AdminUserVO vo) {
 		mybatis.insert("AdminDAO.insertUser", vo);
 	}
 	
 	public AdminUserVO getUser(AdminUserVO vo) {
 		return (AdminUserVO)mybatis.selectOne("AdminDAO.getUser", vo);
+	}
+	
+	public AdminChatRoomVO getChatRoom(AdminChatRoomVO vo) {
+		return (AdminChatRoomVO)mybatis.selectOne("AdminDAO.getChatRoom", vo);
 	}
 	
 	public void updateUser(AdminUserVO vo) {
@@ -64,6 +78,10 @@ public class AdminDAOMybatis {
 
 	public int countService(AdminServiceVO vo) {
 		return mybatis.selectOne("AdminDAO.countService", vo);
+	}
+	
+	public int countChatRoom(AdminChatRoomVO vo) {
+		return mybatis.selectOne("AdminDAO.countChatRoom", vo);
 	}
 
 	public int countInquiry(AdminInquiryVO vo) {

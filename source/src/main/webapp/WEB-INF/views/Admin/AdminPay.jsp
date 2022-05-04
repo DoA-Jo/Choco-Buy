@@ -50,7 +50,7 @@
 							<td><input type="checkbox"></td>
 							<td><%out.print(num++); %></td>
 							<td>${pay.pay_num }</td>
-							<td><a target="_blank" href="/Admin/getPay">${pay.pay_ordernum }</a></td>
+							<td>${pay.pay_ordernum }</td>
 							<td>${pay.pay_category }</td>
 							<td>${pay.pay_buy }</td>
 							<td>${pay.pay_sell }</td>
@@ -65,20 +65,20 @@
 		  <div id="btnBox"  style="text-align: center;">
 	<div id="pgCnt" class="btn-group">
 	<c:if test="${paging.startPage != 1 }">
-		<button type="button" class="pageBtn btn btn-primary" onClick="pageFnc(${paging.startPage - 1 })">&lt;</button>
+		<button type="button" class="pageBtn btn btn-success" onClick="pageFnc(${paging.startPage - 1 })">&lt;</button>
 	</c:if>
 	<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
 		<c:choose>
 			<c:when test="${p == paging.nowPage }">
-				<button type="button" class="btn btn-primary" style="color:#f00;">${p }</button>
+				<button type="button" class="btn btn-success" style="color:#fff;">${p }</button>
 			</c:when>
 			<c:when test="${p != paging.nowPage }">
-				<button type="button" class="pageBtn btn btn-primary" onClick="pageFnc(${p })">${p }</button>
+				<button type="button" class="pageBtn btn btn-success" onClick="pageFnc(${p })">${p }</button>
 			</c:when>
 		</c:choose>
 	</c:forEach>
 	<c:if test="${paging.endPage != paging.lastPage}">
-		<button type="button" class="pageBtn btn btn-primary" onClick="pageFnc(${paging.endPage+1})">&gt;</button>
+		<button type="button" class="pageBtn btn btn-success" onClick="pageFnc(${paging.endPage+1})">&gt;</button>
 	</c:if>
 	</div>
   </div><br>

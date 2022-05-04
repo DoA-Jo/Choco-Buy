@@ -47,7 +47,7 @@
 		</nav>
 		
 		<div class="buttons">
-			<button class="btn btn-primary open" onclick="location.href='/Admin/adminInsertUser'">사용자 추가</button>
+			<button class="btn btn-success open" onclick="location.href='/Admin/adminInsertUser'">사용자 추가</button>
 		</div>
 		
 		<div class="list">
@@ -69,7 +69,7 @@
 						<tr>
 							<td><input type="checkbox"></td>
 							<td><%out.print(num++); %></td>
-							<td><a target="_blank" href="/Admin/adminGetUser?user_uuid=${user.user_uuid }">${user.user_uuid }</a></td>
+							<td><a href="/Admin/adminGetUser?user_uuid=${user.user_uuid }">${user.user_uuid }</a></td>
 							<td>${user.user_tel }</td>
 							<td>${user.user_nick }</td>
 							<td>${user.user_siNm } ${user.user_sggNm } ${user.user_emdNm }</td>
@@ -91,20 +91,20 @@
   <div id="btnBox"  style="text-align: center;">
 	<div id="pgCnt" class="btn-group">
 	<c:if test="${paging.startPage != 1 }">
-		<button type="button" class="pageBtn btn btn-primary" onClick="pageFnc(${paging.startPage - 1 })">&lt;</button>
+		<button type="button" class="pageBtn btn btn-success" onClick="pageFnc(${paging.startPage - 1 })">&lt;</button>
 	</c:if>
 	<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
 		<c:choose>
 			<c:when test="${p == paging.nowPage }">
-				<button type="button" class="btn btn-primary" style="color:#f00;">${p }</button>
+				<button type="button" class="btn btn-success" style="color:#fff;">${p }</button>
 			</c:when>
 			<c:when test="${p != paging.nowPage }">
-				<button type="button" class="pageBtn btn btn-primary" onClick="pageFnc(${p })">${p }</button>
+				<button type="button" class="pageBtn btn btn-success" onClick="pageFnc(${p })">${p }</button>
 			</c:when>
 		</c:choose>
 	</c:forEach>
 	<c:if test="${paging.endPage != paging.lastPage}">
-		<button type="button" class="pageBtn btn btn-primary" onClick="pageFnc(${paging.endPage+1})">&gt;</button>
+		<button type="button" class="pageBtn btn btn-success" onClick="pageFnc(${paging.endPage+1})">&gt;</button>
 	</c:if>
 	</div>
   </div><br>
