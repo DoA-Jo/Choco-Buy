@@ -11,7 +11,10 @@ public class TradeVO {
 	private String trade_title;//	글 제목
 	private int trade_money;//	금액
 	private String trade_content;//	글 내용
-	private String trade_area;//	거래 지역
+//	private String trade_area;//	거래 지역
+	private String trade_sinm;//	거래 지역 시
+	private String trade_sggnm;//	거래 지역 시군구
+	private String trade_emdnm;//	거래 지역 읍면동
 	private String trade_img;//	이미지 이름
 	private String trade_profileimg;//	프로필 이미지 이름
 	private String trade_category;//	카테고리
@@ -29,6 +32,24 @@ public class TradeVO {
 	private int start;
 	private int listcnt;
 	
+	public String getTrade_sinm() {
+		return trade_sinm;
+	}
+	public void setTrade_sinm(String trade_sinm) {
+		this.trade_sinm = trade_sinm;
+	}
+	public String getTrade_sggnm() {
+		return trade_sggnm;
+	}
+	public void setTrade_sggnm(String trade_sggnm) {
+		this.trade_sggnm = trade_sggnm;
+	}
+	public String getTrade_emdnm() {
+		return trade_emdnm;
+	}
+	public void setTrade_emdnm(String trade_emdnm) {
+		this.trade_emdnm = trade_emdnm;
+	}
 	public String getTrade_profileimg() {
 		return trade_profileimg;
 	}
@@ -136,12 +157,7 @@ public class TradeVO {
 	public void setTrade_content(String trade_content) {
 		this.trade_content = trade_content;
 	}
-	public String getTrade_area() {
-		return trade_area;
-	}
-	public void setTrade_area(String trade_area) {
-		this.trade_area = trade_area;
-	}
+
 	public String getTrade_img() {
 		return trade_img;
 	}

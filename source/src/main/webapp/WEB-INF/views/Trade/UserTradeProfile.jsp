@@ -22,7 +22,7 @@
 				        <img src="${pagecontext.request.contextPath}/resources/img/profileImg/${trade.trade_profileimg}" alt="Jane Doe" class="align-self-center rounded-circle" style="width:45px;">
 				        <div class="introduceBox media-body">
 				             <h4> <i class="fas fa-user-friends"></i> ${trade.trade_nick }</h4>
-     						 <p><i>${trade.trade_area }</i></p>      
+     						 <p><i>${trade.trade_sinm +=trade.trade_sggnm +=trade.trade_emdnm }</i></p>      
 				        </div>
 					<button type="button" onClick="location.href='/Trade/getTrade?trade_seq=${trade.trade_seq}'"  class="btn btn-outline-info getBackBtn">이전으로 돌아가기</button>
 			      	</div>  

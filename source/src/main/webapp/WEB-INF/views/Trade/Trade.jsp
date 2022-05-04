@@ -18,7 +18,7 @@
 									<div class="media-body" id="proBox" onClick="location.href='/Trade/getTradeProfile?trade_nick=${trade.trade_nick}'" style="cursor : pointer;" >
 									<input type="hidden" name="trade_nick" value="${trade.trade_nick}">
 										<h3>${trade.trade_nick}</h3>
-										<p><small>${trade.trade_area}</small></p>
+										<p><small>${trade.trade_sinm +=trade.trade_sggnm +=trade.trade_emdnm }</small></p>
 									</div>
 									    <button type="button" class="btn btn-outline-info" onclick="location.href='/Chat/Chat?trade_seq=${trade.trade_seq}'">채팅으로 거래하기</button>
 							</div>
