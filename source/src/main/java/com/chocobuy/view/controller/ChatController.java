@@ -40,20 +40,21 @@ public class ChatController {
 		String user_uuid = (String) session.getAttribute("UserInfo");//user_uuid
 		uvo.setUser_uuid(user_uuid);
 		UserVO vo = userService.getMypageUser(uvo);
-		
 		System.out.println(user_uuid.toString());
 		tvo = tradeService.getTrade(tvo);
 		System.out.println(tvo.toString());
 		if(user_uuid.equals(tvo.getTrade_uuid())) {
+			System.out.println("로그인한 아이디와 글 등록한 아이디가 같은 경우");
 			return "redirect:/Chat/ChatMyRoom?trade_seq="+tvo.getTrade_seq();
 		}else {
+			System.out.println("로그인한 아이디와 글 등록한 아이디가 다른 경우");
 			cvo.setTrade_seq(tvo.getTrade_seq());
 			cvo.setUser_uuid(user_uuid);
 			cvo.setTrade_uuid(tvo.getTrade_uuid());
 			cvo.setTrade_title(tvo.getTrade_title());
 			cvo.setTrade_nick(tvo.getTrade_nick());
 			cvo.setTrade_area(tvo.getTrade_area());
-			cvo.setUser_nick( (String) session.getAttribute("user_nick"));
+			cvo.setUser_nick(vo.getUser_nick());
 			if(chatService.countRoom(cvo) <= 0 ) chatService.createChatRoom(cvo);
 			int chatroom_seq = chatService.getRoomSeq(cvo);
 			avo.setChatroom_seq(chatroom_seq);
@@ -95,6 +96,8 @@ public class ChatController {
 	
 	@RequestMapping("/Chat/ChatMyRoom")
 	public String chatMyRoom(ChatRoomVO cvo, Model model) {
+		//채팅방이 있는지 체크해야함. 채팅방번호가 없는 상태이므로 trade_seq를 가지고 채티앙의 갯수가 있는지의 여부를 받는다.
+		model.addAttribute("myRoomCount",chatService.countMyRoom(cvo));
 		model.addAttribute("myRoomList", chatService.getMyChatRoom(cvo));
 		System.out.println(cvo);
 		return "/Chat/ChatMyRoom";

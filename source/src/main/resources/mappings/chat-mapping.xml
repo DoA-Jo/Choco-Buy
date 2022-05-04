@@ -50,6 +50,12 @@
 		]]>
 	</select>
 	
+	<select id="countMyRoom" resultType="int">
+		<![CDATA[ 
+		SELECT count(*) FROM CHATROOM_TABLE WHERE TRADE_SEQ = #{trade_seq}
+		]]>
+	</select>
+	
 <!-- 	<select id="countApp" resultType="int"> -->
 <!-- 		<![CDATA[  -->
 <!-- 		SELECT count(*) FROM CHATROOM_TABLE WHERE TRADE_SEQ = #{trade_seq} AND USER_UUID = #{user_uuid} -->

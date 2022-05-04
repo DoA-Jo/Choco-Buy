@@ -22,7 +22,10 @@
 <%@ include file="../template/menu.jsp"  %>
 <div class="container mt-3 mb-3">
 	 <h1>채팅방</h1><br>
-        <div class="warp">
+	 <c:choose>
+   
+            <c:when test="${myRoomCount > 0 }"> 
+           		 <div class="warp">
 	        <section class="">
 				<div class="container-fluid">
 				<c:forEach items="${myRoomList}" var="myRoom">
@@ -37,6 +40,13 @@
 			</div>
 		</section>
 	</div>
+            </c:when>
+           
+            <c:otherwise>
+				해당 글에대한 거래요청이 존재하지 않습니다.
+            </c:otherwise>
+</c:choose>
+        
 </div>
 <%@ include file="../template/footer.jsp"  %>
 </body>

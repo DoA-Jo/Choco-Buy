@@ -55,6 +55,10 @@ public class ChatDAOMybatis {
 		return mybatis.selectOne("ChatDAO.countRoom",cvo);
 	}
 	
+	public int countMyRoom(ChatRoomVO cvo) {
+		return mybatis.selectOne("ChatDAO.countMyRoom",cvo);
+	}
+	
 	public int insertMsg(MsgVO cvo) {
 		System.out.println("dao클래스: "+cvo.toString());
 		return mybatis.insert("ChatDAO.insertMsg",cvo);

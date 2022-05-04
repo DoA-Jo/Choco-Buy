@@ -9,6 +9,7 @@ public interface ChatService {
 	void updateChatRoom(AppVO avo);
 	ChatRoomVO getChatRoom(ChatRoomVO cvo);
 	int countRoom(ChatRoomVO cvo);
+	int countMyRoom(ChatRoomVO cvo);
 	int insertMsg(MsgVO cvo);
 	int getRoomSeq(ChatRoomVO cvo);
 	List<MsgVO> getMsgList(MsgVO cvo);
@@ -18,4 +19,5 @@ public interface ChatService {
 	int updateReport(ChatRoomVO cvo);
 	int countApp(AppVO avo);
 	int updateApp(AppVO avo);
+	
 }

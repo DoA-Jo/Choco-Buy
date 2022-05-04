@@ -96,4 +96,10 @@ public class ChatServiceImpl implements ChatService{
 		
 	}
 
+
+	@Override
+	public int countMyRoom(ChatRoomVO cvo) {
+		return chatDAO.countMyRoom(cvo);
+	}
+
 }
