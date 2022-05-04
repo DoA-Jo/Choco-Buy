@@ -45,7 +45,7 @@
 			    </div>     
 			    <div id="footer">
 			    	<div style="text-align: center;">
-						<a href="/Service/ServiceController" class="btn btn-primary pull-Right">글 목록</a> <!-- 5월2일 수정 :.do삭제-->
+						<a href="/Service/getServiceList" class="btn btn-primary pull-Right">글 목록</a> <!-- 5월2일 수정 :.do삭제-->
 					</div>
 				  	<div style="text-align: right;">
 						<button type="submit" class="btn btn-primary pull-Right">글등록</button>

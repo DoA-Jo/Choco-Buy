@@ -45,7 +45,7 @@
 			    </div>     
 			    <div id="footer">
 			    	<div style="text-align: center;">
-						<a href="/Service/QnaController" class="btn btn-primary pull-Right">글 목록</a>
+						<a href="/Service/getQnaList" class="btn btn-primary pull-Right">글 목록</a>
 					</div>
 				  	<div style="text-align: right;">
 						<button type="submit" class="btn btn-primary pull-Right">글등록</button>
