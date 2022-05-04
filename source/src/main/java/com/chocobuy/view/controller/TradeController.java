@@ -46,7 +46,8 @@ public class TradeController {
 	@RequestMapping(value = "/Trade/insertTrade")
 	public String insertTrade(TradeVO vo, UserVO uvo, Model model, MultipartHttpServletRequest request , HttpSession session) throws IOException{
 		
-	String realPath=request.getSession().getServletContext().getRealPath("/");	
+	String realPath=request.getSession().getServletContext().getRealPath("/");
+	realPath += "/resources/img/upload/";	
 	//톰캣에 올릴때는 realPath로 !!!
 //	String savePath=realPath+"/resources/img/upload/";
 //	String savePath="C:/swork/ChocoBuyProto/src/main/webapp/resources/img/upload/";
