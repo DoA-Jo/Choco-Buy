@@ -350,15 +350,15 @@ function enterkey() {
 				
 					<form action="/Trade/updateTrade" method="post">
 						<div class="imgBox mb-3 mt-3">
-							<img src="/resources/img/fff.png">
-						</div>
+							<img src="${pageContext.request.contextPath}/resources/img/upload/${trade.trade_img}">						</div>
 							<div class="media p-3" >
-								<img src="/resources/img/img_avatar3.png" alt="John Doe" class="mr-3 rounded-circle" style="width: 60px;">
-									<div class="media-body" id="proBox" onClick="location.href='/Trade/getTradeProfile'">
-									<input type="hidden" id="chatroom_seq" value="${chatRoom.chatroom_seq}">
-									<input type="hidden" id="user_nick" value="${userUser.user_nick}">
-									<input type="hidden" id="trade_uuid" value="${chatRoom.trade_uuid}">
-									<input type="hidden" id="user_uuid" value="${userUser.user_uuid}">
+									<img src="${pageContext.request.contextPath}/resources/img/profileImg/${trade.trade_profileimg}" alt="John Doe" class="mr-3 rounded-circle" style="width: 60px;">
+									<div class="media-body" id="proBox" onClick="location.href='/Trade/getTradeProfile?trade_nick=${trade.trade_nick}'" style="cursor : pointer;" >
+										<input type="hidden" id="chatroom_seq" value="${chatRoom.chatroom_seq}">
+										<input type="hidden" id="user_nick" value="${userUser.user_nick}">
+										<input type="hidden" id="trade_uuid" value="${chatRoom.trade_uuid}">
+										<input type="hidden" id="user_uuid" value="${userUser.user_uuid}">
+										<input type="hidden" id="user_uuid" value="${chatRoom.trade_area}">
 										<h3>${chatRoom.trade_nick}</h3>
 										<p><small>${tradeUser.trade_area}</small></p>
 										</div>
