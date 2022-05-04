@@ -10,6 +10,19 @@
 	$("#chooseFile").click(function(){
 		$("#uploadBtn").click();
 	});
+	
+	$("#seeMoreListClick").click(function(){
+	
+	if($("#seeMoreList").attr("style") == "display : none;"){
+		$("#seeMoreList").attr("style","display : block;");
+		document.getElementById("seeMoreListClick").textContent = "- 접기"
+		}else if($("#seeMoreList").attr("style") == "display : block;"){
+		$("#seeMoreList").attr("style","display : none;");
+		document.getElementById("seeMoreListClick").textContent = "+ 더보기"
+		}
+	});
+	
+	
 	    });
 		
 	

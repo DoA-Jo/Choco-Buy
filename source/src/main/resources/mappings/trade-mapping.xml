@@ -4,6 +4,7 @@
 
 <mapper namespace="TradeDAO">
 	<insert id="insertTrade">
+	
 	<if test="trade_img != null">		
 		INSERT INTO TRADE_TABLE(TRADE_TITLE, TRADE_NICK, TRADE_CONTENT,TRADE_MONEY, TRADE_AREA, TRADE_PROFILEIMG, TRADE_CATEGORY, TRADE_IMG , TRADE_UUID)
 		VALUES( #{trade_title},#{trade_nick}, #{trade_content}, #{trade_money}, #{trade_area},#{trade_profileimg} ,#{trade_category}, #{trade_img},#{trade_uuid})
@@ -38,16 +39,16 @@
 	</select>
 	<select id="getTradeList" resultType="trade">
 	SELECT * FROM TRADE_TABLE WHERE 1=1
-	AND TRADE_CATEGORY LIKE CONCAT('%', #{searchCategory} ,'%') ORDER BY trade_seq DESC
+	AND TRADE_CATEGORY LIKE CONCAT('%', #{searchCategory} ,'%') ORDER BY TRADE_SEQ DESC
 	</select>
 		<select id="getSearchTradeList" resultType="trade">
 	SELECT * FROM TRADE_TABLE WHERE 1=1
-	AND TRADE_CONTENT LIKE CONCAT('%', #{searchInput} ,'%') ORDER BY trade_seq DESC
+	AND TRADE_CONTENT LIKE CONCAT('%', #{searchInput} ,'%') ORDER BY TRADE_SEQ DESC
 	</select>
 	<!-- 20220503 김혜린 수정 -->
 	<select id="getMyTradeList" resultType="trade">
 	SELECT * FROM TRADE_TABLE WHERE 1=1
-	AND TRADE_NICK LIKE CONCAT('%', #{trade_nick} ,'%') ORDER BY TRADE_NICK 
+	AND TRADE_NICK LIKE CONCAT('%', #{trade_nick} ,'%') ORDER BY TRADE_SEQ DESC
 	</select>
 	<!--MypageTradeList.jsp 에서 리뷰 입력을 위한  글검색	 -->
 	<select id="getMypageTrade" resultType="trade">
