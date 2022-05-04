@@ -38,11 +38,11 @@ a:active{color:red;    text-decoration: none;}
 
 /* ServiceList.jsp */
 .serviceTable thead { background-color: #eee;  text-align: center;} 
-.serviceTable thead .th01{width: 100px; }  
-.serviceTable thead .th02{width: 450px; }  
-.serviceTable thead .th03{width: 100px; }  
-.serviceTable thead .th04{width: 150px; } 
-.serviceTable thead .th05{width: 100px; } 
+.serviceTable thead .th01{width: 10px; }  
+.serviceTable thead .th02{width: 45px; }  
+.serviceTable thead .th03{width: 10px; }  
+.serviceTable thead .th04{width: 15px; } 
+.serviceTable thead .th05{width: 10px; } 
 .servicePage {display: flex;}
 .serviceBar {width: 200px;}
 .serviceTotal {width: 100%;}

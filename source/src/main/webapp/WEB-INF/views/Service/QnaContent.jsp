@@ -55,7 +55,7 @@
 					<a href="/Service/getQnaList" class="btn btn-primary pull-Right">글 목록</a><!--GET방식  -->
 					</div>
 					<div align="right">
-					<c:if test="${ UserInfo eq '7172be7a-c20a-11ec-a2b8-a8a1594f3c92' }"> 																<!-- 5월2일 추가 -->
+					<c:if test="${ user_role eq 100 }"> <!-- 5월3일 수정 -->															<!-- 5월2일 추가 -->
 <!-- 						<a href="/Service/ServiceController.do" class="btn btn-primary pull-Right">글 목록</a> -->
 						<button type="submit" class="btn btn-primary pull-Right">수정</button>
 						<a href="/Service/deleteQna?service_seq=${qna.qna_seq}" class="btn btn-primary pull-Right">삭제</a>

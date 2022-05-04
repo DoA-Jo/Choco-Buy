@@ -39,10 +39,15 @@ public class QnaController {
 		conditionMap.put("내용", "QNA_CONTENT");
 		return conditionMap;
 	}
-//	상세페이지 화면 리스트 
-		@RequestMapping("/Service/getQna")
-		public String getService(QnaVO vo, Model model) {
+//	상세페이지 화면 리스트   5월3일 수정 
+		@RequestMapping("/Service/getQna")  
+		public String getService(HttpSession session, UserVO uvo, QnaVO vo, Model model) {
 			System.out.println("글 상세 조회 처리");
+			
+			uvo.setUser_uuid(session.getAttribute("UserInfo").toString()); //5월3일 추가
+		    UserVO user =  userService.getMypageUser(uvo);//5월3일 추가
+		    model.addAttribute("user_role", user.getUser_role());//5월3일 추가
+			
 			model.addAttribute("qna", qnaService.getQna(vo));	// Model 정보 저장
 			return "/Service/QnaContent";	// View 이름 리턴
 		}
@@ -120,9 +125,7 @@ public class QnaController {
 			System.out.println("글 목록 검색 처리");
 			
 			uvo.setUser_uuid(session.getAttribute("UserInfo").toString());  //5월2일 추가
-			System.out.println("user_uuid: "+session.getAttribute("UserInfo"));	//5월2일 추가
 		    UserVO user =  userService.getMypageUser(uvo);	//5월2일 추가
-		    System.out.println(" user.getUser_role(): "+ user.getUser_role());	//5월2일 추가
 		    
 		    model.addAttribute("user_role", user.getUser_role());	//5월2일 추가
 			

@@ -28,7 +28,7 @@
 			      	<div class="input-group-prepend">
 			      	  <span class="input-group-text">작성자</span>
 			      	</div>
-			      	<input type="text" class="form-control innm" name="service_writer" value="관리자" disabled>      
+			      	<input type="text" class="form-control innm" name="service_writer" value="관리자" readonly >      
 			    </div>
 			    <div class="input-group mb-3">
 			      	<div class="input-group-prepend">

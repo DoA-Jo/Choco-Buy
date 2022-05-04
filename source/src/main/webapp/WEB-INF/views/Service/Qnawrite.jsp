@@ -28,7 +28,7 @@
 			      	<div class="input-group-prepend">
 			      	  <span class="input-group-text">작성자</span>
 			      	</div>
-			      	<input type="text" class="form-control innm" name="qna_writer" value="${qna.qna_writer}">      
+			      	<input type="text" class="form-control innm" name="qna_writer" value="관리자" readonly > <!-- 5월3일수정 -->      
 			    </div>
 			    <div class="input-group mb-3">
 			      	<div class="input-group-prepend">

@@ -39,6 +39,12 @@
 		]]>
 	</select>
 	
+	<update id="updateCnt">
+		<![CDATA[
+		UPDATE SERVICE_TABLE SET SERVICE_CNT = SERVICE_CNT+1 WHERE SERVICE_SEQ= #{service_seq} 
+		]]>
+	</update>
+	
 	<select id="getServiceList" resultMap="ServiceResult">
 		SELECT * FROM service_table WHERE 1=1
 		<if test="service_searchCondition == 'SERVICE_TITLE'"> AND SERVICE_TITLE LIKE CONCAT('%', #{service_searchKeyword} ,'%')</if>

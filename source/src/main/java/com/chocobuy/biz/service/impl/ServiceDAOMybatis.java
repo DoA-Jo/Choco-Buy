@@ -31,7 +31,7 @@ public class ServiceDAOMybatis {
 	//글 상세 조회
 	public ServiceVO getService(ServiceVO vo) {
 		System.out.println("===>JDBC로 getService() 기능처리");
-//		mybatis.update("ServiceDAO.updateCnt", vo);
+		mybatis.update("ServiceDAO.updateCnt", vo);
 		return (ServiceVO) mybatis.selectOne("ServiceDAO.getService", vo);
 	}
 	

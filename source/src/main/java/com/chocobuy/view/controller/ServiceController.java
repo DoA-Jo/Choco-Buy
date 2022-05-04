@@ -54,8 +54,13 @@ public class ServiceController {
 		
 //	상세페이지 화면 리스트 
 		@RequestMapping("/Service/getService")
-		public String getService(ServiceVO vo, Model model) {
-			System.out.println("글 상세 조회 처리");
+		public String getService(HttpSession session, UserVO uvo, ServiceVO vo, Model model) {
+			System.out.println("글 상세 조회 처리"); 
+			
+			uvo.setUser_uuid(session.getAttribute("UserInfo").toString()); //5월2일 추가
+		    UserVO user =  userService.getMypageUser(uvo);//5월2일 추가
+		    model.addAttribute("user_role", user.getUser_role());//5월2일 추가
+			
 			model.addAttribute("service", serviceService.getService(vo));	// Model 정보 저장
 			return "/Service/ServiceContent";	// View 이름 리턴
 		}
@@ -117,10 +122,7 @@ public class ServiceController {
 			System.out.println("글 목록 검색 처리");
 			
 			uvo.setUser_uuid(session.getAttribute("UserInfo").toString()); //5월2일 추가
-			System.out.println("user_uuid: "+session.getAttribute("UserInfo")); //5월2일 추가
 		    UserVO user =  userService.getMypageUser(uvo);//5월2일 추가
-		    System.out.println(" user.getUser_role(): "+ user.getUser_role());//5월2일 추가
-		    
 		    model.addAttribute("user_role", user.getUser_role());//5월2일 추가
 			
 			String cntPerPage = "5";
