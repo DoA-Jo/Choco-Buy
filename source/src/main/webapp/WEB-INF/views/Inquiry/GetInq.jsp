@@ -7,6 +7,7 @@
 	String sts = ""; 
 	String hide = "";
 	String replyHide = "";
+	String rehide = "";
 	UserVO userVo = (UserVO) request.getAttribute("vo_ck"); 
 	int role = userVo.getUser_role(); 
 	String nick= userVo.getUser_nick();
@@ -121,13 +122,14 @@
 				
 				
 			 		
-					
+
 				<!-- 등록된 댓글목록 -->
 				<div class="inqInfoBox">
 					<div id="inqReply">
 						<ol class="inqReplyList">
 							<c:forEach items="${inqReplyList}" var="getInqReply">
-								<c:if test="${user_nick ne getInqReply.inqRe_nickname }"><% hide = "hidden"; %></c:if>
+								<c:if test="${vo_ck.user_nick ne getInqReply.inqRe_nickname }"><% rehide = "hidden"; %></c:if>
+								<c:if test="${vo_ck.user_nick eq getInqReply.inqRe_nickname }"><% rehide = ""; %></c:if>
 								<li>
 									<div class="input-group mb-3">
 									    <div class="input-group-prepend">
@@ -147,8 +149,8 @@
 									    </div>
 				    					<textarea class="form-control innm" rows="10" id="comment" name="content" readonly>${getInqReply.inqRe_content}</textarea>
 									</div>
-									<div class="inqBtnBox ta_r">
-										<button type="button" class="btn btn-danger" onclick="location.href='/Inquiry/DeleteInqReply?bno=${getInqReply.inqRe_bno}&rno=${getInqReply.inqRe_rno}'"<%=hide %>>답변삭제</button>
+									<div class="inqBtnBox ta_r" <%=rehide %>>
+										<button type="button" class="btn btn-danger" onclick="location.href='/Inquiry/DeleteInqReply?bno=${getInqReply.inqRe_bno}&rno=${getInqReply.inqRe_rno}'">답변삭제</button>
 									</div>
 								</li>
 							</c:forEach>   
