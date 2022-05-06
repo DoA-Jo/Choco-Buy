@@ -1,8 +1,22 @@
-$(document).ready(function (){
-	/* 전화번호 인증 */
+/* 전화번호 인증 */
+$(document).ready(function(){
 	var code2 = ""; 
+	/* 인증번호 보내기 */
 	$("#phoneChk").on("click",function(){ 
 		var phone = $("#phone").val();
+		
+		if(nullCheck()==1){
+			console.log("잘못된 회원정보, db삭제 후 회원가입 진행 합니다");
+			$.ajax({ 
+				url : '/Join/deleteUser',
+				type:"POST",
+				data:{"user_tel":phone},
+				cache : false, 
+				success : function(data) {}, 
+				error : function() {console.log("실패");} 
+			}); 
+		}
+		
 		if(telRegCheck()==false){
 			console.log("!telRegCheck()");
 			$(".tel_input").val('').focus();
@@ -101,22 +115,37 @@ $(document).ready(function (){
         	$(".agree_next_btn").attr("disabled", false);
         }
 	});
-
 	
-	/* JoinAgree [다음] 버튼 submit */
+	/* JoinNick 프로필 이미지 박스 토클  */
+    $('.pImg_edit_btn').on("click", function(){
+    	$('.pImg .pImg_box').show(function(){
+    		 $('.pImg_edit_btn').on("click", function(){
+    		 	$('.pImg .pImg_box').hide();
+    		 });
+    	});
+    });
+    
+	/* JoinNick 프로필 사진 변경 */
+    $('.pImg_box .pImg_list ul li img').click(function(){
+        var clicked=$(this).attr('name');
+        $('.pImg_default').css("background-image","url('/resources/img/profileImg/"+clicked+"')");
+        $('.pImg_name').attr("value",clicked);
+        $('.pImg .pImg_box').hide();
+    })
+
+	/* JoinAgree [다음] */
 	$(".agree_next_btn").on("click", function(){
 		location.href='/Join/joinTel';
 	});
 	
-	
-	/* JoinTel [다음] 버튼 submit */
+	/* JoinTel [다음] */
 	$(".tel_next_btn").on("click", function(){
 		document.join_tel.action='/Join/JoinTel';
 		document.join_tel.method='post';
 		document.join_tel.submit();
 	});
 	
-	/* JoinArea [다음] 버튼 submit */
+	/* JoinArea [다음] */
 	$(".area_next_btn").on("click", function(){
 		if($("#user_siNm")!=null&&$("#user_sggNm")!=null&&$("#user_emdNm")!=null){
 			document.form.action ='/Join/JoinArea';
@@ -125,28 +154,7 @@ $(document).ready(function (){
 		}
 	});
 	
-	/* JoinNick 프로필 사진 변경 */
-    $('.pImg_edit_btn').on("click", function(){
-    	$('.pImg .pImg_box').show(function(){
-    		 $('.pImg_edit_btn').on("click", function(){
-    		 	$('.pImg .pImg_box').hide();
-    		 });
-    	});
-    });
-
-    $('.pImg_box .pImg_list ul li img').click(function(){
-        var clicked=$(this).attr('name');
-        $('.pImg_default').css("background-image","url('/resources/img/profileImg/"+clicked+"')");
-        $('.pImg_name').attr("value",clicked);
-        $('.pImg .pImg_box').hide();
-    })
-    
-    /*왜잇을까*/
-    $('.nick_next_btn').on("click",function(){
-        var pImgName=$('.pImg_default').attr('name');
-    });
-	
-	/* JoinNick [다음] 버튼 submit */
+	/* JoinNick [다음] 버튼 */
 	$(".nick_next_btn").on("click", function(){
 		if(user_nick!=null){
 			document.join_nick.action ='/Join/JoinNick';
@@ -154,9 +162,8 @@ $(document).ready(function (){
 			document.join_nick.submit();
 		}
 	});
-
-
-	/* join_done.jsp */
+	
+	/* join_done [다음] 버튼 */
 	$(".done_next_btn").on("click", function(){
 		document.join_done.action='/Join/JoinDone';
 		document.join_done.method='post';
@@ -174,6 +181,24 @@ function telRegCheck(){
 	if(!reg.test(user_tel.value)){
 		user_tel.focus();
 	}
+}
+
+/* 회원정보 null 확인 */
+function nullCheck(){
+	var phone = $("#phone").val();
+	var dataNull;
+	$.ajax({
+		url : "/Login/getTelInfo",
+		async: false,
+  		data : {'user_tel':phone},
+  		type : "POST", 
+  		cache : false, 
+  		success : function(data){
+  			dataNull=data;
+  		},
+  		error : function(){console.log('실패');}
+	});
+	return dataNull; 
 }
 
 /* 회원확인 */

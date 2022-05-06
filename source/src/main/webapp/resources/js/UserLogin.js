@@ -4,6 +4,21 @@ $(document).ready(function(){
 	/* 인증번호 보내기 */
 	$("#phoneChk").on("click",function(){ 
 		var phone = $("#phone").val(); 
+		
+		if(nullCheck()==1){
+			console.log("잘못된 회원정보, db삭제 후 회원가입 진행 합니다");
+			$(".successPhoneChk").text("유효한 번호를 입력해주세요."); 
+			$(".successPhoneChk").css("color","red"); 
+			$.ajax({ 
+				url : '/Join/deleteUser',
+				type:"POST",
+				data:{"user_tel":phone},
+				cache : false, 
+				success : function(data) {}, 
+				error : function() {console.log("실패");} 
+			}); 
+		}
+		
 		//1 = 회원, 문자인증 진행 / 0 = 비회원, '휴대폰 번호를 확인해주세요.' 알림창
 		if(checkUser()==1){
 			$.ajax({ 
@@ -62,6 +77,24 @@ $(document).ready(function(){
 	});
 	
 });
+
+/* 회원정보 null 확인 */
+function nullCheck(){
+	var phone = $("#phone").val();
+	var dataNull;
+	$.ajax({
+		url : "/Login/getTelInfo",
+		async: false,
+  		data : {'user_tel':phone},
+  		type : "POST", 
+  		cache : false, 
+  		success : function(data){
+  			dataNull=data;
+  		},
+  		error : function(){console.log('실패');}
+	});
+	return dataNull; 
+}
 
 /* 회원확인 */
 function checkUser(){

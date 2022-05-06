@@ -17,28 +17,24 @@ public class UserServiceImpl implements UserService {
 	private UserDAOMybatis userDAO;
 
 	@Override
-	public void updateUserArea(UserVO vo) {
-		userDAO.updateUserArea(vo);
-	}
-
-	@Override
-	public List<UserVO> getUserList(UserVO vo) {
-		return userDAO.getUserList(vo);
-	}
-	
-	@Override
 	public void insertUser(UserVO vo) {
 		userDAO.insertUser(vo);
 	}
-
+	
+	@Override
+	public void deleteUser(String user_tel) {
+		userDAO.deleteUser(user_tel);
+	}
+	
+	// getUser 기준:user_tel
 	@Override
 	public UserVO getUser(UserVO vo) {
 		return userDAO.getUser(vo);
 	}
+	
 	@Override
-	public void updateUserNick(UserVO vo) {
-		userDAO.updateUserNick(vo);
-		
+	public UserVO getUserUuid(UserVO vo) {
+		return userDAO.getUserUuid(vo);
 	}
 	
 	@Override
@@ -47,19 +43,47 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
+	public int UserNull(String user_tel) {
+		return userDAO.UserNull(user_tel);
+	}
+	
+	@Override
 	public int userTelCheck(String user_tel) {
 		return userDAO.userTelCheck(user_tel);
 	}
 	
 	@Override
+	public void autoLogin(String sessionId, Date limitDate, String user_uuid) {
+		Map<String,Object> map = new HashMap<>();
+		System.out.println(sessionId);
+		System.out.println(limitDate);
+		System.out.println(user_uuid);
+        map.put("sessionId",sessionId);
+        map.put("limitDate",limitDate);
+        map.put("user_uuid",user_uuid);
+        System.out.println("map"+map);
+        userDAO.autoLogin(map);
+	}
+
+	@Override
+	public UserVO selectSession(String sessionId) {
+		return userDAO.selectSession(sessionId);
+	}
+
+	@Override
+	public void autoLogin(Map<String, Object> map) {
+		userDAO.autoLogin(map);
+	}
+	
+
+
+	
+//----------------------------------------------------------------------------
+	@Override
 	public int updateUser(UserVO vo) {
 		return userDAO.updateUser(vo);
 	}
 
-	@Override
-	public int deleteUser(UserVO vo) {
-		return userDAO.deleteUser(vo);
-	}
 	
 	@Override
 	public int mypageNameCheck(String sm_name) {
@@ -82,32 +106,12 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void updateMypageUseArea(UserVO vo) {
-		userDAO.updateUserArea(vo);
+		userDAO.updateMypageUseArea(vo);
 	}
 
 	@Override
 	public UserVO getUserInfo(UserVO vo) {
 		return userDAO.getUserInfo(vo);
-	}
-
-	@Override
-	public void autoLogin(String sessionId, Date limitDate, String id) {
-		Map<String,Object> map = new HashMap<>();
-        map.put("sessionId",sessionId);
-        map.put("limitDate",limitDate);
-        map.put("id",id);
-        System.out.print(map);
-        userDAO.autoLogin(map);
-	}
-
-	@Override
-	public UserVO selectSession(String sessionId) {
-		return userDAO.selectSession(sessionId);
-	}
-
-	@Override
-	public UserVO getUserUuid(UserVO vo) {
-		return userDAO.getUserUuid(vo);
 	}
 
 	@Override
@@ -119,4 +123,5 @@ public class UserServiceImpl implements UserService {
 	public String getMypageTradeNick(UserVO vo) {
 		return userDAO.getMypageTradeNick(vo);
 	}
+
 }

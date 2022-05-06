@@ -2,46 +2,62 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="UserDAO">
+	<insert id="insertUser">
+		INSERT 
+		INTO USER_TABLE 
+		VALUES (uuid(), #{user_tel}, #{user_nick}, #{user_siNm}, #{user_sggNm}, #{user_emdNm}, #{user_profileImg}, 0, null, current_timestamp, false)
+	</insert>
+	<delete id="deleteUser">
+		delete 
+		from user_table 
+		where user_tel=#{user_tel}
+	</delete>
+	<select id="UserNull" resultType="integer">
+		select COUNT(*) 
+		from user_table
+		where user_tel=#{user_tel} and 
+		(
+		user_siNm=null or 
+		user_sggNm=null or 
+		user_emdNm=null
+		)
+	</select>
 	<update id="autoLogin">
-        UPDATE USER_TABLE SET SESSION_ID=#{sessionId}, LIMIT_DATE=#{limitDate} WHERE USER_UUID=#{user_uuid};
+       	UPDATE USER_TABLE 
+        SET 
+        	SESSION_ID=#{session_id}, 
+        	LIMIT_DATE=#{limit_date},
+        	AUTOLOGIN=#{autoLogin} 
+        WHERE USER_UUID=#{user_uuid};
 	</update>
-    
 	<select id="selectSession">
-		SELECT * FROM USER_TABLE WHERE SESSIONID=#{sessionId}
+		SELECT * 
+		FROM USER_TABLE 
+		WHERE SESSIONID=#{sessionId}
 	</select>
-
-<!-- get -->
 	<select id="getUser" resultType="user">
-		SELECT * FROM USER_TABLE WHERE USER_TEL=#{user_tel}
+		SELECT * 
+		FROM USER_TABLE 
+		WHERE USER_TEL=#{user_tel}
 	</select>
-	
 	<select id="getUserUuid" resultType="user">
-		SELECT * FROM USER_TABLE WHERE USER_UUID=#{user_uuid}
+		SELECT * 
+		FROM USER_TABLE 
+		WHERE USER_UUID=#{user_uuid}
 	</select>
-	
-<!-- JOIN (Update User Data) -->
-	<insert id="insert_userTel">
-		INSERT INTO USER_TABLE VALUES (uuid(), #{user_tel}, floor(rand()*100000000000000), 'null', 'null', 'null', 'null', 0, 'null', current_timestamp)
-	</insert>	
-
- 	<update id="update_userArea">
-		UPDATE USER_TABLE SET USER_SINM=#{user_siNm}, USER_SGGNM=#{user_sggNm}, USER_EMDNM=#{user_emdNm} WHERE USER_UUID=#{user_uuid}
-	</update>
-	
-	<update id="update_userNick">
-		UPDATE USER_TABLE SET USER_NICK=#{user_nick}, USER_PROFILEIMG=#{user_profileImg} WHERE USER_UUID=#{user_uuid}
-	</update>	
-	
-<!-- user_tel, user_nick check -->
 	<select id="nickDupCheck" resultType="integer"> 
-		SELECT COUNT(*) FROM USER_TABLE WHERE USER_NICK=#{user_nick} 
+		SELECT COUNT(*) 
+		FROM USER_TABLE 
+		WHERE USER_NICK=#{user_nick} 
 	</select>
-
 	<select id="userTelCheck" resultType="integer"> 
-		SELECT COUNT(*) FROM USER_TABLE WHERE USER_TEL=#{user_tel} 
+		SELECT COUNT(*) 
+		FROM USER_TABLE 
+		WHERE USER_TEL=#{user_tel} 
 	</select>
 
-
+<!-- //////////////////////////////////////////////////////////////////////////////login-join mapping end -->
+	
 	<select id="nameCheck" resultType="integer">
 		SELECT COUNT(*) FROM user_table WHERE user_nick=#{sm_name} 
 	</select>
@@ -84,7 +100,7 @@
 	        WHERE USER_UUID=#{user_uuid}
 		]]>
 	</update>
-	
+
 	<!-- MypageTradeList 닉네임  작성권한  -->
 	<select id="getMypageTradeNick" resultType="String">
 		SELECT USER_NICK FROM USER_TABLE WHERE USER_UUID=#{user_uuid}
