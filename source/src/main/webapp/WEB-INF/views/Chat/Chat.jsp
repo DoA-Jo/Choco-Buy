@@ -1,18 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
+<%@ include file="../template/head.jsp"  %>
 <link rel="stylesheet" href="${pagecontext.request.contextPath}/resources/css/trade_style.css">
 <title>Chat page</title>
 <style>
@@ -337,12 +325,10 @@ function enterkey() {
     }
 }
 
-
 </script>
-</head>
-<body>
-<%@ include file="/WEB-INF/views/template/header.jsp"  %>
 
+<%@ include file="/WEB-INF/views/template/header.jsp"  %>
+<%@ include file="../template/menu.jsp"  %>
    <div class="container">
         <div class="warp">
             <section class="">
@@ -350,17 +336,17 @@ function enterkey() {
 				
 					<form action="/Trade/updateTrade" method="post">
 						<div class="imgBox mb-3 mt-3">
-							<img src="${pageContext.request.contextPath}/resources/img/upload/${trade.trade_img}">						</div>
+							<img src="${pageContext.request.contextPath}/resources/img/upload/${tradeUser.trade_img}">						</div>
 							<div class="media p-3" >
-									<img src="${pageContext.request.contextPath}/resources/img/profileImg/${trade.trade_profileimg}" alt="John Doe" class="mr-3 rounded-circle" style="width: 60px;">
-									<div class="media-body" id="proBox" onClick="location.href='/Trade/getTradeProfile?trade_nick=${trade.trade_nick}'" style="cursor : pointer;" >
+									<img src="${pageContext.request.contextPath}/resources/img/profileImg/${tradeUser.trade_profileimg}" alt="John Doe" class="mr-3 rounded-circle" style="width: 60px;">
+									<div class="media-body" id="proBox" onClick="location.href='/Trade/getTradeProfile?trade_nick=${tradeUser.trade_nick}'" style="cursor : pointer;" >
 										<input type="hidden" id="chatroom_seq" value="${chatRoom.chatroom_seq}">
 										<input type="hidden" id="user_nick" value="${userUser.user_nick}">
 										<input type="hidden" id="trade_uuid" value="${chatRoom.trade_uuid}">
 										<input type="hidden" id="user_uuid" value="${userUser.user_uuid}">
 										<input type="hidden" id="user_uuid" value="${chatRoom.trade_area}">
 										<h3>${chatRoom.trade_nick}</h3>
-										<p><small>${tradeUser.trade_area}</small></p>
+										<p><small>${chatRoom.trade_area}</small></p>
 										</div>
 											<!-- Button to Open the Modal -->
 											<div id="appBtnName">
@@ -380,12 +366,13 @@ function enterkey() {
 												   	  <text> 약속날짜 :</text>
 												      <input type="datetime-local" class="form-control mb-3" id="app_time">
 												      
-												      <text> 약속장소 :</text>
+												      <text> 약속장소 :</text> 
 												      <input type="text" class="form-control mb-3" id="app_add" placeholder="약속한 장소를 입력해주세요">
-												      
+												     
 												      <text> 약속금액 :</text>
 												      <div class="input-group mb-3" >
 												      <input type="number" class="form-control" id="app_price" placeholder="약속한 금액을 입력해주세요">
+												      
 												      <div class="input-group-append">
 												        <span class="input-group-text">원</span>
 												      </div>
@@ -402,7 +389,7 @@ function enterkey() {
 												   </div>
 												  </div>
 											<div id="reportPay">	  
-											<button type="button" class="btn btn-outline-warning ml-3 mr-3" onclick="location.href='/Pay/PayIndex?app_seq=${app.app_seq}'">결제하기</button>
+											<button type="button" class="btn btn-outline-warning ml-3 mr-3" onclick="location.href='/Pay/PayIndex?chatroom_seq=${chatRoom.chatroom_seq}'">결제하기</button>
 											</div>
 											<!-- Button to Open the Modal -->
 											<c:if test="${tradeUser.trade_uuid ne userUser.user_uuid}">
