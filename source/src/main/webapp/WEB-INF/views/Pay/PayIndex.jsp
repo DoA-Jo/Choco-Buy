@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 	2022.05.04 추가 수정 start -->
 <%@ include file="../template/head.jsp"  %>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9fc11080c962f547cb0e64dc54c2fb97&libraries=services"></script>
 <!-- 	2022.05.04 추가 수정 end -->
 <title>Pay Index Page</title>
 <!-- (kakao 지도API)javascript key=9fc11080c962f547cb0e64dc54c2fb97 -->
@@ -17,7 +18,6 @@
 			<td rowspan="3">
 			<label>거래희망지역 상세 보기</label>
 				<div id="map" style="width:500px;height:350px;"></div>
-				<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9fc11080c962f547cb0e64dc54c2fb97&libraries=services"></script>
 				<script>
 // 				2022.05.04 추가 수정 start
 // 				<c:forEach items="${AppointmentList }" var="app">
