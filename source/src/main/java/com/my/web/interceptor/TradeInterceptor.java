@@ -9,7 +9,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 public class TradeInterceptor extends HandlerInterceptorAdapter {
 
 	static final String[] EXCLUDE_URL_LIST = {
-		"/login", "/join", "/index" 
+		"/Login", "/Join", "/index" 
 	};
 
 	@Override
@@ -40,11 +40,11 @@ public class TradeInterceptor extends HandlerInterceptorAdapter {
 			response.sendRedirect("/Login/login");
 			return false;
 		}
-		if(!UserInfo.equals(request.getParameter("trade_uuid"))) {
-			response.sendRedirect("/Login/login");
-			return false;	
-			
-		}
+//		if(!UserInfo.equals(request.getParameter("trade_uuid"))) {
+//			response.sendRedirect("/Login/login");
+//			return false;	
+//			
+//		}
 		
 		return true;
 	}
