@@ -124,4 +124,9 @@ public class UserDAOMybatis{
 		System.out.println("Mybatis >> getUserUuid");
 		return (UserVO) mybatis.selectOne("UserDAO.getUserUuid", vo);
 	}
+	// 리뷰 nick 작성권한 체크 
+	public String getMypageTradeNick(UserVO vo) {
+		System.out.println("===> JDBC getMypageTradeNick() 기능 처리");
+		return mybatis.selectOne("UserDAO.getMypageTradeNick", vo);
+	}
 }

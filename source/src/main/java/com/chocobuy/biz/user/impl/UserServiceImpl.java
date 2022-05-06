@@ -16,7 +16,6 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDAOMybatis userDAO;
 
-	// Area 異붽�
 	@Override
 	public void updateUserArea(UserVO vo) {
 		userDAO.updateUserArea(vo);
@@ -27,13 +26,11 @@ public class UserServiceImpl implements UserService {
 		return userDAO.getUserList(vo);
 	}
 	
-	//�쉶�썝媛��엯 (�쟾�솕踰덊샇 db �엯�젰)
 	@Override
 	public void insertUser(UserVO vo) {
 		userDAO.insertUser(vo);
 	}
 
-	// getUser 湲곗�:user_tel
 	@Override
 	public UserVO getUser(UserVO vo) {
 		return userDAO.getUser(vo);
@@ -44,13 +41,11 @@ public class UserServiceImpl implements UserService {
 		
 	}
 	
-	// 蹂꾨챸 以묐났 泥댄겕
 	@Override
 	public int nickDupCheck(String user_nick) {
 		return userDAO.nickDupCheck(user_nick);
 	}
 	
-	// �쑕���룿 踰덊샇 泥댄겕
 	@Override
 	public int userTelCheck(String user_tel) {
 		return userDAO.userTelCheck(user_tel);
@@ -65,8 +60,6 @@ public class UserServiceImpl implements UserService {
 	public int deleteUser(UserVO vo) {
 		return userDAO.deleteUser(vo);
 	}
-	
-	
 	
 	@Override
 	public int mypageNameCheck(String sm_name) {
@@ -120,5 +113,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int nameCheck(String sm_name) {
 		return userDAO.nameCheck(sm_name);
+	}
+
+	@Override
+	public String getMypageTradeNick(UserVO vo) {
+		return userDAO.getMypageTradeNick(vo);
 	}
 }

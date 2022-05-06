@@ -84,4 +84,9 @@
 	        WHERE USER_UUID=#{user_uuid}
 		]]>
 	</update>
+	
+	<!-- MypageTradeList 닉네임  작성권한  -->
+	<select id="getMypageTradeNick" resultType="String">
+		SELECT USER_NICK FROM USER_TABLE WHERE USER_UUID=#{user_uuid}
+	</select>
 </mapper>

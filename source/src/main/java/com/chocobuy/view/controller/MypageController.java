@@ -160,7 +160,7 @@ public class MypageController {
 	
 	// 글 목록 (페이징 처리)
 	@RequestMapping("/Mypage/getMypageTradeSerch")
-	public String getBoardListPost(PagingVO pv, TradeVO vo,HttpSession session, Model model,@RequestParam(value = "nowPage", required = false) String nowPage) {
+	public String getBoardListPost(PagingVO pv, TradeVO vo, UserVO uvo, HttpSession session, Model model,@RequestParam(value = "nowPage", required = false) String nowPage) {
 		System.out.println("글 목록 검색 처리(페이징 처리)");
 		String cntPerPage = "5";
 		if (vo.getSearchMypageCondition() != null) vo.setSearchMypageCondition(vo.getSearchMypageCondition());
@@ -171,6 +171,11 @@ public class MypageController {
 		System.out.println("000: "+vo.getSearchMypageCondition());
 		System.out.println("111: "+vo.getSearchMypageKeyword());
 		vo.setTrade_uuid((String)session.getAttribute("UserInfo"));
+		
+		//리뷰 작성 권한 체크를 위한 작업  
+		uvo.setUser_uuid((String)session.getAttribute("UserInfo"));
+		model.addAttribute("userNick", userService.getMypageTradeNick(uvo));
+		
 
 		int total = tradeService.countMypageTrade(vo);
 		if (nowPage == null)  nowPage = "1";
@@ -209,6 +214,23 @@ System.out.println("uuid세션 값: "+(String)session.getAttribute("UserInfo"));
 	     
 	      return "/Mypage/MypageProfileUpdate";
 	   }
+	   
+	   
+		// 리뷰 nick 작성 권한 체크 
+		@RequestMapping("/Mypage/getMypageTradeNick")
+		@ResponseBody
+		public String getMypageTradeNick( UserVO vo, Model model,HttpServletRequest request, HttpSession session ) {
+			vo.setUser_uuid((String)session.getAttribute("UserInfo"));
+			System.out.println("getMypageTradeNick");
+			System.out.println(userService.getMypageTradeNick(vo));
+			return userService.getMypageTradeNick(vo);
+//			System.out.println( vo.getUser_nick());
+//			String nick = vo.getUser_nick();
+//			return nick;
+			//model.addAttribute("user", userService.getMypageUser(vo));
+			//System.out.println("userService.getMypageUser(vo)" +vo);
+//			return userService.getMypageTradeNick(vo,info);
+		}
 
 }
 
