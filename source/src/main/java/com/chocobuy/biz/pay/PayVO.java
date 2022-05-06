@@ -13,7 +13,14 @@ public class PayVO {
 //	2022.05.01 추가 수정 end
 	private int pay_amount;
 	private String pay_method;
+	private int chatroom_seq;
 	
+	public int getChatroom_seq() {
+		return chatroom_seq;
+	}
+	public void setChatroom_seq(int chatroom_seq) {
+		this.chatroom_seq = chatroom_seq;
+	}
 	private String searchCondition;
 	private String searchKeyword;
 	

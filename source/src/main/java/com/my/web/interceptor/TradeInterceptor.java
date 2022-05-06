@@ -35,8 +35,6 @@ public class TradeInterceptor extends HandlerInterceptorAdapter {
 		String UserInfo = (String)session.getAttribute("UserInfo");
 		
 		if(UserInfo == null || UserInfo.trim().equals("")) {
-			session.invalidate();
-			
 			response.sendRedirect("/Login/login");
 			return false;
 		}		
