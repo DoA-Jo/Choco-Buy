@@ -15,6 +15,7 @@ import com.chocobuy.biz.admin.AdminChatRoomVO;
 import com.chocobuy.biz.admin.AdminInquiryVO;
 import com.chocobuy.biz.admin.AdminMsgVO;
 import com.chocobuy.biz.admin.AdminPayVO;
+import com.chocobuy.biz.admin.AdminQnaVO;
 import com.chocobuy.biz.admin.AdminService;
 import com.chocobuy.biz.admin.AdminServiceVO;
 import com.chocobuy.biz.admin.AdminTradeVO;
@@ -123,10 +124,6 @@ public class AdminController {
 	public String getAdminServiceList(AdminServiceVO vo, Model model, PagingVO pv, @RequestParam(value = "nowPage", required = false) String nowPage) {
 		String cntPerPage = "20";
 		
-		if(vo.getNotice()==0 && vo.getFaq()==0) {
-			vo.setNotice(1);
-			vo.setFaq(1);
-		}
 		if (vo.getSearchKeyword() != null) vo.setSearchKeyword(vo.getSearchKeyword());
 		else vo.setSearchKeyword("");
 		int total = adminService.countService(vo);
@@ -139,6 +136,24 @@ public class AdminController {
 		
 		model.addAttribute("adminServiceList", adminService.getServiceList(vo));
 		return "/Admin/AdminService";
+	}
+	
+	@RequestMapping("/Admin/adminQna")
+	public String getAdminServiceList(AdminQnaVO vo, Model model, PagingVO pv, @RequestParam(value = "nowPage", required = false) String nowPage) {
+		String cntPerPage = "20";
+		
+		if (vo.getSearchKeyword() != null) vo.setSearchKeyword(vo.getSearchKeyword());
+		else vo.setSearchKeyword("");
+		int total = adminService.countQna(vo);
+		if (nowPage == null)  nowPage = "1";
+		
+		pv = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		model.addAttribute("paging", pv);
+		vo.setStart(pv.getStart());
+		vo.setListcnt(Integer.parseInt(cntPerPage));
+		
+		model.addAttribute("adminQnaList", adminService.getQnaList(vo));
+		return "/Admin/AdminQna";
 	}
 	
 	@RequestMapping("/Admin/adminInquiry")
@@ -250,28 +265,6 @@ public class AdminController {
 			adminService.showTrade(vo);
 		}
 		return "redirect:/Admin/adminTrade";
-	}
-
-	@ResponseBody
-	@RequestMapping("/Admin/hideService")
-	public String adminHideService(@RequestParam(value="array[]") Integer[] array) {
-		for(int i=0; i<array.length; i++) {
-			AdminServiceVO vo = new AdminServiceVO();
-			vo.setService_seq(array[i]);
-			adminService.hideService(vo);
-		}
-		return "redirect:/Admin/adminService";
-	}
-	
-	@ResponseBody
-	@RequestMapping("/Admin/showService")
-	public String adminShowService(@RequestParam(value="array[]") Integer[] array) {
-		for(int i=0; i<array.length; i++) {
-			AdminServiceVO vo = new AdminServiceVO();
-			vo.setService_seq(array[i]);
-			adminService.showService(vo);
-		}
-		return "redirect:/Admin/adminService";
 	}
 
 	@ResponseBody

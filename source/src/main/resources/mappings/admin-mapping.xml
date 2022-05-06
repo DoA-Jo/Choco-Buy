@@ -48,7 +48,9 @@
 	  		<result property="trade_title" column="TRADE_TITLE" />
 	  		<result property="trade_money" column="TRADE_MONEY" />
 	  		<result property="trade_content" column="TRADE_CONTENT" />
-	  		<result property="trade_area" column="TRADE_AREA" />
+	  		<result property="trade_sinm" column="TRADE_SINM" />
+	  		<result property="trade_sggnm" column="TRADE_SGGNM" />
+	  		<result property="trade_emdnm" column="TRADE_EMDNM" />
 	  		<result property="trade_img" column="TRADE_IMG" />
 	  		<result property="trade_category" column="TRADE_CATEGORY" />
 	  		<result property="trade_buyinfo" column="TRADE_BUYINFO" />
@@ -63,7 +65,9 @@
 				trade_nick LIKE CONCAT('%',#{searchKeyword},'%') OR 
 				trade_title LIKE CONCAT('%',#{searchKeyword},'%') OR 
 				trade_money LIKE CONCAT('%',#{searchKeyword},'%') OR 
-				trade_area LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				trade_sinm LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				trade_sggnm LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				trade_emdnm LIKE CONCAT('%',#{searchKeyword},'%') OR 
 				trade_category LIKE CONCAT('%',#{searchKeyword},'%') OR 
 				trade_buyinfo LIKE CONCAT('%',#{searchKeyword},'%')
 				)
@@ -138,7 +142,6 @@
 	  		<result property="service_date" column="SERVICE_DATE" />
 	  		<result property="service_content" column="SERVICE_CONTENT" />
 	  		<result property="service_cnt" column="SERVICE_CNT" />
-	  		<result property="service_header" column="SERVICE_HEADER" />
   	</resultMap>
   	
   	<select id="getAdminServiceList" resultMap="adminServiceResult">
@@ -150,15 +153,26 @@
 				service_date LIKE CONCAT('%',#{searchKeyword},'%') 
 				) 
 			</if>
-			 AND ( 1=1 
-			<if test="notice != 1 ">
-				AND service_header!=1 
-			</if>
-			<if test="faq != 2 ">
-				AND service_header!=2 
-			</if>
-			)
 			 ORDER BY service_seq DESC
+  	</select>
+  	
+  	<resultMap id="adminQnaResult" type="adminQna">
+	  		<id property="qna_seq" column="QNA_SEQ" />
+	  		<result property="qna_title" column="QNA_TITLE" />
+	  		<result property="qna_date" column="QNA_DATE" />
+	  		<result property="qna_content" column="QNA_CONTENT" />
+  	</resultMap>
+  	
+  	<select id="getAdminQnaList" resultMap="adminQnaResult">
+  		SELECT * FROM qna_table where 1=1 
+			<if test="searchKeyword != '' "> AND (
+				qna_seq LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				qna_title LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				qna_content LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				qna_date LIKE CONCAT('%',#{searchKeyword},'%') 
+				) 
+			</if>
+			 ORDER BY qna_seq DESC
   	</select>
   	
   	<resultMap id="adminInquiryResult" type="adminInquiry">
@@ -247,7 +261,7 @@
   	
   	<insert id="insertUser">
   		<![CDATA[
-  			INSERT INTO user_table VALUES(uuid(), #{user_tel},#{user_nick},#{user_siNm}, #{user_sggNm}, #{user_emdNm}, #{user_profileImg}, #{user_role})
+  			INSERT INTO user_table(user_uuid, user_tel, user_nick, user_siNm, user_sggNm, user_emdNm, user_profileImg, user_role) VALUES(uuid(), #{user_tel},#{user_nick},#{user_siNm}, #{user_sggNm}, #{user_emdNm}, #{user_profileImg}, #{user_role})
   		]]>
   	</insert>
   	
@@ -302,7 +316,9 @@
 				trade_nick LIKE CONCAT('%',#{searchKeyword},'%') OR 
 				trade_title LIKE CONCAT('%',#{searchKeyword},'%') OR 
 				trade_money LIKE CONCAT('%',#{searchKeyword},'%') OR 
-				trade_area LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				trade_sinm LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				trade_sggnm LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				trade_emdnm LIKE CONCAT('%',#{searchKeyword},'%') OR 
 				trade_category LIKE CONCAT('%',#{searchKeyword},'%') OR 
 				trade_buyinfo LIKE CONCAT('%',#{searchKeyword},'%') OR
 				trade_date LIKE CONCAT('%',#{searchKeyword},'%')
@@ -368,14 +384,17 @@
 				service_date LIKE CONCAT('%',#{searchKeyword},'%') 
 				) 
 			</if>
-			 AND ( 1=1 
-			<if test="notice != 1 ">
-				AND service_header!=1 
+  	</select>
+  	
+  	<select id="countQna" resultType="int">
+  			SELECT COUNT(*) FROM qna_table where 1=1 
+			<if test="searchKeyword != '' "> AND (
+				qna_seq LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				qna_title LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				qna_content LIKE CONCAT('%',#{searchKeyword},'%') OR 
+				qna_date LIKE CONCAT('%',#{searchKeyword},'%') 
+				) 
 			</if>
-			<if test="faq != 2 ">
-				AND service_header!=2 
-			</if>
-			)
   	</select>
   	
   	<select id="countInquiry" resultType="int">

@@ -9,6 +9,7 @@ import com.chocobuy.biz.admin.AdminChatRoomVO;
 import com.chocobuy.biz.admin.AdminInquiryVO;
 import com.chocobuy.biz.admin.AdminMsgVO;
 import com.chocobuy.biz.admin.AdminPayVO;
+import com.chocobuy.biz.admin.AdminQnaVO;
 import com.chocobuy.biz.admin.AdminService;
 import com.chocobuy.biz.admin.AdminServiceVO;
 import com.chocobuy.biz.admin.AdminTradeVO;
@@ -38,6 +39,11 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public List<AdminServiceVO> getServiceList(AdminServiceVO vo) {
 		return mybatis.getAdminServiceList(vo);
+	}
+
+	@Override
+	public List<AdminQnaVO> getQnaList(AdminQnaVO vo) {
+		return mybatis.getAdminQnaList(vo);
 	}
 
 	@Override
@@ -88,6 +94,11 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public int countService(AdminServiceVO vo) {
 		return mybatis.countService(vo);
+	}
+
+	@Override
+	public int countQna(AdminQnaVO vo) {
+		return mybatis.countQna(vo);
 	}
 
 	@Override

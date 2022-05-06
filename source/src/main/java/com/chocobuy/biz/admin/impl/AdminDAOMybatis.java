@@ -10,6 +10,7 @@ import com.chocobuy.biz.admin.AdminChatRoomVO;
 import com.chocobuy.biz.admin.AdminInquiryVO;
 import com.chocobuy.biz.admin.AdminMsgVO;
 import com.chocobuy.biz.admin.AdminPayVO;
+import com.chocobuy.biz.admin.AdminQnaVO;
 import com.chocobuy.biz.admin.AdminServiceVO;
 import com.chocobuy.biz.admin.AdminTradeVO;
 import com.chocobuy.biz.admin.AdminUserVO;
@@ -34,6 +35,10 @@ public class AdminDAOMybatis {
 	
 	public List<AdminServiceVO> getAdminServiceList(AdminServiceVO vo) {
 		return mybatis.selectList("AdminDAO.getAdminServiceList", vo);
+	}
+	
+	public List<AdminQnaVO> getAdminQnaList(AdminQnaVO vo) {
+		return mybatis.selectList("AdminDAO.getAdminQnaList", vo);
 	}
 	
 	public List<AdminInquiryVO> getAdminInquiryList(AdminInquiryVO vo) {
@@ -78,6 +83,10 @@ public class AdminDAOMybatis {
 
 	public int countService(AdminServiceVO vo) {
 		return mybatis.selectOne("AdminDAO.countService", vo);
+	}
+
+	public int countQna(AdminQnaVO vo) {
+		return mybatis.selectOne("AdminDAO.countQna", vo);
 	}
 	
 	public int countChatRoom(AdminChatRoomVO vo) {

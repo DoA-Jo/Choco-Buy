@@ -8,7 +8,7 @@
 <script src="/resources/js/admin.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <meta charset="UTF-8">
-<title>고객센터 관리</title>
+<title>자주 묻는 질문</title>
 </head>
 <body>
 	<%@ include file="AdminHeader.jsp"%>
@@ -26,7 +26,7 @@
 		</nav>
 		
 		<div class="buttons">
-			<button class="btn btn-success" onclick="window.open('/Service/Servicewrite')">글쓰기</button>
+			<button class="btn btn-success" onclick="window.open('/Qna/Qnawrite')">글쓰기</button>
 		</div>
 		
 		<div class="list">
@@ -39,19 +39,17 @@
 						<th>제목</th>
 						<th>내용</th>
 						<th>날짜</th>
-						<th>조회수</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${adminServiceList }" var="service">
+					<c:forEach items="${adminQnaList }" var="qna">
 						<tr>
 							<td><input type="checkbox"></td>
 							<td><%out.print(num++); %></td>
-							<td>${service.service_seq }</td>
-							<td class="one-line"><a target="_blank" href="/Service/getService?service_seq=${service.service_seq }">${service.service_title }</a></td>
-							<td class="one-line">${service.service_content }</td>
-							<td>${service.service_date }</td>
-							<td>${service.service_cnt }</td>
+							<td>${qna.qna_seq }</td>
+							<td class="one-line"><a target="_blank" href="/Qna/getQna?qna_seq=${qna.qna_seq }">${qna.qna_title }</a></td>
+							<td class="one-line">${qna.qna_content }</td>
+							<td>${qna.qna_date }</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -85,7 +83,7 @@
 function pageFnc(np){
 	let frm = document.fm;
 	frm.nowPage.value = np;
-	frm.action = "/Admin/adminService";
+	frm.action = "/Admin/adminQna";
 	frm.method = "post";
 	frm.submit();	
 }

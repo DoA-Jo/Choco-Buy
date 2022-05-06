@@ -7,6 +7,7 @@ public interface AdminService {
 	List<AdminTradeVO> getTradeList(AdminTradeVO vo);
 	List<AdminPayVO> getPayList(AdminPayVO vo);
 	List<AdminServiceVO> getServiceList(AdminServiceVO vo);
+	List<AdminQnaVO> getQnaList(AdminQnaVO vo);
 	List<AdminInquiryVO> getInquiryList(AdminInquiryVO vo);
 	List<AdminChatRoomVO> getChatRoomList(AdminChatRoomVO vo);
 	List<AdminMsgVO> getMsgList(AdminMsgVO vo);
@@ -22,6 +23,7 @@ public interface AdminService {
 	int countTrade(AdminTradeVO vo);
 	int countPay(AdminPayVO vo);
 	int countService(AdminServiceVO vo);
+	int countQna(AdminQnaVO vo);
 	int countInquiry(AdminInquiryVO vo);
 	int countChatRoom(AdminChatRoomVO vo);
 	

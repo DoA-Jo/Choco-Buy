@@ -53,7 +53,7 @@ public class ChatController {
 			cvo.setTrade_uuid(tvo.getTrade_uuid());
 			cvo.setTrade_title(tvo.getTrade_title());
 			cvo.setTrade_nick(tvo.getTrade_nick());
-			cvo.setTrade_area(tvo.getTrade_area());
+			cvo.setTrade_area(tvo.getTrade_sinm() + " " + tvo.getTrade_sggnm() + " " + tvo.getTrade_emdnm());
 			cvo.setUser_nick(vo.getUser_nick());
 			if(chatService.countRoom(cvo) <= 0 ) chatService.createChatRoom(cvo);
 			int chatroom_seq = chatService.getRoomSeq(cvo);
