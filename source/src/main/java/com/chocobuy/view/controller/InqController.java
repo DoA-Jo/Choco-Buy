@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -95,8 +94,13 @@ public class InqController {
 
 	// 글 수정
 	@RequestMapping("/Inquiry/UpdateInq")
-	public String updateInq(@ModelAttribute("inq") InqVO inqVo, HttpSession session) {
-		if( inqVo.getInq_nickname().equals(session.getAttribute("user_nick").toString()) ){
+	public String updateInq(@ModelAttribute("inq") InqVO inqVo, UserVO vo, HttpServletRequest request, HttpSession session) {
+//20220506_영미 참고  user_nick가져오는 로직 처리 후에 session.getAttribute("user_nick").toString() 로직이 처리되므로 에러남.
+//20220506_영미 참고 세션에 설정된 uuid를 통해 해당 uuid의 한 줄 데이터 끌어와서   그 데이터를 통해  user_nick값 추출할 것		
+		vo.setUser_uuid((String) request.getSession().getAttribute("UserInfo"));
+		vo = userService.getUserInfo(vo);
+		
+		if( inqVo.getInq_nickname().equals(inqService.getVo_ck(vo).getUser_nick()) ){
 			inqService.updateInq(inqVo);
 			return "redirect:/Inquiry/GetInqList";
 		}else {
@@ -107,8 +111,11 @@ public class InqController {
 
 	// 글 삭제
 	@RequestMapping("/Inquiry/DeleteInq")
-	public String deleteInq(@ModelAttribute("inq") InqVO inqVo, HttpSession session) {
-		if( inqVo.getInq_nickname().equals(session.getAttribute("user_nick").toString()) ) {
+	public String deleteInq(@ModelAttribute("inq") InqVO inqVo,  UserVO vo, HttpServletRequest request, HttpSession session) {
+		vo.setUser_uuid((String) request.getSession().getAttribute("UserInfo"));
+		vo = userService.getUserInfo(vo);
+		
+		if( inqVo.getInq_nickname().equals(inqService.getVo_ck(vo).getUser_nick()) ) {
 			if(inqVo.getInq_filename()!=null) {
 				System.out.println("파일삭제: "+realPath + inqVo.getInq_filename());
 				File f = new File(realPath + inqVo.getInq_filename());		
@@ -121,27 +128,32 @@ public class InqController {
 
 	// 글 상세 조회
 	@RequestMapping("/Inquiry/GetInq")
-	public String getInq(InqVO inqVo, UserVO vo, InqReplyVO inqReplyVo, Model model, HttpSession session) {
-		System.out.println(inqVo);
-		System.out.println("에러?1");
-		inqReplyVo.setInqRe_bno(inqVo.getInq_num());
-		System.out.println("에러?2");
-		System.out.println("에러?3");
+	public String getInq(InqVO inqVo, UserVO vo, InqReplyVO inqReplyVo, Model model, HttpSession session, HttpServletRequest request) {
+		System.out.println("글 상세를 눌렀어요!");
 		
-//		if(inqService.getInq(inqVo) == null) {
-//			inqVo.setInq_num((Integer) request.getAttribute("inqNum"));
-//			inqReplyVo.setInqRe_bno((Integer) request.getAttribute("inqNum"));
-//			System.out.println((Integer) request.getAttribute("inqNum"));
-//		}
+//20220506_영미 수정_세션에서 가져오는 것이 아님. 이 부분 잘못처리되어 주석처리함.	inqVo.setInq_num((int) session.getAttribute("inqNum"));
+		
+		//댓글로 들어왔을때의 if문
+		if(inqService.getInq(inqVo) == null) {
+			inqVo.setInq_num((Integer) request.getAttribute("inqNum"));
+			inqReplyVo.setInqRe_bno((Integer) request.getAttribute("inqNum"));
+			System.out.println((Integer) request.getAttribute("inqNum"));
+		}
+		model.addAttribute("inq", inqService.getInq(inqVo));
 		
 
+		//글목록에서 조회 들어왔을때 + 댓글로 들어왔을때
 		vo.setUser_uuid((String) session.getAttribute("UserInfo"));
 		model.addAttribute("vo_ck", inqService.getVo_ck(vo));
 		System.out.println(inqService.getVo_ck(vo) +"111111");
 		
 		
+		System.out.println(inqService.getInq(inqVo));
 		model.addAttribute("inq", inqService.getInq(inqVo));
-		System.out.println(inqService.getInq(inqVo) +"22");
+		inqReplyVo.setInqRe_bno(inqService.getInq(inqVo).getInq_num());
+		System.out.println(inqReplyVo.getInqRe_bno() + "아아아아아아아222");
+		
+		request.setAttribute("inqVoInfo", inqService.getInq(inqVo));
 		
 //		댓글기능 목록
 		model.addAttribute("inqReplyList", inqReplyService.getInqReplyList(inqReplyVo));
@@ -152,14 +164,11 @@ public class InqController {
 	}
 	// 댓글 작성
 	@RequestMapping(value = "/Inquiry/InsertInqReply")
-	public String insertInqReply(InqVO inqVo, InqReplyVO inqReplyVo, MultipartHttpServletRequest request, Model model) throws IOException{
-		System.out.println(inqReplyVo.getInqRe_bno()+" zz");
+	public String insertInqReply(InqVO inqVo, InqReplyVO inqReplyVo, Model model, HttpSession session, HttpServletRequest request) throws IOException{
 		request.setAttribute("inqNum", inqReplyVo.getInqRe_bno());
 		
 		inqReplyService.insertInqReply(inqReplyVo);
-		
-		inqVo.setInq_num(inqReplyVo.getInqRe_bno());
-		
+
 		return "forward:/Inquiry/GetInq";
 	}
 	// 댓글 삭제
@@ -179,19 +188,8 @@ public class InqController {
 
 		return "forward:/Inquiry/GetInq";
 	}	
-	// 댓글 수정
-//	@RequestMapping("/Inquiry/updateInqReply*")
-//	public String updateInqReply(InqVO inqVo, InqReplyVO inqReplyVo, HttpServletRequest request, Model model, HttpSession session) throws IOException{
-//		inqReplyService.updateInqReply(inqReplyVo);
-//		
-//		if( inqReplyVo.getInqRe_nickname().equals(session.getAttribute("userName").toString()) ){
-//			inqReplyService.updateInqReply(inqReplyVo);
-//			return "getInq";
-//		}else {
-//			return "getInq?error=1";
-//		}
-//	}
 
+	
 	// 글 목록
 	@RequestMapping("/Inquiry/GetInqList")
 	public String getInqListPost(PagingVO pv, UserVO vo, InqVO inqVo, Model model,@RequestParam(value = "nowPage", required = false) String nowPage, HttpServletRequest request) {

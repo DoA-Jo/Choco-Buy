@@ -42,7 +42,7 @@
 			  		<col width="8%">
 			  		<col width="">
 			  		<col width="12%">
-			  		<col width="10%">
+			  		<col width="12%">
 			  		<col width="10%">
 			  	</colgroup>
 			    <thead>
@@ -130,9 +130,9 @@
 	// 	alert(usernick + inqContnick + inqListnum);
 		
 	     if(usernick == inqContnick){ 
-	    	 location.href = "GetInq?inq_num="+inqListnum;
+	    	 location.href = "/Inquiry/GetInq?inq_num="+inqListnum;
 	     }else if(userRole == 100){
-	    	 location.href = "GetInq?inq_num="+inqListnum;
+	    	 location.href = "/Inquiry/GetInq?inq_num="+inqListnum;
 	     }else{
 	        $('#inq_myModal').show();
 	     	$('#inq_myModal').addClass("active");

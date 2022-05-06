@@ -16,8 +16,8 @@
 	String inqNick= inqVo.getInq_nickname();
 	
 %>
-<c:if test="${user_nick ne inq.inq_nickname }"><% sts = "disabled"; %></c:if>	<!-- 작성자가 로그인회원이랑 다를 때 컨트롤 못하게 disabled (= 작성자만보기) -->
-<c:if test="${user_nick ne inq.inq_nickname }"><% hide = "hidden"; %></c:if>	<!-- 작성자가 로그인회원이랑 다를 때 숨기기 hidden (= 작성자만보기) -->
+<c:if test="${vo_ck.user_nick ne inq.inq_nickname }"><% sts = "disabled"; %></c:if>	<!-- 작성자가 로그인회원이랑 다를 때 컨트롤 못하게 disabled (= 작성자만보기) -->
+<c:if test="${vo_ck.user_nick ne inq.inq_nickname }"><% hide = "hidden"; %></c:if>	<!-- 작성자가 로그인회원이랑 다를 때 숨기기 hidden (= 작성자만보기) -->
 <%
 	if(role != 100 && !nick.equals(inqNick)){
 		replyHide="hidden";
@@ -106,7 +106,7 @@
 						    <div class="input-group-prepend">
 						    	<span class="input-group-text">작성자</span>
 						    </div>
-						    <input type="text" class="form-control innm" name="inqRe_nickname" value="${user_nick}" readonly>      
+						    <input type="text" class="form-control innm" name="inqRe_nickname" value="${vo_ck.user_nick}" readonly>      
 						</div>
 						<div class="input-group mb-3">
 						    <div class="input-group-prepend">
