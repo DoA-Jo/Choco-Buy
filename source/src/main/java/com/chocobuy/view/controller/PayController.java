@@ -29,8 +29,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.chocobuy.biz.chat.AppVO;
+import com.chocobuy.biz.chat.ChatRoomVO;
+import com.chocobuy.biz.chat.ChatService;
+import com.chocobuy.biz.chat.MsgVO;
 import com.chocobuy.biz.pay.PayService;
 import com.chocobuy.biz.pay.PayVO;
+import com.chocobuy.biz.trade.TradeService;
+import com.chocobuy.biz.trade.TradeVO;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -40,6 +46,12 @@ public class PayController {
 	
 	@Autowired
 	private PayService payService;
+	
+	@Autowired
+	private ChatService chatService;
+	
+	@Autowired
+	private TradeService tradeService;
 	
 	public static final String IMPORT_TOKEN_URL = "https://api.iamport.kr/users/getToken";
 	public static final String IMPORT_PAYMENTINFO_URL = "https://api.iamport.kr/payments/find/";
@@ -113,26 +125,40 @@ public class PayController {
 //		2022.05.01 추가 수정 end
 		setHackCheck(Integer.toString(vo.getPay_amount()), vo.getPay_ordernum(), token);
 		
-		// DB 저장 로직 start
+		// DB 저장 로직
 //		2022.05.01 추가 수정 start
 		return "redirect:/Pay/insertPay";
 //		2022.05.01 추가 수정 end
 		
 	}
 
-	// test...
+	// 2022.05.04 추가 수정 start
 	@RequestMapping("/Pay/PayIndex")
-	public String payIndex() {
+	public String payIndex(ChatRoomVO cvo, TradeVO tvo, AppVO avo, Model model, HttpSession session) {
+		cvo = chatService.getChatRoom(cvo);
+		model.addAttribute("chatroom", cvo );
+		tvo.setTrade_seq(cvo.getTrade_seq());
+		avo.setChatroom_seq(cvo.getChatroom_seq());
+		model.addAttribute("appointment",chatService.getApp(avo));
+		model.addAttribute("trade", tradeService.getTrade(tvo));
 		return "/Pay/PayIndex";
 	}
 	@RequestMapping("/Pay/Pay")
-	public String payPay() {
+	public String payPay(ChatRoomVO cvo, TradeVO tvo, AppVO avo, PayVO vo, Model model, HttpSession session) {
+		cvo = chatService.getChatRoom(cvo);
+		model.addAttribute("chatroom", cvo );
+		tvo.setTrade_seq(cvo.getTrade_seq());
+		avo.setChatroom_seq(cvo.getChatroom_seq());
+		model.addAttribute("appointment",chatService.getApp(avo));
+		model.addAttribute("trade", tradeService.getTrade(tvo));
 		return "/Pay/Pay";
 	}
-	@RequestMapping("/Pay/PayComplete")
-	public String payComplete() {
-		return "/Pay/PayComplete";
-	}
+	
+//	@RequestMapping("/Pay/PayComplete")
+//	public String payComplete() {
+//		return "/Pay/PayComplete";
+//	}
+	// 2022.05.04 추가 수정 end	
 	
 	// insert
 	@RequestMapping("/Pay/insertPay")
@@ -161,7 +187,7 @@ public class PayController {
 	// 2022.05.01 추가 수정 start
 	public String getPay(@ModelAttribute("pay") PayVO vo, Model model) {
 		model.addAttribute("pay", payService.getPay(vo));
-		return "redirect:/Pay/PayComplete";
+		return "/Pay/PayComplete";
 	// 2022.05.01 추가 수정 end
 	}
 	//
