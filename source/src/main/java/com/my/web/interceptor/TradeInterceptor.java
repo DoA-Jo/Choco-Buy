@@ -4,9 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class TradeInterceptor extends HandlerInterceptorAdapter {
@@ -40,11 +37,11 @@ public class TradeInterceptor extends HandlerInterceptorAdapter {
 		if(UserInfo == null || UserInfo.trim().equals("")) {
 			session.invalidate();
 			
-			response.sendRedirect("/Login/login.jsp");
+			response.sendRedirect("/Login/login");
 			return false;
 		}
 		if(!UserInfo.equals(request.getParameter("trade_uuid"))) {
-			response.sendRedirect("/Login/login.jsp");
+			response.sendRedirect("/Login/login");
 			return false;	
 			
 		}
