@@ -26,7 +26,7 @@
 		</nav>
 		
 		<div class="buttons">
-			<button class="btn btn-success" onclick="window.open('/Qna/Qnawrite')">글쓰기</button>
+			<button class="btn btn-success" onclick="window.open('/Service/Qnawrite')">글쓰기</button>
 		</div>
 		
 		<div class="list">
@@ -47,7 +47,7 @@
 							<td><input type="checkbox"></td>
 							<td><%out.print(num++); %></td>
 							<td>${qna.qna_seq }</td>
-							<td class="one-line"><a target="_blank" href="/Qna/getQna?qna_seq=${qna.qna_seq }">${qna.qna_title }</a></td>
+							<td class="one-line"><a target="_blank" href="/Service/getQna?qna_seq=${qna.qna_seq }">${qna.qna_title }</a></td>
 							<td class="one-line">${qna.qna_content }</td>
 							<td>${qna.qna_date }</td>
 						</tr>
