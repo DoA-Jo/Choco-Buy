@@ -41,6 +41,7 @@
 			<mvc:exclude-mapping path="/Login/**"/>
 			<mvc:exclude-mapping path="/Join/**"/>
 			<mvc:exclude-mapping path="/index"/>
+			<mvc:exclude-mapping path="/resources/**"/>
 			<!-- 적용될 인터셉터를 지정 -->
 			<bean class="com.my.web.interceptor.TradeInterceptor" />
 		</mvc:interceptor>
