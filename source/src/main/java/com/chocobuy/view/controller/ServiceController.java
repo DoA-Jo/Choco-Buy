@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.chocobuy.biz.service.ServiceService;
 import com.chocobuy.biz.service.ServiceVO;
-import com.chocobuy.biz.trade.TradeService;
 import com.chocobuy.biz.user.UserService;
 import com.chocobuy.biz.user.UserVO;
 import com.chocobuy.biz.util.PagingVO;
@@ -27,22 +26,7 @@ public class ServiceController {
 	private UserService userService;
 	@Autowired
 	private ServiceService serviceService;
-	@Autowired
-	private TradeService tradeService;
 	
-
-//	@RequestMapping("/Service/ServiceController")
-//	public String getServiceList(ServiceVO vo, Model model) {
-//		System.out.println("7777");
-//		//NULL Check
-//		if(vo.getSearchCondition()==null) vo.setSearchCondition("TITLE");
-//		if(vo.getSearchKeyword()==null) vo.setSearchKeyword("");
-//		
-//		// Model 정보 저장
-//		model.addAttribute("serviceList", serviceService.getServiceList(vo));
-//		System.out.println("테스트");
-//		return "/Service/getServiceList";	// View 이름 리턴
-//	}
 	// 검색 조건 목록 설정
 		@ModelAttribute("conditionMap")
 		public Map<String, String> searchConditionMap() {
@@ -52,7 +36,7 @@ public class ServiceController {
 			return conditionMap;
 		}
 		
-//	상세페이지 화면 리스트 
+	//	상세페이지 화면 리스트 
 		@RequestMapping("/Service/getService")
 		public String getService(HttpSession session, UserVO uvo, ServiceVO vo, Model model) {
 			System.out.println("글 상세 조회 처리"); 
@@ -105,16 +89,6 @@ public class ServiceController {
 			serviceService.deleteService(vo);
 			return "redirect:/Service/getServiceList";
 		}
-//		 //인덱스 글 목록
-//		   @RequestMapping(value={"/index","/"})
-//		   public String getIndexListtPost( TradeVO vo, Model model) {
-//		      System.out.println("인덱스 글 목록 검색 처리");
-//		      
-//		      if (vo.getSearchCategory() != null) vo.setSearchCategory(vo.getSearchCategory());
-////		      else vo.setSearchCategory("");
-//		      model.addAttribute("tradeList","test");
-//		      return "index";
-//		   }
 		   
 		// 글 목록
 		@RequestMapping("/Service/getServiceList")
@@ -148,35 +122,5 @@ public class ServiceController {
 			model.addAttribute("service_searchCondition", serviceVo.getService_searchCondition());
 			return "/Service/ServiceList";
 		}
-			}
+}
 		   
-
-//		// 글 상세 조회
-//		@RequestMapping("/Service/getService")
-//		public String getBoard(BoardVO vo, Model model) {
-//			model.addAttribute("service", serviceService.getService(vo));	// Model 정보 저장
-//			return "getServiceList";	// View 이름 리턴
-//		}
-//		//인덱스 글 목록
-//		@RequestMapping("index")
-//		public String getIndexListPost( Trade vo, Model model) {
-//			System.out.println("인덱스 글 목록 검색 처리");
-//			if(vo.getSearchCategory() ≠ null) vo.setSearchCategory(vo.getSearchCategory());
-//			else vo.setSearchCategory("");
-//			model.addAttribute("tradeList",tradeService.getTradeList(vo));
-//			return "index";
-//		}
-//		@RequestMapping("/trade/getSearchIndexList")
-//		public String getIndexSearchPost( TradeVO vo, Model model) {
-//			System.out.println("글 검색어 검색 처리");
-//			if(vo.getSearchInput() ≠ null) vo.serSearchInput(vo.getSearchInput());
-//			else vo.setSearchInput("");
-//			model.addAttribute("tradeList", tradeService.getSearchTradeList(vo));
-//			return "TradeList";
-		   
-		   
-
-
-		
-		
-//}
