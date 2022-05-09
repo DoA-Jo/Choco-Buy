@@ -50,7 +50,7 @@
 									</div>
 										<div class="textcontent">
 										<h4><span>${trade.trade_title}</span></h4>
-										<small><i>${trade.trade_area}</i></small>
+										<small><i>${trade.trade_sinm +=trade.trade_sggnm +=trade.trade_emdnm }</i></small>
 										<p>${trade.trade_money}원</p>
 									</div>
 								</div>
