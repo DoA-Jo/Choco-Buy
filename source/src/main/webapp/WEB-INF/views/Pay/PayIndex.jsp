@@ -1,11 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/template/head.jsp" %>	
 <link rel="stylesheet" href="${pagecontext.request.contextPath}/resources/css/pay.css">
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9fc11080c962f547cb0e64dc54c2fb97&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7936f38a9850536e84a2e9f3579d56b3&libraries=services"></script>
 <title>Pay Index Page</title>
 <!-- (kakao 지도API-real)javascript key=7936f38a9850536e84a2e9f3579d56b3 -->
-</head>
-<body>
 <%@ include file="/WEB-INF/views/template/header.jsp" %>	
 
 	<div class="container" align="center">

@@ -2,8 +2,6 @@
 <%@ include file="/WEB-INF/views/template/head.jsp" %>	
 <link rel="stylesheet" href="${pagecontext.request.contextPath}/resources/css/pay.css">
 <title>Pay Complete Page</title>
-</head>
-<body>
 <%@ include file="/WEB-INF/views/template/header.jsp" %>
 
 	<div class="container" align="center">

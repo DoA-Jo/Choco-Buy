@@ -189,7 +189,7 @@ function orderList(){
 	<tr>
 		<td>
 			<br>
-			<button type="button" onclick="location.href='/Pay/PayIndex?chatroom_seq=${chatroom.chatroom_seq}'" class="btn btn-light btn-lg" role="button">취소하기</a>
+			<button type="button" onclick="location.href='/Pay/PayIndex?chatroom_seq=${chatroom.chatroom_seq}'" class="btn btn-light btn-lg" role="button">취소하기</button>
 		</td>
 	</tr>
 	</table>
