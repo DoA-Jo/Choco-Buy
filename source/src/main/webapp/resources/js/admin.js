@@ -13,8 +13,10 @@ $(document).ready(function() {
 		selected = 3;
 	} else if (loc == 'adminService') {
 		selected = 4;
-	} else if (loc == 'adminInquiry') {
+	} else if (loc == 'adminQna') {
 		selected = 5;
+	} else if (loc == 'adminInquiry') {
+		selected = 6;
 	} else {
 		console.log('선택된 메뉴가 없습니다');
 		return true;
