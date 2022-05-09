@@ -21,10 +21,10 @@
 /* getInqList 페이지 부분 */
 .inquiry_searchBox {text-align:right; margin-bottom:30px;}
 .inquiry_searchBox > form {display:inline-flex;}
-.inquiry_searchBox > form > * {display:inline-block; margin-right:5px;}
+.inquiry_searchBox > form > * {display:inline-block; margin-right:5px;border-radius: 4px;}
 .inquiry_searchBox > form > *:last-child {margin-right:0 ;}
-.inquiry_searchBox .inqSearchSelect {height:40px; font-size:16px; min-width: 80px; padding: 0 5px;}
-.inquiry_searchBox .inqSearchInput {height:40px; font-size:16px; text-indent:10px;}
+.inquiry_searchBox .inqSearchSelect {height:40px; font-size:16px; min-width: 80px; padding: 0 5px; border: 1px solid #666;}
+.inquiry_searchBox .inqSearchInput {height:40px; font-size:16px; text-indent:10px; border: 1px solid #666;}
 .inquiry_searchBox .gblueBtn {margin-left:30px;}
 
 .inqListTable {}
@@ -51,9 +51,10 @@
 /* 페이징 부분 */
 .inq_pgBtnBox {}
 .inq_pgBtnBox .btn-group > button + button {margin-left:5px !important;}
-.inq_pgBtnBox .btn-primary {background:#bd845e; color:#fff; border:0; border-radius: 0.25rem !important;}
+.inq_pgBtnBox .btn-primary {min-width:35px; background:#bd845e; color:#fff; border:0; border-radius: 0.25rem !important;}
 .inq_pgBtnBox .btn-primary:hover, .btn-primary:active, .btn-primary:focus {background:#704224;}
 .inq_pgBtnBox .btn-primary:not(:disabled):not(.disabled).active, .inq_pgBtnBox .btn-primary:not(:disabled):not(.disabled):active, .inq_pgBtnBox .show>.btn-primary.dropdown-toggle {background:#704224;}
+
 
 
 /* 하단 버튼 부분 */
@@ -84,3 +85,14 @@ body.scrollbar_hide {-ms-overflow-style: none; /* IE and Edge */ scrollbar-width
 body.scrollbar_hide::-webkit-scrollbar {display: none; /* Chrome, Safari, Opera*/}
 
 
+/* 모바일 */
+@media screen and (max-width: 600px) {
+	.inquiry_searchBox {}
+	.inquiry_searchBox > form {display:block;}
+	.inquiry_searchBox > form > * {width:100%; margin-right:0; margin-bottom:5px;}
+	.inquiry_searchBox > form > *:last-child {margin-bottom:0;}
+	
+	.inqBtnBox > button {width:100%; margin-bottom:5px;}
+	.inqBtnBox > button:last-child {margin-bottom:0;}
+	.inqBtnBox > button + button {margin-left:0;}
+}

@@ -38,13 +38,14 @@
 	   
 // 	    //이미지 source 가져오기
 	    newImage.src = URL.createObjectURL(file);   
-	    newImage.style.width = "70%";
-	    newImage.style.height = "70%";
+	    newImage.style.width = "100%";	
+	    newImage.style.height = "100%";
 	    newImage.style.visibility = "visible"; 
 	    newImage.style.objectFit = "contain";
 		
 	    //이미지를 image-show div에 추가
 	    var container = document.getElementById('imageShow');
+	    container.style.height = "500px";	
 	    container.appendChild(newImage);
 	    
 	    $("#chooseFile").hide();

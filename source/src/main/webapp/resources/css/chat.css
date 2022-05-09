@@ -1,0 +1,114 @@
+@charset "UTF-8";
+
+.chat_h1 { font-size:27px; text-align: center; font-weight: 700;}
+.chat_h4 {font-size:14px; font-weight: 400; margin-bottom:10px;}
+
+.chat_contBox .media{
+	border-top : 1px solid rgba(88,166,166,0.4);
+	border-bottom: 1px solid rgba(88,166,166,0.4);
+}
+.chat_contBox div#proBox{
+	margin-top: auto !important;
+}
+.chat_contBox .input-group-text{
+	background-color :  rgba(88,166,166,0.4) ;
+}
+.chat_contBox .form-control{
+	border : 1px solid rgba(88,166,166,0.4);
+	border-radius: 0;
+}
+.chat_contBox .custom-select{
+	border-radius: 0;
+
+}
+.chat_contBox .imgBox{
+	margin : 0 auto;
+	padding : 0 auto;
+	 text-align: center;
+}
+
+
+.chat_contBox #chatBox { 
+    margin:0;
+    list-style-type:none;
+    display:flex;
+    align-content: flex-end;
+    flex-direction: column;
+    overflow-y:auto;
+    width: 100%;
+    height:300px;
+    border-top:2px solid #fff;
+    border-bottom:2px solid #fff;
+}
+.chat_contBox #chatSubmitBtn:hover {cursor:pointer; background-color: #aaa; color: #fff;}
+
+.chat_contBox .speech-bubble-left , .speech-bubble-right{
+	display: inline-block; padding: 10px; color: #fff;
+}
+
+.chat_contBox .speech-bubble-left {
+	position: relative;
+	background: #00aabb;
+	border-radius: 0.2em 0.2em 0.2em 0;
+}
+
+.chat_contBox .speech-bubble-left:after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 10px solid transparent;
+	border-right-color: #00aabb;
+	border-left: 0;
+	border-bottom: 0;
+	margin-top: 0px;
+	margin-left: -10px;
+}
+
+.chat_contBox .speech-bubble-right {
+	position: relative;
+	background: #00aabb;
+	border-radius: 0.2em 0.2em 0 0.2em;
+}
+
+.speech-bubble-right:after {
+	content: '';
+	position: absolute;
+	right: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 10px solid transparent;
+	border-left-color: #00aabb;
+	border-right: 0;
+	border-bottom: 0;
+	margin-top: 0px;
+	margin-right: -10px;
+}
+
+.chat_contBox .ipml , .ipmr {color:red; cursor: pointer;}
+.chat_contBox .ipml {padding-left:20px;}
+.chat_contBox .ipmr {padding-right:20px;}
+
+.chat_contBox .alert.alert-warning {
+    width: 100%;
+}
+
+
+
+/* 2022.05.08 */
+.chat_h4 > span {margin-left:10px;}
+.chat_h4 > span > i {font-size:12px; font-style:normal;}
+
+.chat_contBox {}
+.chat_contBox .container-fluid {padding:0;}
+
+.chat_contBox .chatBox_cont {margin-top:30px;}
+.chat_listBox {margin-bottom:20px;}
+.chat_listBox:last-child {margin-bottom:0;}
+.trade_areaInfo{font-size: 13px; font-style:normal;}
+
+.chat_contBox #chatBox > div > span {margin-right:20px;}
+.chat_contBox #chatBox > div > span:last-child {margin-right:0;}

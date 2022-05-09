@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/template/head.jsp" %>   
+<link rel="stylesheet" href="${pagecontext.request.contextPath}/resources/css/mypage.css">
 <script>
 function init(){
 	if('${inputYn}'=='Y'){
@@ -10,30 +10,9 @@ function init(){
 }
 </script>
 <title>글 상세</title>
-<style>
-/* .inner {width: 700px;height: 100%;margin: 100px auto;padding-bottom: 20px;border-bottom: 1px solid gray;position: relative;} */
-body {margin: 0;padding: 0;}
-h1 {font-size: 35px; margin:30px auto; text-align: center;padding-bottom: 10px;}
-.btn-info {border-radius: 0;height: 30px;padding: 5px;font-size: 14px;position:absolute;top: 91px;right: 5px;border-radius: 5px;}
-table {margin: 60px auto 0px auto;width: 500px;}
-table input, table textarea {width: 100%;}
-table button {border: none;background-color: #fff}
-.btn{display: flex; margin:5px;}
-.btn-outline-secondary {background-color:#831616; color: white;}
-.btn-outline-secondary:hover {background-color:#4B0E0E; color: white;}
-.mylogo {width: 200px; height: 200px; background: url("/resources/img/img_avatar3.png") no-repeat; background-size: 200px; display: inline-block; margin-top: 15px;}
-.item-content{background-color: #ddd;}
-#aa{font-size: 20px; background-color:#58a6a6 }
-.list-group{margin-top: 50px;}
-button.btn.btn-outline-secondary {
-    margin: 0;
-}
-</style>
-</head>
-<body>
-	<%@ include file="/WEB-INF/views/template/header.jsp" %>
-	<div class="inner">
-		<div class="container mt-3">
+<%@ include file="/WEB-INF/views/template/header.jsp" %>
+	<div class="container mt-3">
+		<div class="warp mypage_wrap">
 		   <ul class="list-group">
 		   		<li class="list-group-item" id="aa">내 정보 수정</li>
 			    <li class="list-group-item item-content">
@@ -69,16 +48,16 @@ button.btn.btn-outline-secondary {
 <!-- 						      		<input id="dup_btn" type="button" value="중복확인" > -->
 			                		<input type="hidden" id="nameDoubleChk"/> 
 						    	</div>
-						    	<div class="btn">
-						    	<button class="btn btn-outline-secondary" type="button" onClick="check()" >수정완료</button>
-							    <button class="btn btn-outline-secondary" type="button" onClick="location.href='getMypageUser'">취소</button>
+						    	<div class="mypage_btnBox">
+							    	<button class="btn btn-outline-secondary" type="button" onClick="check()" >수정완료</button>
+								    <button class="btn btn-outline-secondary" type="button" onClick="location.href='getMypageUser'">취소</button>
 						    	</div>
 					      	</form>
 					    </div>
 					</div>
 			    </li> 
 		  	</ul>  
-		</div>
+		 </div>
 	</div>
 	<%@ include file="/WEB-INF/views/template/footer.jsp" %>
 </body>

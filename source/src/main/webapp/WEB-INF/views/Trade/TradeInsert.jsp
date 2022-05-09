@@ -18,7 +18,7 @@
 							<label id="chooseFile" for="chooseFile"> 사진 올리기! </label>
 							<input id="uploadBtn" type="file" class="form-control border" name="trade_uploadImg" accept="image/*" onChange="loadFile(this)" value="trade_img" hidden>      
 						</div>
-						<div id="imageShow" class="mb-3"></div>
+						<div id="imageShow" class="mb-3 tradeImgBox"></div>
 					<!-- 20220502 김혜린 수정 -->
 							<div class="media p-3">
 								<img src="${pageContext.request.contextPath}/resources/img/profileImg/${user.user_profileImg}" alt="profileImg" class="mr-3 rounded-circle" style="width: 60px;">

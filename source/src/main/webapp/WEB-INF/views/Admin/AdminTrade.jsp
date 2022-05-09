@@ -181,7 +181,7 @@
 							<td>${trade.trade_date }</td>
 							<td>${trade.trade_nick }</td>
 							<td>${trade.trade_money }</td>
-							<td>${trade.trade_sinm } ${trade.trade_sggnm } ${trade.trade_emdnm } </td>	
+							<td>${trade.trade_area }</td>
 							<td>${trade.trade_img }</td>
 							<td>${trade.trade_buyinfo }</td>
 							<td>${trade.trade_review }</td>

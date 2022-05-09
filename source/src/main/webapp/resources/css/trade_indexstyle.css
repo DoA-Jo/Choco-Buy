@@ -45,13 +45,12 @@
  .menuBox .container .categoryList .menuLink:hover{ cursor: pointer; position :absolute; right : 0px; top : 8px; }
  .menuBox .container .categoryList .categoryItem { margin :  auto 0; }
  .menuBox .container .categoryList .categoryItem :hover { margin :  auto 0;  color : #58a6a6;}
- .menuBox .container .categoryList .categoryItem .categoryToggle { float : left; margin : auto 0; heigth:50px; line-height:50px;}
  .menuBox .container .categoryList .categoryItem .categoryToggle:hover { float : left; margin : auto 0; color : #58a6a6;}
  .menuBox .container .categoryList .categoryItem .categoryToggle .categoryDropdown {}
  .menuBox .container .categoryList .categoryItem .categoryToggle .categoryDropdown #bannerContainer{ clear : both;}
  /* bannerSearchBox */
 #bannerContainer .slick-background .banColor .banSearchBox {margin-top : 20px; position : relative;}
-#bannerContainer .slick-background .banColor .banSearchBox form { width: 350px; height: 40px; border : 3px solid white; }
+#bannerContainer .slick-background .banColor .banSearchBox form {display:inline-block; width: 350px; height: 40px; border : 3px solid white; }
 #bannerContainer .slick-background .banColor .banSearchBox form .searchInput{ padding : 5px;  width: 344px; height: 34px; border:0px; background-color: transparent; color : white;}
 #bannerContainer .slick-background .banColor .banSearchBox form .searchInput::placeholder{ font-size : 15px; color : white;}
 #bannerContainer .slick-background .banColor .banSearchBox form .searchBtn {width: 20px; height: 20px; background-size: contain;  text-indent: -9999px;  position: absolute; left: 370px; top: 50%; transform: translateY(-50%);}
@@ -60,3 +59,81 @@
 .bannerConBox {display: block; height: 440px;}
 .listContainerhover {width:280px; height:189px; overflow:hidden; position:relative; border-radius: 8px;}
 .listContainerhover img {position:absolute; width:100%; height: 100%; object-fit: cover; left:50%; top:50%; transform: translate(-50%,-50%);}
+
+/* 2022.05.08 */
+/* 태블릿 */
+@media screen and (max-width: 1200px) {
+	.header {padding-bottom: 70px;}
+	.header .searchBox {margin-left: 0; padding-top: 0; position: absolute; left: 0; top: 130px; width: 100%;}
+	.header .searchBox form {width: 100%;}
+	.header .searchBox form .searchInput {width: calc(100% - 30px);}
+	
+	#bannerContainer .bannerInner {margin: 0 60px; width: calc(100% - 120px);}
+	#bannerContainer .bannerInner .bannerSlide {width: 300px; height: 211px; top:195px; right: 50%; margin-right: -150px;}
+	#bannerContainer .bannerInner .bannerSlide .slick-slider .slick-list {width: 300px; height: 211px;}
+	#bannerContainer .bannerInner .slick-slider .slick-list .slick-track>div .slideImg {width:100%;}
+	
+	#bannerContainer .slick-background {text-align:center;}
+	#bannerContainer .slick-background .bannerWrap {margin: 0 60px; width: calc(100% - 120px); padding: 40px 0;}
+	
+	.listContainerhover {width:100%;}
+	.listContainerhover img {width:100% !important;}
+	
+	.content-container .warp .sectionBox .flexContainer {width: calc(100% + 3.3333%); margin-left: -1.66667%;}
+	.content-container .warp .sectionBox .flexContainer .listcontainer {width: 30%; margin: 0 1.6667%;}
+	.content-container .warp .sectionBox .flexContainer .listcontainer .textcontent > h4 {display:block;}
+	.content-container .warp .sectionBox .flexContainer .listcontainer .textcontent > h4 > span {width:100%;}
+	.content-container .warp .sectionBox .flexContainer .listcontainer .textcontent > p {width:100%;}
+}
+
+/* 태블릿2 */
+@media screen and (max-width: 780px) {
+	.header .logoBox .logo {width:150px; height:75px;}	
+	.header .searchBox {top: 90px;}
+	
+	.content-container .warp .sectionBox .flexContainer {width: calc(100% + 2%); margin-left: -1%;}
+	.content-container .warp .sectionBox .flexContainer .listcontainer {width:48%; margin:0 1%;}
+	.content-container .warp .sectionBox .flexContainer .listcontainer:nth-child(3n+1) {margin-top: 0;}
+	.content-container .warp .sectionBox .flexContainer .listcontainer:nth-child(2n+1) {margin-top: 15px;}
+	
+}
+
+/* 모바일 */
+@media screen and (max-width: 600px) {
+	.header .hdMenuBox{position: inherit; top: auto; transform: none;}
+	.header .hdMenuBox ul {display:inline-block;}
+	.header .hdMenuBox ul > li { margin-right:15px;}
+	.header .searchBox {top:135px;}
+	
+	.container {margin: 0 30px; width: calc(100% - 60px);}
+	
+	#bannerContainer .slick-background .banColor .banSearchBox form {width:100%;}
+	#bannerContainer .slick-background .banColor .banSearchBox form .searchInput {width:100%;}
+	#bannerContainer .bannerInner .bannerSlide {width: 255px; height: 180px; margin-right:-127.5px;}
+	#bannerContainer .bannerInner .bannerSlide .slick-slider .slick-list {width:100%;}
+	
+	
+	.content-container .warp .sectionBox .flexContainer {width: 100%; margin-left:0;}
+	.content-container .warp .sectionBox .flexContainer .listcontainer {width:100%; margin:20px 0 0 0;}
+	.content-container .warp .sectionBox .flexContainer .listcontainer:nth-child(3n+1) {margin-top: 20px;}
+	.content-container .warp .sectionBox .flexContainer .listcontainer:nth-child(2n+1) {margin-top: 20px;}
+	
+	
+}
+
+@media screen and (max-width: 400px) {
+	.header .hdMenuBox ul li a {font-size:14px;}
+	.bannerConBox {height:350px;}
+	#bannerContainer {height:350px;}
+	#bannerContainer .bannerInner {height:350px;}
+	#bannerContainer .slick-background {height:350px; top:-350px;}
+	#bannerContainer .slick-background .bannerWrap {height:350px;}
+	#bannerContainer .slick-background .banColor  {height:350px;}
+	#bannerContainer .slick-background .banColor .banText {font-size:14px;} 
+	#bannerContainer .bannerInner .bannerSlide {top: 200px; width:160px; height:112px; margin-right: -80px;}
+	#bannerContainer .bannerInner .bannerSlide .slick-slider .slick-list {height:112px;}
+	#bannerContainer .slick-background .banColor .banSearchBox form .searchInput {font-size:14px;}
+	#bannerContainer .slick-background .banColor .banSearchBox form .searchInput::placeholder {font-size:14px;}
+}
+
+.searchTable {display:flex; margin-bottom: 30px;background:red;}

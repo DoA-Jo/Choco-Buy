@@ -1,39 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/template/head.jsp" %>  
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ include file="/WEB-INF/views/template/head.jsp" %>   
+<link rel="stylesheet" href="${pagecontext.request.contextPath}/resources/css/mypage.css">
 <title>글 목록</title>
-<style>
-body {margin: 0; padding: 0;}
-.inner {width: 1000px; height: 70%; margin: 100px auto; padding-bottom:20px;}
-h1 {font-size: 35px;text-align: center;  padding-bottom: 30px;}
-#trade th, #trade td {border-bottom: 1px solid gray; padding: 10px;}
-.btn-outline-secondary:hover { background-color: #712A2A;} 
-.btn-primary{background-color:#712A2A;}
-.btn-primary:hover{background-color:#421e22;}
-.btn-success{background-color:#58a6a6;}
-.search { inline-block; margin: 0 5px; float: right;}
-.search2{height: 40px; border-radius: 10px;}
-#inpbox{border: 1px solid gray; margin: 5px;}
-#inpbox:focus{ outline: none;}
-#backbtn{ inline-block; margin: 0 5px; float: right;}
-#pgCnt{font-size: 20px; text-align: center; margin-left:220px;}
-.pgbtn{border-bottom: 1px solid gray; margin: 5px;}
-</style>
 <%@ include file="/WEB-INF/views/template/header.jsp" %>
-<%@ include file="/WEB-INF/views/template/menu.jsp" %> 
-	<div class="inner">
+<div class="container">
+	<div class="warp myTrade_wrap">
 		<h1>거래내역 보기</h1>
-			<div class="search">
-				<form action="getMypageTradeSerch" name="fm" method="post">
-			  		<select class="search2" name="searchMypageCondition">
-						<c:forEach items="${searchMypageConditionMap}" var="option">
-							<option value="${option.value}"<c:if test="${tradeVO.searchMypageCondition eq option.value}">selected</c:if>>${option.key}</option>
-						</c:forEach>
-			    	</select>
-	    			<input class="search2" id="inpbox" type="text" name="searchMypageKeyword" value="${tradeVO.searchMypageKeyword}" placeholder="검색어를 입력하세요.">
-					<input  type="hidden" name="nowPage">
-	    			<button class="btn btn-success" type="button" onclick="pageFnc('0')">검색</button>
-		  		</form>
-	  		</div>
+<%-- 	<h2>${UserInfo}</h2> --%>
+		<div class="search">
+			<form action="getMypageTradeSerch" name="fm" method="post">
+		  		<select class="search2" name="searchMypageCondition">
+					<c:forEach items="${searchMypageConditionMap}" var="option">
+						<option value="${option.value}"<c:if test="${tradeVO.searchMypageCondition eq option.value}">selected</c:if>>${option.key}</option>
+					</c:forEach>
+		    	</select>
+    			<input class="search2" id="inpbox" type="text" name="searchMypageKeyword" value="${tradeVO.searchMypageKeyword}" placeholder="검색어를 입력하세요.">
+				<input  type="hidden" name="nowPage">
+    			<button class="btn btn-success" type="button" onclick="pageFnc('0')">검색</button>
+	  		</form>
+  		</div>
 		<table class="table table-hover">
 	    	<thead class="btn-primary">
 	      		<tr>
@@ -47,18 +33,18 @@ h1 {font-size: 35px;text-align: center;  padding-bottom: 30px;}
 	   		</thead>
 	    	<tbody>
 				<c:forEach items="${tradeList}" var="trade">
-						<tr>
-			 				<td>${trade.trade_title}</td>
-			 				<td>${trade.trade_nick}</td>
-			  				<td>${trade.trade_date}</td>
-			  				<td >${trade.trade_buyinfo}</td>
-			  				<td>${trade.trade_review}</td>
-			  				<td><button class="btn btn-outline-secondary" type="button" onClick="checkReview('${trade.trade_buyinfo}',${trade.trade_seq})" >리뷰입력</button></td>
-			  			</tr>
+					<tr >
+		 				<td>${trade.trade_title}</td>
+		 				<td>${trade.trade_nick}</td>
+		  				<td>${trade.trade_date}</td>
+		  				<td>${trade.trade_buyinfo}</td>
+		  				<td>${trade.trade_review}</td>
+		  				<td><input class="btn btn-success" type="button" onclick="location.href='getMypageTrade?trade_seq=${trade.trade_seq}'" value="리뷰작성"></td>
+		  			</tr>
 				</c:forEach>
 	    	</tbody>
 	  	</table>
-		<button class="btn btn-outline-secondary" id="backbtn" type="button" onClick="location.href='getMypageUser'" >Mypagemain.jsp 로 돌아가기</button>
+		<button class="btn btn-outline-secondary" id="backbtn" type="button" onClick="location.href='getMypageUser'" >마이페이지 메인</button>
 		<div id="btnBox">	
 			<div id="pgCnt" >
 				<c:if test="${paging.startPage != 1 }">
@@ -79,7 +65,9 @@ h1 {font-size: 35px;text-align: center;  padding-bottom: 30px;}
 				</c:if>
 			</div>
 	  	</div>
-	</div>
+	 </div>
+</div>
+
 <%@ include file="/WEB-INF/views/template/footer.jsp" %>
 <script>
 function pageFnc(np){
@@ -89,23 +77,7 @@ function pageFnc(np){
 	frm.method = "post";
 	frm.submit();	
 }
-function checkReview(val1,val2){
- 		//alert(val1);
- 		//alert(val2);
- 		//alert('${userNick}');
- 		
- 		if(val1==='${userNick}'){
-			location.href = '/Mypage/getMypageTrade?trade_seq='+val2;
- 		}else{
- 			alert("권한이 없습니다");
- 		}
-}
-
-
-
-
 </script>
+
 </body>
 </html>
-
-<td><input class="btn btn-success" type="button" onclick="location.href='getMypageTrade?trade_seq=${trade.trade_seq}'" value="리뷰작성"></td>

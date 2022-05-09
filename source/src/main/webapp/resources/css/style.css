@@ -4,7 +4,7 @@
 
 /* header */
 .header {padding: 20px 0 10px;}
-.header .container {display: flex; position: relative;}
+.header .container {display: flex; position: relative; max-width:1000px;}
 .header .container > div {display: inline-block;}
 .header .logoBox {}
 .header .logoBox .logo {width: 240px; height: 120px; background: url("/resources/img/common/logo.svg") no-repeat; background-size: contain; display: inline-block; text-indent: -9999px;}
@@ -19,7 +19,7 @@
 .header .hdMenuBox ul {overflow: hidden;}
 .header .hdMenuBox ul li {float: left; margin-right: 30px; padding: 10px 0;}
 .header .hdMenuBox ul li:last-child {margin-right: 0;}
-.header .hdMenuBox ul li a {display: block; font-size: 16px; font-weight: 500;}
+.header .hdMenuBox ul li a {display: block; font-size: 16px; font-weight: 500; color:#000;}
 .header .hdMenuBox ul li a:hover {text-decoration: none!important; display: block; font-size: 16px; font-weight: 500;}
 
 /* menuBox */
@@ -43,7 +43,7 @@
 
 
 /* container */
-.container {width: 1000px; margin: 0 auto; min-height: calc(100% - 346px); padding:0;} /* 2022.05.03 수정 */
+.container {max-width:1000px; width: 1000px; margin: 0 auto; min-height: calc(100% - 346px); padding:0;} /* 2022.05.03 수정 */
 .warp {min-height: 593px; padding: 50px 0;} /* 2022.05.03 수정 */
 
 
@@ -53,6 +53,7 @@
 .footer .container > div {display: inline-block; vertical-align: top;}
 .footer .ft_logo {margin-right: 40px;}
 .ft_logo .logo {font-family: 'Luckiest Guy', cursive; font-size: 30px;}
+.ft_logo .logo:hover {text-decoration: none; color: #704224;}
 .footer .ft_txt {}
 .footer .ft_txt > p {margin-bottom: 5px; font-size: 14px; line-height: 18px;}
 .footer .ft_txt > p:last-of-type {margin-bottom: 0;}
@@ -67,16 +68,6 @@
 
 
 
-/* 모바일 */
-@media screen and (max-width: 1024px) {
-	.header {padding-bottom: 70px;}
-	.header .searchBox {margin-left: 0; padding-top: 0; position: absolute; left: 0; top: 130px; width: 100%;}
-	.header .searchBox form {width: 100%;}
-	.header .searchBox form .searchInput {width: calc(100% - 45px);}
-
-	.container {margin: 0 60px;}
-}
-
 /* 2022.05.03 수정 */
 .menuBox .nav-link {padding:0;}
 
@@ -86,7 +77,62 @@
  .menuBox .container .categoryList .menuLink:hover{ cursor: pointer; position :absolute; right : 0px; top : 8px; }
  .menuBox .container .categoryList .categoryItem { margin :  auto 0; }
  .menuBox .container .categoryList .categoryItem :hover { margin :  auto 0;  color : #58a6a6;}
- .menuBox .container .categoryList .categoryItem .categoryToggle { float : left; margin : auto 0; heigth:50px; line-height:50px;}
+ .menuBox .container .categoryList .categoryItem .categoryToggle { float : left; margin : auto 0; height:50px; line-height:50px;}
  .menuBox .container .categoryList .categoryItem .categoryToggle:hover { float : left; margin : auto 0; color : #58a6a6;}
  .menuBox .container .categoryList .categoryItem .categoryToggle .categoryDropdown {}
  .menuBox .container .categoryList .categoryItem .categoryToggle .categoryDropdown #bannerContainer{ clear : both;}
+ 
+/* 태블릿 */
+@media screen and (max-width: 1200px) {
+	.header {padding-bottom: 70px;}
+	.header .searchBox {margin-left: 0; padding-top: 0; position: absolute; left: 0; top: 130px; width: 100%;}
+	.header .searchBox form {width: 100%; text-align:left;}
+	.header .searchBox form .searchInput {width: calc(100% - 30px);}
+
+	.container {margin: 0 60px; width: calc(100% - 120px); max-width: inherit; margin-top:0 !important;}
+	.content-container .warp .sectionBox .flexContainer {width: calc(100% + 3.3333%); margin-left: -1.66667%;}
+	.content-container .warp .sectionBox .flexContainer .listcontainer {width:30%; margin: 0 1.6667%;}
+	
+	#bannerContainer .bannerInner {margin: 0 60px; width: calc(100% - 120px);}
+	#bannerContainer .bannerInner .bannerSlide {width: 300px; height: 211px; top:195px; right: 50%; margin-right: -150px;}
+	#bannerContainer .bannerInner .bannerSlide .slick-slider .slick-list {width: 300px; height: 211px;}
+	#bannerContainer .bannerInner .slick-slider .slick-list .slick-track>div .slideImg {width:100%;}
+	
+	#bannerContainer .slick-background {text-align:center;}
+	#bannerContainer .slick-background .bannerWrap {margin: 0 60px; width: calc(100% - 120px); padding: 40px 0;}
+	
+}
+
+
+/* 태블릿2 */
+@media screen and (max-width: 780px) {
+	.header .logoBox .logo {width:150px; height:75px;}	
+	.header .searchBox {top: 90px;}
+}
+
+/* 모바일 */
+@media screen and (max-width: 600px) {
+	.container {margin: 0 30px; width: calc(100% - 60px);}
+	
+	.header .container {display: block; text-align: center;}
+	.header .container > div {width:100%;}
+	.header .hdMenuBox{position: inherit; top: auto; transform: none;}
+	.header .hdMenuBox ul {display:inline-block;}
+	.header .hdMenuBox ul > li { margin-right:15px;}
+	.header .searchBox {top:135px;}
+	
+	.menuBox {height:auto; text-align:center;}
+	.menuBox .container {height:auto; padding: 20px 0;}
+	.menuBox .container .categoryList {display: inline-block;}
+	.menuBox .container .categoryList .categoryItem .categoryToggle {height: 30px; line-height: 30px;}
+	.menuBox .container > div.fl_r {position: inherit; transform: none; top: auto;}
+	.menuBox .container > div.fl_r > div {display:block; margin-bottom:10px;}
+	.menuBox .container > div.fl_r > div:last-child {margin-bottom:0;}
+	.menuBox .container > div.fl_r > div + div {margin-left:0;}
+	
+}
+
+@media screen and (max-width: 400px) {
+	.header .hdMenuBox ul li a {font-size:14px;}
+}
+

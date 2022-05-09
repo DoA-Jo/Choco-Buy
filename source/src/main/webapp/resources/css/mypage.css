@@ -1,0 +1,86 @@
+@charset "utf-8";
+
+.mypage_wrap h1 {font-size: 35px; margin:30px auto; text-align: center;padding-bottom: 10px;}
+.mypage_wrap .btn-info {border-radius: 0;height: 30px;padding: 5px;font-size: 14px;position:absolute;top: 91px;right: 5px;border-radius: 5px;}
+.mypage_wrap table {font-size: 18px; margin: 60px auto 0px auto;width: 500px;}
+.mypage_wrap table input, table textarea {width: 100%;}
+.mypage_wrap table button {border: none;background-color: #fff}
+.mypage_wrap .btn-outline-secondary {background-color:#831616; color: white;}
+.mypage_wrap .btn-outline-secondary:hover {background-color:#4B0E0E; color: white;}
+.mypage_wrap .mylogo {width: 200px; height: 200px; background: url("/resources/img/img_avatar3.png") no-repeat; background-size: 200px; display: inline-block; margin-top: 15px;}
+.mypage_wrap .item-content{background-color: #ddd;}
+.mypage_wrap #aa{font-size: 20px; background-color:#58a6a6 }
+.mypage_wrap .list-group{margin-top: 50px;}
+.mypage_wrap p {font-size: 25px;}
+.mypage_wrap .btn-group{width: 500px;}
+.mypage_wrap .form-group{height: 50px;}
+.myTrade_wrap .mt-3{height: 500px;}
+.myTrade_wrap .form-control{height: 40px;}
+
+
+.myTrade_wrap h1 {font-size: 35px;text-align: center;  padding-bottom: 30px;}
+.myTrade_wrap table th, table td {border-bottom: 1px solid gray; padding: 10px; text-align:center; vertical-align: middle !important;}
+.myTrade_wrap .btn-outline-secondary:hover { background-color: #712A2A;} 
+.myTrade_wrap .btn-primary{background-color:#712A2A;}
+.myTrade_wrap .btn-primary:hover{background-color:#421e22;}
+.myTrade_wrap .btn-success{background-color:#58a6a6;}
+.myTrade_wrap .search {text-align: right; margin-bottom: 10px;}
+.myTrade_wrap .search2{min-width: 80px; height: 40px; border-radius: 10px; text-indent:5px;}
+.myTrade_wrap #inpbox{border: 1px solid gray; text-indent: 10px;}
+.myTrade_wrap #inpbox:focus{ outline: none;}
+.myTrade_wrap #backbtn{ inline-block; margin: 0 5px; float: right;}
+.myTrade_wrap #pgCnt{font-size: 20px; text-align: center; margin-left:220px;}
+.myTrade_wrap .pgbtn{border-bottom: 1px solid gray; margin: 5px;}
+.myTrade_wrap .btn-outline-secondary {background-color:#831616; color: white;}
+.myTrade_wrap .btn-outline-secondary:hover {background-color:#4B0E0E; color: white;}
+.myTrade_wrap .mylogo {width: 200px; height: 200px; background: url("/resources/img/img_avatar3.png") no-repeat; background-size: 200px; display: inline-block; margin-top: 15px;}
+.myTrade_wrap .btn-group{width: 500px;}
+.myTrade_wrap .item-content{background-color: #ddd;}
+.myTrade_wrap #aa{font-size: 20px; background-color:#58a6a6 }
+.myTrade_wrap .mt-3{height: 500px;}
+.myTrade_wrap .form-group {width: 100%; height: 45px; display: table;}
+.myTrade_wrap .form-control{height: 40px;}
+
+
+
+
+/* 2022.05.08 */
+.mypage_wrap {}
+.mypage_btnBox {display: flex; padding:0;}
+.mypage_btnBox .btn {margin-left:5px;}
+.mypage_btnBox .btn:first-child {margin-left:0;}
+.myTrade_wrap .search > form {display:inline-flex;}
+.myTrade_wrap .search > form > * {margin-left: 5px;}
+.myTrade_wrap .search > form > *:first-child {margin-left:0;}
+
+
+.mypage_btnBox {display: flex; padding:0;}
+.mypage_btnBox .btn {margin-left:5px;}
+.mypage_btnBox .btn:first-child {margin-left:0;}
+
+/* 태블릿 */
+@media screen and (max-width: 1200px) {
+	.mypage_wrap .list-group {margin-top:0;}
+	.mypage_wrap .list-group .col-sm-3 {flex: 0 0 100%; max-width: 100%; margin-bottom:20px;}
+	.mypage_wrap .list-group .col-sm-9 {flex: 0 0 100%; max-width: 100%;}
+}
+
+/* 태블릿2 */
+@media screen and (max-width: 780px) {
+	
+}
+
+/* 모바일 */
+@media screen and (max-width: 600px) {
+	.mypage_wrap .list-group .col-sm-9 .form-control {width:100%; border-radius: 4px; margin-bottom: 5px;}
+	.mypage_wrap .list-group .col-sm-9 .form-control:last-child {margin-bottom:0;}
+	.mypage_wrap .form-group {height: auto; min-height: 50px;}
+}
+
+@media screen and (max-width: 400px) {
+	.mypage_btnBox {display:block;}
+	.mypage_wrap .input-group-append {width:100%;}
+	.mypage_wrap .btn-outline-secondary {width:100%; margin-left:0; margin-top:10px;}
+	.mypage_btnBox .btn-outline-secondary:first-child {margin-top:0;}
+	.mypage_btnBox .btn-outline-secondary {width:100%; margin-left:0; margin-top:10px;}
+}

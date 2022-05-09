@@ -131,6 +131,6 @@ $(document).ready(function(){
         <div style="clear:both"></div>
     </div>
 <!-- footer -->
-<%@ include file="/WEB-INF/views/template/footer.jsp"  %>
+<%@ include file="/WEB-INF/views/template/index_footer.jsp"  %>
 </body>
 </html>

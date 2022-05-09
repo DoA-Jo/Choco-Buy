@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+.pay_tit {}
+.pay_tit > h1{font-size: 24px; text-align: left; margin-bottom: 40px;}
+
+.pay_mapBox {width:500px;height:350px;}
+.pay_table {text-align:center; }
+.pay_table td, .pay_table th {border-bottom: 1px solid #dee2e6; }
+
+.payBtnBox {display:block;}	/* 버튼 박스 */
+.payBtnBox > button {display:inline-block;}
+.payBtnBox > button + button {margin-left:10px;}
+
+.

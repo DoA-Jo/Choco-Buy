@@ -3,7 +3,7 @@
 <footer class="footer">
         <div class="container">
             <div class="ft_logo">
-                <a href="/Trade/getTradeList" class="logo">CHOCO-BUY</a>
+                <a href="" class="logo">CHOCO-BUY</a>
             </div>
             <div class="ft_txt">
                 <p>본 사이트는 교육용으로 제작된 가상의 사이트로 실제 사용이 불가능합니다. 저작권은 제작자에게 있습니다.</p>
