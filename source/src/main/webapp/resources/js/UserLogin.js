@@ -4,7 +4,8 @@ $(document).ready(function(){
 	/* 인증번호 보내기 */
 	$("#phoneChk").on("click",function(){ 
 		var phone = $("#phone").val(); 
-		
+		console.log(phone);
+		console.log(nullCheck());
 		if(nullCheck()==1){
 			console.log("잘못된 회원정보, db삭제 후 회원가입 진행 합니다");
 			$(".successPhoneChk").text("유효한 번호를 입력해주세요."); 
@@ -17,36 +18,36 @@ $(document).ready(function(){
 				success : function(data) {}, 
 				error : function() {console.log("실패");} 
 			}); 
-		}
-		
-		//1 = 회원, 문자인증 진행 / 0 = 비회원, '휴대폰 번호를 확인해주세요.' 알림창
-		if(checkUser()==1){
-			$.ajax({ 
-				url:"/Login/phoneCheck", 
-				type:"GET",
-				data:{"phone":phone},
-				cache : false, 
-				success:function(data){
-					alert("data: "+data);
-	 				if(data == "error"){ 
-	 					alert("휴대폰 번호가 올바르지 않습니다."); 
-	 					$(".successPhoneChk").text("유효한 번호를 입력해주세요."); 
-						$(".successPhoneChk").css("color","red"); 
-						$("#phone").attr("autofocus",true); 
-	 				}else{ 
-						$("#phone2").attr("disabled",false); 
-						$("#phoneChk2").attr("disabled",false); 
-						$("#phoneChk2").css("display","inline-block"); 
-						//$(".successPhoneChk").text("인증번호를 입력한 뒤 본인인증을 눌러주십시오."); 
-						$("#phone").attr("readonly",true); 
-						code2 = data; 
-					} 
-				} 
-			}); 
 		}else{
-			/* 비회원 */
-			$(".successPhoneChk").text("휴대폰 번호를 확인해주세요."); 
-			$(".successPhoneChk").css("color","red"); 
+			//1 = 회원, 문자인증 진행 / 0 = 비회원, '휴대폰 번호를 확인해주세요.' 알림창
+			if(checkUser()==1){
+				$.ajax({ 
+					url:"/Login/phoneCheck", 
+					type:"GET",
+					data:{"phone":phone},
+					cache : false, 
+					success:function(data){
+						alert("data: "+data);
+		 				if(data == "error"){ 
+		 					alert("휴대폰 번호가 올바르지 않습니다."); 
+		 					$(".successPhoneChk").text("유효한 번호를 입력해주세요."); 
+							$(".successPhoneChk").css("color","red"); 
+							$("#phone").attr("autofocus",true); 
+		 				}else{ 
+							$("#phone2").attr("disabled",false); 
+							$("#phoneChk2").attr("disabled",false); 
+							$("#phoneChk2").css("display","inline-block"); 
+							//$(".successPhoneChk").text("인증번호를 입력한 뒤 본인인증을 눌러주십시오."); 
+							$("#phone").attr("readonly",true); 
+							code2 = data; 
+						} 
+					} 
+				}); 
+			}else{
+				/* 비회원 */
+				$(".successPhoneChk").text("휴대폰 번호를 확인해주세요."); 
+				$(".successPhoneChk").css("color","red"); 
+			}
 		}
 	});
 	
@@ -83,7 +84,7 @@ function nullCheck(){
 	var phone = $("#phone").val();
 	var dataNull;
 	$.ajax({
-		url : "/Login/getTelInfo",
+		url : "/Login/UserNull",
 		async: false,
   		data : {'user_tel':phone},
   		type : "POST", 

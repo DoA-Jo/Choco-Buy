@@ -50,10 +50,14 @@ public class LoginController {
 	}
 
 	// LOGIN-get
-	@RequestMapping(value="/Login/login",method=RequestMethod.GET)
-	public String login_View() {
-		return "/Login/login";
-	}
+	   @RequestMapping(value="/Login/login",method=RequestMethod.GET)
+	   public String login_View(HttpSession session) {
+	      if(session.getAttribute("user")!= null) {
+	         System.out.println("user session delete");
+	         session.invalidate();
+	      }
+	      return "/Login/login";
+	   }
 	
 	// LOGIN-post	
 	@RequestMapping(value="/Login/login", method=RequestMethod.POST)

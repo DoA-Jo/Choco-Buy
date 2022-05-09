@@ -188,7 +188,7 @@ function nullCheck(){
 	var phone = $("#phone").val();
 	var dataNull;
 	$.ajax({
-		url : "/Login/getTelInfo",
+		url : "/Login/UserNull",
 		async: false,
   		data : {'user_tel':phone},
   		type : "POST", 
@@ -233,7 +233,7 @@ function goPopup(){
 		document.form2.resultType.value = resultType;
 		document.form2.action= "https://www.juso.go.kr/addrlink/addrLinkUrl.do"; //인터넷망
 		document.form2.submit();
-		document.querySelector('.area_next_btn').setAttribute('disabled','false');
+		document.querySelector('.area_next_btn').disabled= false;
 	} 
 	
 }
