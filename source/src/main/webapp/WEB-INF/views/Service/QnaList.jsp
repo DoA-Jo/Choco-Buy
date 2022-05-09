@@ -21,9 +21,9 @@
 	href="${pagecontext.request.contextPath}/resources/css/serviceBoard.css">
 <link rel="stylesheet"
 	href="${pagecontext.request.contextPath}/resources/css/inquiry.css">
-<link rel="stylesheet"
+<link rel="stylesheet" 
 	href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-<link rel="stylesheet"
+<link rel="stylesheet" 
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 <script>
@@ -68,46 +68,36 @@ $( function() {
 				</form>
 				<!-- 검색 종료 -->
 			</div>
-
+		
 			<!-- 아코디언 처리 (시작)-->
-			<%
-				pageContext.setAttribute("LF", "\n");
-			%>
+			<% pageContext.setAttribute("LF", "\n"); %>
 			<div id="accordion">
-				<c:forEach items="${qnaList}" var="qna">
-					<div>
-						
-						<h3 class="pt-3 pb-3"><i style="font-size:24px" class="fa">Q</i>${qna.qna_title}</h3>
-
-					</div>
-					<div style="position: relative;">
-						<p class="fa"><i style="font-size:24px" class="fa">A.</i></p>
-						<br>
-						<br>
-						<p>
-							<c:out value="${fn:replace(qna.qna_content, LF, '<br>')}"
-								escapeXml="false" />
-						</p>
-						<c:if test="${ user_role eq 100 }">
-							<div class="Qnaeditdelete">
-								<button type="button" class="btn btn-primary pull-Right"
-									onclick="location.href='/Service/UpdateQna?qna_seq=${qna.qna_seq}'">수정</button>
-								<button type="button" onclick="deletebutton(${qna.qna_seq})"
-									class="btn btn-primary pull-Right">삭제</button>
-							</div>
-						</c:if>
-					</div>
-				</c:forEach>
+			<c:forEach items="${qnaList}" var="qna">
+			<div>
+				<p>Q.</p>
+				<h3 class="pt-3 pb-3" style="font-size:16px;color:blue">${qna.qna_title}</h3>
+				
 			</div>
+				<div style="position:relative;">
+					<p class="fa">A.</p><br><br>
+					<p><c:out value="${fn:replace(qna.qna_content, LF, '<br>')}" escapeXml="false"/></p>
+				<c:if test="${ user_role eq 100 }">
+				<div style="position: absolute ;bottom:10px;right:10px;text-align:right;">
+					<button type="button" class="btn btn-primary pull-Right" onclick="location.href='/Service/UpdateQna?qna_seq=${qna.qna_seq}'">수정</button>
+					<button type="button" onclick="deletebutton(${qna.qna_seq})" class="btn btn-primary pull-Right">삭제</button>
+				</div>
+				</c:if>
+				</div>
+			</c:forEach>
+			</div>		
 			<!-- 아코디언 처리 (끝)-->
 			<div style="text-align: right;">
 				<c:if test="${ user_role eq 100 }">
 					<!-- 5월3일 수정 -->
 					<!-- 5월2일 추가 -->
-					<a class="qnawrite" fref="/Service/Qnawrite"
-						class="btn btn-primary pull-Right">글쓰기</a>
+					<a style="margin : 10px auto;" fref="/Service/Qnawrite" class="btn btn-primary pull-Right">글쓰기</a>
 				</c:if>
-
+				
 			</div>
 			<div class="btnBox" style="text-align: center;">
 				<div id="pgCnt" class="btn-group">
