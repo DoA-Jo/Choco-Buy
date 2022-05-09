@@ -328,22 +328,22 @@
 			<if test="category1 != 1 ">
 				AND trade_category!='배달' 
 			</if>
-			<if test="category1 != 2 ">
+			<if test="category2 != 1 ">
 				AND trade_category!='쇼핑' 
 			</if>
-			<if test="category1 != 3 ">
+			<if test="category3 != 1 ">
 				AND trade_category!='청소' 
 			</if>
-			<if test="category1 != 4 ">
+			<if test="category4 != 1 ">
 				AND trade_category!='집안일' 
 			</if>
-			<if test="category1 != 5 ">
+			<if test="category5 != 1 ">
 				AND trade_category!='전문서비스' 
 			</if>
-			<if test="category1 != 6 ">
+			<if test="category6 != 1 ">
 				AND trade_category!='반려동물' 
 			</if>
-			<if test="category1 != 7 ">
+			<if test="category7 != 1 ">
 				AND trade_category!='역할대행' 
 			</if><if test="report1 != 1 ">
 				AND trade_reporting!=0 
