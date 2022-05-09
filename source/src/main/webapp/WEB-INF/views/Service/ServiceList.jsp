@@ -43,8 +43,8 @@
 			<c:forEach items="${serviceList }" var="service">
 				<tr>
 					<td>${service.service_seq }</td>
-					<td><a href="/Service/getService?service_seq=${service.service_seq }">${service.service_title }</a></td>
-					<td>${service.service_writer }</td>
+					<td style="color:red;"><a href="/Service/getService?service_seq=${service.service_seq }">${service.service_title }</a></td>
+					<td>관리자</td>
 					<td>${service.service_date }</td>
 					<td>${service.service_cnt }</td>
 				</tr>

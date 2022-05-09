@@ -45,7 +45,7 @@
 						</tr>
 						<tr>
 							<td>작성자</td>
-							<td>${service.service_writer}</td>
+							<td>관리자</td>
 						</tr>
 	<!-- 					<div id="footer"> -->
 					</table>
@@ -56,13 +56,22 @@
 					<c:if test="${ user_role eq 100 }">			<!-- 5월2일 추가 -->  <!-- 5월 3일 수정 -->
 <!-- 						<a href="/Service/ServiceController.do" class="btn btn-primary pull-Right">글 목록</a> -->
 						<button type="submit" class="btn btn-primary pull-Right">수정</button>
-						<a href="/Service/deleteService?service_seq=${service.service_seq}" class="btn btn-primary pull-Right">삭제</a>
+						<button type="button" onclick="servicebutton(${service.service_seq})" class="btn btn-primary pull-Right">삭제</button>
 <!-- 						<button type="submit" class="btn btn-primary pull-Right">삭제</button> -->
 					</c:if>
 					</div>
 				</form>
 		</div>
 	</div>
+<script>
+function servicebutton(val) {
+    if (confirm("정말 삭제하시겠습니까?") == true) {
+        location.href="/Service/deleteService?service_seq="+val;
+    } 
+
+}
+
+</script>
 <%@ include file="/WEB-INF/views/template/footer.jsp" %>
 </body>
 </html>

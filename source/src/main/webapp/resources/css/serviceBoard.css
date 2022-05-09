@@ -9,15 +9,17 @@ h1 {display: block; font-size: 3em !important; margin-top: 0.67em !important; ma
 .menu-list {padding: 0px; list-style: none;}
 .menu-list li{padding: 0px; font-family: 'Noto Sans KR', sans-serif; font-size: 18px; font-weight: normal;}
 .menu-list li:first-child {margin: 20px 0px;}
-/* 메뉴바 */
+
+/* 메뉴바 텍스트 */
 a:link {color : block; text-decoration: none;}
 a:visited{color #666;  text-decoration: none;}
-a:hover{color:purple;  text-decoration: none;}
+a:hover{color:red;  text-decoration: none;}
 a:active{color:red;    text-decoration: none;}
 
 /* QnaContent.jsp */
 .serviceContent thead .th01,th02,th03,th04 {background-color: #eee;  text-align: center;}
 .serviceContent thead .th01,th02,th03,th04 {width:100px;}
+.editdelete {align:right;}
 
 /* QnaList.jsp */
 .qnaTable thead { background-color: #eee;  text-align: center;}
@@ -35,14 +37,23 @@ a:active{color:red;    text-decoration: none;}
 .searchInput:focus {border: 1px solid #000;}
 .searchSubmit {padding: 0px 12px;}
 .searchInput { margin : 10px auto;}
+/*아코디언 부분*/
+.accordion > p {style="font-size:20px;color:red";}
+.accordion > p > h3 {style="font-size:16px;color:blue";}
+.Qnaeditdelete{style="position: absolute ;bottom:10px;right:10px;text-align:right;}
+.qnawrite{margin : 10px auto;}
+.fa {font-size:16px; color:red;}
+
+
+
 
 /* ServiceList.jsp */
 .serviceTable thead { background-color: #eee;  text-align: center;} 
-.serviceTable thead .th01{width: 10px; }  
-.serviceTable thead .th02{width: 45px; }  
-.serviceTable thead .th03{width: 10px; }  
+.serviceTable thead .th01{width: 3px; }  
+.serviceTable thead .th02{width: 78px; }  
+.serviceTable thead .th03{width: 2px; }  
 .serviceTable thead .th04{width: 15px; } 
-.serviceTable thead .th05{width: 10px; } 
+.serviceTable thead .th05{width: 2px; } 
 .servicePage {display: flex;}
 .serviceBar {width: 200px;}
 .serviceTotal {width: 100%;}
@@ -53,6 +64,7 @@ a:active{color:red;    text-decoration: none;}
 .searchInput:focus {border: 1px solid #000;}
 .searchSubmit {padding: 0px 12px;}
 .searchInput { margin : 10px auto;}
+
 
 
 

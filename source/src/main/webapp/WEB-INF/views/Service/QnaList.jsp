@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ include file="/WEB-INF/views/template/head.jsp"%>
 <%@page import="java.util.List"%>
 <!DOCTYPE html>
@@ -20,6 +21,18 @@
 	href="${pagecontext.request.contextPath}/resources/css/serviceBoard.css">
 <link rel="stylesheet"
 	href="${pagecontext.request.contextPath}/resources/css/inquiry.css">
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+<script>
+$( function() {
+  $( "#accordion" ).accordion({
+    collapsible: true
+  });
+} );
+</script>
 <!-- <script src="../WebContent/resources/jquery-3.5.1.js"></script> -->
 <title>초코바이 고객센터</title>
 </head>
@@ -34,8 +47,7 @@
 				<li class="nav-item"><a class="nav-link service"
 					href="/Service/getServiceList">공지 사항</a></li>
 				<li class="nav-item"><a class="nav-link service"
-					href="/Service/getQnaList" style="color: red; font-weight: bold">자주
-						묻는 질문</a></li>
+					href="/Service/getQnaList" style="color: red; font-weight: bold">자주 묻는 질문</a></li>
 			</ul>
 		</div>
 		<div class="qnaTotal">
@@ -50,56 +62,75 @@
 						</select> <input type="hidden" name="nowPage"> <input
 							class="searchInput" name="qna_searchKeyword" type="text"
 							onkeyDown="f_enterLogin()" placeholder="검색어를 입력해주세요." />
-						<button class="btn btn-outline-primary searchSubmit" type="button" onclick="pageFnc(0)">검색</button>
+						<button class="btn btn-outline-primary searchSubmit" type="button"
+							onclick="pageFnc(0)">검색</button>
 					</div>
 				</form>
 				<!-- 검색 종료 -->
 			</div>
-			<table class="table table-bordered qnaTable"
-				style="text-align: center">
-				<thead>
-					<tr>
-						<th class="th01">글번호</th>
-						<th class="th02">제목</th>
-						<th class="th03">작성자</th>
-					</tr>
-				</thead>
+
+			<!-- 아코디언 처리 (시작)-->
+			<%
+				pageContext.setAttribute("LF", "\n");
+			%>
+			<div id="accordion">
 				<c:forEach items="${qnaList}" var="qna">
-					<tr>
-						<td>${qna.qna_seq }</td>
-						<td><a href="/Service/getQna?qna_seq=${qna.qna_seq }">${qna.qna_title}</a></td>
-						<td>${qna.qna_writer }</td>
-					</tr>
+					<div>
+						
+						<h3 class="pt-3 pb-3"><i style="font-size:24px" class="fa">Q</i>${qna.qna_title}</h3>
+
+					</div>
+					<div style="position: relative;">
+						<p class="fa"><i style="font-size:24px" class="fa">A.</i></p>
+						<br>
+						<br>
+						<p>
+							<c:out value="${fn:replace(qna.qna_content, LF, '<br>')}"
+								escapeXml="false" />
+						</p>
+						<c:if test="${ user_role eq 100 }">
+							<div class="Qnaeditdelete">
+								<button type="button" class="btn btn-primary pull-Right"
+									onclick="location.href='/Service/UpdateQna?qna_seq=${qna.qna_seq}'">수정</button>
+								<button type="button" onclick="deletebutton(${qna.qna_seq})"
+									class="btn btn-primary pull-Right">삭제</button>
+							</div>
+						</c:if>
+					</div>
 				</c:forEach>
-				<tbody>
-				</tbody>
-			</table>
+			</div>
+			<!-- 아코디언 처리 (끝)-->
 			<div style="text-align: right;">
-				<c:if test="${ user_role eq 100 }"> <!-- 5월3일 수정 -->
+				<c:if test="${ user_role eq 100 }">
+					<!-- 5월3일 수정 -->
 					<!-- 5월2일 추가 -->
-					<a href="/Service/Qnawrite" class="btn btn-primary pull-Right">글쓰기</a>
+					<a class="qnawrite" fref="/Service/Qnawrite"
+						class="btn btn-primary pull-Right">글쓰기</a>
 				</c:if>
+
 			</div>
 			<div class="btnBox" style="text-align: center;">
 				<div id="pgCnt" class="btn-group">
 					<c:if test="${paging.startPage != 1 }">
 						<button type="button" class="btn btn-primary"
-							onclick="pageFnc(${paging.startPage - 1 })">&lt;
-						</button>
+							onclick="pageFnc(${paging.startPage - 1 })">&lt;</button>
 					</c:if>
 					<c:forEach begin="${paging.startPage }" end="${paging.endPage }"
 						var="p">
 						<c:choose>
 							<c:when test="${p == paging.nowPage }">
-								<button type="button" class="btn btn-primary" style="color: #f00;">${p } </button>
+								<button type="button" class="btn btn-primary"
+									style="color: #f00;">${p }</button>
 							</c:when>
 							<c:when test="${p != paging.nowPage }">
-								<button type="button" class="btn btn-primary" onclick="pageFnc(${p })">${p }</button>
+								<button type="button" class="btn btn-primary"
+									onclick="pageFnc(${p })">${p }</button>
 							</c:when>
 						</c:choose>
 					</c:forEach>
 					<c:if test="${paging.endPage != paging.lastPage}">
-						<button type="button" class="btn btn-primary" onclick="pageFnc(${paging.endPage+1})">&gt;</button>
+						<button type="button" class="btn btn-primary"
+							onclick="pageFnc(${paging.endPage+1})">&gt;</button>
 					</c:if>
 				</div>
 			</div>
@@ -122,6 +153,13 @@ function f_enterLogin() {
     if(window.event.keyCode == 13){
     	pageFnc(0); 
 	}
+}
+
+function deletebutton(val) {
+    if (confirm("정말 삭제하시겠습니까?") == true) {
+        location.href="/Service/deleteQna?qna_seq="+val;
+    } 
+
 }
 </script>
 	<%@ include file="/WEB-INF/views/template/footer.jsp"%>

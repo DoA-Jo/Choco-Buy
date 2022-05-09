@@ -46,7 +46,7 @@
 						</tr>
 						<tr>
 							<td class ="th04">작성자</td>
-							<td>${qna.qna_writer}</td>
+							<td>관리자</td>
 						</tr>
 						</thead>
 	<!-- 					<div id="footer"> -->
@@ -54,9 +54,8 @@
 					<div align="left">
 					<a href="/Service/getQnaList" class="btn btn-primary pull-Right">글 목록</a><!--GET방식  -->
 					</div>
-					<div align="right">
+					<div class="editdelete">
 					<c:if test="${ user_role eq 100 }"> <!-- 5월3일 수정 -->															<!-- 5월2일 추가 -->
-<!-- 						<a href="/Service/ServiceController.do" class="btn btn-primary pull-Right">글 목록</a> -->
 						<button type="submit" class="btn btn-primary pull-Right">수정</button>
 						<a href="/Service/deleteQna?service_seq=${qna.qna_seq}" class="btn btn-primary pull-Right">삭제</a>
 <!-- 						<button type="submit" class="btn btn-primary pull-Right">삭제</button> -->

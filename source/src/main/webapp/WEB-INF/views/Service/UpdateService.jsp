@@ -51,7 +51,7 @@
 	<!-- 					<div id="footer"> -->
 					</table>
 					<div align="left">
-					<a href="/Service/ServiceController" class="btn btn-primary pull-Right">글 목록</a>
+					<a href="/Service/getServiceList" class="btn btn-primary pull-Right">글 목록</a>
 					</div>
 					<div align="right">
 <!-- 						<a href="/Service/ServiceController.do" class="btn btn-primary pull-Right">글 목록</a> -->

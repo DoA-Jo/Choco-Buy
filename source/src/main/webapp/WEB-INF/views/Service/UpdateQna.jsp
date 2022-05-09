@@ -45,18 +45,17 @@
 						</tr>
 						<tr>
 							<td>작성자</td>
-							<input type="hidden" name="qna_writer" value="${qna.qna_writer}">
-							<td>${qna.qna_writer}</td>
+							<input type="hidden" name="qna_writer" value="">
+							<td>관리자</td>
 						</tr>
 	<!-- 					<div id="footer"> -->
 					</table>
 					<div align="left">
-					<a href="/Service/QnaController" class="btn btn-primary pull-Right">글 목록</a>
+					<a href="/Service/getQnaList" class="btn btn-primary pull-Right">글 목록</a>
 					</div>
 					<div align="right">
 <!-- 						<a href="/Service/ServiceController.do" class="btn btn-primary pull-Right">글 목록</a> -->
 						<button type="submit" class="btn btn-primary pull-Right">수정</button>
-						<a href="/Service/deleteQna?qna_seq=${qna.qna_seq}" class="btn btn-primary pull-Right">삭제</a>
 <!-- 						<button type="submit" class="btn btn-primary pull-Right">삭제</button> -->
 					</div>
 				</form>
