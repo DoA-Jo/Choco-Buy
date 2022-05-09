@@ -3,5 +3,6 @@
 /Servers/
 /source/.settings/
 /source/target/
+/source/bin/
 /source/.classpath
 /source/.project
