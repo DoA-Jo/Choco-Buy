@@ -12,6 +12,7 @@
 				<li><a href="/Admin/adminChat">채팅창 관리</a></li>
 				<li><a href="/Admin/adminPay">결제 관리</a></li>
 				<li><a href="/Admin/adminService">고객 센터</a></li>
+				<li><a href="/Admin/adminQna">자주 묻는 질문</a></li>
 				<li><a href="/Admin/adminInquiry">1:1 문의</a></li>
 			</ul>
 		</span>
