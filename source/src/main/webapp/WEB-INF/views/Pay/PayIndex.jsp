@@ -15,7 +15,7 @@
 			<table class="table bordered-table w-auto mx-auto pay_table">
 				<tr>
 					<td rowspan="3">
-					<label>거래희망지역 상세 보기</label>
+					<label><b>거래희망지역 상세 보기</b></label>
 						<div id="map" class="pay_mapBox"></div>
 						<script>
 				var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -68,22 +68,23 @@
 				</script>
 					</td>
 					<td>
-						<label>거래희망시간 확인</label><br>
-							<input type="text" size="20" id="pay_date2" value="${appointment.app_time }" readonly/>
+						<label><b>거래희망시간 확인</b></label><br>
+							${appointment.app_time }
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<label>거래내용 확인</label><br>
-							판매자: <input type="text" size="10" id="pay_seller" value="${chatroom.trade_nick }" readonly/><br>
-							구매자: <input type="text" size="10" id="pay_buyer" value="${chatroom.user_nick }" readonly/><br>
-							거래내용: <input type="text" size="3" id="pay_cat" value="${trade.trade_category }" readonly/><input type="text" size="10" id="pay_trade" value="${chatroom.trade_title }" readonly/>
+						<label><b>거래내용 확인</b></label><br>
+						판매자 : ${chatroom.trade_nick }<br>
+						구매자 : ${chatroom.user_nick }<br><br>
+						거래내용 : "${trade.trade_category }" 카테고리<br>
+						-> ${chatroom.trade_title }
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<label>총 결제 금액</label><br>
-				 			<input type="text" size="10" id="pay_amount" value="${appointment.app_price }" readonly/>원
+						<label><b>총 결제 금액</b></label><br>
+						${appointment.app_price }원
 					</td>
 				</tr>
 			</table>
