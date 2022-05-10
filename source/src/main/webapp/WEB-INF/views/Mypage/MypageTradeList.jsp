@@ -39,7 +39,7 @@
 		  				<td>${trade.trade_date}</td>
 		  				<td>${trade.trade_buyinfo}</td>
 		  				<td>${trade.trade_review}</td>
-		  				<td><input class="btn btn-success" type="button" onclick="location.href='getMypageTrade?trade_seq=${trade.trade_seq}'" value="리뷰작성"></td>
+		  				<td><input class="btn btn-success" type="button" onClick="checkReview('${trade.trade_buyinfo}',${trade.trade_seq})" value="리뷰작성"></td>
 		  			</tr>
 				</c:forEach>
 	    	</tbody>
@@ -76,6 +76,13 @@ function pageFnc(np){
 	frm.action = "/Mypage/getMypageTradeSerch";
 	frm.method = "post";
 	frm.submit();	
+}
+function checkReview(val1,val2){
+		if(val1==='${userNick}'){
+		location.href = '/Mypage/getMypageTrade?trade_seq='+val2;
+		}else{
+			alert("권한이 없습니다");
+		}
 }
 </script>
 
