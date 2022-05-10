@@ -15,7 +15,6 @@ window.onload=function(){
 }
 window.onpageshow=function(event){
 	if(event.persisted || (window.performance&&window.performance.navigation.type==2))	{
-		alert("from jointel");
 		document.join_tel.action='/Join/joinFail';
 		document.join_tel.method='post';
 		document.join_tel.submit();

@@ -18,7 +18,6 @@ function init(){
 }
 window.onpageshow=function(event){
 	if(event.persisted || (window.performance&&window.performance.navigation.type==2))	{
-		alert("from joinarea");
 		document.form.action='/Join/joinFail';
 		document.form.method='post';
 		document.form.submit();

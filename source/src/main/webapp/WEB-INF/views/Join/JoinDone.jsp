@@ -22,7 +22,6 @@ window.onload=function(){
 };
 window.onpageshow=function(event){
 	if(event.persisted || (window.performance&&window.performance.navigation.type==2))	{
-		alert("from joindone");
 		document.join_done.action='/Join/joinFail';
 		document.join_done.method='post';
 		document.join_done.submit();

@@ -55,10 +55,6 @@ window.onpageshow = function(event) {
 				<button type="button" class="login_next_btn next_btn" disabled>로그인</button> 
 			</div>
 			<div class="login_opts_wrap">
-				<div class="autoLogin">
-					<input type="checkbox" name="autoLogin" id="autoLogin"/>
-					<label for="autoLogin">자동로그인</label>
-				</div>
 				<a class="link_to_inquiry" href="/Inquiry/GetInqList">로그인이 안되시나요?</a>
 			</div>
 		</form>
