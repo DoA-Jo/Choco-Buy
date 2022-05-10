@@ -21,13 +21,13 @@ public class CertifiedPhoneNumber {
 		params.put("text", "[TEST] 인증번호는" + "["+randomNumber+"]" + "입니다."); // 문자 내용 입력 
 		params.put("app_version", "test app 1.2"); // application name and version 		
 		System.out.println("인증번호: "+randomNumber);
-//		try { 
-//			JSONObject obj = (JSONObject) coolsms.send(params); 
-//			System.out.println(obj.toString()); 
-//		} catch (CoolsmsException e) { 
-//			System.out.println(e.getMessage());
-//			System.out.println(e.getCode()); 
-//		} 		
+		try { 
+			JSONObject obj = (JSONObject) coolsms.send(params); 
+			System.out.println(obj.toString()); 
+		} catch (CoolsmsException e) { 
+			System.out.println(e.getMessage());
+			System.out.println(e.getCode()); 
+		} 		
 	}
 }
 																															
