@@ -54,8 +54,11 @@
 		</mvc:interceptor>
 	</mvc:interceptors>
 	
+	<!-- 예외처리 설정 -->
+	<bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="defaultErrorView" value="/error/error"></property>
+	</bean>
 	
-
 	<!-- SECURITY -->	
 	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
 	
