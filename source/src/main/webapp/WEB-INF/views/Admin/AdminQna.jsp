@@ -47,7 +47,7 @@
 							<td><input type="checkbox"></td>
 							<td><%out.print(num++); %></td>
 							<td>${qna.qna_seq }</td>
-							<td class="one-line"><a target="_blank" href="/Qna/getQna?qna_seq=${qna.qna_seq }">${qna.qna_title }</a></td>
+							<td class="one-line"><a target="_blank" href="/Service/getQna?qna_seq=${qna.qna_seq }">${qna.qna_title }</a></td>
 							<td class="one-line">${qna.qna_content }</td>
 							<td>${qna.qna_date }</td>
 						</tr>
