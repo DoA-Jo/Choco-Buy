@@ -91,7 +91,7 @@
 			
 		    <div class="payBtnBox">
 		 		<button type="button" class="btn btn-light btn-lg" onclick="location.href='/Trade/getTradeList'">취소하기</button>
-				<button type="button" class="btn btn-info btn-lg" onclick="location.href='/Pay/Pay'">결제하기</button>
+				 <button type="button" onclick="location.href='/Pay/Pay?chatroom_seq=${chatroom.chatroom_seq}'" class="btn btn-info btn-lg" role="button">결제하기</button>
 			</div>
 			
 		</div>
