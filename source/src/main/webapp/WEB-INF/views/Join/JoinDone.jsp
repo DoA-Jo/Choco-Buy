@@ -19,7 +19,16 @@
 <script>
 window.onload=function(){
 	document.querySelector('.progress_container > #onehundred').setAttribute('checked',true);
-}
+};
+window.onpageshow=function(event){
+	if(event.persisted || (window.performance&&window.performance.navigation.type==2))	{
+		alert("from joindone");
+		document.join_done.action='/Join/joinFail';
+		document.join_done.method='post';
+		document.join_done.submit();
+	}
+
+};
 </script>
 </head>
 <body>

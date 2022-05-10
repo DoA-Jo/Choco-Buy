@@ -12,7 +12,16 @@
 <script>
 window.onload=function(){
 	document.querySelector('.progress_container > #eighty').setAttribute('checked',true);
-}
+};
+window.onpageshow=function(event){
+	if(event.persisted || (window.performance&&window.performance.navigation.type==2))	{
+		alert("from joinnick");
+		document.join_nick.action='/Join/joinFail';
+		document.join_nick.method='post';
+		document.join_nick.submit();
+	}
+
+};
 </script>
 </head>
 <body>

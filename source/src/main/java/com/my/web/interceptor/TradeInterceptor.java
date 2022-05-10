@@ -9,7 +9,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 public class TradeInterceptor extends HandlerInterceptorAdapter {
 
 	static final String[] EXCLUDE_URL_LIST = {
-		"/Login", "/Join", "/index"
+		"/Login", "/Join", "/index", "/favicon"
 	};
 
 	@Override
@@ -20,6 +20,7 @@ public class TradeInterceptor extends HandlerInterceptorAdapter {
 		
 //		인덱스 패스
 		String path = uri.substring(context.length()); 
+		System.out.println("path: "+path);
 		if(path.equals("/")) {
 			return true;
 		}
@@ -30,14 +31,14 @@ public class TradeInterceptor extends HandlerInterceptorAdapter {
 				return true;
 			}
 		}
-		///
+				
 		HttpSession session = request.getSession();
 		String UserInfo = (String)session.getAttribute("UserInfo");
 		
 		if(UserInfo == null || UserInfo.trim().equals("")) {
 			response.sendRedirect("/Login/login");
 			return false;
-		}		
+		}
 		return true;
 	}
 } 	

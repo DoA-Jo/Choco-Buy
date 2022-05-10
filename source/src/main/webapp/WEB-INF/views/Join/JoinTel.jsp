@@ -13,6 +13,15 @@
 window.onload=function(){
 	document.querySelector('.progress_container > #forty').setAttribute('checked',true);
 }
+window.onpageshow=function(event){
+	if(event.persisted || (window.performance&&window.performance.navigation.type==2))	{
+		alert("from jointel");
+		document.join_tel.action='/Join/joinFail';
+		document.join_tel.method='post';
+		document.join_tel.submit();
+	}
+
+};
 </script>
 </head>
 <body>

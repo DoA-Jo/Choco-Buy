@@ -23,13 +23,12 @@ public class LoginController {
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping("/Join/joinFail")
+	@RequestMapping(value="/Join/joinFail", method=RequestMethod.POST)
 	public String joinFail(HttpSession session, UserVO vo) {
 		System.out.println("Controller >> joinFail");
-		//1. 세션에서 uuid받아서 (쿼리문)삭제하기 2.세션삭제하기
-		userService.deleteUser(vo.getUser_tel());
-		if(session.getAttribute("UserInfo")!= null) {
-			session.removeAttribute("UserInfo"); 
+		session=(HttpSession) session.getAttribute("user");
+		if(session!= null) {
+			session.removeAttribute("user"); 
 			session.invalidate();
 		}
 		return "/Join/JoinFail";
@@ -53,7 +52,7 @@ public class LoginController {
 	   @RequestMapping(value="/Login/login",method=RequestMethod.GET)
 	   public String login_View(HttpSession session) {
 	      if(session.getAttribute("user")!= null) {
-	         System.out.println("user session delete");
+	         System.out.println("login-get//session(user) delete");
 	         session.invalidate();
 	      }
 	      return "/Login/login";
@@ -61,11 +60,18 @@ public class LoginController {
 	
 	// LOGIN-post	
 	@RequestMapping(value="/Login/login", method=RequestMethod.POST)
-	public String login(UserVO vo, HttpSession session) {
+	public String login(UserVO vo, HttpSession session, HttpServletRequest request) {
+		System.out.println("Controller >> login");
+		//회원가입 시 사용했던 user세션이 존재한다면 삭제
+		if(session.getAttribute("user")!= null) {
+	         System.out.println("login-post//session(user) delete");
+	         session.invalidate();
+		}
 		UserVO user=userService.getUser(vo);
 		System.out.println("user: "+user);
-		if(userService.getUser(vo)!=null){
-			//session update : user_uuid
+		session = request.getSession();
+		if(user!=null){
+			//UserInfo session update (value=user_uuid)
 			session.setAttribute("UserInfo", user.getUser_uuid());
 			if(user.getUser_role()==100) {
 				return "redirect:/Admin/adminMain";
@@ -131,6 +137,7 @@ public class LoginController {
 	
 	@RequestMapping(value="/Join/joinArea", method=RequestMethod.GET)
 	public String joinArea_view() {
+		System.out.println("joinArea_view()");
 		return "/Join/JoinArea";
 	}
 	
