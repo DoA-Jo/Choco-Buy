@@ -12,7 +12,7 @@
 			
 			<table class="table table-hover w-auto mx-auto pay_table">
 				<tr>
-					<th colspan="2"><font size="30">결제가 완료되었습니다!</font></th>
+					<th colspan="4"><font size="30">결제가 완료되었습니다!</font></th>
 				</tr>
 				<tr>
 					<th size="250">주문번호</th>
