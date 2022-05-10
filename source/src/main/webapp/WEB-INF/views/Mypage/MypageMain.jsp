@@ -9,7 +9,7 @@
 		   		<li class="list-group-item" id="aa">내 정보 관리</li>
 			    <li class="list-group-item item-content">
 					<div class="row">
-					    <div class="col-sm-3"> <img class="mylogo"></div>
+					<div class="col-sm-3"> <img src="${pageContext.request.contextPath}/resources/img/profileImg/${user.user_profileImg}" ></div>
 				    	<div class="col-sm-9">
 							<form action="/Mypage/updateMypageUser" method="post" name="fr">
 								<div class="input-group mb-2">
