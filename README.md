@@ -28,7 +28,7 @@
 
 
 
-### 🛠 주요 기술 스택
+## 🛠 주요 기술 스택
 
 <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> <img src="https://img.shields.io/badge/JAVA-007396?style=for-the-badge&logo=java&logoColor=white"> <img src="https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white"> <img src="https://img.shields.io/badge/Tomcat-F8DC75?style=for-the-badge&logo=apachetomcat&logoColor=black"> <img src="https://img.shields.io/badge/Github-181717?style=for-the-badge&logo=github&logoColor=white"> <img src="https://img.shields.io/badge/MariaDB-003545?style=for-the-badge&logo=mariadb&logoColor=white"> <img src="https://img.shields.io/badge/Bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white"> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=white"> <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white"> <img src="https://img.shields.io/badge/spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white"> <img src="https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white"> <img src="https://img.shields.io/badge/AJAX-232F3E?style=for-the-badge&logo=ajax&logoColor=white"> 
 
@@ -50,23 +50,32 @@
 
 ## :airplane: 페이지 소개
 
-### 회원가입
+### 1. 회원가입 / 로그인
 
-### 로그인
+<details>
+    <summary>회원가입</summary>
+    <div markdown="1">
 
-### 게시글
+        dd
+        
+    </div>
+</details>
 
-### 채팅
 
-### 결제
 
-### 마이페이지
+### 2. 게시글
 
-### 1:1 문의
+### 3. 채팅
 
-### 고객센터
+### 4. 결제
 
-### 관리자 페이지
+### 5. 마이페이지
+
+### 6. 1:1 문의
+
+### 7. 고객센터 / 자주 묻는 질문
+
+### 8. 관리자 페이지
 
 
 
