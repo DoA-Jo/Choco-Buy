@@ -8,8 +8,8 @@
 
 |                    이름                     |          포지션 및 담당 파트           |                 기타                  |
 | :-----------------------------------------: | :------------------------------------: | :-----------------------------------: |
-|     [김혜린](https://github.com/gimae1)     | 부팀장, [Trade(게시글)](# 거래 페이지) |              페이지 통합              |
-|   [민성호](https://github.com/Hernameis)    |  팀장, [Admin(관리자)](# 메인 페이지)  | 서비스 호스팅, 깃허브 관리, 파일 통합 |
+|     [김혜린](https://github.com/gimae1)     | 부팀장, [Trade(게시글)](# 거래-페이지) |              페이지 통합              |
+|   [민성호](https://github.com/Hernameis)    |  팀장, [Admin(관리자)](# 메인-페이지)  | 서비스 호스팅, 깃허브 관리, 파일 통합 |
 |     [민지홍](https://github.com/may-jh)     |               Pay(결제)                |   kakao map, I'm port 결제 api 활용   |
 |                   신예정                    |               Chat(채팅)               |                                       |
 |   [심현정](https://github.com/jwsimhj97)    |           Inquiry(1:1 문의)            |    CSS 통합, DB 테이블 유효성 관리    |
