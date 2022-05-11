@@ -54,7 +54,7 @@
     <summary>메인 페이지</summary>
     <div markdown="1">
 
-<img src="./img/ppt/index.PNG">
+<img src="./img/ppt/index.PNG" align="center">
 
 </details>
 
@@ -62,7 +62,11 @@
     <summary>회원가입/로그인 페이지</summary>
     <div markdown="1">
 
+<img src="./img/ppt/join1.PNG" align="center">
 
+<img src="./img/ppt/join2.PNG" align="center">
+
+<img src="./img/ppt/login1.PNG" align="center">
 
 </details>
 
@@ -70,7 +74,11 @@
     <summary>거래 페이지</summary>
     <div markdown="1">
 
+<img src="./img/ppt/trade1.PNG" align="center">
 
+<img src="./img/ppt/trade2.PNG" align="center">
+
+<img src="./img/ppt/trade3.PNG" align="center">
 
 </details>
 
@@ -78,7 +86,11 @@
     <summary>채팅 페이지</summary>
     <div markdown="1">
 
+<img src="./img/ppt/chat1.PNG" align="center">
 
+<img src="./img/ppt/chat2.PNG" align="center">
+
+<img src="./img/ppt/chat3.PNG" align="center">
 
 </details>
 
@@ -86,7 +98,9 @@
     <summary>결제 페이지</summary>
     <div markdown="1">
 
+<img src="./img/ppt/pay1.PNG" align="center">
 
+<img src="./img/ppt/pay2.PNG" align="center">
 
 </details>
 
@@ -94,7 +108,9 @@
     <summary>마이 페이지</summary>
     <div markdown="1">
 
+<img src="./img/ppt/mypage1.PNG" align="center">
 
+<img src="./img/ppt/mypage2.PNG" align="center">
 
 </details>
 
@@ -102,7 +118,11 @@
     <summary>1:1 문의 페이지</summary>
     <div markdown="1">
 
+<img src="./img/ppt/inquiry1.PNG" align="center">
 
+<img src="./img/ppt/inquiry2.PNG" align="center">
+
+<img src="./img/ppt/inquiry3.PNG" align="center">
 
 </details>
 
@@ -110,7 +130,11 @@
     <summary>고객센터 페이지</summary>
     <div markdown="1">
 
+<img src="./img/ppt/service1.PNG" align="center">
 
+<img src="./img/ppt/service2.PNG" align="center">
+
+<img src="./img/ppt/service3.PNG" align="center">
 
 </details>
 
@@ -118,7 +142,7 @@
     <summary>관리자 페이지</summary>
     <div markdown="1">
 
-
+<img src="./img/ppt/admin1.PNG" align="center">
 
 </details>
 
@@ -184,3 +208,9 @@
                     ├─template
                     └─Trade
 ```
+
+
+
+## :date: 업데이트 예정
+
+관리자 페이지 : 접속 로그 파일로 남기기.
