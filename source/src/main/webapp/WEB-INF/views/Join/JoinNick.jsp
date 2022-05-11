@@ -3,7 +3,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>회원가입 | 초코바이</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
@@ -15,7 +16,6 @@ window.onload=function(){
 };
 window.onpageshow=function(event){
 	if(event.persisted || (window.performance&&window.performance.navigation.type==2))	{
-		alert("from joinnick");
 		document.join_nick.action='/Join/joinFail';
 		document.join_nick.method='post';
 		document.join_nick.submit();
