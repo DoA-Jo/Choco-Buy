@@ -6,16 +6,16 @@
 팀명 : 도와조  
 팀원 : [김혜린](https://github.com/gimae1) [민성호](https://github.com/Hernameis) [민지홍](https://github.com/may-jh) 신예정 [심현정](https://github.com/jwsimhj97) [이혜미](https://github.com/Flowerdrumsong) [장우혁](https://github.com/dgh03052) 최재현   
 
-|                    이름                     |          포지션 및 담당 파트           |                 기타                  |
-| :-----------------------------------------: | :------------------------------------: | :-----------------------------------: |
-|     [김혜린](https://github.com/gimae1)     |         부팀장, Trade(게시글)          |              페이지 통합              |
-|   [민성호](https://github.com/Hernameis)    |          팀장, Admin(관리자)           | 서비스 호스팅, 깃허브 관리, 파일 통합 |
-|     [민지홍](https://github.com/may-jh)     |               Pay(결제)                |                                       |
-|                   신예정                    |               Chat(채팅)               |                                       |
-|   [심현정](https://github.com/jwsimhj97)    |           Inquiry(1:1 문의)            |    CSS 통합, DB 테이블 유효성 관리    |
-| [이혜미](https://github.com/Flowerdrumsong) |     Join(회원가입), Login(로그인)      |   kakao map, I'm port 결제 api 사용   |
-|    [장우혁](https://github.com/dgh03052)    | Service(고객센터), Qna(자주 묻는 질문) |                                       |
-|                   최재현                    |          Mypage(마이 페이지)           |          도로명주소 api 사용          |
+|                    이름                     |                  포지션 및 담당 파트                   |                 기타                  |
+| :-----------------------------------------: | :----------------------------------------------------: | :-----------------------------------: |
+|     [김혜린](https://github.com/gimae1)     |         부팀장, [Trade(게시글)](#거래 페이지)          |              페이지 통합              |
+|   [민성호](https://github.com/Hernameis)    | 팀장, [Admin(관리자)](#<summary>메인 페이지</summary>) | 서비스 호스팅, 깃허브 관리, 파일 통합 |
+|     [민지홍](https://github.com/may-jh)     |                       Pay(결제)                        |   kakao map, I'm port 결제 api 활용   |
+|                   신예정                    |                       Chat(채팅)                       |                                       |
+|   [심현정](https://github.com/jwsimhj97)    |                   Inquiry(1:1 문의)                    |    CSS 통합, DB 테이블 유효성 관리    |
+| [이혜미](https://github.com/Flowerdrumsong) |             Join(회원가입), Login(로그인)              |     coolsms, 도로명주소 api 활용      |
+|    [장우혁](https://github.com/dgh03052)    |         Service(고객센터), Qna(자주 묻는 질문)         |                                       |
+|                   최재현                    |                  Mypage(마이 페이지)                   |          도로명주소 api 활용          |
 
 
 
@@ -44,7 +44,7 @@
 
 
 
-클라이언트 요청 -> WAS (컨트롤러 -> DB 접근 -> jsp) -> 클라이언트 응답 (이미지로 대체)
+클라이언트 요청 -> WAS (컨트롤러 -> DB 접근 -> jsp) -> 클라이언트 응답 (이미지로 대체 예정)
 
 
 
@@ -53,7 +53,6 @@
 <details>
     <summary>메인 페이지</summary>
     <div markdown="1">
-
 <img src="./img/ppt/index.PNG" align="center">
 
 </details>
