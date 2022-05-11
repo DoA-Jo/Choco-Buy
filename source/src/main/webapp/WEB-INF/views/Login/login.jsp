@@ -35,7 +35,7 @@ window.onpageshow = function(event) {
 </head>
 <body>
 <div class="login_inner inner">
-	<h1 class="title">chocobuy</h1>
+	<h1 class="title"><a href="/index">chocobuy</a></h1>
 	<div class="content login_content">
 		<form id="login_tel" name="login_tel">
 			<div class="desc"> 
@@ -57,10 +57,6 @@ window.onpageshow = function(event) {
 				<button type="button" class="login_next_btn next_btn" disabled>로그인</button> 
 			</div>
 			<div class="login_opts_wrap">
-				<div class="autoLogin">
-					<input type="checkbox" name="autoLogin" id="autoLogin"/>
-					<label for="autoLogin">자동로그인</label>
-				</div>
 				<a class="link_to_inquiry" href="/Inquiry/GetInqList">로그인이 안되시나요?</a>
 			</div>
 		</form>
