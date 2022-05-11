@@ -81,7 +81,8 @@ function checkReview(val1,val2){
 		if(val1==='${userNick}'){
 		location.href = '/Mypage/getMypageTrade?trade_seq='+val2;
 		}else{
-			alert("권한이 없습니다");
+		location.href = '/Mypage/getMypageTrade?trade_seq='+val2;
+		//alert("권한이 없습니다");
 		}
 }
 </script>

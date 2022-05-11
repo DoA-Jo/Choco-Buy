@@ -10,7 +10,7 @@
 	   		<li class="list-group-item" id="aa">리뷰 작성</li>
 		    <li class="list-group-item item-content">
 				<div class="row">
-				    <div class="col-sm-3"> <img class="mylogo"></div>
+				    <div class="col-sm-3"> <img src="${pageContext.request.contextPath}/resources/img/profileImg/${user.user_profileImg}" ></div>
 			    	<div class="col-sm-9">
 						<form action="updateMypageReview" method="post" name="fr" onsubmit="return check();">
 						    <div class="form-group">

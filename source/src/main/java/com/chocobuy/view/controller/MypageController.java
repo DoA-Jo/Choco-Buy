@@ -106,10 +106,12 @@ public class MypageController {
 	// getMypageTrade 메소드 명으로 변경 됨 
 	// 사실 getTrade() 기능 사용해도 무방하나 겹치는걸 방지하기 위해  네이밍 작업 
 	@RequestMapping("/Mypage/getMypageTrade")
-	public String getMypageTrade(TradeVO vo, Model model) {
+	public String getMypageTrade(TradeVO vo, UserVO uo,Model model,HttpSession session) {
 		System.out.println(vo.getTrade_seq());
 		model.addAttribute("trade", tradeService.getMypageTrade(vo));
 		System.out.println(tradeService.getMypageTrade(vo));
+		uo.setUser_uuid((String)session.getAttribute("UserInfo"));
+		model.addAttribute("user", userService.getMypageUser(uo));
 		return "/Mypage/MypageTrade";
 	}
 	
