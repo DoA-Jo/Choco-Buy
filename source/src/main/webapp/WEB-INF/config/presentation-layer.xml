@@ -58,14 +58,4 @@
 	<bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		<property name="defaultErrorView" value="/error/error"></property>
 	</bean>
-	
-	<!-- SECURITY -->	
-	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
-	
-	<bean id="webContentInterceptor" class="org.springframework.web.servlet.mvc.WebContentInterceptor">
-		<property name="cacheSeconds" value="0"/>
-		<property name="useExpiresHeader" value="true"/>
-		<property name="useCacheControlHeader" value="true"/>
-		<property name="useCacheControlNoStore" value="true"/>
-	</bean>
 </beans>
