@@ -9,7 +9,7 @@
             <section class="">
 				<div class="container-fluid">
 				
-					<form action="updateTrade" method="post">
+					<form action="updateTrade" method="post" class="update_tradeImg">
 						<div class="imgBox mb-3 mt-3">
 							<img src="${pageContext.request.contextPath}/resources/img/upload/${trade.trade_img}">
 						</div>
