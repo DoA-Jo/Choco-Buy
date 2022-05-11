@@ -1,19 +1,36 @@
 [프로젝트 살펴보기 ](http://chocobuy250.ml:8080/) (~2022.07.29까지 호스팅)  
 
 팀명 : 도와조  
-팀원 : 김혜린 민성호 민지홍 신예정 심현정 이혜미 장우혁 최재현  
+팀원 : [김혜린](https://github.com/gimae1) [민성호](https://github.com/Hernameis) [민지홍](https://github.com/may-jh) 신예정 [심현정](https://github.com/jwsimhj97) [이혜미](https://github.com/Flowerdrumsong) [장우혁](https://github.com/dgh03052) 최재현  
 프로젝트 기간 : 2022/04/04 - 2022/05/11 (월-금 09:30 - 18:20)  
+
+|  이름  |       맡은 역할       |     역할 외 기여     |
+| :----: | :-------------------: | :------------------: |
+| 김혜린 |     부팀장, Trade     |                      |
+| 민성호 |      팀장, Admin      | 호스팅, 깃허브 관리, |
+| 민지홍 |          Pay          |                      |
+| 신예정 |         Chat          |                      |
+| 심현정 |     1:1 문의 담당     |                      |
+| 이혜미 | 회원가입, 로그인 담당 |                      |
+| 장우혁 |     고객센터 담당     |                      |
+| 최재현 |   마이 페이지 담당    |                      |
+
+
 
 <details>
     <summary>역할</summary>
     <div markdown="1">
-        민성호 - 팀장<br>
-        김혜린 - 부팀장<br>
-        기타 12345
+        <p>
+         민성호 - 팀장<br>
+         김혜린 - 부팀장<br>
+         기타 12345
+        </p>
     </div>
 </details>
 
 # :eyes: 프로젝트 Choco-Buy
+
+
 
 ## 개요
 
@@ -21,6 +38,8 @@
 > 이웃과 함께 해결할 수 있는  공간
 
 <img src="./img/chocobuy_concept.png" align="left">
+
+
 
 ## 주요 기술 스택
 
@@ -33,25 +52,37 @@
             <thead>
                 <th>이름</th>
                 <th>버전</th>
-                <th>이유</th>
+                <th>기술, 버전 선택 이유</th>
             </thead>
             <tbody>
             	<tr>
                     <td>JAVA</td>
                     <td>8</td>
-                    <td>이유</td>
+                    <td>좋으니까!</td>
                 </tr>
             </tbody>
         </table>
     </div>
 </details>
 
+
+
 ## 디렉토리 구조
 
-
-
-view
+class단
 
 ```
 ```
 
+view단
+
+```
+├── src/
+│   ├── App.js
+│   ├── index.js
+│   └── ebconfig.js  <–––
+├── assets/
+├── package.json
+```
+
+resources
