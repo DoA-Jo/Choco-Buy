@@ -44,7 +44,7 @@
 
 
 
-<img src="./img/was_structure.PNG" align="center">
+<img src="./img/was_structure.png" align="center">
 
 
 
