@@ -50,25 +50,21 @@
 
 ## :airplane: 페이지 소개
 
-### 1. 회원가입 / 로그인
+<details>
+    <summary>메인 페이지</summary>
+    <div markdown="1">
+
+<img src="./img/ppt/index.PNG">
+
+</details>
 
 <details>
-    <summary>회원가입 페이지</summary>
+    <summary>회원가입/로그인 페이지</summary>
     <div markdown="1">
 
 
 
 </details>
-
-<details>
-    <summary>로그인 페이지</summary>
-    <div markdown="1">
-
-
-
-</details>
-
-### 2. 게시글
 
 <details>
     <summary>거래 페이지</summary>
@@ -78,8 +74,6 @@
 
 </details>
 
-### 3. 채팅
-
 <details>
     <summary>채팅 페이지</summary>
     <div markdown="1">
@@ -87,8 +81,6 @@
 
 
 </details>
-
-### 4. 결제
 
 <details>
     <summary>결제 페이지</summary>
@@ -98,8 +90,6 @@
 
 </details>
 
-### 5. 마이 페이지
-
 <details>
     <summary>마이 페이지</summary>
     <div markdown="1">
@@ -107,8 +97,6 @@
 
 
 </details>
-
-### 6. 1:1 문의
 
 <details>
     <summary>1:1 문의 페이지</summary>
@@ -118,8 +106,6 @@
 
 </details>
 
-### 7. 고객센터 / 자주 묻는 질문
-
 <details>
     <summary>고객센터 페이지</summary>
     <div markdown="1">
@@ -127,8 +113,6 @@
 
 
 </details>
-
-### 8. 관리자 페이지
 
 <details>
     <summary>관리자 페이지</summary>
