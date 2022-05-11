@@ -9,7 +9,7 @@
             <section class="">
 				<div class="container-fluid">
 				
-					<form action="updateTrade" method="post" class="update_tradeImg">
+					<form action="updateTrade" method="post">
 						<div class="imgBox mb-3 mt-3">
 							<img src="${pageContext.request.contextPath}/resources/img/upload/${trade.trade_img}">
 						</div>
@@ -40,7 +40,7 @@
 					</form>
 					<!-- 본인이 아닐때 만 신고 가능 -->
 					<c:if test="${trade.trade_uuid ne UserInfo}">
-							<button onClick="location.href='updateReporting'" type="button" class="btn btn-Basic">유저 신고</button>
+							<button id="reportingBtn" onClick="location.href='updateReporting'" type="button" class="btn btn-Basic">게시글 신고</button>
 					</c:if>
 					
 				</div>
