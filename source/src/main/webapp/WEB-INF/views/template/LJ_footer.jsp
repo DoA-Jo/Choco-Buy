@@ -11,6 +11,6 @@ if (request.getProtocol().equals("HTTP/1.1"))
 
 <footer class="LJ_footer">
     <div class="LJ_copy_area">
-		<p>본 사이트는 교육용으로 제작된 가상의 사이트로 실제 사용이 불가능합니다.<br>COPYRIGHT © 2022. <a href="/index">CHOCO-BUY</a> Team DOWAJO. All rights reserved.</p>
+		<p>본 사이트는 교육용으로 제작된 <br class="mobile">가상의 사이트로 <br class="mobile2">실제 사용이 불가능합니다.<br>COPYRIGHT © 2022. <br class="mobile2"><a href="/index">CHOCO-BUY</a> Team DOWAJO. <br class="mobile">All rights reserved.</p>
     </div>
 </footer>

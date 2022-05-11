@@ -83,3 +83,43 @@ a:active{color:red;    text-decoration: none;}
 
 
 
+/* 모바일 */
+@media screen and (max-width: 600px) {
+	h1 {margin: 30px !important; font-size: 30px !important;}
+	.servicePage .warp {padding-top: 0;}
+	.qnaPage .warp {padding-top: 0;}
+	
+	.servicePage .warp {display:block;}
+	.servicePage .warp > div {width:100%;}
+	.serviceBar {margin-bottom:30px;}
+	.serviceBar .nav {display:block; overflow:hidden;}
+	.serviceBar .nav > li {display:inline-block; float:left; width:50%;}
+	.serviceBar .nav > li > a {padding: 15px 0; text-align: center; border:1px solid #ddd;}
+	.serviceBar .nav > li:first-child > a {border-right:0;}
+	
+	.serviceTotal {}
+	.serviceTotal .searchTable{margin-bottom:30px;} 
+	.serviceTotal .searchTable > * {width:100%; height:45px; text-indent: 10px; margin: 0 0 5px;}
+	.serviceTotal .searchTable > *:last-child {margin-bottom:0;}
+	.serviceTotal .searchSubmit {text-indent:0;}
+	
+	
+	
+	.qnaPage .warp {display:block;}
+	.qnaPage .warp > div {width:100%;}
+	.qnaBar {margin-bottom:30px;}
+	.qnaBar .nav {display:block; overflow:hidden;}
+	.qnaBar .nav > li {display:inline-block; float:left; width:50%;}
+	.qnaBar .nav > li > a {padding: 15px 0; text-align: center; border:1px solid #ddd;}
+	.qnaBar .nav > li:first-child > a {border-right:0;}
+	
+	.qnaTotal {}
+	.qnaTotal .searchTable{margin-bottom:30px;} 
+	.qnaTotal .searchTable > * {width:100%; height:45px; text-indent: 10px; margin: 0 0 5px;}
+	.qnaTotal .searchTable > *:last-child {margin-bottom:0;}
+	.qnaTotal .searchSubmit {text-indent:0;}
+	
+}
+
+@media screen and (max-width: 400px) {
+}

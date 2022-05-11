@@ -46,6 +46,9 @@
 	    //이미지를 image-show div에 추가
 	    var container = document.getElementById('imageShow');
 	    container.style.height = "500px";	
+	    if(document.body.offsetWidth <= 600){
+	    	container.style.height = "300px";	
+	    }
 	    container.appendChild(newImage);
 	    
 	    $("#chooseFile").hide();

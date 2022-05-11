@@ -72,9 +72,20 @@
 
 /* 모바일 */
 @media screen and (max-width: 600px) {
+	.myTrade_wrap h1 {font-size: 30px;}
+	
+	.myTrade_wrap .search {margin-bottom:30px;}
+	.myTrade_wrap .search > form {display:block;}
+	.myTrade_wrap .search > form > * {width:100%; margin-left: 0; margin-bottom: 5px;}
+	
+	
 	.mypage_wrap .list-group .col-sm-9 .form-control {width:100%; border-radius: 4px; margin-bottom: 5px;}
 	.mypage_wrap .list-group .col-sm-9 .form-control:last-child {margin-bottom:0;}
 	.mypage_wrap .form-group {height: auto; min-height: 50px;}
+	
+	.myTrade_wrap .table {width:100%; overflow-x:scroll; overflow-y:hidden; display:block;}
+	.myTrade_wrap #backbtn {width:100%; display:block;}
+	.myTrade_wrap #pgCnt {display:block; width:100%; margin: 0 auto;}
 }
 
 @media screen and (max-width: 400px) {

@@ -95,4 +95,6 @@ body.scrollbar_hide::-webkit-scrollbar {display: none; /* Chrome, Safari, Opera*
 	.inqBtnBox > button {width:100%; margin-bottom:5px;}
 	.inqBtnBox > button:last-child {margin-bottom:0;}
 	.inqBtnBox > button + button {margin-left:0;}
+	
+	.inqListTable table {display:block; width:100%; overflow-x: scroll; overflow-y:hidden;}
 }

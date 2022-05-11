@@ -114,6 +114,8 @@
 @media screen and (max-width: 600px) {
 	.container {margin: 0 30px; width: calc(100% - 60px);}
 	
+	#bannerContainer .slick-background .bannerWrap {margin: 0 30px; width: calc(100% - 60px); padding: 40px 0;}
+	
 	.header .container {display: block; text-align: center;}
 	.header .container > div {width:100%;}
 	.header .hdMenuBox{position: inherit; top: auto; transform: none;}
@@ -133,6 +135,13 @@
 }
 
 @media screen and (max-width: 400px) {
-	.header .hdMenuBox ul li a {font-size:14px;}
+   .header .hdMenuBox ul li a {font-size:14px;}
+	
+	.menuLink {font-size:13px;}
+	
+   .footer .ft_txt .nameTxt {display:block;}
+   .footer .ft_txt .nameTxt > div {width:100%; padding:0; margin:0;}
+   .footer .ft_txt .nameTxt > div:first-child:after {content:none;}
+   
 }
 
