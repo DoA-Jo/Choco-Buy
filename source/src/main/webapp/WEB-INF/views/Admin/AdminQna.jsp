@@ -26,7 +26,7 @@
 		</nav>
 		
 		<div class="buttons">
-			<button class="btn btn-success" onclick="window.open('/Qna/Qnawrite')">글쓰기</button>
+			<button class="btn btn-success" onclick="window.open('/Service/Qnawrite')">글쓰기</button>
 		</div>
 		
 		<div class="list">
