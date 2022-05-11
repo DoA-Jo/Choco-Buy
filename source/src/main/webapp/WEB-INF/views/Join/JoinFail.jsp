@@ -12,8 +12,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 <title>회원가입 | 초코바이</title>
 <style>
-.logoBox{width: 400px; height: 120px; background: url("/resources/img/common/logo.svg") no-repeat; background-size: contain; display: inline-block; text-indent: -9999px;}
-.fail_content{width:500px;height:500px;margin:0 auto;text-align: center; padding:50px;}
+.fail_content{width:500px;height:500px; padding:50px;text-align: center; position:absolute; top:50%;left:50%;transform: translate(-50%,-56%);}
 .fail_content h1{width: 400px;} 
 .fail_content .icon{width:80px;height:80px;color:#58a6a6;margin:0 auto;padding:10px;line-height:50px;font-size: 50px;border:4px solid #58a6a6; border-radius: 50%;}
 .fail_content .auto_redirect_desc{display:block;margin: 50px 0;}
@@ -41,17 +40,15 @@ window.onload=function(){
 </script>
 </head>
 <body>
-	<div class="logoBox">
-	    <a href="/Trade/getTradeList" class="logo">CHOCO-BUY logo</a>
-	</div>
-	<div class="fail_content">
-	        <div class="icon"><i class="fas fa-exclamation"></i></div>
-	        <h1>웹페이지가 만료되었습니다.</h1>
-            <span class="auto_redirect_desc"></span>
-	        <div class="fail_btn_area">
-	            <a class="goJoinAgree" href="/Join/joinAgree">회원가입으로 돌아가기</a>
-	            <!-- <a class="goMain" href="/index">메인으로</a> -->
-	    </div>
-	</div>
+<div class="fail_content">
+        <div class="icon"><i class="fas fa-exclamation"></i></div>
+        <h1>웹페이지가 만료되었습니다.</h1>
+           <span class="auto_redirect_desc"></span>
+        <div class="fail_btn_area">
+            <a class="goJoinAgree" href="/Join/joinAgree">회원가입으로 돌아가기</a>
+            <!-- <a class="goMain" href="/index">메인으로</a> -->
+    </div>
+</div>
+<%@ include file="/WEB-INF/views/template/LJ_footer.jsp"  %>
 </body>
 </html>
