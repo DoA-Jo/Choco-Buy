@@ -119,6 +119,10 @@ a:active{color:red;    text-decoration: none;}
 	.qnaTotal .searchTable > *:last-child {margin-bottom:0;}
 	.qnaTotal .searchSubmit {text-indent:0;}
 	
+	.serviceTotal .searchTool {display:block; width:100%;}
+	.qnaTotal .searchTool {display:block; width:100%;}
+	.qnaTotal .ui-accordion .ui-accordion-content {height: auto !important;}
+	
 }
 
 @media screen and (max-width: 400px) {

@@ -60,9 +60,7 @@
 
 /* 태블릿 */
 @media screen and (max-width: 1200px) {
-	.mypage_wrap .list-group {margin-top:0;}
-	.mypage_wrap .list-group .col-sm-3 {flex: 0 0 100%; max-width: 100%; margin-bottom:20px;}
-	.mypage_wrap .list-group .col-sm-9 {flex: 0 0 100%; max-width: 100%;}
+	.mypage_wrap .item-content .row .col-sm-3 > img {width:100%;}
 }
 
 /* 태블릿2 */
@@ -86,6 +84,10 @@
 	.myTrade_wrap .table {width:100%; overflow-x:scroll; overflow-y:hidden; display:block;}
 	.myTrade_wrap #backbtn {width:100%; display:block;}
 	.myTrade_wrap #pgCnt {display:block; width:100%; margin: 0 auto;}
+	
+	.mypage_wrap .list-group {margin-top:0;}
+	.mypage_wrap .list-group .col-sm-3 {flex: 0 0 100%; max-width: 100%; margin-bottom:20px;}
+	.mypage_wrap .list-group .col-sm-9 {flex: 0 0 100%; max-width: 100%;}
 }
 
 @media screen and (max-width: 400px) {
