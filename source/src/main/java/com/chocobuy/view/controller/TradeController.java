@@ -95,7 +95,7 @@ public class TradeController {
 			tradeService.updateTrade(vo);
 			return "redirect:/Trade/getTradeList";
 	}
-	// 유저 신고
+		// 게시글 신고
 	@RequestMapping("/Trade/updateReporting")
 	public String updateUserReporting(@ModelAttribute("trade") TradeVO vo, HttpSession session) {
 		tradeService.updateReporting(vo);
@@ -104,6 +104,7 @@ public class TradeController {
 		
 		
 	}
+	
 
 	// 글 삭제
 	@RequestMapping("/Trade/deleteTrade")
