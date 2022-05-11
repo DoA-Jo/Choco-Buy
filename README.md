@@ -146,6 +146,26 @@
 
 </details>
 
+<details>
+    <summary>반응형</summary>
+    <div markdown="1">
+
+<img src="./img/ppt/response1.PNG" align="center">
+
+<img src="./img/ppt/response2.PNG" align="center">
+
+<img src="./img/ppt/response3.PNG" align="center">
+
+</details>
+
+## :date: 업데이트 예정
+
+관리자 페이지 : 접속 로그 파일로 남기기  
+로그인 페이지 : 자동 로그인, 간편 로그인  
+회원가입 페이지 : 현위치 잡기, 랜덤 별명 생성기  
+결제 페이지 : 결제수단별 PG사 다양화  
+리뷰 입력 페이지: 상대방에게 알림기능
+
 
 
 
@@ -211,6 +231,3 @@
 
 
 
-## :date: 업데이트 예정
-
-관리자 페이지 : 접속 로그 파일로 남기기.
