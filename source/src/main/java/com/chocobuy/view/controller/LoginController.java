@@ -110,7 +110,7 @@ public class LoginController {
 	            }
 	            if(user.getUser_role()==100) {
 	            	System.out.println("로그인성공(관리자)"); 
-		            return "redirect:/Admin /adminMain";
+		            return "redirect:/Admin/adminMain";
 	        	}
 	            System.out.println("로그인성공"); 
 	            return "redirect:/Trade/getTradeList";
