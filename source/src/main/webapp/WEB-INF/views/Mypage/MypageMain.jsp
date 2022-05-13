@@ -25,7 +25,7 @@
 						      		<input id="user_nick" class="form-control" type="text" name="user_nick" value="${user.user_nick}" placeholder="${user.user_nick}" readonly>
 						    	</div>
 						    	<div class="mypage_btnBox">
-							    	<button class="btn btn-outline-secondary " type="button" onClick="location.href='/Mypage/getMypageTradeSerch'" >리뷰보기</button>
+							    	<button class="btn btn-outline-secondary " type="button" onClick="location.href='/Mypage/getMypageTradeSerch'" >리뷰내용 보기</button>
 									<button class="btn btn-outline-secondary " type="button" onClick="location.href='/Mypage/getMypageProfileUpdate'" >내정보 수정</button>
 						    	</div>
 					      	</form>

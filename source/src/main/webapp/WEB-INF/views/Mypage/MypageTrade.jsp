@@ -32,7 +32,7 @@
 					      		거래일:<input id="user_tel" class="form-control" type="text"  name="trade_date" value="${trade.trade_date}" placeholder="${trade.trade_date}" readonly >
 					    	</div>
 					    	<div class="form-group">
-					      		리뷰입력:<input id="user_nick" class="form-control" type="text" name="trade_review" value="${trade.trade_review}" placeholder="${trade.trade_review}" maxlength="50" title="8자 까지 입력" required autofocus/>
+					      		리뷰입력:<input id="user_nick" class="form-control" type="text" name="trade_review" value="${trade.trade_review}" maxlength="50"  required autofocus/>
 					    	</div>
 						    <div class="mypage_btnBox">
 						    	<input class="btn btn-outline-secondary" type="submit" value="수정완료"/>
