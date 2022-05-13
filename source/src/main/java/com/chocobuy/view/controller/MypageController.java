@@ -36,10 +36,8 @@ public class MypageController {
 	@ModelAttribute("searchMypageConditionMap")
 	public Map<String, String> searchMypageConditionMap() {
 		Map<String, String> searchMypageConditionMap = new HashMap<String, String>();
-		searchMypageConditionMap.put("거래상대", "BUYINFO");
-		searchMypageConditionMap.put("제목", "TITLE");
+		searchMypageConditionMap.put("거래완료", "BUYINFO");
 		searchMypageConditionMap.put("내정보", "MYLIST");
-		searchMypageConditionMap.put("전체", "ALL"); 
 		return searchMypageConditionMap;
 	}
 	
@@ -88,11 +86,6 @@ public class MypageController {
 	}
 	
 	// 글 목록 1 getTradeList
-	// MypageMain.jsp  에서 목록확인을 위해 글 리스트를 
-	// 모두 가져오고 MypageTradeList.jsp 로 이동 
-	// getMypageList 메소드 명으로 네이밍 변경 됨
-	// getMypageTradeSerch Controller 가 완성되면 추후 삭제 예정 
-	// MypageMain.jsp 에서도 getMypageTradeSerch Controller 사용 예정 
 	@RequestMapping("/Mypage/getMypageList")
 	public String getMypageList( TradeVO vo, Model model, HttpSession session) {
 		System.out.println("getMypageTradeList");
@@ -115,11 +108,6 @@ public class MypageController {
 		return "/Mypage/MypageTrade";
 	}
 	
-	
-	// MypageTrade.jsp 에서 
-	// review 작성 완료 버튼 
-	// 수정 완료후 getMypageList 로직 으로 이동 
-	// 네이밍 수정 완료 
 	@RequestMapping("/Mypage/updateMypageReview")
 	public String updateMypageReview( TradeVO vo, Model model, HttpSession session) {
 		System.out.println("updateReview"); 
@@ -131,23 +119,6 @@ public class MypageController {
 	}
 	
 	
-	// 글 검색 기능을 구현중 
-	// 추후 페이징을 구현하면 해당 컨트롤러는 
-	// 사용 안할 예정 
-	//@RequestMapping("/Mypage/getMypageTradeSerch")
-	public String getMypageTradeSerch(TradeVO vo, Model model, HttpSession session) {
-		System.out.println("getMypageTradeSerch 아직 완료 전 ");
-		System.out.println((String)session.getAttribute("UserInfo"));
-		vo.setTrade_uuid((String)session.getAttribute("UserInfo"));
-		System.out.println(vo); 
-		model.addAttribute("tradeList", tradeService.getMypageTradeSerch(vo));
-		return "/Mypage/MypageTradeList";
-	}
-	
-	
-	// updateUser 를 변형함 
-	// UserService.java , UserServiceImpl.java .
-	// UserDAOMybatis.java, User-mapping.xml 네이밍 모두 새롭게 추가 ( 중복 방지) 
 	@RequestMapping("/Mypage/updateMypageUser")
 	public String updateMypageUser(UserVO vo, Model model, HttpSession session) {
 		System.out.println("updateMypageUser  왜 너는 출력이 안되니...");
@@ -155,7 +126,6 @@ public class MypageController {
 		System.out.println(vo);
 		userService.updateMypageUser(vo);
 		
-	//	session.setAttribute("user_nick",vo.getUser_nick());
 		return "redirect:/Mypage/getMypageUser";
 	}
 	
@@ -166,17 +136,22 @@ public class MypageController {
 		System.out.println("글 목록 검색 처리(페이징 처리)");
 		String cntPerPage = "5";
 		if (vo.getSearchMypageCondition() != null) vo.setSearchMypageCondition(vo.getSearchMypageCondition());
-		else vo.setSearchMypageCondition("TITLE");
+		else vo.setSearchMypageCondition("MYLIST");
 		
 		if (vo.getSearchMypageKeyword() != null) vo.setSearchMypageKeyword(vo.getSearchMypageKeyword());
 		else vo.setSearchMypageKeyword("");
 		System.out.println("000: "+vo.getSearchMypageCondition());
 		System.out.println("111: "+vo.getSearchMypageKeyword());
+		
+		
 		vo.setTrade_uuid((String)session.getAttribute("UserInfo"));
 		
 		//리뷰 작성 권한 체크를 위한 작업  
 		uvo.setUser_uuid((String)session.getAttribute("UserInfo"));
 		model.addAttribute("userNick", userService.getMypageTradeNick(uvo));
+		
+		// 내 닉정보로 상대방 글의 거래상대를  검색하기 위한 
+		vo.setTrade_nick((String)userService.getMypageTradeNick(uvo));
 		
 
 		int total = tradeService.countMypageTrade(vo);
@@ -211,7 +186,6 @@ System.out.println("uuid세션 값: "+(String)session.getAttribute("UserInfo"));
 	      vo.setUser_emdNm(emdNm);
 	      vo.setUser_uuid((String)session.getAttribute("UserInfo"));
 	      userService.updateMypageUseArea(vo);
-//	      System.out.println(userService.getMypageUser(vo).toString());
 	      model.addAttribute("user", userService.getMypageUser(vo));
 	     
 	      return "/Mypage/MypageProfileUpdate";
@@ -226,38 +200,6 @@ System.out.println("uuid세션 값: "+(String)session.getAttribute("UserInfo"));
 			System.out.println("getMypageTradeNick");
 			System.out.println(userService.getMypageTradeNick(vo));
 			return userService.getMypageTradeNick(vo);
-//			System.out.println( vo.getUser_nick());
-//			String nick = vo.getUser_nick();
-//			return nick;
-			//model.addAttribute("user", userService.getMypageUser(vo));
-			//System.out.println("userService.getMypageUser(vo)" +vo);
-//			return userService.getMypageTradeNick(vo,info);
 		}
 
 }
-
-
-
-
-
-  
-   
-   
-   
-   
-// 회원정보 수정 
-// 중복 요인이 있어 새로운 이름으로 다시 작성함
-// 확인후 서로 사용하지 않는 Controller 이면 삭제 요망 
-// 생각 없이 작하다.. 조금 수정한 내용이 있을수 있음 4/22 일 
-//	@RequestMapping("/Mypage/updateUser")
-//	public String updateUser(UserVO vo, Model model, HttpSession session) {
-//		System.out.println("updateUser");
-//		UserVO us =(UserVO)session.getAttribute("user_uuid");
-//		vo.setUser_uuid(us.getUser_uuid());
-//		System.out.println(vo);
-//		userService.updateUser(vo);
-//		session.setAttribute("user_nick",vo.getUser_nick());
-//		return "redirect:/Mypage/getMypageUser";
-//	}
-   
-

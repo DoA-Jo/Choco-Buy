@@ -15,7 +15,7 @@
 						<option value="${option.value}"<c:if test="${tradeVO.searchMypageCondition eq option.value}">selected</c:if>>${option.key}</option>
 					</c:forEach>
 		    	</select>
-    			<input class="search2" id="inpbox" type="text" name="searchMypageKeyword" value="${tradeVO.searchMypageKeyword}" placeholder="검색어를 입력하세요.">
+<%--     			<input class="search2" id="inpbox" type="text" name="searchMypageKeyword" value="${tradeVO.searchMypageKeyword}" placeholder="검색어를 입력하세요."> --%>
 				<input  type="hidden" name="nowPage">
     			<button class="btn btn-success" type="button" onclick="pageFnc('0')">검색</button>
 	  		</form>
@@ -81,8 +81,8 @@ function checkReview(val1,val2){
 		if(val1==='${userNick}'){
 		location.href = '/Mypage/getMypageTrade?trade_seq='+val2;
 		}else{
-		location.href = '/Mypage/getMypageTrade?trade_seq='+val2;
-		//alert("권한이 없습니다");
+		//location.href = '/Mypage/getMypageTrade?trade_seq='+val2;
+		alert("권한이 없습니다");
 		}
 }
 </script>

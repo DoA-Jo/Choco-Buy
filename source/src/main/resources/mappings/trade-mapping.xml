@@ -64,10 +64,10 @@
 	</update>
 	<select id="getMypageTradeSerch" resultType="trade">
 		SELECT * FROM trade_table WHERE 1=1
-		<if test="searchMypageCondition == 'TITLE'"> AND TRADE_TITLE LIKE CONCAT('%', #{searchMypageKeyword} ,'%')ORDER BY trade_seq DESC</if>
-		<if test="searchMypageCondition == 'BUYINFO'"> AND TRADE_BUYINFO LIKE CONCAT('%', #{searchMypageKeyword} ,'%')ORDER BY trade_seq DESC</if>
+<!-- 		<if test="searchMypageCondition == 'TITLE'"> AND TRADE_TITLE LIKE CONCAT('%', #{searchMypageKeyword} ,'%')ORDER BY trade_seq DESC</if> -->
+		<if test="searchMypageCondition == 'BUYINFO'"> AND TRADE_BUYINFO LIKE CONCAT('%', #{trade_nick} ,'%')ORDER BY trade_seq DESC</if>
 		<if test="searchMypageCondition == 'MYLIST'"> AND TRADE_UUID LIKE CONCAT('%', #{trade_uuid} ,'%')ORDER BY trade_seq DESC</if>
-		<if test="searchMypageCondition == 'ALL'"> AND TRADE_TITLE LIKE CONCAT('%', "" ,'%')ORDER BY trade_seq DESC</if>
+<!-- 		<if test="searchMypageCondition == 'ALL'"> AND TRADE_TITLE LIKE CONCAT('%', "" ,'%')ORDER BY trade_seq DESC</if> -->
 		LIMIT #{listcnt} OFFSET #{start}
 	</select>
 	<!-- 총 게시글 갯수 출력 -->
