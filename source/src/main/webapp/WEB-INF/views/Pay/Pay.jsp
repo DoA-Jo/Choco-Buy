@@ -46,7 +46,7 @@ $(document).ready(function(){
 			buyer_tel: p_tel,
 			buyer_addr: p_addr,
 			buyer_postcode: p_postcode,
-			m_redirect_url: "http://localhost:8090/Pay/Payment"
+			m_redirect_url: "http://chocobuy250.ml:8080/Pay/Payment"
 		}, function (rsp) {
 			console.log(rsp);
 				if(rsp.success){
@@ -77,7 +77,7 @@ $(document).ready(function(){
 			buyer_tel: p_tel,
 			buyer_addr: p_addr,
 			buyer_postcode: p_postcode,
-			m_redirect_url: "http://localhost:8090/Pay/Payment"
+			m_redirect_url: "http://chocobuy250.ml:8080/Pay/Payment"
 		}, function (rsp) {
 			console.log(rsp);
 				if(rsp.success){
@@ -108,7 +108,7 @@ $(document).ready(function(){
 			buyer_tel: p_tel,
 			buyer_addr: p_addr,
 			buyer_postcode: p_postcode,
-			m_redirect_url: "http://localhost:8090/Pay/Payment"
+			m_redirect_url: "http://chocobuy250.ml:8080/Pay/Payment"
 		}, function (rsp) {
 			console.log(rsp);
 				if(rsp.success){
@@ -138,7 +138,7 @@ $(document).ready(function(){
 			buyer_tel: p_tel,
 			buyer_addr: p_addr,
 			buyer_postcode: p_postcode,
-			m_redirect_url: "http://localhost:8090/Pay/Payment"
+			m_redirect_url: "http://chocobuy250.ml:8080/Pay/Payment"
 		}, function (rsp) {
 			console.log(rsp);
 				if(rsp.success){
