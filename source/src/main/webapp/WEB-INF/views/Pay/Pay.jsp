@@ -1,12 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/template/head.jsp" %>	
-<link rel="stylesheet" href="${pagecontext.request.contextPath}/resources/css/pay.css">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="../template/head.jsp"  %>
 <!-- iamport.payment.js -->
-	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>	
+	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+<!-- jQuery -->
+<!-- 	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script> -->
 <title>Pay Page</title>
+
 <script>
 var curDate = new Date();
 var curTime = curDate.getFullYear() + "-" + (curDate.getMonth() + 1) + "-" + curDate.getDate() + " " + curDate.getHours() + ":" + curDate.getMinutes() + ":" + curDate.getSeconds();
+
 var p_amount=null;
 	p_amount=${appointment.app_price };
 var p_email="chocobuy@250.ml";
@@ -15,11 +20,12 @@ var p_buyer=null;
 var p_tel="010-8888-8888";
 var p_addr='${appointment.app_add }';
 var p_postcode="00000";
-var mid = "CHOCOBUY-" + new Date().getTime();
+var mid = "CHOCOBUY" + new Date().getTime();
 // 2022.05.06 추가 수정 start
 var method=null;
 // 2022.05.06 추가 수정 end
 var chk = false;
+
 $(document).ready(function(){
 	var IMP=window.IMP;
 	IMP.init('imp76820413'); // 가맹점 식별코드
@@ -28,7 +34,8 @@ $(document).ready(function(){
 	$("#pay_card").click(function () {
 		method="card";
 		IMP.request_pay({
-			pg: "html5_inicis",
+			pg: "danal_tpay",
+// 			pg: "html5_inicis",
 			pay_method: method,
 			merchant_uid: mid,
 			name: "초코바이 도움비",
@@ -39,7 +46,7 @@ $(document).ready(function(){
 			buyer_tel: p_tel,
 			buyer_addr: p_addr,
 			buyer_postcode: p_postcode,
-			m_redirect_url: "http://chocobuy250.ml:8080/Pay/Payment"
+			m_redirect_url: "http://localhost:8090/Pay/Payment"
 		}, function (rsp) {
 			console.log(rsp);
 				if(rsp.success){
@@ -58,6 +65,7 @@ $(document).ready(function(){
 	$("#pay_trans").click(function () {
 		method="trans";
 		IMP.request_pay({
+// 			pg: "danal_tpay",
 			pg: "html5_inicis",
 			pay_method: method,
 			merchant_uid: mid,
@@ -69,7 +77,7 @@ $(document).ready(function(){
 			buyer_tel: p_tel,
 			buyer_addr: p_addr,
 			buyer_postcode: p_postcode,
-			m_redirect_url: "http://chocobuy250.ml:8080/Pay/Payment"
+			m_redirect_url: "http://localhost:8090/Pay/Payment"
 		}, function (rsp) {
 			console.log(rsp);
 				if(rsp.success){
@@ -88,7 +96,8 @@ $(document).ready(function(){
 	$("#pay_phone").click(function () {
 		method="phone";
 		IMP.request_pay({
-			pg: "html5_inicis",
+			pg: "danal",
+// 			pg: "html5_inicis",
 			pay_method: method,
 			merchant_uid: mid,
 			name: "초코바이 도움비",
@@ -99,7 +108,7 @@ $(document).ready(function(){
 			buyer_tel: p_tel,
 			buyer_addr: p_addr,
 			buyer_postcode: p_postcode,
-			m_redirect_url: "http://chocobuy250.ml:8080/Pay/Payment"
+			m_redirect_url: "http://localhost:8090/Pay/Payment"
 		}, function (rsp) {
 			console.log(rsp);
 				if(rsp.success){
@@ -129,7 +138,7 @@ $(document).ready(function(){
 			buyer_tel: p_tel,
 			buyer_addr: p_addr,
 			buyer_postcode: p_postcode,
-			m_redirect_url: "http://chocobuy250.ml:8080/Pay/Payment"
+			m_redirect_url: "http://localhost:8090/Pay/Payment"
 		}, function (rsp) {
 			console.log(rsp);
 				if(rsp.success){
@@ -157,15 +166,11 @@ function orderList(){
 }
 	
 </script>
-<%@ include file="/WEB-INF/views/template/header.jsp" %>
 
-	<div class="container" align="center">
-		<div class="warp">
-			<div class="pay_tit">
-				<h1>결제방법 선택</h1>
-			</div>
-			
-			<form name="fm">
+<%@ include file="../template/header.jsp"  %>
+<%@ include file="../template/menu.jsp"  %>
+
+<form name="fm">
 	<table class="w-auto mx-auto">
 	<tr>
 		<td>
@@ -178,7 +183,8 @@ function orderList(){
 				<input name="pay_method" type="hidden" />
 				<input name="chatroom_seq" type="hidden" value="${chatroom.chatroom_seq}" />
 				<input name="trade_seq" type="hidden" value="${trade.trade_seq}" />
-				<input name="pay_stat" type="hidden" value="0" />	
+				<input name="pay_stat" type="hidden" value="0" />
+				
 			<button id="pay_card" class="btn btn-info btn-lg" type="button">카드결제</button>
 			<button id="pay_trans" class="btn btn-info btn-lg" type="button">실시간 계좌이체</button>
 			<button id="pay_phone" class="btn btn-info btn-lg" type="button">휴대폰 소액결제</button>
@@ -195,8 +201,6 @@ function orderList(){
 	</tr>
 	</table>
 </form>
-		</div>
-	</div>
-<%@ include file="/WEB-INF/views/template/footer.jsp" %>
+<%@ include file="../template/footer.jsp"  %>
 </body>
 </html>
