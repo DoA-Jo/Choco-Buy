@@ -27,12 +27,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.chocobuy.biz.chat.AppVO;
 import com.chocobuy.biz.chat.ChatRoomVO;
 import com.chocobuy.biz.chat.ChatService;
-import com.chocobuy.biz.chat.MsgVO;
 import com.chocobuy.biz.pay.PayService;
 import com.chocobuy.biz.pay.PayVO;
 import com.chocobuy.biz.trade.TradeService;
@@ -97,6 +97,7 @@ public class PayController {
 		
 	// 아임포트 결제금액 변조를 방지하는 함수 
 		 public void setHackCheck(String amount,String mId,String token) { 
+			System.out.printf(amount, mId, token);
 			HttpClient client = HttpClientBuilder.create().build();
 			HttpPost post = new HttpPost(IMPORT_PREPARE_URL);
 			Map<String,String> m =new HashMap<String,String>();
@@ -131,26 +132,63 @@ public class PayController {
 //		2022.05.01 추가 수정 end
 		
 	}
+	// 결제취소
+		@RequestMapping(value="/Pay/cancle" , method = RequestMethod.POST)
+		@ResponseBody
+		public int cancelPayment(String mid) {
+			String token = getImportToken();
+			HttpClient client = HttpClientBuilder.create().build();
+			HttpPost post = new HttpPost(IMPORT_CANCEL_URL); 
+			Map<String, String> map = new HashMap<String, String>();
+			post.setHeader("Authorization", token);
+			map.put("merchant_uid", mid); 
+			String asd = ""; 
+			try {
+				post.setEntity(new UrlEncodedFormEntity(convertParameter(map)));
+				HttpResponse res = client.execute(post); 
+				ObjectMapper mapper = new ObjectMapper(); 
+				String enty = EntityUtils.toString(res.getEntity()); 
+				JsonNode rootNode = mapper.readTree(enty); 
+				asd = rootNode.get("response").asText(); 
+			} catch (Exception e) { 
+				e.printStackTrace(); 
+			}
+			if (asd.equals("null")) {				
+				System.err.println("주문번호: "+mid+" -취소/환불실패");
+				return -1;
+			} else {
+				System.err.println("주문번호: "+mid+" -취소/환불성공");
+				return 1;
+			} 
+		}
 
 	// 2022.05.04 추가 수정 start
 	@RequestMapping("/Pay/PayIndex")
 	public String payIndex(ChatRoomVO cvo, TradeVO tvo, AppVO avo, Model model, HttpSession session) {
 		cvo = chatService.getChatRoom(cvo);
 		model.addAttribute("chatroom", cvo );
+		System.out.println("cvo객체: "+cvo.toString());
+		
 		tvo.setTrade_seq(cvo.getTrade_seq());
-		avo.setChatroom_seq(cvo.getChatroom_seq());
+//		avo.setChatroom_seq(cvo.getChatroom_seq());
 		model.addAttribute("appointment",chatService.getApp(avo));
+		System.out.println("avo객체: "+ chatService.getApp(avo).toString());
 		model.addAttribute("trade", tradeService.getTrade(tvo));
+		System.out.println("tvo객체: "+tradeService.getTrade(tvo).toString());
 		return "/Pay/PayIndex";
 	}
 	@RequestMapping("/Pay/Pay")
 	public String payPay(ChatRoomVO cvo, TradeVO tvo, AppVO avo, PayVO vo, Model model, HttpSession session) {
 		cvo = chatService.getChatRoom(cvo);
 		model.addAttribute("chatroom", cvo );
+		System.out.println("cvo객체: "+cvo.toString());
+		
 		tvo.setTrade_seq(cvo.getTrade_seq());
-		avo.setChatroom_seq(cvo.getChatroom_seq());
+//		avo.setChatroom_seq(cvo.getChatroom_seq());
 		model.addAttribute("appointment",chatService.getApp(avo));
+		System.out.println("avo객체: "+ chatService.getApp(avo).toString());
 		model.addAttribute("trade", tradeService.getTrade(tvo));
+		System.out.println("tvo객체: "+tradeService.getTrade(tvo).toString());
 		return "/Pay/Pay";
 	}
 	
@@ -164,23 +202,19 @@ public class PayController {
 	@RequestMapping("/Pay/insertPay")
 	public String insertPay(@ModelAttribute("pay") PayVO vo, ServletRequest request) {
 		payService.insertPay(vo);
-		return "redirect:/Pay/getPay"; // list아님
+		return "redirect:/Pay/updatePay";
 	}
 	// update
 	@RequestMapping("/Pay/updatePay")
 	public String updatePay(@ModelAttribute("pay") PayVO vo, HttpSession session) {
-		if( vo.getPay_sell().equals(session.getAttribute("trade_nick").toString()) ){ // ??
-			payService.updatePay(vo);
-			return "redirect:/Pay/getPayList";
-		}else {
-			return "getPay?error=1";
-		}
+		payService.updatePay(vo);
+		return "redirect:/Pay/getPay"; // list아님
 	}
-	// delete
+	// delete 결제 취소 후 DB에 결제정보 삭제 반영
 	@RequestMapping("/Pay/deletePay")
-	public String deletePay(PayVO vo) {
+	public String deletePay(@ModelAttribute("pay") PayVO vo, HttpSession session) {
 		payService.deletePay(vo);
-		return "/Pay/getPayList";
+		return "redirect:/Admin/adminPay";
 	}
 	// get
 	@RequestMapping("/Pay/getPay")

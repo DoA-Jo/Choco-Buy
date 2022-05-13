@@ -14,7 +14,21 @@ public class PayVO {
 	private int pay_amount;
 	private String pay_method;
 	private int chatroom_seq;
+	private int trade_seq;
+	private String pay_stat;
 	
+	public String getPay_stat() {
+		return pay_stat;
+	}
+	public void setPay_stat(String pay_stat) {
+		this.pay_stat = pay_stat;
+	}
+	public int getTrade_seq() {
+		return trade_seq;
+	}
+	public void setTrade_seq(int trade_seq) {
+		this.trade_seq = trade_seq;
+	}
 	public int getChatroom_seq() {
 		return chatroom_seq;
 	}

@@ -7,7 +7,6 @@
 <script>
 var curDate = new Date();
 var curTime = curDate.getFullYear() + "-" + (curDate.getMonth() + 1) + "-" + curDate.getDate() + " " + curDate.getHours() + ":" + curDate.getMinutes() + ":" + curDate.getSeconds();
-
 var p_amount=null;
 	p_amount=${appointment.app_price };
 var p_email="chocobuy@250.ml";
@@ -21,7 +20,6 @@ var mid = "CHOCOBUY-" + new Date().getTime();
 var method=null;
 // 2022.05.06 추가 수정 end
 var chk = false;
-
 $(document).ready(function(){
 	var IMP=window.IMP;
 	IMP.init('imp76820413'); // 가맹점 식별코드
@@ -41,7 +39,7 @@ $(document).ready(function(){
 			buyer_tel: p_tel,
 			buyer_addr: p_addr,
 			buyer_postcode: p_postcode,
-			m_redirect_url: "http://localhost:8090/Pay/PayComplete"
+			m_redirect_url: "http://chocobuy250.ml:8080/Pay/Payment"
 		}, function (rsp) {
 			console.log(rsp);
 				if(rsp.success){
@@ -71,7 +69,7 @@ $(document).ready(function(){
 			buyer_tel: p_tel,
 			buyer_addr: p_addr,
 			buyer_postcode: p_postcode,
-			m_redirect_url: "http://localhost:8090/Pay/PayComplete"
+			m_redirect_url: "http://chocobuy250.ml:8080/Pay/Payment"
 		}, function (rsp) {
 			console.log(rsp);
 				if(rsp.success){
@@ -101,7 +99,7 @@ $(document).ready(function(){
 			buyer_tel: p_tel,
 			buyer_addr: p_addr,
 			buyer_postcode: p_postcode,
-			m_redirect_url: "http://localhost:8090/Pay/PayComplete"
+			m_redirect_url: "http://chocobuy250.ml:8080/Pay/Payment"
 		}, function (rsp) {
 			console.log(rsp);
 				if(rsp.success){
@@ -131,7 +129,7 @@ $(document).ready(function(){
 			buyer_tel: p_tel,
 			buyer_addr: p_addr,
 			buyer_postcode: p_postcode,
-			m_redirect_url: "http://localhost:8090/Pay/PayComplete"
+			m_redirect_url: "http://chocobuy250.ml:8080/Pay/Payment"
 		}, function (rsp) {
 			console.log(rsp);
 				if(rsp.success){
@@ -177,7 +175,10 @@ function orderList(){
 				<input name="pay_category" type="hidden" value="${trade.trade_category }"/>
 				<input name="pay_date" type="hidden" />
 				<input name="pay_amount" type="hidden" />
-				<input name="pay_method" type="hidden" />		
+				<input name="pay_method" type="hidden" />
+				<input name="chatroom_seq" type="hidden" value="${chatroom.chatroom_seq}" />
+				<input name="trade_seq" type="hidden" value="${trade.trade_seq}" />
+				<input name="pay_stat" type="hidden" value="0" />	
 			<button id="pay_card" class="btn btn-info btn-lg" type="button">카드결제</button>
 			<button id="pay_trans" class="btn btn-info btn-lg" type="button">실시간 계좌이체</button>
 			<button id="pay_phone" class="btn btn-info btn-lg" type="button">휴대폰 소액결제</button>

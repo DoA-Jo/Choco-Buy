@@ -11,7 +11,21 @@ public class AdminPayVO {
 	private String pay_buy;
 	private String pay_category;
 	private String pay_method;
+	private String pay_stat;
+	private int trade_seq;
 	
+	public int getTrade_seq() {
+		return trade_seq;
+	}
+	public void setTrade_seq(int trade_seq) {
+		this.trade_seq = trade_seq;
+	}
+	public String getPay_stat() {
+		return pay_stat;
+	}
+	public void setPay_stat(String pay_stat) {
+		this.pay_stat = pay_stat;
+	}
 	private int start;
 	private int listcnt;
 	

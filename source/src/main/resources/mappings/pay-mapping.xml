@@ -12,26 +12,29 @@
 		<result property="pay_date" column="PAY_DATE"/>
 		<result property="pay_amount" column="PAY_AMOUNT"/>
 		<result property="pay_method" column="PAY_METHOD"/>
+		<result property="chatroom_seq" column="CHATROOM_SEQ"/>
+		<result property="trade_seq" column="TRADE_SEQ"/>
+		<result property="pay_stat" column="PAY_STAT"/>
 	</resultMap>
 
 	<!-- 2022.05.06 추가 수정 start -->
 	<insert id="insertPay">
 		<![CDATA[
-			INSERT INTO PAY_TABLE(PAY_ORDERNUM,PAY_SELL,PAY_BUY,PAY_CATEGORY,PAY_DATE,PAY_AMOUNT,PAY_METHOD,CHATROOM_SEQ)
-			 VALUES(#{pay_ordernum},#{pay_sell},#{pay_buy},#{pay_category},#{pay_date},#{pay_amount},#{pay_method},#{chatroom_seq})
+			INSERT INTO PAY_TABLE(PAY_ORDERNUM,PAY_SELL,PAY_BUY,PAY_CATEGORY,PAY_DATE,PAY_AMOUNT,PAY_METHOD,CHATROOM_SEQ,TRADE_SEQ,PAY_STAT)
+			 VALUES(#{pay_ordernum},#{pay_sell},#{pay_buy},#{pay_category},#{pay_date},#{pay_amount},#{pay_method},#{chatroom_seq},#{trade_seq},'결제완료')
 		]]>
 	</insert>
 	<!-- 2022.05.06 추가 수정 end -->
 	
 	<update id="updatePay">
 		<![CDATA[
-			UPDATE PAY_TABLE SET PAY_CATEGORY=#{pay_category},PAY_AMOUNT=#{pay_amount}
+			UPDATE TRADE_TABLE SET TRADE_BUYINFO=#{pay_buy} WHERE TRADE_SEQ=#{trade_seq}
 		]]>
 	</update>
 	
 	<delete id="deletePay">
 		<![CDATA[
-			DELETE FROM PAY_TABLE WHERE PAY_NUM=#{pay_num}
+			UPDATE PAY_TABLE SET PAY_STAT='결제취소' WHERE TRADE_SEQ=#{trade_seq}
 		]]>
 	</delete>
 

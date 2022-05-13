@@ -5,6 +5,7 @@
 <html>
 <head>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script src="/resources/js/admin.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <meta charset="UTF-8">
@@ -26,6 +27,8 @@
 		</nav>
 		
 		<div class="buttons">
+			<input type="text" name="merchant_uid" id="merchant_uid" size="30" value="" placeholder="주문번호를 입력하세요">
+			<button id="cancel_module" class="btn btn-danger">결제취소</button><span>&nbsp;&nbsp;※ 결제취소는 꼭 문의글 확인 후 신중하게 진행하세요!</span>
 		</div>
 		
 		<div class="list">
@@ -42,6 +45,7 @@
 						<th>금액</th>
 						<th>결제 날짜</th>
 						<th>결제 수단</th>
+						<th>결제상태</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -57,6 +61,7 @@
 							<td>${pay.pay_amount }</td>
 							<td>${pay.pay_date }</td>
 							<td>${pay.pay_method }</td>
+							<td>${pay.pay_stat }</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -92,6 +97,28 @@ function pageFnc(np){
 	frm.method = "post";
 	frm.submit();	
 }
+
+IMP.init('imp76820413');	
+$("#cancel_module").click(function () {
+	$.ajax({
+		url : "/Pay/cancle",
+		data : {"mid": $("#merchant_uid").val()},
+		method : "POST",
+		success : function(val){
+			console.log(val);
+			if(val==1){
+				alert("결제취소 완료");
+				location.href='/Pay/deletePay';
+			}
+			else{
+				alert("결제취소 실패");
+			}
+		},
+		error :  function(request, status){
+			alert("취소가 실패하였습니다.");
+		}
+	});
+});
 </script>
 </body>
 </html>
