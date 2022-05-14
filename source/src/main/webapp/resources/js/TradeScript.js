@@ -38,7 +38,7 @@
  
         var NumRegExp = /^[0-9]{2-9}$/;
         if (!NumRegExp.test(Num)) {
-            alert("금액dl 올바르지 않습니다.");
+            alert("금액이 올바르지 않습니다.");
             return false;
         }
         return true; //확인이 완료되었을 때
