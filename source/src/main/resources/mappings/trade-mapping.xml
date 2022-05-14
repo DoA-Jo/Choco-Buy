@@ -41,7 +41,7 @@
 	SELECT * FROM TRADE_TABLE WHERE 1=1
 	AND TRADE_CATEGORY LIKE CONCAT('%', #{searchCategory} ,'%') ORDER BY TRADE_SEQ DESC
 	</select>
-		<select id="getSearchTradeList" resultType="trade">
+	<select id="getSearchTradeList" resultType="trade">
 	SELECT * FROM TRADE_TABLE WHERE 1=1
 	AND TRADE_CONTENT LIKE CONCAT('%', #{searchInput} ,'%') ORDER BY TRADE_SEQ DESC
 	</select>
@@ -50,6 +50,17 @@
 	SELECT * FROM TRADE_TABLE WHERE 1=1
 	AND TRADE_NICK LIKE CONCAT('%', #{trade_nick} ,'%') ORDER BY TRADE_SEQ DESC
 	</select>
+	
+	<select id="getTradeCount" resultType="int">
+	SELECT COUNT(*) FROM trade_table WHERE 1=1
+	AND TRADE_CATEGORY LIKE CONCAT('%', #{searchCategory} ,'%') ORDER BY TRADE_SEQ DESC
+	</select>
+	
+	
+	
+	
+	
+	
 	<!--MypageTradeList.jsp 에서 리뷰 입력을 위한  글검색	 -->
 	<select id="getMypageTrade" resultType="trade">
 		<![CDATA[

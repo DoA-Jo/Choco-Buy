@@ -49,7 +49,7 @@
 							<textarea class="form-control" rows="10" id="td_content" name="trade_content" placeholder = "내용을 입력하세요" ></textarea>
 						</div>
 						<div class="input-group mb-3 ">
-							<input type="text" class="form-control innm"  id ="td_money" name="trade_money" placeholder = "금액...">
+							<input type="text" class="form-control innm"  id ="td_money" name="trade_money" placeholder = "상품 금액을 입력하세요..." onchange="checkNum(this)">
 						</div>
 							<button id="insertTradeBtn" type="button" class="btn btn-Basic">새글 등록</button>
 							<button onClick="location.href='getTradeList'" id="conList" type="button" class="btn btn-Basic">글목록</button>

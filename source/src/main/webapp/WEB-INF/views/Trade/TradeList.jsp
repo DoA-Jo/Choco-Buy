@@ -10,6 +10,9 @@
         <div class="warp">
             <section class="sectionBox">
 	            <div class="flexContainer">
+	            
+					<c:if test="${countTrade ne 0 }">      
+					<c:if test="${trade.trade_hidden eq 0 }">           
 		            <c:forEach items="${tradeList}" var="trade">
 		            	<div onClick="location.href='getTrade?trade_seq=${trade.trade_seq}'"  class="listcontainer border-secondary" >
 		            		<div class="listContainerhover">
@@ -22,6 +25,15 @@
 							</div>
 						</div>
 					</c:forEach>
+					</c:if>
+					</c:if>
+					<c:if test="${countTrade eq 0 }">
+		            	<div class="listcontainer border-secondary" >
+		            		<div class="listContainerhover">
+		            			표시할 컨텐츠가 없습니다.
+							</div>
+						</div>
+					</c:if>
 	            </div>
 			</section>
         </div>

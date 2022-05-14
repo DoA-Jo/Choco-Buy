@@ -18,9 +18,12 @@ public interface TradeService {
 	TradeVO getTrade(TradeVO vo);
 //	20220503김혜린 수정
 	List<TradeVO> getMyTradeList(TradeVO vo);
-	
 	TradeVO getMypageTrade(TradeVO vo);
-
+	int getTradeCount(TradeVO vo);
+	
+	
+	
+	
 	List<TradeVO> getTradeList(TradeVO vo);
 	List<TradeVO> getMypageTradeList(TradeVO vo);
 	List<TradeVO> getSearchTradeList(TradeVO vo);

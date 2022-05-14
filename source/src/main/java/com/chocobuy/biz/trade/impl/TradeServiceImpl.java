@@ -53,6 +53,10 @@ public class TradeServiceImpl implements TradeService {
 	public List<TradeVO> getMyTradeList(TradeVO vo) {
 		return tradeDAO.getMyTradeList(vo);
 	}
+	@Override
+	public int getTradeCount(TradeVO vo) {
+		return tradeDAO.getTradeCount(vo);
+	}
 
 
 	
@@ -82,6 +86,7 @@ public class TradeServiceImpl implements TradeService {
 	public int countMypageTrade(TradeVO vo) {
 		return tradeDAO.countMypageTrade(vo);
 	}
+
 
 
 }

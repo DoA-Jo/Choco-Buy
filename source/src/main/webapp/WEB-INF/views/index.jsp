@@ -110,13 +110,14 @@ $(document).ready(function(){
         <div class="warp">
             <section class="sectionBox">
             	<div class="flexContainer">
-            		<c:forEach items="${tradeList}" var="trade">
-            			<div onClick="location.href='/Login/login'"  class="listcontainer border-secondary">
-	            			<div class="listContainerhover">
-	            				<img src="${pageContext.request.contextPath}/resources/img/upload/${trade.trade_img}" alt="untitledchoco" class="trade-img" style="width : 280px; heith : 149px;">
+					<c:if test="${countTrade ne 0 }">            
+					<c:if test="${trade.trade_hidden eq 0 }">   
+		            <c:forEach items="${tradeList}" var="trade">
+		            	<div onClick="location.href='getTrade?trade_seq=${trade.trade_seq}'"  class="listcontainer border-secondary" >
+		            		<div class="listContainerhover">
+		            			<img src="${pageContext.request.contextPath}/resources/img/upload/${trade.trade_img}" alt="untitledchoco" class="trade-img" style="width : 280px; heith : 149px;">
 							</div>
-							
-							<!-- textcontent 2022.05.03 수정 s -->
+						<!-- textcontent 2022.05.03 수정 s -->
 							<div class="textcontent">
 								<h4><span>${trade.trade_title}</span></h4>
 								<p class="trade_areaInfo"><i>${trade.trade_sinm +=trade.trade_sggnm +=trade.trade_emdnm }</i></p>
@@ -125,6 +126,15 @@ $(document).ready(function(){
 							<!-- textcontent 2022.05.03 수정 e -->
 						</div>
 					</c:forEach>
+					</c:if>
+					</c:if>
+					<c:if test="${countTrade eq 0 }">
+		            	<div class="listcontainer border-secondary" >
+		            		<div class="listContainerhover">
+		            			표시할 컨텐츠가 없습니다.
+							</div>
+						</div>
+					</c:if>
 				</div>
 			</section>
         </div>

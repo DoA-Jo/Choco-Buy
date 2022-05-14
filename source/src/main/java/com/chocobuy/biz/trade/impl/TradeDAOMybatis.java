@@ -56,6 +56,12 @@ public class TradeDAOMybatis {
 		System.out.println("===>JDBC로 getSearchTradeList() ");
 		return mybatis.selectList("TradeDAO.getSearchTradeList", vo);
 	}
+	public int getTradeCount(TradeVO vo) {
+		return mybatis.selectOne("TradeDAO.getTradeCount", vo);
+	}
+	
+	
+	
 	//마이페이지 전체 글목록 조회
 	public List<TradeVO> getMypageTradeList(TradeVO vo) {
 		System.out.println("===>JDBC로 getMypageTradeList() ");

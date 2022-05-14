@@ -132,7 +132,7 @@ public class TradeController {
 		if (vo.getSearchCategory() != null) vo.setSearchCategory(vo.getSearchCategory());
 		else vo.setSearchCategory("");
 		model.addAttribute("tradeList", tradeService.getTradeList(vo));
-		
+		model.addAttribute("countTrade",tradeService.getTradeCount(vo));
 		return "/Trade/TradeList";
 	}
 	
@@ -166,7 +166,7 @@ public class TradeController {
 		if (vo.getSearchCategory() != null) vo.setSearchCategory(vo.getSearchCategory());
 		else vo.setSearchCategory("");
 		model.addAttribute("tradeList", tradeService.getTradeList(vo));
-		
+		model.addAttribute("countTrade",tradeService.getTradeCount(vo));
 		
 		return "index";
 	}
