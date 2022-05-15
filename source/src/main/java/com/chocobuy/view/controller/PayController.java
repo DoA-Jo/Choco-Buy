@@ -212,7 +212,7 @@ public class PayController {
 	}
 	// delete 결제 취소 후 DB에 결제정보 삭제 반영
 	@RequestMapping("/Pay/deletePay")
-	public String deletePay(@ModelAttribute("pay") PayVO vo, HttpSession session) {
+	public String deletePay(PayVO vo, HttpSession session) {
 		payService.deletePay(vo);
 		return "redirect:/Admin/adminPay";
 	}

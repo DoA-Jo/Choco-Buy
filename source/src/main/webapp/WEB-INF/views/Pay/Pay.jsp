@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../template/head.jsp"  %>
+<link rel="stylesheet" href="${pagecontext.request.contextPath}/resources/css/pay.css">
 <!-- iamport.payment.js -->
 	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <!-- jQuery -->
@@ -170,10 +171,16 @@ function orderList(){
 <%@ include file="../template/header.jsp"  %>
 <%@ include file="../template/menu.jsp"  %>
 
+<div class="container" align="center">
+	<div class="warp">
+		<div class="pay_tit">
+			<h1>결제방법 선택</h1>
+		</div>
+		
 <form name="fm">
 	<table class="w-auto mx-auto">
-	<tr>
-		<td>
+		<tr>
+			<td>
 				<input name="pay_ordernum" type="hidden" />
 				<input name="pay_sell" type="hidden" value="${chatroom.trade_nick }"/>
 				<input name="pay_buy" type="hidden" value="${chatroom.user_nick }"/>
@@ -184,23 +191,26 @@ function orderList(){
 				<input name="chatroom_seq" type="hidden" value="${chatroom.chatroom_seq}" />
 				<input name="trade_seq" type="hidden" value="${trade.trade_seq}" />
 				<input name="pay_stat" type="hidden" value="0" />
-				
-			<button id="pay_card" class="btn btn-info btn-lg" type="button">카드결제</button>
-			<button id="pay_trans" class="btn btn-info btn-lg" type="button">실시간 계좌이체</button>
-			<button id="pay_phone" class="btn btn-info btn-lg" type="button">휴대폰 소액결제</button>
-			<button id="pay_kakao" class="btn btn-info btn-lg" type="button">카카오페이</button>
-		</td>
-	</tr>
+				<br>
+				<button id="pay_card" class="btn btn-info btn-lg" type="button">카드결제</button>
+				<button id="pay_trans" class="btn btn-info btn-lg" type="button">실시간 계좌이체</button>
+				<button id="pay_phone" class="btn btn-info btn-lg" type="button">휴대폰 소액결제</button>
+				<button id="pay_kakao" class="btn btn-info btn-lg" type="button">카카오페이</button>
+			</td>
+		</tr>
 	</table>
 	<table class="w-auto mx-auto">
 	<tr>
 		<td>
 			<br>
 			<button type="button" onclick="location.href='/Pay/PayIndex?chatroom_seq=${chatroom.chatroom_seq}'" class="btn btn-light btn-lg" role="button">취소하기</button>
-		</td>
-	</tr>
+				<br>
+			</td>
+		</tr>
 	</table>
 </form>
+	</div>
+</div>
 <%@ include file="../template/footer.jsp"  %>
 </body>
 </html>

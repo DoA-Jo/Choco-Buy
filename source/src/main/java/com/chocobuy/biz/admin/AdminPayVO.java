@@ -13,7 +13,17 @@ public class AdminPayVO {
 	private String pay_method;
 	private String pay_stat;
 	private int trade_seq;
+	private int chatroom_seq;
+	private int start;
+	private int listcnt;
+	private String searchKeyword;
 	
+	public int getChatroom_seq() {
+		return chatroom_seq;
+	}
+	public void setChatroom_seq(int chatroom_seq) {
+		this.chatroom_seq = chatroom_seq;
+	}
 	public int getTrade_seq() {
 		return trade_seq;
 	}
@@ -26,10 +36,6 @@ public class AdminPayVO {
 	public void setPay_stat(String pay_stat) {
 		this.pay_stat = pay_stat;
 	}
-	private int start;
-	private int listcnt;
-	
-	private String searchKeyword;
 	
 	public int getStart() {
 		return start;
