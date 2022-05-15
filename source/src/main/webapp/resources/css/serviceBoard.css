@@ -21,6 +21,8 @@ a:active{color:red;    text-decoration: none;}
 .serviceContent thead .th01,th02,th03,th04 {width:100px;}
 .editdelete {align:right;}
 /* QnaList.jsp */
+.btn-outline-primary {color: #712A2A;border-color: #712A2A;border-radius: 4px;}
+.qnaTotal .ui-accordion .ui-accordion-content {border-radius: 4px;border: 1px solid #712A2A;}
 .qnaTable thead {background-color: #eee;  text-align: center;}
 .qnaTable thead .th01{width: 10px; }  
 .qnaTable thead .th02{width: 75px; }  
@@ -30,10 +32,10 @@ a:active{color:red;    text-decoration: none;}
 .qnaTotal {width: 100%;}
 .serviceTotal {width: 100%;}
 .qnaTotal .searchTool {display: flex; justify-content: right;}
-.qnaTotal .searchSelect, .qnaTotal .searchInput, .searchSubmit {height: 30px;}
+.qnaTotal .searchSelect, .qnaTotal .searchInput, .searchSubmit {height: 30px; border-radius: 4px; color: #712A2A; border-color: #712A2A;}
 .qnaTotal .searchInput {border: 1px solid #000;}
-.qnaTotal .searchInput:hover {border: 1px solid #000;}
-.qnaTotal .searchInput:focus {border: 1px solid #000;}
+.qnaTotal .searchInput:hover {border: 1px solid #712A2A;}
+.qnaTotal .searchInput:focus {border: 1px solid #712A2A;}
 .qnaTotal .searchSubmit {padding: 0px 12px;}
 .qnaTotal .searchInput { margin : 10px auto;}
 
@@ -45,7 +47,7 @@ a:active{color:red;    text-decoration: none;}
 .qnawrite{margin : 10px auto;}
 .fa {font-size:16px; color:red;}
 #accordion p{font-size:16px;color:black;}
-#accordion .titlebg {background-color: #712A2A; border: 1px solid #712A2A; padding: 10px 30px; margin: 30px 0 0 0;}
+#accordion .titlebg {border-radius: 4px; background-color: #712A2A; border: 1px solid #712A2A; padding: 10px 30px; margin: 30px 0 0 0;}
 #accordion .titlebg:first-child {margin-top:0;}
 #accordion .titlebg .ui-icon {position: absolute; right: 25px; top: 50%; transform: translateY(-50%); }
 #accordion .titlebg .ui-icon, #accordion .titlebg .ui-widget-content .ui-icon {background-image: url("/resources/img/serviceImg/ui-icons_ffffff_256x240.png");}
@@ -59,27 +61,26 @@ a:active{color:red;    text-decoration: none;}
 
 
 /* ServiceList.jsp */
-.serviceTable thead { background-color: #712A2A;  text-align: center;} 
-.serviceTable thead th {color:#fff;}
-.serviceTable thead .th01{width: 3px; }  
-.serviceTable thead .th02{width: 78px; }  
-.serviceTable thead .th03{width: 2px; }  
-.serviceTable thead .th04{width: 15px; } 
-.serviceTable thead .th05{width: 2px; } 
+.serviceTable thead {background-color: #712A2A;  text-align: center; } 
+.serviceTable thead th {color:#fff; border-radius: 5px;}
+.serviceTable thead .th01{width: 3px; border-radius: 5px; }  
+.serviceTable thead .th02{width: 78px; border-radius: 5px;}  
+.serviceTable thead .th03{width: 2px; border-radius: 5px;}  
+.serviceTable thead .th04{width: 15px; border-radius: 5px;} 
+.serviceTable thead .th05{width: 2px; border-radius: 5px;} 
 .servicePage .warp {display: flex;}
 .serviceBar {width: 200px;}
 .serviceTotal {width: 100%;}
 .serviceTotal .searchTool {display: flex; justify-content: right;}
-.serviceTotal .searchSelect, .serviceTotal .searchInput, .searchSubmit {height: 30px;}
+.serviceTotal .searchSelect, .serviceTotal .searchInput, .searchSubmit {height: 30px; border-radius: 4px; color: #712A2A; border-color: #712A2A;}
 .serviceTotal .searchInput {border: 1px solid #000;}
-.serviceTotal .searchInput:hover {border: 1px solid #000;}
-.serviceTotal .searchInput:focus {border: 1px solid #000;}
+.serviceTotal .searchInput:hover {border: 1px solid #712A2A;}
+.serviceTotal .searchInput:focus {border: 1px solid #712A2A;}
 .serviceTotal .searchSubmit {padding: 0px 12px;}
 .serviceTotal .searchInput { margin : 10px auto;}
 
 /*servicecontent.jsp*/
 .servicecontent .btn-primary {color: #fff;background-color: #712A2A;border: 1px solid #712A2A;}
-
 
 
 
