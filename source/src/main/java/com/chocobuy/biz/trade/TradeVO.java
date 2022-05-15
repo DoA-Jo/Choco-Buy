@@ -26,6 +26,7 @@ public class TradeVO {
 	private MultipartFile trade_uploadImg;//
 	private String trade_imgpath;//이미지 저장 경로
 	private String trade_uuid;
+	private int trade_hidden;
 	
 	private String searchMypageCondition;  // My page 글 검색 카테고리 커럼에 등록 필요 없음
 	private String searchMypageKeyword;    // My page 글검색 입력  컬럼에 등록 필요 없음
@@ -157,7 +158,12 @@ public class TradeVO {
 	public void setTrade_content(String trade_content) {
 		this.trade_content = trade_content;
 	}
-
+	public int getTrade_hidden() {
+		return trade_hidden;
+	}
+	public void setTrade_hidden(int trade_hidden) {
+		this.trade_hidden = trade_hidden;
+	}
 	public String getTrade_img() {
 		return trade_img;
 	}

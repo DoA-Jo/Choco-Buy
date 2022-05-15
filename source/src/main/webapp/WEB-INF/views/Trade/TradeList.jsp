@@ -12,8 +12,8 @@
 	            <div class="flexContainer">
 	            
 					<c:if test="${countTrade ne 0 }">      
-					<c:if test="${trade.trade_hidden eq 0 }">           
 		            <c:forEach items="${tradeList}" var="trade">
+					<c:if test="${trade.trade_hidden eq 0 }">           
 		            	<div onClick="location.href='getTrade?trade_seq=${trade.trade_seq}'"  class="listcontainer border-secondary" >
 		            		<div class="listContainerhover">
 		            			<img src="${pageContext.request.contextPath}/resources/img/upload/${trade.trade_img}" alt="untitledchoco" class="trade-img" style="width : 280px; heith : 149px;">
@@ -24,8 +24,8 @@
 								<p>${trade.trade_money}원</p>
 							</div>
 						</div>
-					</c:forEach>
 					</c:if>
+					</c:forEach>
 					</c:if>
 					<c:if test="${countTrade eq 0 }">
 		            	<div class="listcontainer border-secondary" >
