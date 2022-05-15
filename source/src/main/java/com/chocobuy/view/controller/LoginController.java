@@ -1,5 +1,6 @@
 package com.chocobuy.view.controller;
 
+
 import java.util.Date;
 
 import javax.servlet.http.Cookie;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.util.WebUtils;
 
+import com.chocobuy.biz.user.EmailService;
+import com.chocobuy.biz.user.EmailVO;
 import com.chocobuy.biz.user.UserService;
 import com.chocobuy.biz.user.UserVO;
 import com.chocobuy.biz.util.CertifiedPhoneNumber;
@@ -27,6 +30,32 @@ import com.chocobuy.biz.util.CertifiedPhoneNumber;
 public class LoginController {
 	@Autowired
 	private UserService userService;
+	
+//	-----------------------------------------------------------------Email
+	
+	@Autowired
+	private EmailService emailService;
+	
+	@RequestMapping("/Login/writeEmail") // 이메일 쓰기를 누르면 이 메소드로 맵핑되어서
+    public String write() {
+        return "/Login/writeEmail"; // 다시 write jsp 페이지로 이동하고 jsp페이지에서 내용을 다 채운 뒤에 확인 버튼을 누르면 send.do로 넘어감
+    }
+ 
+    @RequestMapping("/Login/sendEmail") // 확인 (메일발송) 버튼을 누르면 맵핑되는 메소드
+    public String send(@ModelAttribute EmailVO vo) {
+        try {
+            emailService.sendMail(vo); // vo (메일관련 정보)를 sendMail에 저장함
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "/Login/writeEmail"; // 실패했으므로 다시 write jsp 페이지로 이동함
+        }
+        return "/index";
+    }
+    
+//	-----------------------------------------------------------------Email
+	
+	
+	
 	
 	@RequestMapping(value="/Join/joinFail", method=RequestMethod.POST)
 	public String joinFail(HttpSession session, UserVO vo) {
@@ -148,44 +177,7 @@ public class LoginController {
 	      return "redirect:/index";
 	  }
 	   
-	   
-	   
-//	// LOGIN-post	
-//	@RequestMapping(value="/Login/login", method=RequestMethod.POST)
-//	public String login(UserVO vo, HttpSession session, HttpServletRequest request) {
-//		System.out.println("Controller >> login");
-//		//회원가입 시 사용했던 user세션이 존재한다면 삭제
-//		if(session.getAttribute("user")!= null) {
-//	         System.out.println("login-post//session(user) delete");
-//	         session.invalidate();
-//		}
-//		UserVO user=userService.getUser(vo);
-//		System.out.println("user: "+user);
-//		session = request.getSession();
-//		if(user!=null){
-//			//UserInfo session update (value=user_uuid)
-//			session.setAttribute("UserInfo", user.getUser_uuid());
-//			if(user.getUser_role()==100) {
-//				return "redirect:/Admin/adminMain";
-//			}
-//			return "redirect:/Trade/getTradeList";
-//		}else{
-//			return "/Login/login";
-//		}
-//	}
-//	   
-//		// LOGOUT
-//		@RequestMapping("/Login/logout")
-//		public String logout(HttpSession session, HttpServletRequest request) {
-//			System.out.println("Controller >> logout");
-//			session = request.getSession();
-//			String UserInfo = (String)session.getAttribute("UserInfo");
-//			if(UserInfo != null) {
-//				System.out.println("UserInfo"+UserInfo);
-//				session.invalidate();
-//			}
-//			return "redirect:/index";
-//		}
+	 
 	
 	// user data error (null) check
 	@RequestMapping(value={"/Login/UserNull","/Join/UserNull"})

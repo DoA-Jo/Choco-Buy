@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public void autoLogin(String sessionId, Date limitDate, String user_uuid) {
-		Map<String,Object> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<String,Object>();
 		System.out.println(sessionId);
 		System.out.println(limitDate);
 		System.out.println(user_uuid);

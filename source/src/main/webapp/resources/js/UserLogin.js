@@ -37,7 +37,7 @@ $(document).ready(function(){
 							$("#phone2").attr("disabled",false); 
 							$("#phoneChk2").attr("disabled",false); 
 							$("#phoneChk2").css("display","inline-block"); 
-							//$(".successPhoneChk").text("인증번호를 입력한 뒤 본인인증을 눌러주십시오."); 
+							//$(".successPhoneChk").text("인증번호를 입력한 뒤 본인인증을 눌러주십시오.\n번호 전송은 1~2분 소요될 수 있습니다."); 
 							$("#phone").attr("readonly",true); 
 							code2 = data; 
 						} 
@@ -56,7 +56,7 @@ $(document).ready(function(){
 	/* 번호 일치 확인, 다음 버튼 활성화 */
 	$("#phoneChk2").on("click",function(){ 
 		if($("#phone2").val() == code2){ 
-			$(".successPhoneChk").css("color","inherit"); 
+			$(".successPhoneChk").css("color","#58a6a6"); /*220513*/
 			$(".successPhoneChk").text("인증번호가 일치합니다."); 
 			$("#phoneDoubleChk").val("true");
 			$("#phone2").attr("disabled",true);   
@@ -77,6 +77,18 @@ $(document).ready(function(){
 		document.login_tel.submit();
 	});
 	
+	/* 로그인이 안되시나요? 연결 */
+	$(".link_to_email").on("click", function(){
+		location.href="/Login/writeEmail";
+	});
+	
+	
+	/* 이메일 전송 */
+	$(".send_email_btn").on("click", function(){
+		document.send_email.action='/Login/sendEmail';
+		document.send_email.method='post';
+		document.send_email.submit();
+	});
 });
 
 /* 회원정보 null 확인 */

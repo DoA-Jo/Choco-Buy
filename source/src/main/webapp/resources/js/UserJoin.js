@@ -62,7 +62,7 @@ $(document).ready(function(){
 	/* 번호 일치 확인, 다음 버튼 활성화 */
 	$("#phoneChk2").on("click",function(){ 
 		if($("#phone2").val() == code2){ 
-			$(".successPhoneChk").css("color","inherit"); 
+			$(".successPhoneChk").css("color","#58a6a6"); /*220513*/
 			$(".successPhoneChk").text("인증번호가 일치합니다."); 
 			 $("#phoneDoubleChk").val("true");
 			$("#phone2").attr("disabled",true);   
@@ -91,7 +91,7 @@ $(document).ready(function(){
 				success : function(data) { 
 					if (data == 0) { 
 						$(".successNameChk").text("사용가능한 별명입니다."); 
-						$(".successNameChk").css("color", "green"); 
+						$(".successPhoneChk").css("color","#58a6a6"); /*220513*/
 						$("#nameDoubleChk").val("true"); 
 						$(".nick_next_btn").attr("disabled", false);
 					} else { 
@@ -222,7 +222,7 @@ function checkUser(){
 /* 주소 인증 */
 function goPopup(){
 	var url = location.href;
-	alert(url);
+	/*alert(url);*/
 	var inputYn= "${inputYn}";
 	var confmKey = "devU01TX0FVVEgyMDIyMDQwNzE1NTgzMTExMjQzNTk=";
 	var resultType = "1"; // 도로명주소 검색결과 화면 출력내용, 1 : 도로명, 2 : 도로명+지번+상세보기(관련지번, 관할주민센터), 3 : 도로명+상세보기(상세건물명), 4 : 도로명+지번+상세보기(관련지번, 관할주민센터, 상세건물명)

@@ -36,12 +36,19 @@ body{background-color:#f5f6f7;}
 .login_content .login_btn_area{text-align: center;}
 .login_content .login_opts_wrap {position:relative;width:100%; min-height:20px;margin-top:6px;}
 .login_content .login_opts_wrap .autoLogin {position:absolute; left:0; font-size:14px; cursor:pointer;}
-.login_content .login_opts_wrap .link_to_inquiry {position:absolute; right:0; color:var(--a-tag-blue); font-size:14px; curser:pointer; text-decoration: none;}
-.login_content .login_opts_wrap .link_to_inquiry:hover {text-decoration: underline;}
+.login_content .login_opts_wrap .link_to_email {position:absolute; right:0; color:var(--a-tag-blue); font-size:14px; text-decoration: none; cursor:pointer;}
+.login_content .login_opts_wrap .link_to_email:hover {text-decoration: underline;}
 .login_content .join_btn_area {text-align:center; margin-top:22px;border-top: 1px solid #ddd;padding-top:14px;font-size:14px;}
 .login_content .join_btn_area .join_btn {color: var(--a-tag-blue);font-size:14px;curser:pointer; text-decoration: none;}
 .login_content .join_btn_area .join_btn:hover {text-decoration: underline;}
 
+/* writeEmail */
+.email_content .desc h2 {padding:60px 0px 40px 0px;}
+.email_content .desc p {font-size:18px;color: red; padding-bottom:10px;}
+.email_content .desc span {font-size:14px;color:#393939;}
+.email_content .mail_sub {width:88%; height: 30px;margin-left:6px;border: 1px solid #666;border-radius: 4px; }
+.email_content .mail_message_t{display:block;margin:2px 0px;}
+.email_content textarea{width:100%;height:200px;resize:none; border: 1px solid #666; border-radius: 4px; padding: 10px;}
 
 /* JoinAgree */
 .agree_content{text-align:center;border: 1px solid var(--main-color) ;margin: 0 auto;padding: 30px;text-align: left;}
@@ -67,7 +74,7 @@ body{background-color:#f5f6f7;}
 .pImg_select_area{position: relative;}
 .pImg .pImg_default{width: 100px;height: 100px;border-radius: 50%;box-shadow: 5px 5px 0px gray;background-image: url("/resources/img/profileImg/pImg01.svg");}
 .pImg .pImg_edit_btn .bi-gear{width: 28px;height: 28px;border-radius: 50%;border: 1px solid black;background-color: turquoise;padding:2px;position: absolute;left:0;bottom:0;cursor: pointer;}
-.pImg .pImg_box{position:absolute;border: 1px solid black;z-index:100;margin-top:10px;padding-top:5px;background-color: #fff;width: 450px;height:200px;display: none;}
+.pImg .pImg_box{position:absolute;border: 1px solid black;z-index:1000;margin-top:10px;padding-top:5px;background-color: #fff;width: 450px;height:200px;display: none;}
 .pImg .pImg_box .pImg_list {}
 .pImg .pImg_box .pImg_list ul{padding: 0;width: 450px;height: 90px;padding-top:5px;}
 .pImg .pImg_box .pImg_list ul li{float:left;list-style: none;float:left;padding:5px;}
@@ -110,7 +117,7 @@ body .particletext.confetti > .particle.c2 {
 }
 
 /* LOGIN/JOIN FOOTER */
-.LJ_footer{position: fixed; bottom: 5px; width: 100%; margin: 0 auto; font-size: 12px;}
+.LJ_footer{z-index:-1;position: fixed; bottom: 5px; width: 100%; margin: 0 auto; font-size: 12px;}
 .LJ_footer > div {text-align: center; line-height: 1.2;}
 .LJ_copy_area a {color: inherit; text-decoration:none; font-weight: 700;}
 
