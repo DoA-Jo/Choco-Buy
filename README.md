@@ -17,7 +17,7 @@
 |    [장우혁](https://github.com/dgh03052)    | Service(고객센터), Qna(자주 묻는 질문) |                                       |
 |                   최재현                    |          Mypage(마이 페이지)           |          도로명주소 api 활용          |
 
-
+<br>
 
 ## :eyes: 개요
 
@@ -26,7 +26,7 @@
 
 <img src="./img/chocobuy_concept.png" align="left">
 
-
+<br>
 
 ## 🛠 주요 기술 스택
 
@@ -38,7 +38,7 @@
 |    JAVA     |        8         | 실무에서 가장 많이 쓰이는 버전                              |
 |   SPRING5   | 5.1.16 -> 5.1.22 | 보안 취약점 이슈                                            |
 | 아파치 톰캣 |       9.0        | 하위 버전에서는 EL(Expression Language) 문법 일부 적용 안됨 |
-
+<br>
 ## 🗺️ 서비스 구조
 
 
@@ -46,7 +46,7 @@
 <img src="./img/was_structure.png" align="center">
 
 
-
+<br>
 ## :file_folder: 디렉토리 구조
 
 <details>
@@ -218,7 +218,7 @@
 </details>
 
 
-
+<br>
 ## :warning: 품질 테스트 및 피드백
 
 품질 테스트 주체 : 학원 강사, 강의 내 다른 팀
@@ -291,7 +291,7 @@
 </details>
 
 
-
+<br>
 ## :wrench: 업데이트 내역 (프로젝트 종료 이후)
 
 |    날짜    |    분류     |                          변경 사항                           |
@@ -307,7 +307,7 @@
 
 
 
-
+<br>
 ## :date: 다음 업데이트 예정
 
 |       분류       |                         추가할 내용                          |
